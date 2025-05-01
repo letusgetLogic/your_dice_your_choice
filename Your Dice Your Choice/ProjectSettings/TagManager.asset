@@ -47,5 +47,8 @@ TagManager:
   - name: Points
     uniqueID: 3772021839
     locked: 0
+  - name: Weapon
+    uniqueID: 2764436311
+    locked: 0
   m_RenderingLayers:
   - Default
