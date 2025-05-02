@@ -7,8 +7,8 @@ public class MapGenerator : MonoBehaviour
     public int MapHeight;
     public GameObject PointPrefab;
 
-    private float _halfSize = 0.5f;
-    private float _halfSizeOfOnePoint = 0.5f;
+    private readonly float HalfSize = 0.5f;
+    private readonly float HalfSizeOfOnePoint = 0.5f;
 
 
     /// <summary>
@@ -19,8 +19,8 @@ public class MapGenerator : MonoBehaviour
         Transform spawnTransform = GetComponent<Transform>();
         Vector3 spawnPos = spawnTransform.position;
 
-        float startPointVertical = -MapLength * _halfSize + _halfSizeOfOnePoint;
-        float startPointHorizontal = MapHeight * _halfSize - _halfSizeOfOnePoint;
+        float startPointVertical = -MapLength * HalfSize + HalfSizeOfOnePoint;
+        float startPointHorizontal = MapHeight * HalfSize - HalfSizeOfOnePoint;
 
         spawnPos = new Vector3(startPointVertical, startPointHorizontal, 0);
 
