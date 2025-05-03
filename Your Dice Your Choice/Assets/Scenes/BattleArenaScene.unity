@@ -119,6 +119,56 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &11377609
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 11377611}
+  - component: {fileID: 11377610}
+  m_Layer: 0
+  m_Name: LevelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &11377610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 11377609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45a40ef19d785fc44a9da08d09c6b279, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CharacterPanel:
+  - {fileID: 1503901224}
+  - {fileID: 2019299898}
+  - {fileID: 398152898}
+  - {fileID: 273940549}
+  _characterAmount: 2
+--- !u!4 &11377611
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 11377609}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.48595, y: 0.43373, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &45062450 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1181180781010479432, guid: 1252024c3d6bad74392cffa4883f43f5, type: 3}
@@ -3128,6 +3178,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 189370902}
   m_CullTransparentMesh: 1
+--- !u!1 &273940549 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 562667841298920821, guid: c74da118415bf6c42bc13b9807f00cd9, type: 3}
+  m_PrefabInstance: {fileID: 421721301}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &279742286
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3444,6 +3499,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 946038897408945833, guid: 1252024c3d6bad74392cffa4883f43f5, type: 3}
   m_PrefabInstance: {fileID: 376049464}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &398152898 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 562667841298920821, guid: c74da118415bf6c42bc13b9807f00cd9, type: 3}
+  m_PrefabInstance: {fileID: 810333276}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &404139875
 GameObject:
   m_ObjectHideFlags: 0
@@ -3530,6 +3590,10 @@ PrefabInstance:
     - target: {fileID: 562667841298920821, guid: c74da118415bf6c42bc13b9807f00cd9, type: 3}
       propertyPath: m_Name
       value: CharacterPanel (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 562667841298920821, guid: c74da118415bf6c42bc13b9807f00cd9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4177083841675014586, guid: c74da118415bf6c42bc13b9807f00cd9, type: 3}
       propertyPath: m_AnchorMax.y
@@ -4603,6 +4667,7 @@ GameObject:
   - component: {fileID: 877011355}
   - component: {fileID: 877011354}
   - component: {fileID: 877011353}
+  - component: {fileID: 877011356}
   m_Layer: 5
   m_Name: PlayerPanel
   m_TagString: Untagged
@@ -4695,6 +4760,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 877011351}
   m_CullTransparentMesh: 1
+--- !u!114 &877011356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 877011351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e42d7787a854374ea3e3da25631e3b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &882143577
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11023,6 +11100,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1991182940}
   m_CullTransparentMesh: 1
+--- !u!1 &2019299898 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 562667841298920821, guid: c74da118415bf6c42bc13b9807f00cd9, type: 3}
+  m_PrefabInstance: {fileID: 279742286}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2028664979
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11584,6 +11666,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CharacterPanel
       objectReference: {fileID: 0}
+    - target: {fileID: 3426237138665464371, guid: c74da118415bf6c42bc13b9807f00cd9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4177083841675014586, guid: c74da118415bf6c42bc13b9807f00cd9, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -11787,3 +11873,4 @@ SceneRoots:
   - {fileID: 1262512404944060030}
   - {fileID: 513823983}
   - {fileID: 505334692}
+  - {fileID: 11377611}

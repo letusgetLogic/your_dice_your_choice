@@ -6,7 +6,7 @@ public class Dice : MonoBehaviour
 {
     public Sprite[] DiceSide;
 
-    [NonSerialized] public int CurrentNumber; // Does it need to be a property?
+    [NonSerialized] public int CurrentNumber = 0; // Does it need to be a property?
 
     /// <summary>
     /// Start method.
@@ -25,6 +25,7 @@ public class Dice : MonoBehaviour
     {
         var currentImage = gameObject.GetComponent<Image>();
         currentImage.sprite = DiceSide[sideIndex];
+        CurrentNumber = sideIndex;
     }
 }
 
