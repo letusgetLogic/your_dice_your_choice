@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class RollPanelDisplay : MonoBehaviour
 {
     public GameObject DicePrefab;
-    public GameObject[] DiceSlot;
+    public RectTransform[] DiceSlot;
 
     [SerializeField] private int _diceAmount;  
 
@@ -19,9 +19,15 @@ public class RollPanelDisplay : MonoBehaviour
     {
         for (int i = 0; i < _diceAmount; i++)
         {
-            var dice = Instantiate(DicePrefab, DiceSlot[i].transform.position, Quaternion.identity);
+            var position = GetMiddlePoint(DiceSlot[i]);
+            var dice = Instantiate(DicePrefab, position, Quaternion.identity);
             DiceOnPanel.Add(dice);
         }
+    }
+
+    private Vector3 GetMiddlePoint(RectTransform slot)
+    {
+        return Camera.main.ScreenToWorldPoint(slot.position);
     }
 
     /// <summary>

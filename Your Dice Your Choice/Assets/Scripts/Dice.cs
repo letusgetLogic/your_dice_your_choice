@@ -10,10 +10,10 @@ public class Dice : MonoBehaviour
     private void Start()
     {
         var defaultSprite = gameObject.GetComponent<Sprite>();
-        defaultSprite = DiceSide[0];
+        defaultSprite = DiceSide[6];
     }
 
-    /// <summary>
+    /// <summary>   
     /// Initializes dice side.
     /// </summary>
     /// <param name="sideIndex"></param>
