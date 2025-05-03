@@ -241,6 +241,28 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Dice_6
+      rect:
+        serializedVersion: 2
+        x: 385
+        y: 1
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 071ad317b16a20b4d9b2a5fda874802d
+      internalID: 431537536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -263,6 +285,7 @@ TextureImporter:
       Dice_3: 1454795454
       Dice_4: -1137614138
       Dice_5: 197335296
+      Dice_6: 431537536
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
