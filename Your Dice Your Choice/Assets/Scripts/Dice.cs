@@ -1,16 +1,20 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class Dice : MonoBehaviour
 {
     public Sprite[] DiceSide;
+
+    [NonSerialized] public int CurrentNumber; // Does it need to be a property?
 
     /// <summary>
     /// Start method.
     /// </summary>
     private void Start()
     {
-        var defaultSprite = gameObject.GetComponent<Sprite>();
-        defaultSprite = DiceSide[6];
+        var defaultImage = gameObject.GetComponent<Image>();
+        defaultImage.sprite = DiceSide[6];
     }
 
     /// <summary>   
@@ -19,8 +23,8 @@ public class Dice : MonoBehaviour
     /// <param name="sideIndex"></param>
     public void InitializeSide(int sideIndex)
     {
-        var currentSprite = gameObject.GetComponent<Sprite>();
-        currentSprite = DiceSide[sideIndex];
+        var currentImage = gameObject.GetComponent<Image>();
+        currentImage.sprite = DiceSide[sideIndex];
     }
 }
 

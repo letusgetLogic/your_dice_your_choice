@@ -11,13 +11,7 @@ public class DisplayPanel : MonoBehaviour
     /// </summary>
     void Start()
     {
-        var objectInWorld = Instantiate(CharacterPrefab);
-        var transform = objectInWorld.GetComponent<Transform>();
-        transform.position = Vector3.zero;
-
-        objectInWorld.transform.SetParent(Avatar.transform);
-        var rectTransform = objectInWorld.AddComponent<RectTransform>();
-        rectTransform.anchoredPosition = Vector3.zero;
+        
 
     }
 }

@@ -1,33 +1,41 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class RollPanelDisplay : MonoBehaviour
 {
-    public GameObject DicePrefab;
-    public RectTransform[] DiceSlot;
+   
+    public GameObject[] Dice;
 
-    [SerializeField] private int _diceAmount;  
+    [SerializeField] private int _diceAmount;
+    [SerializeField] private int _rollFrequency;
+    [SerializeField] private float _animTimer = 0.25f;
 
     [NonSerialized] public List<GameObject> DiceOnPanel = new List<GameObject>();
+
+ 
 
     /// <summary>
     /// Start method.
     /// </summary>
-    void Start()
+    private void Start()
     {
         for (int i = 0; i < _diceAmount; i++)
         {
-            var position = GetMiddlePoint(DiceSlot[i]);
-            var dice = Instantiate(DicePrefab, position, Quaternion.identity);
+            var dice = Dice[i];
+            dice.SetActive(true);
             DiceOnPanel.Add(dice);
         }
     }
 
-    private Vector3 GetMiddlePoint(RectTransform slot)
+    /// <summary>
+    /// Update method.
+    /// </summary>
+    private void Update()
     {
-        return Camera.main.ScreenToWorldPoint(slot.position);
+        
     }
 
     /// <summary>
@@ -35,10 +43,25 @@ public class RollPanelDisplay : MonoBehaviour
     /// </summary>
     public void RollDice()
     {
-        foreach(var dice in DiceOnPanel)
+        StartCoroutine(AnimateDiceRoll()); 
+    }
+
+    /// <summary>
+    /// Shows all dice per roll.
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator AnimateDiceRoll()
+    {
+        for (int i = 0; i < _rollFrequency; i++)
         {
-            var diceScript = dice.GetComponent<Dice>();
-            diceScript.InitializeSide(UnityEngine.Random.Range(1, diceScript.DiceSide.Length));
+            foreach (var dice in DiceOnPanel)
+            {
+                var diceScript = dice.GetComponent<Dice>();
+                int sideIndex = UnityEngine.Random.Range(1, diceScript.DiceSide.Length);
+                diceScript.InitializeSide(sideIndex);
+            }
+
+            yield return new WaitForSeconds(_animTimer); 
         }
     }
 }
