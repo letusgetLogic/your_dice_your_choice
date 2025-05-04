@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-class BattlefieldManager : MonoBehaviour
+public class BattlefieldManager : MonoBehaviour // public class or only class?
 {
 
 }

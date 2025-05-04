@@ -1,0 +1,6 @@
+﻿enum CharacterType
+{
+    Tower,
+    Tank,
+}
+
