@@ -11,7 +11,7 @@ public class Field : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, 
     public GameObject AnimationHover;
     public GameObject AnimationClick;
 
-    [SerializeField] private float _animTimer = 0.1f;
+    [SerializeField] private float _animTimer = .1f;
 
     private bool _isClicking = false;
 
@@ -39,10 +39,12 @@ public class Field : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, 
     private IEnumerator DisableAnimClick()
     {
         yield return new WaitForSeconds(_animTimer);
+
         FoggyPanel.SetActive(false);
         AnimationClick.SetActive(false);
-        var field = gameObject.GetComponent<Field>();
-        field.enabled = false;
+
+        var boxCollider = gameObject.GetComponent<BoxCollider2D>();
+        boxCollider.enabled = false;
     }
 
     /// <summary>
@@ -68,6 +70,14 @@ public class Field : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, 
         {
             AnimationHover.SetActive(false);
             AnimationZoom.SetActive(true);
+        }
+    }
+
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            var otherScript = other.gameObject.GetComponent<Character>();
         }
     }
 }

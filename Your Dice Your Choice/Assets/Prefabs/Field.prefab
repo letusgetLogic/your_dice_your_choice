@@ -314,7 +314,7 @@ MonoBehaviour:
   AnimationZoom: {fileID: 9159352336250848926}
   AnimationHover: {fileID: 2649372849752654676}
   AnimationClick: {fileID: 510090375065560255}
-  _animTimer: 0.1
+  _animTimer: 0.05
 --- !u!61 &586475268459886930
 BoxCollider2D:
   m_ObjectHideFlags: 0

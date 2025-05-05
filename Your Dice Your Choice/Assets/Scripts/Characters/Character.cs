@@ -1,5 +1,7 @@
-﻿class Character
-{
+﻿using UnityEngine;
 
+public class Character : MonoBehaviour
+{
+    
 }
 

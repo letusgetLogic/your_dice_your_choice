@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1415101767450205266}
   - component: {fileID: 1998406024287402891}
+  - component: {fileID: 3144011488393902226}
   - component: {fileID: 7102619009427932503}
   m_Layer: 5
   m_Name: DicePanel
@@ -30,8 +31,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7154172334302712278}
   - {fileID: 5990378912980733926}
+  - {fileID: 7154172334302712278}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -47,6 +48,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 421359889958457307}
   m_CullTransparentMesh: 1
+--- !u!114 &3144011488393902226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 421359889958457307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4be033a431a7a004a9827839d73a7ab0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActionNameText: {fileID: 7240826885235866854}
+  DiceSlot: {fileID: 5944877232779813216}
 --- !u!114 &7102619009427932503
 MonoBehaviour:
   m_ObjectHideFlags: 0
