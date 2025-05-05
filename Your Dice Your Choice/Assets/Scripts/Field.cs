@@ -1,16 +1,48 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class Field : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
+    public GameObject FoggyPanel;
+    public GameObject AnimationZoom;
+    public GameObject AnimationHover;
+    public GameObject AnimationClick;
+
+    [SerializeField] private float _animTimer = 0.1f;
+
+    private bool _isClicking = false;
+
+    private void Start()
+    {
+        FoggyPanel.SetActive(true);
+        AnimationZoom.SetActive(true);
+    }
+
     /// <summary>
     /// On mouse click event.
     /// </summary>
     public void OnPointerClick(PointerEventData eventData)
     {
-        Vector3 fieldPos = transform.position;
-        Debug.Log("Click!");
-        Debug.Log(fieldPos);
+        _isClicking = true;
+        AnimationHover.SetActive(false);
+        AnimationClick.SetActive(true);
+        StartCoroutine(DisableAnimClick());
+    }
+
+    /// <summary>
+    /// Disable animation click.
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator DisableAnimClick()
+    {
+        yield return new WaitForSeconds(_animTimer);
+        FoggyPanel.SetActive(false);
+        AnimationClick.SetActive(false);
+        var field = gameObject.GetComponent<Field>();
+        field.enabled = false;
     }
 
     /// <summary>
@@ -19,7 +51,11 @@ public class Field : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, 
     /// <param name="eventData"></param>
     public void OnPointerEnter(PointerEventData eventData)
     {
-        // do mouse hover stuff
+        if (!_isClicking)
+        {
+            AnimationZoom.SetActive(false);
+            AnimationHover.SetActive(true);
+        }
     }
 
     /// <summary>
@@ -28,6 +64,10 @@ public class Field : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, 
     /// <param name="eventData"></param>
     public void OnPointerExit(PointerEventData eventData)
     {
-        // reset to normal
+        if (!_isClicking)
+        {
+            AnimationHover.SetActive(false);
+            AnimationZoom.SetActive(true);
+        }
     }
 }

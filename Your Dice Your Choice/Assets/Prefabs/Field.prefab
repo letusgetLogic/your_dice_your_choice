@@ -185,7 +185,7 @@ GameObject:
   - component: {fileID: 7996033149595946989}
   - component: {fileID: 2553125407303417166}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Foggy Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -310,6 +310,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3def2d92de5b6c94bbdeb9ae935b6d69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FoggyPanel: {fileID: 3530496106706729831}
+  AnimationZoom: {fileID: 9159352336250848926}
+  AnimationHover: {fileID: 2649372849752654676}
+  AnimationClick: {fileID: 510090375065560255}
+  _animTimer: 0.1
 --- !u!61 &586475268459886930
 BoxCollider2D:
   m_ObjectHideFlags: 0

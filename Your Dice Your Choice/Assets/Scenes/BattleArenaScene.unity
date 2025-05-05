@@ -4772,6 +4772,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e42d7787a854374ea3e3da25631e3b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DicePanel: []
 --- !u!1001 &882143577
 PrefabInstance:
   m_ObjectHideFlags: 0
