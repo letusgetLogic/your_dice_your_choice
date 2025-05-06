@@ -10,7 +10,7 @@ public class Dice : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     [SerializeField] private Canvas _canvas;
     [SerializeField] private float _alphaValue = .6f;
 
-    [NonSerialized] public int CurrentNumber = 0; // Does it need to be a property?
+    [HideInInspector] public int CurrentNumber { get; set; }
 
     private CanvasGroup _canvasGroup;
 

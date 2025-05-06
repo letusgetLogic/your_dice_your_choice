@@ -11690,6 +11690,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6634777697201407558, guid: d3827d2d5b6835445a89612f13cab49a, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6690808932299012320, guid: d3827d2d5b6835445a89612f13cab49a, type: 3}
       propertyPath: m_Name
       value: Pivot Rotation & Animation
