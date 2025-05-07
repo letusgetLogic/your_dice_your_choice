@@ -3,9 +3,29 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
+    public static LevelManager Instance;
+
     public GameObject[] CharacterPanel;
 
-    [SerializeField] private int _characterAmount;
+    [SerializeField] private LevelData[] _dataPrefab;
+    [SerializeField] private int _dataIndex;
+
+    public LevelData Data { get; private set; }
+
+    /// <summary>
+    /// Awake method.
+    /// </summary>
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Destroy(Instance.gameObject);
+        }
+
+        Instance = this;
+
+        Data = _dataPrefab[_dataIndex];
+    }
 
     /// <summary>
     /// Start method.
@@ -18,7 +38,7 @@ public class LevelManager : MonoBehaviour
 
     private void ShowPanelForCharacterOnField()
     {
-        for (int i = 0; i < _characterAmount; i++)
+        for (int i = 0; i < Data.CharacterAmount; i++)
         {
             CharacterPanel[i].SetActive(true);
         }

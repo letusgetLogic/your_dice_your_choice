@@ -2,13 +2,7 @@
 {
     public static TurnState[] Parties { get; private set; }
     public static TurnState Turn { get; private set; }
-    public enum TurnState
-    {
-        None,
-        Player1,
-        Player2,
-        Player3
-    }
+   
 
     /// <summary>
     /// Set parties.

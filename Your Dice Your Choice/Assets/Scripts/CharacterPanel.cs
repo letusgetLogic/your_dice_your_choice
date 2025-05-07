@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CharacterPanel : MonoBehaviour
 {
+    
     //public GameObject Avatar;
     //public GameObject[] DicePanel;
 

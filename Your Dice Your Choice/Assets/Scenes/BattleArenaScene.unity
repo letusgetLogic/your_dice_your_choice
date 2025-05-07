@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 11377611}
   - component: {fileID: 11377610}
   m_Layer: 0
-  m_Name: LevelManager
+  m_Name: Level Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -153,7 +153,12 @@ MonoBehaviour:
   - {fileID: 2019299898}
   - {fileID: 398152898}
   - {fileID: 273940549}
-  _characterAmount: 2
+  _dataPrefab:
+  - {fileID: 11400000, guid: c19e37418122c86468a8d95f147a0273, type: 2}
+  - {fileID: 11400000, guid: 175f218960678a446abdc873f61fb322, type: 2}
+  - {fileID: 11400000, guid: 02f0e1ffa1bbb5340ab40ab5311a35f8, type: 2}
+  - {fileID: 11400000, guid: a6e97e2ec5e445c44941de668b1d1b7b, type: 2}
+  _dataIndex: 0
 --- !u!4 &11377611
 Transform:
   m_ObjectHideFlags: 0
@@ -3805,6 +3810,7 @@ GameObject:
   - component: {fileID: 436895416}
   - component: {fileID: 436895419}
   - component: {fileID: 436895420}
+  - component: {fileID: 436895421}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3946,6 +3952,18 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_MaxRayIntersections: 0
+--- !u!114 &436895421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 436895415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a7eaaf3aa848bc4c93e28d71164d9a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &505334690
 GameObject:
   m_ObjectHideFlags: 0
@@ -4063,8 +4081,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddaa12cba219f1748972d959d73029de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MapLength: 9
-  MapHeight: 7
   FieldPrefab: {fileID: 8115748279230849610, guid: 7ed5336a2a490944cac53886a444e9cf, type: 3}
 --- !u!4 &513823983
 Transform:

@@ -1,4 +1,4 @@
-﻿enum CharacterType
+﻿public enum CharacterType
 {
     Tower,
     Tank,
