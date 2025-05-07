@@ -28,19 +28,27 @@ public class BattleManager : MonoBehaviour
     {
         Character = new GameObject[LevelManager.Instance.Data.CharacterAmount];
 
-        int mapHeight = LevelManager.Instance.Data.MapHeight;
-        int mapLength = LevelManager.Instance.Data.MapLength;
-        
-        Fields = new GameObject[mapHeight, mapLength];
+        InitializeFields();
     }
 
     /// <summary>
-    /// 
+    /// Initializes the array Character.
     /// </summary>
     /// <param name="characterPrefab"></param>
     public void SetCharacter(GameObject characterPrefab, int index)
     {
         Character[index] = characterPrefab;
+    }
+
+    /// <summary>
+    /// Initializes the array Fields.
+    /// </summary>
+    private void InitializeFields()
+    {
+        int mapHeight = LevelManager.Instance.Data.MapHeight;
+        int mapLength = LevelManager.Instance.Data.MapLength;
+
+        Fields = new GameObject[mapHeight, mapLength];
     }
 }
 

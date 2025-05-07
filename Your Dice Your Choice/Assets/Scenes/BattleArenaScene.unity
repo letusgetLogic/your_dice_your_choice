@@ -4083,7 +4083,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FieldPrefab: {fileID: 8115748279230849610, guid: 7ed5336a2a490944cac53886a444e9cf, type: 3}
   CharacterPrefab:
-  - {fileID: 562667841298920821, guid: c74da118415bf6c42bc13b9807f00cd9, type: 3}
+  - {fileID: 5643954692354094509, guid: d3827d2d5b6835445a89612f13cab49a, type: 3}
 --- !u!4 &513823983
 Transform:
   m_ObjectHideFlags: 0
@@ -11702,7 +11702,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5643954692354094509, guid: d3827d2d5b6835445a89612f13cab49a, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5643954692354094509, guid: d3827d2d5b6835445a89612f13cab49a, type: 3}
       propertyPath: m_TagString
