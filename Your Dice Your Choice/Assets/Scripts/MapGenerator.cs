@@ -4,8 +4,9 @@ using UnityEngine;
 public class MapGenerator : MonoBehaviour
 {
     public GameObject FieldPrefab;
+    public GameObject[] CharacterPrefab;
 
-    private readonly float HalfSizeOfOneField = 0.5f;
+    private readonly int CharacterSpawnAreaMaxColumn = 2; // Max. value of columns of the spawn area for character. 
 
     private LevelData _data;
 
@@ -32,15 +33,15 @@ public class MapGenerator : MonoBehaviour
     /// </summary>
     private void SpawnField()
     {
-        BattleFieldManager.Instance.Fields = new GameObject[_data.MapHeight, _data.MapLength];
-
         Transform spawnTransform = GetComponent<Transform>();
         Vector3 spawnPos = spawnTransform.position;
 
-        float halfLength = _data.MapLength * .5f;
-        float halfHeight = _data.MapHeight * .5f;
-        float startPointVertical = -halfLength + HalfSizeOfOneField;
-        float startPointHorizontal = halfHeight - HalfSizeOfOneField;
+        // Length - 1 because the distance between pivot point of fields together is 1 field length less than the length of entire fields.
+        // For example 9 fields have 8 distance between their pivot points.
+        float halfLength = (_data.MapLength - 1) * .5f; 
+        float halfHeight = (_data.MapHeight - 1) * .5f;
+        float startPointVertical = -halfLength;
+        float startPointHorizontal = halfHeight;
 
         spawnPos = new Vector3(startPointVertical, startPointHorizontal, 0);
 
@@ -50,7 +51,7 @@ public class MapGenerator : MonoBehaviour
             {
                 var field = Instantiate(FieldPrefab, spawnPos, Quaternion.identity);
 
-                BattleFieldManager.Instance.Fields[j, i] = field;
+                BattleManager.Instance.Fields[j, i] = field;
 
                 spawnPos.x += 1;
             }
@@ -65,6 +66,27 @@ public class MapGenerator : MonoBehaviour
     /// </summary>
     private void SpawnCharacter()
     {
+        for (int i = 0; i < _data.CharacterAmount; i++)
+        {
+            var prefab = CharacterPrefab[Random.Range(0, CharacterPrefab.Length)];
+            BattleManager.Instance.SetCharacter(prefab, i);
+            Debug.Log(prefab.ToString());
+            Instantiate(prefab, GetPosition(), Quaternion.identity);
+        }
+    }
 
+    /// <summary>
+    /// Get random position on field.
+    /// </summary>
+    /// <returns></returns>
+    private Vector3 GetPosition()
+    {
+        int rowLength = BattleManager.Instance.Fields.GetLength(0);
+        int row = Random.Range(0, rowLength);
+        int col = Random.Range(0, CharacterSpawnAreaMaxColumn);
+        var field = BattleManager.Instance.Fields[row, col];
+        var pos = field.transform.position;
+        Debug.Log(pos);
+        return pos;
     }
 }

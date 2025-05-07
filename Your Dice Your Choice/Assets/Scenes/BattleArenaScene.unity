@@ -4082,6 +4082,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FieldPrefab: {fileID: 8115748279230849610, guid: 7ed5336a2a490944cac53886a444e9cf, type: 3}
+  CharacterPrefab:
+  - {fileID: 562667841298920821, guid: c74da118415bf6c42bc13b9807f00cd9, type: 3}
 --- !u!4 &513823983
 Transform:
   m_ObjectHideFlags: 0

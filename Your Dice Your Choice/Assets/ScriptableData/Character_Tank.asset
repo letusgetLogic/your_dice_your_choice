@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9531a790102358c4db39205d87e3d82e, type: 3}
   m_Name: Character_Tank
   m_EditorClassIdentifier: 
-  Player: 0
-  Type: 0
-  HP: 0
-  AP: 0
-  DP: 0
-  Weapon1: 0
-  Weapon2: 0
-  Action1: 0
-  Action2: 0
-  Action3: 0
+  Player: 2
+  Type: 1
+  HP: 1200
+  AP: 156
+  DP: 84
+  Weapon1: 1
+  Weapon2: 5
+  Action1: 1
+  Action2: 2
+  Action3: 3
   Action4: 0

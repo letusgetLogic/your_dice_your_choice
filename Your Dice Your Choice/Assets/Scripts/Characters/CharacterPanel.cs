@@ -14,7 +14,7 @@ public class CharacterPanel : MonoBehaviour
     /// </summary>
     void Start()
     {
-        InitializeSlots();
+        //InitializeSlots();
 
     }
 
