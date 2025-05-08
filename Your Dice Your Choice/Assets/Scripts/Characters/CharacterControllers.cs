@@ -2,7 +2,7 @@
 
 namespace Assets.Scripts.Characters
 {
-    public class CharacterController : MonoBehaviour
+    public class CharacterControllers : MonoBehaviour
     {
 
     }

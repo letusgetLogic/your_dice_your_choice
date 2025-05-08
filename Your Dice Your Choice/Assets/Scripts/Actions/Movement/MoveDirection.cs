@@ -1,10 +1,13 @@
-﻿public enum MoveDirection
+﻿namespace Assets.Scripts.Actions
 {
-    None,
-    Any,
-    Horizontal,
-    Vertical,
-    HV, // horizontal & vertical
-    Diagonal,
+    public enum MoveDirection
+    {
+        None,
+        Any,
+        Horizontal,
+        Vertical,
+        HV, // horizontal & vertical
+        Diagonal,
+    }
 }
 

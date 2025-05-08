@@ -1,13 +1,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Movement
+namespace Assets.Scripts.Actions
 {
-    private MoveDirection _direction;
-    private AvaiableDiceNumber _diceNumber;
-    private AvaiableMoveTiles _moveTiles;
+    public class Movement
+    {
+        private MoveDirection _direction;
+        private AvaiableDiceNumber _diceNumber;
+        private AvaiableMoveTiles _moveTiles;
 
-    private Dictionary<string, string> _moveDescription = new Dictionary<string, string>
+        private Dictionary<string, string> _moveDescription = new Dictionary<string, string>
     {
         {"Move_X_Tiles", "Move in any direction X Tiles"},
         {"Move_X_+_Tiles", "Move orthogonally X Tiles"},
@@ -21,12 +23,13 @@ public class Movement
         {"Move_1_+_Tile_4-6", "Move orthogonally 1 Tile, with Dice 4-6"},
         {"Move_1_x_Tile_4-6", "Move diagonally 1 Tile, with Dice 4-6"},
     };
-    
-    public Movement(Dictionary<string, string> moveDescription, MoveDirection direction, AvaiableDiceNumber diceNumber, AvaiableMoveTiles moveTiles)
-    {
-        _moveDescription = moveDescription;
-        _direction = direction;
-        _diceNumber = diceNumber;
-        _moveTiles = moveTiles;
+
+        public Movement(Dictionary<string, string> moveDescription, MoveDirection direction, AvaiableDiceNumber diceNumber, AvaiableMoveTiles moveTiles)
+        {
+            _moveDescription = moveDescription;
+            _direction = direction;
+            _diceNumber = diceNumber;
+            _moveTiles = moveTiles;
+        }
     }
 }

@@ -1,7 +1,10 @@
-﻿public enum AvaiableMoveTiles
+﻿namespace Assets.Scripts.Actions
 {
-    MoveX,
-    Move1_3,
-    Move1,
+    public enum AvaiableMoveTiles
+    {
+        MoveX,
+        Move1_3,
+        Move1,
+    }
 }
 

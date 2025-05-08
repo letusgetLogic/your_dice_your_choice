@@ -7,8 +7,7 @@ namespace Assets.Scripts.Characters
         [SerializeField] private CharacterData _data;
 
         public CharacterData Data { get; private set; }
-
-        private GameObject _panel;
+        public GameObject Panel { get; private set; }
 
         /// <summary>
         /// Awake method.
@@ -24,9 +23,9 @@ namespace Assets.Scripts.Characters
         /// <param name="panel"></param>
         public void SetPanel(GameObject panel)
         {
-            _panel = panel;
-            _panel.SetActive(true);
-            _panel.
+            Panel = panel;
+            Panel.SetActive(true);
+            Panel.GetComponent<CharacterPanel>().SetCharacter(gameObject);
         }
     }
 }
