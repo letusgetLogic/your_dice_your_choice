@@ -4,8 +4,11 @@ public class BattleManager : MonoBehaviour
 {
     public static BattleManager Instance;
 
+    public GameObject[] CharacterPanel;
+
     public GameObject[,] Fields { get; private set; }
     public GameObject[] Character { get; private set; }
+    
 
 
     /// <summary>
@@ -26,29 +29,56 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        Character = new GameObject[LevelManager.Instance.Data.CharacterAmount];
+        
+    }
 
-        InitializeFields();
+    /// <summary>
+    /// Initializes the array Fields.
+    /// </summary>
+    public void InitializeCharacter()
+    {
+        Character = new GameObject[LevelManager.Instance.Data.CharacterAmount];
+    }
+    
+    /// <summary>
+    /// Initializes the array Fields.
+    /// </summary>
+    public void InitializeFields()
+    {
+        int mapHeight = LevelManager.Instance.Data.MapHeight;
+        int mapLength = LevelManager.Instance.Data.MapLength;
+
+        Fields = new GameObject[mapHeight, mapLength];
+    }
+
+    /// <summary>
+    /// Initializes the array Character and Panel in Character.
+    /// </summary>
+    /// <param name="characterPrefab"></param>
+    public void SetCharacter(GameObject characterPrefab, int index)
+    {
+        Character[index] = characterPrefab;
+        Character[index].GetComponent<Character>().SetPanel(CharacterPanel[index]);
     }
 
     /// <summary>
     /// Initializes the array Character.
     /// </summary>
     /// <param name="characterPrefab"></param>
-    public void SetCharacter(GameObject characterPrefab, int index)
+    public void SetField(GameObject field, int j, int i)
     {
-        Character[index] = characterPrefab;
+        Fields[j, i] = field;
     }
 
     /// <summary>
-    /// Initializes the array Fields.
+    /// Hides all chracter panel.
     /// </summary>
-    private void InitializeFields()
+    public void HideAllPanel()
     {
-        int mapHeight = LevelManager.Instance.Data.MapHeight;
-        int mapLength = LevelManager.Instance.Data.MapLength;
-
-        Fields = new GameObject[mapHeight, mapLength];
+        foreach (GameObject panel in CharacterPanel)
+        {
+            panel.gameObject.SetActive(false);
+        }
     }
 }
 

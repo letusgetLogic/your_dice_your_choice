@@ -148,11 +148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45a40ef19d785fc44a9da08d09c6b279, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharacterPanel:
-  - {fileID: 1503901224}
-  - {fileID: 2019299898}
-  - {fileID: 398152898}
-  - {fileID: 273940549}
   _dataPrefab:
   - {fileID: 11400000, guid: c19e37418122c86468a8d95f147a0273, type: 2}
   - {fileID: 11400000, guid: 175f218960678a446abdc873f61fb322, type: 2}
@@ -4111,6 +4106,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ae094ca787deba409c7bb8d495557cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CharacterPanel:
+  - {fileID: 1503901224}
+  - {fileID: 2019299898}
+  - {fileID: 398152898}
+  - {fileID: 273940549}
 --- !u!224 &553152109 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5493381474151762222, guid: c74da118415bf6c42bc13b9807f00cd9, type: 3}
@@ -11968,6 +11968,6 @@ SceneRoots:
   - {fileID: 1929649784}
   - {fileID: 7968855155037533533}
   - {fileID: 1262512404944060030}
-  - {fileID: 513823983}
   - {fileID: 505334692}
   - {fileID: 11377611}
+  - {fileID: 513823983}

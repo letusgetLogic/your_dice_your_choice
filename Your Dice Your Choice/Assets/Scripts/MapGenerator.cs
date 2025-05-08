@@ -5,6 +5,7 @@ public class MapGenerator : MonoBehaviour
 {
     public GameObject FieldPrefab;
     public GameObject[] CharacterPrefab;
+    
 
     private readonly int CharacterSpawnAreaMaxColumn = 2; // Max. value of columns of the spawn area for character. 
 
@@ -19,6 +20,12 @@ public class MapGenerator : MonoBehaviour
         if (LevelManager.Instance.Data != null)
         { 
             _data = LevelManager.Instance.Data;
+
+            BattleManager.Instance.HideAllPanel();
+
+            BattleManager.Instance.InitializeFields();
+            BattleManager.Instance.InitializeCharacter();
+
             SpawnField();
             SpawnCharacter();
         }
@@ -50,8 +57,8 @@ public class MapGenerator : MonoBehaviour
             for (int i = 0; i < _data.MapLength; i++)
             {
                 var field = Instantiate(FieldPrefab, spawnPos, Quaternion.identity);
-
-                BattleManager.Instance.Fields[j, i] = field;
+               
+                BattleManager.Instance.SetField(field, j, i);
 
                 spawnPos.x += 1;
             }
@@ -70,7 +77,7 @@ public class MapGenerator : MonoBehaviour
         {
             var prefab = CharacterPrefab[Random.Range(0, CharacterPrefab.Length)];
             BattleManager.Instance.SetCharacter(prefab, i);
-            Debug.Log(prefab.ToString());
+            
             Instantiate(prefab, GetPosition(), Quaternion.identity);
         }
     }
@@ -86,7 +93,7 @@ public class MapGenerator : MonoBehaviour
         int col = Random.Range(0, CharacterSpawnAreaMaxColumn);
         var field = BattleManager.Instance.Fields[row, col];
         var pos = field.transform.position;
-        Debug.Log(pos);
+       
         return pos;
     }
 }
