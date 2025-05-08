@@ -1,6 +1,9 @@
-﻿public enum CharacterType
+﻿namespace Assets.Scripts.Characters
 {
-    Tower,
-    Tank,
+    public enum CharacterType
+    {
+        Tower,
+        Tank,
+    }
 }
 

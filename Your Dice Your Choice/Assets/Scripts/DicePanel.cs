@@ -7,6 +7,10 @@ public class DicePanel : MonoBehaviour, IDropHandler
     public TextMeshProUGUI ActionNameText;
     public GameObject DiceSlot;
 
+    /// <summary>
+    /// On drop event.
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnDrop(PointerEventData eventData)
     {
        
