@@ -15,9 +15,6 @@ namespace Assets.Scripts.Characters
         public Weapon Weapon1;
         public Weapon Weapon2;
 
-        public ActionType Action1;
-        public ActionType Action2;
-        public ActionType Action3;
-        public ActionType Action4;
+        public ActionType[] ActionTypes = new ActionType[4];
     }
 }

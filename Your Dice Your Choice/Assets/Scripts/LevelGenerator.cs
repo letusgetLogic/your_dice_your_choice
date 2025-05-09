@@ -1,8 +1,10 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class MapGenerator : MonoBehaviour
+public class LevelGenerator : MonoBehaviour
 {
+    public static LevelGenerator Instance;
+
     public GameObject FieldPrefab;
     public GameObject[] CharacterPrefab;
     
@@ -11,38 +13,27 @@ public class MapGenerator : MonoBehaviour
 
     private LevelData _data;
 
-
     /// <summary>
-    /// Start method.
+    /// Awake method.
     /// </summary>
-    private void Start()
+    private void Awake()
     {
-        if (LevelManager.Instance.Data != null)
-        { 
-            _data = LevelManager.Instance.Data;
-
-            BattleManager.Instance.HideAllPanel();
-
-            BattleManager.Instance.InitializeFields();
-            BattleManager.Instance.InitializeCharacter();
-
-            SpawnField();
-            SpawnCharacter();
-        }
-        else
+        if (Instance != null)
         {
-            throw new System.Exception("LevelManager.Instance.Data == null");
+            Destroy(Instance.gameObject);
         }
+
+        Instance = this;
     }
 
     /// <summary>
     /// Spawn fields.
     /// </summary>
-    private void SpawnField()
+    public void SpawnField()
     {
         Transform spawnTransform = GetComponent<Transform>();
         Vector3 spawnPos = spawnTransform.position;
-
+        
         // Length - 1 because the distance between pivot point of fields together is 1 field length less than the length of entire fields.
         // For example 9 fields have 8 distance between their pivot points.
         float halfLength = (_data.MapLength - 1) * .5f; 
@@ -69,31 +60,65 @@ public class MapGenerator : MonoBehaviour
     }
 
     /// <summary>
-    /// Spawn Character.
+    /// Spawn characters.
     /// </summary>
-    private void SpawnCharacter()
+    public void SpawnCharacter()
     {
+        Vector3[] assignedPositions = new Vector3[_data.CharacterAmount];
+
         for (int i = 0; i < _data.CharacterAmount; i++)
         {
             var prefab = CharacterPrefab[Random.Range(0, CharacterPrefab.Length)];
+
+            var pos = GetPosition(assignedPositions);
+
+            Instantiate(prefab, pos, Quaternion.identity);
+
+            pos = assignedPositions[i];
+
             BattleManager.Instance.SetCharacter(prefab, i);
-            
-            Instantiate(prefab, GetPosition(), Quaternion.identity);
         }
     }
 
     /// <summary>
-    /// Get random position on field.
+    /// Get random position on field, which hasn't been filled.
     /// </summary>
     /// <returns></returns>
-    private Vector3 GetPosition()
+    private Vector3 GetPosition(Vector3[] assignedPositions)
     {
         int rowLength = BattleManager.Instance.Fields.GetLength(0);
         int row = Random.Range(0, rowLength);
         int col = Random.Range(0, CharacterSpawnAreaMaxColumn);
         var field = BattleManager.Instance.Fields[row, col];
         var pos = field.transform.position;
-       
+
+        if (HasPositionBeenFilled(pos, assignedPositions)) GetPosition(assignedPositions); // new position
+
         return pos;
+    }
+
+    /// <summary>
+    /// Has the position been filled?
+    /// </summary>
+    /// <param name="pos"></param>
+    /// <param name="assignedPositions"></param>
+    /// <returns></returns>
+    private bool HasPositionBeenFilled(Vector3 pos, Vector3[] assignedPositions)
+    {
+        foreach (var assignedPosition in assignedPositions)
+        {
+            if (assignedPosition == null) return false;
+            if (pos == assignedPosition) return true; 
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// References _data.
+    /// </summary>
+    public void SetData()
+    {
+        _data = LevelManager.Instance.Data; 
     }
 }

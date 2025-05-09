@@ -19,7 +19,4 @@ MonoBehaviour:
   DP: 84
   Weapon1: 1
   Weapon2: 5
-  Action1: 1
-  Action2: 2
-  Action3: 3
-  Action4: 0
+  ActionTypes: 01000000020000000300000000000000

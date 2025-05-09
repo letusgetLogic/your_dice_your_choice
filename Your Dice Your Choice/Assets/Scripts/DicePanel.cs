@@ -4,8 +4,10 @@ using UnityEngine.EventSystems;
 
 public class DicePanel : MonoBehaviour, IDropHandler
 {
-    public TextMeshProUGUI ActionNameText;
+    public TextMeshProUGUI ActionName;
     public GameObject DiceSlot;
+
+
 
     /// <summary>
     /// On drop event.
@@ -21,5 +23,7 @@ public class DicePanel : MonoBehaviour, IDropHandler
             item.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
         }
     }
+
+    
 }
 

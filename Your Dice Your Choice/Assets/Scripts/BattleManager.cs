@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Assets.Scripts.Characters;
+using static UnityEngine.Rendering.DebugUI;
 
 public class BattleManager : MonoBehaviour
 {
@@ -26,14 +27,6 @@ public class BattleManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Start method.
-    /// </summary>
-    private void Start()
-    {
-        
-    }
-
-    /// <summary>
     /// Initializes the array Fields.
     /// </summary>
     public void InitializeCharacter()
@@ -53,13 +46,16 @@ public class BattleManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Initializes the array Character and Panel in Character.
+    /// Initializes the array Character and references Character and CharacterPanel.
     /// </summary>
     /// <param name="characterPrefab"></param>
     public void SetCharacter(GameObject characterPrefab, int index)
     {
         Character[index] = characterPrefab;
         Character[index].GetComponent<Character>().SetPanel(CharacterPanel[index]);
+        CharacterPanel[index].SetActive(true); 
+        CharacterPanel[index].GetComponent<CharacterPanel>().SetCharacter(Character[index]);
+        //CharacterPanel[index].GetComponent<CharacterPanel>().SetAction(Character[index]);
     }
 
     /// <summary>

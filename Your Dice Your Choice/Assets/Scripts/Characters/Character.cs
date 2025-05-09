@@ -24,8 +24,6 @@ namespace Assets.Scripts.Characters
         public void SetPanel(GameObject panel)
         {
             Panel = panel;
-            Panel.SetActive(true);
-            Panel.GetComponent<CharacterPanel>().SetCharacter(gameObject);
         }
     }
 }

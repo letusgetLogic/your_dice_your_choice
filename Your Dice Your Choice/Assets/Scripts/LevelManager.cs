@@ -1,4 +1,5 @@
 using System;
+using Assets.Scripts;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
@@ -21,6 +22,7 @@ public class LevelManager : MonoBehaviour
         }
 
         Instance = this;
+        DontDestroyOnLoad(Instance);
 
         Data = _dataPrefab[_dataIndex];
     }
@@ -30,7 +32,15 @@ public class LevelManager : MonoBehaviour
     /// </summary>
     private void Start()
     {
-       
+        if (Data != null)
+        {
+            PhaseInitialization.Do();
+        }
+        else
+        {
+            throw new System.Exception("LevelManager.Instance.Data == null");
+        }
+
     }
 
     // Update is called once per frame
