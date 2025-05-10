@@ -64,56 +64,47 @@ public class LevelGenerator : MonoBehaviour
     /// </summary>
     public void SpawnCharacter()
     {
-        Vector3[] assignedPositions = new Vector3[_data.CharacterAmount];
+        Vector3[] randPositions = new Vector3[_data.CharacterAmount];
+        RandomizePosition(randPositions);
 
         for (int i = 0; i < _data.CharacterAmount; i++)
         {
             var prefab = CharacterPrefab[Random.Range(0, CharacterPrefab.Length)];
 
-            var pos = GetPosition(assignedPositions);
-
-            Instantiate(prefab, pos, Quaternion.identity);
-
-            pos = assignedPositions[i];
+            Instantiate(prefab, randPositions[i], Quaternion.identity);
 
             BattleManager.Instance.SetCharacter(prefab, i);
         }
     }
-    
-    /// <summary>
-    /// Get random position on field, which hasn't been filled.
-    /// </summary>
-    /// <returns></returns>
-    private Vector3 GetPosition(Vector3[] assignedPositions)
-    {
-        int rowLength = BattleManager.Instance.Fields.GetLength(0);
-        int row = Random.Range(0, rowLength);
-        int col = Random.Range(0, CharacterSpawnAreaMaxColumn);
-        var field = BattleManager.Instance.Fields[row, col];
-        var pos = field.transform.position;
-
-        if (HasPositionBeenFilled(pos, assignedPositions)) GetPosition(assignedPositions); // new position
-
-        return pos;
-    }
 
     /// <summary>
-    /// Has the position been filled?
+    /// Randomize the position of characters.
     /// </summary>
-    /// <param name="pos"></param>
-    /// <param name="assignedPositions"></param>
-    /// <returns></returns>
-    private bool HasPositionBeenFilled(Vector3 pos, Vector3[] assignedPositions)
+    /// <param name="randPositions"></param>
+    private void RandomizePosition(Vector3[] randPositions)
     {
-        foreach (var assignedPosition in assignedPositions)
+        for (int i = 0; i < randPositions.Length; i++)
         {
-            if (assignedPosition == null) return false;
-            if (pos == assignedPosition) return true; 
+            int rowLength = BattleManager.Instance.Fields.GetLength(0);
+            int row = Random.Range(0, rowLength);
+            int col = Random.Range(0, CharacterSpawnAreaMaxColumn);
+            var field = BattleManager.Instance.Fields[row, col];
+            var pos = field.transform.position;
+
+            for (int j = 0; j < randPositions.Length; j++) // If pos is the same as the predecessor, repeat the loop.
+            {
+                if (randPositions[j] == pos)
+                {
+                    i--;
+                    break;
+                }
+
+                randPositions[i] = pos;Debug.Log(randPositions[i]);
+                break;
+            }
         }
-
-        return false;
     }
-
+    
     /// <summary>
     /// References _data.
     /// </summary>

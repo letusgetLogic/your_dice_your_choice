@@ -34,7 +34,7 @@ public class LevelManager : MonoBehaviour
     {
         if (Data != null)
         {
-            PhaseInitialization.Do();
+            PhaseInitialization();
         }
         else
         {
@@ -47,5 +47,23 @@ public class LevelManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    /// <summary>
+    /// Phase Initialization.
+    /// </summary>
+    private void PhaseInitialization()
+    {
+        LevelGenerator.Instance.SetData();
+
+        BattleManager.Instance.HideAllPanel();
+
+        BattleManager.Instance.InitializeFields();
+        BattleManager.Instance.InitializeCharacter();
+
+        LevelGenerator.Instance.SpawnField();
+        LevelGenerator.Instance.SpawnCharacter();
+
+        BattleManager.Instance.SetAction();
     }
 }

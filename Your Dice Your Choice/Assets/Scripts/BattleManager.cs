@@ -59,11 +59,6 @@ public class BattleManager : MonoBehaviour
 
         Character[index].GetComponent<Character>().SetPanel(CharacterPanel[index]);
         CharacterPanel[index].GetComponent<CharacterPanel>().SetCharacter(Character[index]);
-        //CharacterPanel[index].GetComponent<CharacterPanel>().SetAction();
-        //StartCoroutine(SetAction());
-
-        var characterName = Character[index].name;
-        var characterPanel = CharacterPanel[index].name;
     }
 
     /// <summary>
@@ -71,22 +66,10 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     public void SetAction()
     {
-        Debug.Log("BattleManager SetAction() Character.Length " + Character.Length);
         for (int i = 0; i < Character.Length; i++)
         {
-            var character = Character[i].GetComponent<Character>();
-            Debug.Log(character);
-            //character.Panel.GetComponent<CharacterPanel>().SetAction();
-            CharacterPanel[i].GetComponent<CharacterPanel>().SetAction();
-            Debug.Log(i + CharacterPanel[i].name);
+           CharacterPanel[i].GetComponent<CharacterPanel>().SetAction();
         }
-
-        //foreach (var panel in CharacterPanel)
-        //{
-        //    panel.GetComponent<CharacterPanel>().SetAction();
-        //}
-
-        //yield return new WaitForSeconds(1f);
     }
 
     /// <summary>

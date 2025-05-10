@@ -13,15 +13,7 @@ public class CharacterPanel : MonoBehaviour
     public GameObject CharacterObject { get; private set; }
     public Character Character { get; private set; }
 
-    /// <summary>
-    /// Start method.
-    /// </summary>
-    private void Start()
-    {
-        //InitializeSlots();
-
-    }
-
+    
     /// <summary>
     /// References Object and Script Character.
     /// </summary>
@@ -47,9 +39,5 @@ public class CharacterPanel : MonoBehaviour
         CharacterName.text = Character.Data.Type.ToString();
     }
 
-    private void InitializeSlots()
-    {
-        throw new NotImplementedException();
-    }
 }
 
