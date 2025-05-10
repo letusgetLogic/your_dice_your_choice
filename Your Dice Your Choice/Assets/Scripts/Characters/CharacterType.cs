@@ -4,6 +4,10 @@
     {
         Tower,
         Tank,
+        Archer,
+        Fighter,
+        Mage,
+        Assassin,
     }
 }
 

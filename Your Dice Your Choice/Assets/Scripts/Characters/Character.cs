@@ -6,7 +6,8 @@ namespace Assets.Scripts.Characters
     {
         [SerializeField] private CharacterData _data;
 
-        public CharacterData Data { get; private set; }
+        public CharacterData Data => _data;
+
         public GameObject Panel { get; private set; }
 
         /// <summary>
@@ -14,7 +15,8 @@ namespace Assets.Scripts.Characters
         /// </summary>
         private void Awake()
         {
-            Data = _data;
+            //Data = _data;
+            //Debug.Log(Data);
         }
 
         /// <summary>

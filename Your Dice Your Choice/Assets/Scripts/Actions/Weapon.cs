@@ -5,6 +5,8 @@
     Bow,
     Axe,
     Hammer,
+    Knife,
+    MagicStaff,
     Shield
 }
 

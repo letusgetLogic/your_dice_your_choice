@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using Assets.Scripts.Characters;
-using static UnityEngine.Rendering.DebugUI;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
 
 public class BattleManager : MonoBehaviour
 {
@@ -52,10 +55,38 @@ public class BattleManager : MonoBehaviour
     public void SetCharacter(GameObject characterPrefab, int index)
     {
         Character[index] = characterPrefab;
-        Character[index].GetComponent<Character>().SetPanel(CharacterPanel[index]);
         CharacterPanel[index].SetActive(true); 
+
+        Character[index].GetComponent<Character>().SetPanel(CharacterPanel[index]);
         CharacterPanel[index].GetComponent<CharacterPanel>().SetCharacter(Character[index]);
-        //CharacterPanel[index].GetComponent<CharacterPanel>().SetAction(Character[index]);
+        //CharacterPanel[index].GetComponent<CharacterPanel>().SetAction();
+        //StartCoroutine(SetAction());
+
+        var characterName = Character[index].name;
+        var characterPanel = CharacterPanel[index].name;
+    }
+
+    /// <summary>
+    /// References the action for each DicePanel.
+    /// </summary>
+    public void SetAction()
+    {
+        Debug.Log("BattleManager SetAction() Character.Length " + Character.Length);
+        for (int i = 0; i < Character.Length; i++)
+        {
+            var character = Character[i].GetComponent<Character>();
+            Debug.Log(character);
+            //character.Panel.GetComponent<CharacterPanel>().SetAction();
+            CharacterPanel[i].GetComponent<CharacterPanel>().SetAction();
+            Debug.Log(i + CharacterPanel[i].name);
+        }
+
+        //foreach (var panel in CharacterPanel)
+        //{
+        //    panel.GetComponent<CharacterPanel>().SetAction();
+        //}
+
+        //yield return new WaitForSeconds(1f);
     }
 
     /// <summary>

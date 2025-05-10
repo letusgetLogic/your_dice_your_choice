@@ -11,9 +11,10 @@
             BattleManager.Instance.InitializeFields();
             BattleManager.Instance.InitializeCharacter();
 
-           
             LevelGenerator.Instance.SpawnField();
             LevelGenerator.Instance.SpawnCharacter();
+            
+            BattleManager.Instance.SetAction();
         }
     }
 }

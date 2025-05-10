@@ -2,10 +2,12 @@ using System;
 using System.IO;
 using UnityEngine;
 using Assets.Scripts.Characters;
+using TMPro;
 
 public class CharacterPanel : MonoBehaviour
 {
     //public GameObject Avatar;
+    public TextMeshProUGUI CharacterName;
     public GameObject[] DicePanel;
 
     public GameObject CharacterObject { get; private set; }
@@ -31,15 +33,18 @@ public class CharacterPanel : MonoBehaviour
     }
 
     /// <summary>
-    /// References the action in UI.
+    /// References the action and the character name in UI. ( CharacterName couldn't be set in SetCharacter(), because Character.Data isn't loaded at those time. )
     /// </summary>
-    public void SetAction(GameObject character)
+    public void SetAction()
     {
         for (int i = 0; i < DicePanel.Length; i++)
         {
-            string action = character.GetComponent<Character>().Data.ActionTypes[i].ToString();
-            DicePanel[i].GetComponent<DicePanel>().ActionName.text = action;
+            string action = Character.Data.ActionTypes[i].ToString();
+            
+            DicePanel[i].GetComponent<DicePanel>().SetName(action);
         }
+
+        CharacterName.text = Character.Data.Type.ToString();
     }
 
     private void InitializeSlots()

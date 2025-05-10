@@ -79,7 +79,7 @@ public class LevelGenerator : MonoBehaviour
             BattleManager.Instance.SetCharacter(prefab, i);
         }
     }
-
+    
     /// <summary>
     /// Get random position on field, which hasn't been filled.
     /// </summary>

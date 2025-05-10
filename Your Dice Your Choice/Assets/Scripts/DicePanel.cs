@@ -8,6 +8,7 @@ public class DicePanel : MonoBehaviour, IDropHandler
     public GameObject DiceSlot;
 
 
+    
 
     /// <summary>
     /// On drop event.
@@ -24,6 +25,12 @@ public class DicePanel : MonoBehaviour, IDropHandler
         }
     }
 
-    
+    /// <summary>
+    /// References the name of the action.
+    /// </summary>
+    public void SetName(string action)
+    {
+        ActionName.text = action;
+    }
 }
 
