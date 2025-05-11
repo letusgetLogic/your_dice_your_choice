@@ -7,7 +7,7 @@ public class LevelGenerator : MonoBehaviour
 
     public GameObject FieldPrefab;
     public GameObject[] CharacterPrefab;
-    
+
 
     private readonly int CharacterSpawnAreaMaxColumn = 2; // Max. value of columns of the spawn area for character. 
 
@@ -33,10 +33,10 @@ public class LevelGenerator : MonoBehaviour
     {
         Transform spawnTransform = GetComponent<Transform>();
         Vector3 spawnPos = spawnTransform.position;
-        
+
         // Length - 1 because the distance between pivot point of fields together is 1 field length less than the length of entire fields.
         // For example 9 fields have 8 distance between their pivot points.
-        float halfLength = (_data.MapLength - 1) * .5f; 
+        float halfLength = (_data.MapLength - 1) * .5f;
         float halfHeight = (_data.MapHeight - 1) * .5f;
         float startPointVertical = -halfLength;
         float startPointHorizontal = halfHeight;
@@ -48,7 +48,7 @@ public class LevelGenerator : MonoBehaviour
             for (int i = 0; i < _data.MapLength; i++)
             {
                 var field = Instantiate(FieldPrefab, spawnPos, Quaternion.identity);
-               
+
                 BattleManager.Instance.SetField(field, j, i);
 
                 spawnPos.x += 1;
@@ -83,6 +83,13 @@ public class LevelGenerator : MonoBehaviour
     /// <param name="randPositions"></param>
     private void RandomizePosition(Vector3[] randPositions)
     {
+        // The second array to check if the field index is already assigned. 
+        Vector2[] fieldIndex = new Vector2[randPositions.Length];
+
+        for (int h = 0; h < fieldIndex.Length; h++) 
+            fieldIndex[h] = new Vector2(-1, -1);
+
+
         for (int i = 0; i < randPositions.Length; i++)
         {
             int rowLength = BattleManager.Instance.Fields.GetLength(0);
@@ -90,26 +97,29 @@ public class LevelGenerator : MonoBehaviour
             int col = Random.Range(0, CharacterSpawnAreaMaxColumn);
             var field = BattleManager.Instance.Fields[row, col];
             var pos = field.transform.position;
+            randPositions[i] = pos;
 
-            for (int j = 0; j < randPositions.Length; j++) // If pos is the same as the predecessor, repeat the loop.
+            // Check if the field index is already assigned. 
+            var tempIndex = new Vector2(row, col);
+
+            for (int j = 0; j <= i; j++) 
             {
-                if (randPositions[j] == pos)
+                if (tempIndex == fieldIndex[j])
                 {
                     i--;
                     break;
                 }
 
-                randPositions[i] = pos;Debug.Log(randPositions[i]);
-                break;
+                if (j == i) fieldIndex[j] = tempIndex;
             }
         }
     }
-    
+
     /// <summary>
     /// References _data.
     /// </summary>
     public void SetData()
     {
-        _data = LevelManager.Instance.Data; 
+        _data = LevelManager.Instance.Data;
     }
 }

@@ -64,9 +64,9 @@ MonoBehaviour:
   CharacterName: {fileID: 1114063639640440616}
   DicePanel:
   - {fileID: 8900005894811504728}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1330092692096672856}
+  - {fileID: 4078186673315595176}
+  - {fileID: 823914254172694797}
 --- !u!114 &5583347426329933343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -506,6 +506,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5ee234096cffb245b77a28cc3d8210a, type: 3}
+--- !u!1 &823914254172694797 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 421359889958457307, guid: b5ee234096cffb245b77a28cc3d8210a, type: 3}
+  m_PrefabInstance: {fileID: 1060555039577892566}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &2095487464607054468 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1415101767450205266, guid: b5ee234096cffb245b77a28cc3d8210a, type: 3}
@@ -613,6 +618,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1415101767450205266, guid: b5ee234096cffb245b77a28cc3d8210a, type: 3}
   m_PrefabInstance: {fileID: 1706170295092620163}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1330092692096672856 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 421359889958457307, guid: b5ee234096cffb245b77a28cc3d8210a, type: 3}
+  m_PrefabInstance: {fileID: 1706170295092620163}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4413626292187368563
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -713,6 +723,11 @@ PrefabInstance:
 --- !u!224 &3378590553330585633 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1415101767450205266, guid: b5ee234096cffb245b77a28cc3d8210a, type: 3}
+  m_PrefabInstance: {fileID: 4413626292187368563}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4078186673315595176 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 421359889958457307, guid: b5ee234096cffb245b77a28cc3d8210a, type: 3}
   m_PrefabInstance: {fileID: 4413626292187368563}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9105104869824208771
