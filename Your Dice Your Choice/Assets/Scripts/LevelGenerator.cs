@@ -7,7 +7,10 @@ public class LevelGenerator : MonoBehaviour
 
     public GameObject FieldPrefab;
     public GameObject[] CharacterPrefab;
-
+    public GameObject GroundTop;
+    public GameObject GroundBottom;
+    public GameObject GroundLeft;
+    public GameObject GroundRight;
 
     private readonly int CharacterSpawnAreaMaxColumn = 2; // Max. value of columns of the spawn area for character. 
 
@@ -38,10 +41,10 @@ public class LevelGenerator : MonoBehaviour
         // For example 9 fields have 8 distance between their pivot points.
         float halfLength = (_data.MapLength - 1) * .5f;
         float halfHeight = (_data.MapHeight - 1) * .5f;
-        float startPointVertical = -halfLength;
-        float startPointHorizontal = halfHeight;
+        float startPointHorizontal = -halfLength;
+        float startPointVertical = halfHeight;
 
-        spawnPos = new Vector3(startPointVertical, startPointHorizontal, 0);
+        spawnPos = new Vector3(startPointHorizontal, startPointVertical, 0);
 
         for (int j = 0; j < _data.MapHeight; j++)
         {
@@ -55,8 +58,20 @@ public class LevelGenerator : MonoBehaviour
             }
 
             spawnPos.y -= 1;
-            spawnPos.x = startPointVertical;
+            spawnPos.x = startPointHorizontal;
         }
+
+        spawnPos = new Vector3(0, startPointVertical + 1, 0);
+        Instantiate(GroundTop, spawnPos, Quaternion.identity);Debug.Log(spawnPos);
+
+        spawnPos = new Vector3(0, -startPointVertical - 1, 0);
+        Instantiate(GroundBottom, spawnPos, Quaternion.identity); Debug.Log(spawnPos);
+
+        spawnPos = new Vector3(startPointHorizontal - 1, 0, 0);
+        Instantiate(GroundLeft, spawnPos, Quaternion.identity); Debug.Log(spawnPos);
+
+        spawnPos = new Vector3(-startPointHorizontal + 1, 0, 0);
+        Instantiate(GroundRight, spawnPos, Quaternion.identity); Debug.Log(spawnPos);
     }
 
     /// <summary>
