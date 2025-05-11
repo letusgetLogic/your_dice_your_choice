@@ -9,7 +9,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private LevelData[] _dataPrefab;
     [SerializeField] private int _dataIndex;
 
-    public LevelData Data { get; private set; }
+    public LevelData Data => _dataPrefab[_dataIndex];
 
     /// <summary>
     /// Awake method.
@@ -24,7 +24,7 @@ public class LevelManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(Instance);
 
-        Data = _dataPrefab[_dataIndex];
+        SetMatch();
     }
 
     /// <summary>
@@ -47,6 +47,11 @@ public class LevelManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void SetMatch()
+    {
+        Data.MatchType = MatchType.DuellAI;
     }
 
     /// <summary>

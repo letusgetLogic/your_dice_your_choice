@@ -2,15 +2,20 @@
 {
     public static TurnState[] Parties { get; private set; }
     public static TurnState Turn { get; private set; }
-   
+
 
     /// <summary>
-    /// Set parties.
+    /// Set parties appendix the number of player.
     /// </summary>
     /// <param name="turn"></param>
-    public static void Set(TurnState[] parties)
+    public static void SetParties(int playerNumber)
     {
-        Parties = parties;
+        Parties = new TurnState[playerNumber];
+
+        for (int i = 0; i < Parties.Length; i++)
+        {
+            Parties[i] = (TurnState)i + 1;
+        }
     }
 
     /// <summary>
