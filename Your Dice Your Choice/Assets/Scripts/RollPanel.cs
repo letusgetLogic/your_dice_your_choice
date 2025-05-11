@@ -6,23 +6,18 @@ using UnityEngine.UI;
 
 public class RollPanel : MonoBehaviour
 {
-   
     public GameObject[] Dice;
-
-    [SerializeField] private int _diceAmount;
-    [SerializeField] private int _rollFrequency;
-    [SerializeField] private float _animTimer = 0.25f;
 
     [NonSerialized] public List<GameObject> DiceOnPanel = new List<GameObject>();
 
- 
 
     /// <summary>
-    /// Start method.
+    /// Shows Dice.
     /// </summary>
-    private void Start()
+    /// <param name="amount"></param>
+    public void ShowDice(int  amount)
     {
-        for (int i = 0; i < _diceAmount; i++)
+        for (int i = 0; i < amount; i++)
         {
             var dice = Dice[i];
             dice.SetActive(true);
@@ -31,11 +26,17 @@ public class RollPanel : MonoBehaviour
     }
 
     /// <summary>
-    /// Update method.
+    /// Hide all Dice.
     /// </summary>
-    private void Update()
+    /// <param name="amount"></param>
+    public void HideAllDice()
     {
-        
+        for (int i = 0; i < Dice.Length; i++)
+        {
+            var dice = Dice[i];
+            dice.SetActive(false);
+            DiceOnPanel.RemoveAll(x => !x);
+        }
     }
 
     /// <summary>
@@ -52,7 +53,7 @@ public class RollPanel : MonoBehaviour
     /// <returns></returns>
     private IEnumerator AnimateDiceRoll()
     {
-        for (int i = 0; i < _rollFrequency; i++)
+        for (int i = 0; i < DiceManager.Instance.RollFrequency; i++)
         {
             foreach (var dice in DiceOnPanel)
             {
@@ -61,7 +62,7 @@ public class RollPanel : MonoBehaviour
                 diceScript.InitializeSide(sideIndex);
             }
 
-            yield return new WaitForSeconds(_animTimer); 
+            yield return new WaitForSeconds(DiceManager.Instance.AnimTimer); 
         }
     }
 }

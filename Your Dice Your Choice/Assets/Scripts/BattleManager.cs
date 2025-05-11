@@ -3,6 +3,7 @@ using Assets.Scripts.Characters;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 
 public class BattleManager : MonoBehaviour
@@ -10,6 +11,7 @@ public class BattleManager : MonoBehaviour
     public static BattleManager Instance;
 
     public GameObject[] CharacterPanel;
+    public Button EndTurnButton;
 
     public GameObject[,] Fields { get; private set; }
     public GameObject[] Character { get; private set; }
@@ -28,6 +30,16 @@ public class BattleManager : MonoBehaviour
 
         Instance = this;
     }
+
+    /// <summary>
+    /// Start method.
+    /// </summary>
+    private void Start()
+    {
+        EndTurnButton.gameObject.SetActive(false);
+    }
+
+    
 
     /// <summary>
     /// Initializes the array Fields.
@@ -90,6 +102,11 @@ public class BattleManager : MonoBehaviour
         {
             panel.gameObject.SetActive(false);
         }
+    }
+
+    private void StartMatch()
+    {
+
     }
 }
 

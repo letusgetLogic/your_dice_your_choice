@@ -1,6 +1,6 @@
 ﻿public enum TurnState
 {
     None,
-    Player1,
-    Player2,
+    PlayerLeft,
+    PlayerRight,
 }

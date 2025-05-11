@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class LevelGenerator : MonoBehaviour
 {
-    public static LevelGenerator Instance;
+    public static LevelGenerator Instance { get; private set; }
 
     public GameObject FieldPrefab;
     public GameObject[] CharacterPrefab;
@@ -62,7 +62,7 @@ public class LevelGenerator : MonoBehaviour
         }
 
         spawnPos = new Vector3(0, startPointVertical + 1, 0);
-        Instantiate(GroundTop, spawnPos, Quaternion.identity);Debug.Log(spawnPos);
+        Instantiate(GroundTop, spawnPos, Quaternion.identity); Debug.Log(spawnPos);
 
         spawnPos = new Vector3(0, -startPointVertical - 1, 0);
         Instantiate(GroundBottom, spawnPos, Quaternion.identity); Debug.Log(spawnPos);
@@ -101,7 +101,7 @@ public class LevelGenerator : MonoBehaviour
         // The second array to check if the field index is already assigned. 
         Vector2[] fieldIndex = new Vector2[randPositions.Length];
 
-        for (int h = 0; h < fieldIndex.Length; h++) 
+        for (int h = 0; h < fieldIndex.Length; h++)
             fieldIndex[h] = new Vector2(-1, -1);
 
 
@@ -117,7 +117,7 @@ public class LevelGenerator : MonoBehaviour
             // Check if the field index is already assigned. 
             var tempIndex = new Vector2(row, col);
 
-            for (int j = 0; j <= i; j++) 
+            for (int j = 0; j <= i; j++)
             {
                 if (tempIndex == fieldIndex[j])
                 {
