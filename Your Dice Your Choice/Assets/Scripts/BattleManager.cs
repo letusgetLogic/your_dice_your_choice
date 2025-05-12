@@ -16,7 +16,7 @@ public class BattleManager : MonoBehaviour
     public GameObject[,] Fields { get; private set; }
     public GameObject[] Character { get; private set; }
     
-
+    public PlayerStats CurrentPlayer {  get; private set; }
 
     /// <summary>
     /// Awake method.

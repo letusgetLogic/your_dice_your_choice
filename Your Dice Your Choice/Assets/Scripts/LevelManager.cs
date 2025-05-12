@@ -54,7 +54,7 @@ public class LevelManager : MonoBehaviour
     /// </summary>
     private void SetMatch()
     {
-        Data.MatchType = MatchType.DuellAI;
+        Data.MatchType = MatchType.Duell;
 
         switch (Data.MatchType)
         {
@@ -68,7 +68,6 @@ public class LevelManager : MonoBehaviour
                 break;
 
             case MatchType.DuellAI:
-                
                 break;
         }
     }
