@@ -2,6 +2,7 @@ using Assets.Scripts.Characters;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 public class PanelManager : MonoBehaviour
 {
@@ -51,14 +52,14 @@ public class PanelManager : MonoBehaviour
         if (player == TurnState.PlayerLeft)
         {
             CharacterPanelsLeft[index].SetActive(true);
-
+            
             characterPrefab.GetComponent<Character>().SetPanel(CharacterPanelsLeft[index]);
             CharacterPanelsLeft[index].GetComponent<CharacterPanel>().SetCharacter(characterPrefab);
         }
         else if (player == TurnState.PlayerRight)
         {
             CharacterPanelsRight[index].SetActive(true);
-
+            
             characterPrefab.GetComponent<Character>().SetPanel(CharacterPanelsRight[index]);
             CharacterPanelsRight[index].GetComponent<CharacterPanel>().SetCharacter(characterPrefab);
         }

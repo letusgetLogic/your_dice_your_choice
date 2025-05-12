@@ -11,15 +11,6 @@ namespace Assets.Scripts.Characters
         public GameObject Panel { get; private set; }
 
         /// <summary>
-        /// Awake method.
-        /// </summary>
-        private void Awake()
-        {
-            //Data = _data;
-            //Debug.Log(Data);
-        }
-
-        /// <summary>
         /// Sets the panel at the character and active.
         /// </summary>
         /// <param name="panel"></param>

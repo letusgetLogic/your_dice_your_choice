@@ -1,7 +1,7 @@
 using System.Collections.Generic;
+using Assets.Scripts.Characters;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI.Table;
 
 public class LevelGenerator : MonoBehaviour
 {
@@ -89,11 +89,14 @@ public class LevelGenerator : MonoBehaviour
         {
             var prefab = _characterPrefab[Random.Range(0, _characterPrefab.Length)];
 
-            Instantiate(prefab, RandomizePosition(player)[i], Quaternion.identity);
-
-            PanelManager.Instance.SetPanel(prefab, i, player);
-
             tempList.Add(prefab);
+
+            Instantiate(tempList[i], RandomizePosition(player)[i], Quaternion.identity);
+            
+            PanelManager.Instance.SetPanel(tempList[i], i, player);
+            
+            
+            Debug.Log(tempList[i] + " " + tempList[i].GetComponent<Character>().Panel);
         }
 
         return tempList;
@@ -164,7 +167,22 @@ public class LevelGenerator : MonoBehaviour
 
         return -1;
     }
-    
+
+
+    /// <summary>
+    /// References the action for each DicePanel.
+    /// </summary>
+    public void SetAction()
+    {
+        for (int i = 0; i < PlayerManager.Instance.PlayerLeft.Characters.Count; i++)
+        {
+            Debug.Log(PlayerManager.Instance.PlayerLeft.Characters[i].GetComponent<Character>().Data.Type + " " + 
+                PlayerManager.Instance.PlayerLeft.Characters[i].GetComponent<Character>().Panel.GetComponent<CharacterPanel>());
+            PlayerManager.Instance.PlayerLeft.Characters[i].GetComponent<Character>().Panel.GetComponent<CharacterPanel>().SetAction();
+        }
+    }
+
+
     /// <summary>
     /// References _data.
     /// </summary>

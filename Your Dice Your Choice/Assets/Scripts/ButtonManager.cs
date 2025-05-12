@@ -7,10 +7,10 @@ public class ButtonManager : MonoBehaviour
 
     public Button EndTurnButton;
     public Button[] AllRollButtons;
-    public Button L_RollButton;
-    public Button L_RerollButton;
-    public Button R_RollButton;
-    public Button R_RerollButton;
+    public Button RollButtonLeft;
+    public Button RerollButtonLeft;
+    public Button RollButtonRight;
+    public Button RerollButtonRight;
 
 
     /// <summary>

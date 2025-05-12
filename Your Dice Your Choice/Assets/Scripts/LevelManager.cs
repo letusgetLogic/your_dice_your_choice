@@ -8,6 +8,7 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField] private LevelData[] _dataPrefab;
     [SerializeField] private int _dataIndex;
+    
 
     public LevelData Data => _dataPrefab[_dataIndex];
 
@@ -83,11 +84,12 @@ public class LevelManager : MonoBehaviour
 
         FieldManager.Instance.InitializeFields();
 
-        BattleManager.Instance.InitializeCharacter();
-
         LevelGenerator.Instance.SpawnField();
-        LevelGenerator.Instance.SpawnCharacter();
+
+        PlayerManager.Instance.CreateInstancesForPlayers();
         
-        BattleManager.Instance.SetAction();
+        LevelGenerator.Instance.SetAction();
     }
+
+   
 }

@@ -6,10 +6,10 @@ public class DiceManager : MonoBehaviour
 {
     public static DiceManager Instance { get; private set; }
 
-    public GameObject L_RollPanel;
-    public GameObject R_RollPanel;
-    public GameObject L_TurnDice;
-    public GameObject R_TurnDice;
+    public GameObject RollPanelLeft;
+    public GameObject RollPanelRight;
+    public GameObject TurnDiceLeft;
+    public GameObject TurnDiceRight;
 
     [SerializeField] private int _diceAmount = 4;
     [SerializeField] private int _rollFrequency = 10;
@@ -38,10 +38,10 @@ public class DiceManager : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        HideDiceOnPanel(L_RollPanel);
-        HideDiceOnPanel(R_RollPanel);
-        L_TurnDice.SetActive(false);
-        R_TurnDice.SetActive(false);
+        HideDiceOnPanel(RollPanelLeft);
+        HideDiceOnPanel(RollPanelRight);
+        TurnDiceLeft.SetActive(false);
+        TurnDiceRight.SetActive(false);
     }
 
     /// <summary>

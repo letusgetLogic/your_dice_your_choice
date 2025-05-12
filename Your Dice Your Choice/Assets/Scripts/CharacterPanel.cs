@@ -38,6 +38,5 @@ public class CharacterPanel : MonoBehaviour
 
         CharacterName.text = Character.Data.Type.ToString();
     }
-
 }
 
