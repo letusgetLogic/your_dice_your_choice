@@ -5,12 +5,12 @@ public class LevelGenerator : MonoBehaviour
 {
     public static LevelGenerator Instance { get; private set; }
 
-    public GameObject FieldPrefab;
-    public GameObject[] CharacterPrefab;
-    public GameObject GroundTop;
-    public GameObject GroundBottom;
-    public GameObject GroundLeft;
-    public GameObject GroundRight;
+    [SerializeField] private GameObject _fieldPrefab;
+    [SerializeField] private GameObject[] _characterPrefab;
+    [SerializeField] private GameObject _groundTop;
+    [SerializeField] private GameObject _groundBottom;
+    [SerializeField] private GameObject _groundLeft;
+    [SerializeField] private GameObject _groundRight;
 
     private readonly int CharacterSpawnAreaMaxColumn = 2; // Max. value of columns of the spawn area for character. 
 
@@ -50,7 +50,7 @@ public class LevelGenerator : MonoBehaviour
         {
             for (int i = 0; i < _data.MapLength; i++)
             {
-                var field = Instantiate(FieldPrefab, spawnPos, Quaternion.identity);
+                var field = Instantiate(_fieldPrefab, spawnPos, Quaternion.identity);
 
                 BattleManager.Instance.SetField(field, j, i);
 
@@ -62,16 +62,16 @@ public class LevelGenerator : MonoBehaviour
         }
 
         spawnPos = new Vector3(0, startPointVertical + 1, 0);
-        Instantiate(GroundTop, spawnPos, Quaternion.identity); Debug.Log(spawnPos);
+        Instantiate(_groundTop, spawnPos, Quaternion.identity); Debug.Log(spawnPos);
 
         spawnPos = new Vector3(0, -startPointVertical - 1, 0);
-        Instantiate(GroundBottom, spawnPos, Quaternion.identity); Debug.Log(spawnPos);
+        Instantiate(_groundBottom, spawnPos, Quaternion.identity); Debug.Log(spawnPos);
 
         spawnPos = new Vector3(startPointHorizontal - 1, 0, 0);
-        Instantiate(GroundLeft, spawnPos, Quaternion.identity); Debug.Log(spawnPos);
+        Instantiate(_groundLeft, spawnPos, Quaternion.identity); Debug.Log(spawnPos);
 
         spawnPos = new Vector3(-startPointHorizontal + 1, 0, 0);
-        Instantiate(GroundRight, spawnPos, Quaternion.identity); Debug.Log(spawnPos);
+        Instantiate(_groundRight, spawnPos, Quaternion.identity); Debug.Log(spawnPos);
     }
 
     /// <summary>
@@ -84,7 +84,7 @@ public class LevelGenerator : MonoBehaviour
 
         for (int i = 0; i < _data.CharacterAmount; i++)
         {
-            var prefab = CharacterPrefab[Random.Range(0, CharacterPrefab.Length)];
+            var prefab = _characterPrefab[Random.Range(0, _characterPrefab.Length)];
 
             Instantiate(prefab, randPositions[i], Quaternion.identity);
 

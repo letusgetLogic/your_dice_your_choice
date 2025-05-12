@@ -11,12 +11,11 @@ public class BattleManager : MonoBehaviour
     public static BattleManager Instance;
 
     public GameObject[] CharacterPanel;
-    public Button EndTurnButton;
 
     public GameObject[,] Fields { get; private set; }
     public GameObject[] Character { get; private set; }
     
-    public PlayerStats CurrentPlayer {  get; private set; }
+    public Player CurrentPlayer {  get; private set; }
 
     /// <summary>
     /// Awake method.
@@ -36,7 +35,7 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        EndTurnButton.gameObject.SetActive(false);
+        
     }
 
     

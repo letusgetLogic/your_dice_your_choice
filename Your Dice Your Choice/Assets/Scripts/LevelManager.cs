@@ -86,7 +86,7 @@ public class LevelManager : MonoBehaviour
 
         LevelGenerator.Instance.SpawnField();
         LevelGenerator.Instance.SpawnCharacter();
-
+        
         BattleManager.Instance.SetAction();
     }
 }
