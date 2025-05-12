@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI.Table;
 
 public class LevelGenerator : MonoBehaviour
 {
@@ -52,7 +54,7 @@ public class LevelGenerator : MonoBehaviour
             {
                 var field = Instantiate(_fieldPrefab, spawnPos, Quaternion.identity);
 
-                BattleManager.Instance.SetField(field, j, i);
+                FieldManager.Instance.SetField(field, j, i);
 
                 spawnPos.x += 1;
             }
@@ -75,61 +77,94 @@ public class LevelGenerator : MonoBehaviour
     }
 
     /// <summary>
-    /// Spawn characters.
+    /// Instantiate the characters for the corresponding player.
     /// </summary>
-    public void SpawnCharacter()
+    /// <param name="player"></param>
+    /// <returns></returns>
+    public List<GameObject> CreateCharactersFor(TurnState player)
     {
-        Vector3[] randPositions = new Vector3[_data.CharacterAmount];
-        RandomizePosition(randPositions);
+        var tempList = new List<GameObject>();
 
         for (int i = 0; i < _data.CharacterAmount; i++)
         {
             var prefab = _characterPrefab[Random.Range(0, _characterPrefab.Length)];
 
-            Instantiate(prefab, randPositions[i], Quaternion.identity);
+            Instantiate(prefab, RandomizePosition(player)[i], Quaternion.identity);
 
-            BattleManager.Instance.SetCharacter(prefab, i);
+            PanelManager.Instance.SetPanel(prefab, i, player);
+
+            tempList.Add(prefab);
         }
+
+        return tempList;
     }
 
     /// <summary>
     /// Randomize the position of characters.
     /// </summary>
     /// <param name="randPositions"></param>
-    private void RandomizePosition(Vector3[] randPositions)
+    private Vector3[] RandomizePosition(TurnState player)
     {
+        // The first array, which will be returned.
+        var randPositions = new Vector3[_data.CharacterAmount];
+
         // The second array to check if the field index is already assigned. 
-        Vector2[] fieldIndex = new Vector2[randPositions.Length];
+        var fieldIndex = new Vector2[randPositions.Length];
 
         for (int h = 0; h < fieldIndex.Length; h++)
-            fieldIndex[h] = new Vector2(-1, -1);
+            fieldIndex[h] = new Vector2(-1, -1); // Initializes for each index a null value.
 
+        int rowAmount = FieldManager.Instance.Fields.GetLength(0);
 
         for (int i = 0; i < randPositions.Length; i++)
         {
-            int rowLength = BattleManager.Instance.Fields.GetLength(0);
-            int row = Random.Range(0, rowLength);
-            int col = Random.Range(0, CharacterSpawnAreaMaxColumn);
-            var field = BattleManager.Instance.Fields[row, col];
+            int row = Random.Range(0, rowAmount);
+            int col = RandomizeCol(player);
+            var field = FieldManager.Instance.Fields[row, col];
             var pos = field.transform.position;
             randPositions[i] = pos;
 
-            // Check if the field index is already assigned. 
-            var tempIndex = new Vector2(row, col);
+            // Checks if the field index is already assigned. 
+            var currentFieldIndex = new Vector2(row, col);
 
-            for (int j = 0; j <= i; j++)
+            for (int j = 0; j <= i; j++) 
             {
-                if (tempIndex == fieldIndex[j])
+                if (currentFieldIndex == fieldIndex[j]) // ex. for the first loop, fieldIndex[0] = Vector2(-1,-1) => false.
                 {
-                    i--;
+                    i--; // The main for-loop repeats this loop.
                     break;
                 }
 
-                if (j == i) fieldIndex[j] = tempIndex;
+                if (j == i) // only sets in the last loop.
+                { 
+                    fieldIndex[j] = currentFieldIndex; // ex. fieldIndex[0] = Vector2(row, col).
+                }
             }
         }
+
+        return randPositions;
     }
 
+    /// <summary>
+    /// Randomizes the column index.
+    /// </summary>
+    /// <param name="player"></param>
+    /// <returns></returns>
+    private int RandomizeCol(TurnState player)
+    {
+        if (player == TurnState.PlayerLeft)
+        {
+            return Random.Range(0, CharacterSpawnAreaMaxColumn);
+        }
+        else if (player == TurnState.PlayerRight)
+        {
+            int colAmount = FieldManager.Instance.Fields.GetLength(1);
+            return Random.Range(colAmount - CharacterSpawnAreaMaxColumn, colAmount);
+        }
+
+        return -1;
+    }
+    
     /// <summary>
     /// References _data.
     /// </summary>

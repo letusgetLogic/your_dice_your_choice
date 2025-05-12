@@ -1,3 +1,4 @@
+using Assets.Scripts.Characters;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,50 +7,60 @@ public class PanelManager : MonoBehaviour
 {
     public static PanelManager Instance {  get; private set; }
 
-    [SerializeField] private TextMeshProUGUI _nameTextLeft;
-    [SerializeField] private TextMeshProUGUI _nameTextRight;
-    [SerializeField] private GameObject[] _characterPanelsLeft;
-    [SerializeField] private GameObject[] _characterPanelsRight;
+    public TextMeshProUGUI NameTextLeft;
+    public TextMeshProUGUI NameTextRight;
+    public GameObject[] CharacterPanelsLeft;
+    public GameObject[] CharacterPanelsRight;
 
     /// <summary>
-    /// Sets the name of the corresponding player.
+    /// Awake method.
     /// </summary>
-    /// <param name="player"></param>
-    /// <param name="name"></param>
-    /// <exception cref="System.Exception"></exception>
-    public void SetNameOf(TurnState player, string name)
+    private void Awake()
     {
-        switch (player)
+        if (Instance != null)
         {
-            case TurnState.None:
-                throw new System.Exception($"TurnState has been set to {player}");
-            case TurnState.PlayerLeft:
-                _nameTextLeft.text = name;
-                return;
-            case TurnState.PlayerRight:
-                _nameTextRight.text = name;
-                return;
+            Destroy(Instance.gameObject);
         }
+
+        Instance = this;
     }
 
     /// <summary>
-    /// Gets the serialized panels for the corresponding player.
+    /// Hides all character panels.
     /// </summary>
-    /// <param name="player"></param>
-    /// <returns></returns>
-    /// <exception cref="System.Exception"></exception>
-    public GameObject[] CharacterPanels(TurnState player)
+    public void HideAllPanel()
     {
-        switch (player)
+        foreach (GameObject panel in CharacterPanelsLeft)
         {
-            case TurnState.None:
-                throw new System.Exception($"TurnState has been set to {player}");
-            case TurnState.PlayerLeft:
-                return _characterPanelsLeft;
-            case TurnState.PlayerRight:
-                return _characterPanelsRight;
+            panel.gameObject.SetActive(false);
         }
-        
-        return default;
+
+        foreach (GameObject panel in CharacterPanelsRight)
+        {
+            panel.gameObject.SetActive(false);
+        }
+    }
+
+
+    /// <summary>
+    /// References Character and CharacterPanel to each other.
+    /// </summary>
+    /// <param name="characterPrefab"></param>
+    public void SetPanel(GameObject characterPrefab, int index, TurnState player)
+    {
+        if (player == TurnState.PlayerLeft)
+        {
+            CharacterPanelsLeft[index].SetActive(true);
+
+            characterPrefab.GetComponent<Character>().SetPanel(CharacterPanelsLeft[index]);
+            CharacterPanelsLeft[index].GetComponent<CharacterPanel>().SetCharacter(characterPrefab);
+        }
+        else if (player == TurnState.PlayerRight)
+        {
+            CharacterPanelsRight[index].SetActive(true);
+
+            characterPrefab.GetComponent<Character>().SetPanel(CharacterPanelsRight[index]);
+            CharacterPanelsRight[index].GetComponent<CharacterPanel>().SetCharacter(characterPrefab);
+        }
     }
 }

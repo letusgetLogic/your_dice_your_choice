@@ -79,9 +79,10 @@ public class LevelManager : MonoBehaviour
     {
         LevelGenerator.Instance.SetData();
 
-        BattleManager.Instance.HideAllPanel();
+        PanelManager.Instance.HideAllPanel();
 
-        BattleManager.Instance.InitializeFields();
+        FieldManager.Instance.InitializeFields();
+
         BattleManager.Instance.InitializeCharacter();
 
         LevelGenerator.Instance.SpawnField();
