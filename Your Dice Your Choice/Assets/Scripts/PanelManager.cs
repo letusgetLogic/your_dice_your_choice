@@ -47,22 +47,49 @@ public class PanelManager : MonoBehaviour
     /// References Character and CharacterPanel to each other.
     /// </summary>
     /// <param name="characterPrefab"></param>
-    public void SetPanel(GameObject characterPrefab, int index, TurnState player)
+    public void SetPanel()
     {
-        if (player == TurnState.PlayerLeft)
+        for (int i = 0; i < PlayerManager.Instance.PlayerLeft.Characters.Count; i++)
         {
-            CharacterPanelsLeft[index].SetActive(true);
+            CharacterPanelsLeft[i].SetActive(true);
             
-            characterPrefab.GetComponent<Character>().SetPanel(CharacterPanelsLeft[index]);
-            Debug.Log(CharacterPanelsLeft[index]);
-            CharacterPanelsLeft[index].GetComponent<CharacterPanel>().SetCharacter(characterPrefab);
+            var character = PlayerManager.Instance.PlayerLeft.Characters[i];
+
+            character.GetComponent<Character>().SetPanel(CharacterPanelsLeft[i]);
+
+            CharacterPanelsLeft[i].GetComponent<CharacterPanel>().SetCharacter(character);
         }
-        else if (player == TurnState.PlayerRight)
+
+        for (int i = 0; i < PlayerManager.Instance.PlayerRight.Characters.Count; i++)
         {
-            CharacterPanelsRight[index].SetActive(true);
-            
-            characterPrefab.GetComponent<Character>().SetPanel(CharacterPanelsRight[index]);
-            CharacterPanelsRight[index].GetComponent<CharacterPanel>().SetCharacter(characterPrefab);
+            CharacterPanelsRight[i].SetActive(true);
+
+            var character = PlayerManager.Instance.PlayerRight.Characters[i];
+
+            character.GetComponent<Character>().SetPanel(CharacterPanelsRight[i]);
+
+            CharacterPanelsRight[i].GetComponent<CharacterPanel>().SetCharacter(character);
         }
     }
+
+    /// <summary>
+    /// References the action for each DicePanel.
+    /// </summary>
+    public void SetAction()
+    {
+        for (int i = 0; i < PlayerManager.Instance.PlayerLeft.Characters.Count; i++)
+        {
+            var character = PlayerManager.Instance.PlayerLeft.Characters[i].GetComponent<Character>();
+            var panel = character.Panel.GetComponent<CharacterPanel>();
+            panel.SetAction();
+        }
+        
+        for (int i = 0; i < PlayerManager.Instance.PlayerRight.Characters.Count; i++)
+        {
+            var character = PlayerManager.Instance.PlayerRight.Characters[i].GetComponent<Character>();
+            var panel = character.Panel.GetComponent<CharacterPanel>();
+            panel.SetAction();
+        }
+    }
+
 }

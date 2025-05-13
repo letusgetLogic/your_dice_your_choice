@@ -11,6 +11,14 @@ namespace Assets.Scripts.Characters
         public GameObject Panel { get; private set; }
 
         /// <summary>
+        /// Sets the panel null.
+        /// </summary>
+        private void Awake()
+        {
+            Panel = null;
+        }
+
+        /// <summary>
         /// Sets the panel at the character and active.
         /// </summary>
         /// <param name="panel"></param>

@@ -21,7 +21,6 @@ public class CharacterPanel : MonoBehaviour
     public void SetCharacter(GameObject character)
     {
         CharacterObject = character;
-        Debug.Log(CharacterObject.name);
         Character = CharacterObject.GetComponent<Character>();
     }
 

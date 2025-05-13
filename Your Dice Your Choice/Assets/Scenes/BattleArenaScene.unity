@@ -967,7 +967,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 562667841298920821, guid: 49114301cde7fa54aafb51571a32cf73, type: 3}
       propertyPath: m_Name
-      value: CharacterPanel 1
+      value: CharacterPanel Right
       objectReference: {fileID: 0}
     - target: {fileID: 2095487464607054468, guid: 49114301cde7fa54aafb51571a32cf73, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1335,7 +1335,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 562667841298920821, guid: c74da118415bf6c42bc13b9807f00cd9, type: 3}
       propertyPath: m_Name
-      value: CharacterPanel (1)
+      value: CharacterPanel Left (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 562667841298920821, guid: c74da118415bf6c42bc13b9807f00cd9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2095487464607054468, guid: c74da118415bf6c42bc13b9807f00cd9, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1976,7 +1980,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 562667841298920821, guid: c74da118415bf6c42bc13b9807f00cd9, type: 3}
       propertyPath: m_Name
-      value: CharacterPanel (3)
+      value: CharacterPanel Left (3)
       objectReference: {fileID: 0}
     - target: {fileID: 562667841298920821, guid: c74da118415bf6c42bc13b9807f00cd9, type: 3}
       propertyPath: m_IsActive
@@ -2516,7 +2520,7 @@ GameObject:
   - component: {fileID: 505334692}
   - component: {fileID: 505334691}
   m_Layer: 0
-  m_Name: ein_wilder_pikachu
+  m_Name: ----------------- ein_wilder_pikachu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3336,7 +3340,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 562667841298920821, guid: 49114301cde7fa54aafb51571a32cf73, type: 3}
       propertyPath: m_Name
-      value: CharacterPanel 1 (1)
+      value: CharacterPanel Right (1)
       objectReference: {fileID: 0}
     - target: {fileID: 2095487464607054468, guid: 49114301cde7fa54aafb51571a32cf73, type: 3}
       propertyPath: m_AnchorMax.y
@@ -3609,7 +3613,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 562667841298920821, guid: c74da118415bf6c42bc13b9807f00cd9, type: 3}
       propertyPath: m_Name
-      value: CharacterPanel (2)
+      value: CharacterPanel Left (2)
       objectReference: {fileID: 0}
     - target: {fileID: 2095487464607054468, guid: c74da118415bf6c42bc13b9807f00cd9, type: 3}
       propertyPath: m_AnchorMax.y
@@ -4545,10 +4549,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4e74bdd73a6e8443b665d6a41e6997d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: 
-  PlayerTurn: 0
-  Characters: []
-  CharacterPanels: []
   PlayerLeft: {fileID: 0}
   PlayerRight: {fileID: 0}
 --- !u!4 &1021290825
@@ -31432,7 +31432,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 562667841298920821, guid: 49114301cde7fa54aafb51571a32cf73, type: 3}
       propertyPath: m_Name
-      value: CharacterPanel 1 (2)
+      value: CharacterPanel Right (2)
       objectReference: {fileID: 0}
     - target: {fileID: 2095487464607054468, guid: 49114301cde7fa54aafb51571a32cf73, type: 3}
       propertyPath: m_AnchorMax.y
@@ -33771,7 +33771,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 562667841298920821, guid: 49114301cde7fa54aafb51571a32cf73, type: 3}
       propertyPath: m_Name
-      value: CharacterPanel 1 (3)
+      value: CharacterPanel Right (3)
       objectReference: {fileID: 0}
     - target: {fileID: 2095487464607054468, guid: 49114301cde7fa54aafb51571a32cf73, type: 3}
       propertyPath: m_AnchorMax.y
@@ -35618,7 +35618,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 562667841298920821, guid: c74da118415bf6c42bc13b9807f00cd9, type: 3}
       propertyPath: m_Name
-      value: CharacterPanel
+      value: CharacterPanel Left
       objectReference: {fileID: 0}
     - target: {fileID: 2095487464607054468, guid: c74da118415bf6c42bc13b9807f00cd9, type: 3}
       propertyPath: m_AnchorMax.y
@@ -35864,10 +35864,10 @@ SceneRoots:
   - {fileID: 736680344}
   - {fileID: 505334692}
   - {fileID: 11377611}
+  - {fileID: 1227449653}
   - {fileID: 1500918381}
   - {fileID: 231687919}
   - {fileID: 1772476306}
-  - {fileID: 1227449653}
   - {fileID: 888338206}
   - {fileID: 1021290825}
   - {fileID: 513823983}

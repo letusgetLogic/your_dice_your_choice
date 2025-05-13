@@ -93,15 +93,10 @@ public class LevelGenerator : MonoBehaviour
         for (int i = 0; i < _data.CharacterAmount; i++)
         {
             var prefab = _characterPrefab[Random.Range(0, _characterPrefab.Length)];
-            Debug.Log(prefab.GetComponent<Character>().Panel);
-            tempList.Add(prefab);
 
-            Instantiate(tempList[i], randPositions[i], Quaternion.identity);
+            var characterObject = Instantiate(prefab, randPositions[i], Quaternion.identity);
             
-            PanelManager.Instance.SetPanel(tempList[i], i, player);
-            
-            
-            Debug.Log(tempList[i] + " " + tempList[i].GetComponent<Character>().Panel);
+            tempList.Add(characterObject);
         }
 
         return tempList;
@@ -127,6 +122,7 @@ public class LevelGenerator : MonoBehaviour
             int col = RandomizeCol(player);
             var field = FieldManager.Instance.Fields[row, col];
             var pos = field.transform.position;
+
             randPositions[i] = pos;
 
             // Checks if the field index is already assigned. 
@@ -167,21 +163,6 @@ public class LevelGenerator : MonoBehaviour
 
         return -1;
     }
-
-
-    /// <summary>
-    /// References the action for each DicePanel.
-    /// </summary>
-    public void SetAction()
-    {
-        for (int i = 0; i < PlayerManager.Instance.PlayerLeft.Characters.Count; i++)
-        {
-            var character = PlayerManager.Instance.PlayerLeft.Characters[i].GetComponent<Character>();
-            var panel = character.Panel.GetComponent<CharacterPanel>();
-            panel.SetAction();
-        }
-    }
-
 
     /// <summary>
     /// References _data.

@@ -88,7 +88,8 @@ public class LevelManager : MonoBehaviour
 
         PlayerManager.Instance.CreateInstancesForPlayers();
         
-        LevelGenerator.Instance.SetAction();
+        PanelManager.Instance.SetPanel();
+        PanelManager.Instance.SetAction();
     }
 
    
