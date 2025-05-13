@@ -42,5 +42,17 @@ public class PlayerManager : MonoBehaviour
         PlayerRight.Characters = LevelGenerator.Instance.CreateCharactersFor(TurnState.PlayerRight);
         PlayerRight.CharacterPanels = PanelManager.Instance.CharacterPanelsRight;
     }
+
+    /// <summary>
+    /// Sets the look direction for the right characters.
+    /// </summary>
+    public void LookDirectionRightCharacters()
+    {
+        foreach (var characterObject in PlayerRight.Characters)
+        {
+            var characterController = characterObject.GetComponent<CharacterMovement>();
+            characterController.RotatePivot(180);
+        }
+    }
 }
 
