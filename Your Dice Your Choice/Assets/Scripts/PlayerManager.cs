@@ -29,24 +29,40 @@ public class PlayerManager : MonoBehaviour
     public void CreateInstancesForPlayers()
     {
         PlayerLeft = gameObject.AddComponent<Player>();
+
         PlayerLeft.Name = PanelManager.Instance.NameTextLeft.text;
+
         PlayerLeft.PlayerTurn = TurnState.PlayerLeft;
+
         PlayerLeft.Characters = LevelGenerator.Instance.CreateCharactersFor(TurnState.PlayerLeft);
+
         PlayerLeft.CharacterPanels = PanelManager.Instance.CharacterPanelsLeft;
+
         for (int i = 0; i < PlayerManager.Instance.PlayerLeft.Characters.Count; i++)
         {
-            Debug.Log(PlayerManager.Instance.PlayerLeft.Characters[i] + " " + PlayerManager.Instance.PlayerLeft.Characters[i].GetComponent<Character>().Panel);
-            PlayerManager.Instance.PlayerLeft.Characters[i].GetComponent<Character>().Panel.GetComponent<CharacterPanel>().SetAction();
+            var character = PlayerManager.Instance.PlayerLeft.Characters[i].GetComponent<Character>();
+            var panel = character.Panel.GetComponent<CharacterPanel>();
+            panel.SetAction();
+
+            Debug.Log(character + " " + character.GetComponent<Character>().Panel);
         }
+
         PlayerRight = gameObject.AddComponent<Player>();
+
         PlayerRight.Name = PanelManager.Instance.NameTextRight.text;
+
         PlayerRight.PlayerTurn = TurnState.PlayerRight;
+
         PlayerRight.Characters = LevelGenerator.Instance.CreateCharactersFor(TurnState.PlayerRight);
+
         PlayerRight.CharacterPanels = PanelManager.Instance.CharacterPanelsRight;
+
         for (int i = 0; i < PlayerManager.Instance.PlayerLeft.Characters.Count; i++)
         {
-            Debug.Log(PlayerManager.Instance.PlayerLeft.Characters[i] + " " + PlayerManager.Instance.PlayerLeft.Characters[i].GetComponent<Character>().Panel);
-            PlayerManager.Instance.PlayerLeft.Characters[i].GetComponent<Character>().Panel.GetComponent<CharacterPanel>().SetAction();
+            var character = PlayerManager.Instance.PlayerLeft.Characters[i].GetComponent<Character>();
+            var panel = character.Panel.GetComponent<CharacterPanel>();
+            panel.SetAction();
+            Debug.Log(character + " " + character.GetComponent<Character>().Panel);
         }
     }
 }

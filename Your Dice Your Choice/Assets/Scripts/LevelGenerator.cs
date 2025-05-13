@@ -85,13 +85,18 @@ public class LevelGenerator : MonoBehaviour
     {
         var tempList = new List<GameObject>();
 
+        // The array of random positions.
+        var randPositions = new Vector3[_data.CharacterAmount];
+
+        RandomizePositionInArray(player, randPositions);
+
         for (int i = 0; i < _data.CharacterAmount; i++)
         {
             var prefab = _characterPrefab[Random.Range(0, _characterPrefab.Length)];
-
+            Debug.Log(prefab.GetComponent<Character>().Panel);
             tempList.Add(prefab);
 
-            Instantiate(tempList[i], RandomizePosition(player)[i], Quaternion.identity);
+            Instantiate(tempList[i], randPositions[i], Quaternion.identity);
             
             PanelManager.Instance.SetPanel(tempList[i], i, player);
             
@@ -106,12 +111,9 @@ public class LevelGenerator : MonoBehaviour
     /// Randomize the position of characters.
     /// </summary>
     /// <param name="randPositions"></param>
-    private Vector3[] RandomizePosition(TurnState player)
+    private void RandomizePositionInArray(TurnState player, Vector3[] randPositions)
     {
-        // The first array, which will be returned.
-        var randPositions = new Vector3[_data.CharacterAmount];
-
-        // The second array to check if the field index is already assigned. 
+        // The array to check if the field index is already assigned. 
         var fieldIndex = new Vector2[randPositions.Length];
 
         for (int h = 0; h < fieldIndex.Length; h++)
@@ -144,8 +146,6 @@ public class LevelGenerator : MonoBehaviour
                 }
             }
         }
-
-        return randPositions;
     }
 
     /// <summary>
@@ -176,9 +176,9 @@ public class LevelGenerator : MonoBehaviour
     {
         for (int i = 0; i < PlayerManager.Instance.PlayerLeft.Characters.Count; i++)
         {
-            Debug.Log(PlayerManager.Instance.PlayerLeft.Characters[i].GetComponent<Character>().Data.Type + " " + 
-                PlayerManager.Instance.PlayerLeft.Characters[i].GetComponent<Character>().Panel.GetComponent<CharacterPanel>());
-            PlayerManager.Instance.PlayerLeft.Characters[i].GetComponent<Character>().Panel.GetComponent<CharacterPanel>().SetAction();
+            var character = PlayerManager.Instance.PlayerLeft.Characters[i].GetComponent<Character>();
+            var panel = character.Panel.GetComponent<CharacterPanel>();
+            panel.SetAction();
         }
     }
 

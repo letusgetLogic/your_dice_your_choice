@@ -54,6 +54,7 @@ public class PanelManager : MonoBehaviour
             CharacterPanelsLeft[index].SetActive(true);
             
             characterPrefab.GetComponent<Character>().SetPanel(CharacterPanelsLeft[index]);
+            Debug.Log(CharacterPanelsLeft[index]);
             CharacterPanelsLeft[index].GetComponent<CharacterPanel>().SetCharacter(characterPrefab);
         }
         else if (player == TurnState.PlayerRight)
