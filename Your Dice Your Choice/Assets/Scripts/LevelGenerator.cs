@@ -95,7 +95,24 @@ public class LevelGenerator : MonoBehaviour
             var prefab = _characterPrefab[Random.Range(0, _characterPrefab.Length)];
 
             var characterObject = Instantiate(prefab, randPositions[i], Quaternion.identity);
-            
+
+            var characterMovement = characterObject.GetComponentInChildren<CharacterMovement>();
+            var characterControl = characterObject.GetComponentInChildren<CharacterControl>();
+
+            var panel = CharacterPanels(player)[i];
+
+            var characterPanel = panel.GetComponent<CharacterPanel>();
+
+            if (player == TurnState.PlayerRight) characterMovement.RotatePivot(180);
+
+            characterControl.SetColor(PLayerColor(player));
+
+            panel.SetActive(true);
+            characterPanel.SetCharacter(characterObject);
+            characterPanel.SetAction();
+
+            characterObject.GetComponent<Character>().SetPanel(panel);
+
             tempList.Add(characterObject);
         }
 
@@ -162,6 +179,44 @@ public class LevelGenerator : MonoBehaviour
         }
 
         return -1;
+    }
+
+    /// <summary>
+    /// Return the serialized panels in PanelManager for the corresponding player.
+    /// </summary>
+    /// <param name="player"></param>
+    /// <returns></returns>
+    private GameObject[] CharacterPanels(TurnState player)
+    {
+        if (player == TurnState.PlayerLeft)
+        {
+            return PanelManager.Instance.CharacterPanelsLeft;
+        }
+        else if (player == TurnState.PlayerRight)
+        {
+            return PanelManager.Instance.CharacterPanelsRight;
+        }
+
+        return default;
+    }
+
+    /// <summary>
+    /// Return the color of the corresponding player.
+    /// </summary>
+    /// <param name="player"></param>
+    /// <returns></returns>
+    private Color PLayerColor(TurnState player)
+    {
+        if (player == TurnState.PlayerLeft)
+        {
+            return PanelManager.Instance.NameTextLeft.color;
+        }
+        else if (player == TurnState.PlayerRight)
+        {
+            return PanelManager.Instance.NameTextRight.color;
+        }
+
+        return default;
     }
 
     /// <summary>

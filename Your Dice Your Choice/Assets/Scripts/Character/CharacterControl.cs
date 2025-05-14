@@ -1,0 +1,29 @@
+using UnityEngine;
+
+public class CharacterControl : MonoBehaviour
+{
+    private SpriteRenderer _bodySpriteRenderer;
+    private SpriteRenderer _leftHandSpriteRenderer;
+    private SpriteRenderer _rightHandSpriteRenderer;
+
+    /// <summary>
+    /// Awake method.
+    /// </summary>
+    private void Awake()
+    {
+        _bodySpriteRenderer = transform.parent.Find("Pivot").Find("Character Body").Find("Color").gameObject.GetComponent<SpriteRenderer>();
+        _leftHandSpriteRenderer = transform.parent.Find("Pivot").Find("Character Left Hand").Find("Color").gameObject.GetComponent<SpriteRenderer>();
+        _rightHandSpriteRenderer = transform.parent.Find("Pivot").Find("Character Right Hand").Find("Color").gameObject.GetComponent<SpriteRenderer>();
+    }
+
+    /// <summary>
+    /// Sets the color to the character of the target player.
+    /// </summary>
+    /// <param name="color"></param>
+    public void SetColor(Color color)
+    {
+        _bodySpriteRenderer.color = color;
+        _leftHandSpriteRenderer.color = color;
+        _rightHandSpriteRenderer.color = color;
+    }
+}

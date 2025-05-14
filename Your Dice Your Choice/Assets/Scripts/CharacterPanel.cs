@@ -22,10 +22,11 @@ public class CharacterPanel : MonoBehaviour
     {
         CharacterObject = character;
         Character = CharacterObject.GetComponent<Character>();
+        CharacterName.text = Character.Data.Type.ToString();
     }
 
     /// <summary>
-    /// References the action and the character name in UI. ( CharacterName couldn't be set in SetCharacter(), because Character.Data isn't loaded at those time. )
+    /// References the action in UI.
     /// </summary>
     public void SetAction()
     {
@@ -35,8 +36,6 @@ public class CharacterPanel : MonoBehaviour
             
             DicePanel[i].GetComponent<DicePanel>().SetName(action);
         }
-
-        CharacterName.text = Character.Data.Type.ToString();
     }
 }
 

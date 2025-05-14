@@ -56,21 +56,6 @@ public class LevelManager : MonoBehaviour
     private void SetMatch()
     {
         Data.MatchType = MatchType.Duell;
-
-        switch (Data.MatchType)
-        {
-            case MatchType.None:
-                throw new System.Exception("Match Type is None.");
-
-            case MatchType.Singleplayer:
-                break;
-
-            case MatchType.Duell:
-                break;
-
-            case MatchType.DuellAI:
-                break;
-        }
     }
 
     /// <summary>
@@ -86,12 +71,31 @@ public class LevelManager : MonoBehaviour
 
         LevelGenerator.Instance.SpawnField();
 
-        PlayerManager.Instance.CreateInstancesForPlayers();
-        PlayerManager.Instance.LookDirectionRightCharacters();
-        
-        PanelManager.Instance.SetPanel();
-        PanelManager.Instance.SetAction();
+        CreatePlayer();
     }
 
-   
+    /// <summary>
+    /// Creates the players in the battle.
+    /// </summary>
+    /// <exception cref="System.Exception"></exception>
+    private void CreatePlayer()
+    {
+
+        switch (Data.MatchType)
+        {
+            case MatchType.None:
+                throw new System.Exception("Match Type is None.");
+
+            case MatchType.Singleplayer:
+                break;
+
+            case MatchType.Duell:
+                PlayerManager.Instance.CreateInstanceFor(PlayerManager.Instance.PlayerLeft, "Player 1", TurnState.PlayerLeft);
+                PlayerManager.Instance.CreateInstanceFor(PlayerManager.Instance.PlayerRight, "Player 2", TurnState.PlayerRight);
+                break;
+
+            case MatchType.DuellAI:
+                break;
+        }
+    }
 }

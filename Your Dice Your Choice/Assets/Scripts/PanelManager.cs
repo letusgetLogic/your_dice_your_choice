@@ -42,36 +42,6 @@ public class PanelManager : MonoBehaviour
         }
     }
 
-
-    /// <summary>
-    /// References Character and CharacterPanel to each other.
-    /// </summary>
-    /// <param name="characterPrefab"></param>
-    public void SetPanel()
-    {
-        for (int i = 0; i < PlayerManager.Instance.PlayerLeft.Characters.Count; i++)
-        {
-            CharacterPanelsLeft[i].SetActive(true);
-            
-            var character = PlayerManager.Instance.PlayerLeft.Characters[i];
-
-            character.GetComponent<Character>().SetPanel(CharacterPanelsLeft[i]);
-
-            CharacterPanelsLeft[i].GetComponent<CharacterPanel>().SetCharacter(character);
-        }
-
-        for (int i = 0; i < PlayerManager.Instance.PlayerRight.Characters.Count; i++)
-        {
-            CharacterPanelsRight[i].SetActive(true);
-
-            var character = PlayerManager.Instance.PlayerRight.Characters[i];
-
-            character.GetComponent<Character>().SetPanel(CharacterPanelsRight[i]);
-
-            CharacterPanelsRight[i].GetComponent<CharacterPanel>().SetCharacter(character);
-        }
-    }
-
     /// <summary>
     /// References the action for each DicePanel.
     /// </summary>

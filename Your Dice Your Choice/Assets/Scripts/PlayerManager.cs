@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Assets.Scripts.Characters;
+using TMPro;
 using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
@@ -24,35 +25,13 @@ public class PlayerManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Create the player instances.
+    /// Create the instance of player and instantiate the characters.
     /// </summary>
-    public void CreateInstancesForPlayers()
+    public void CreateInstanceFor(Player player, string name, TurnState playerTurn)
     {
-        PlayerLeft = gameObject.AddComponent<Player>();
+        player = gameObject.AddComponent<Player>();
 
-        PlayerLeft.Name = PanelManager.Instance.NameTextLeft.text;
-        PlayerLeft.PlayerTurn = TurnState.PlayerLeft;
-        PlayerLeft.Characters = LevelGenerator.Instance.CreateCharactersFor(TurnState.PlayerLeft);
-        PlayerLeft.CharacterPanels = PanelManager.Instance.CharacterPanelsLeft;
-
-        PlayerRight = gameObject.AddComponent<Player>();
-
-        PlayerRight.Name = PanelManager.Instance.NameTextRight.text;
-        PlayerRight.PlayerTurn = TurnState.PlayerRight;
-        PlayerRight.Characters = LevelGenerator.Instance.CreateCharactersFor(TurnState.PlayerRight);
-        PlayerRight.CharacterPanels = PanelManager.Instance.CharacterPanelsRight;
-    }
-
-    /// <summary>
-    /// Sets the look direction for the right characters.
-    /// </summary>
-    public void LookDirectionRightCharacters()
-    {
-        foreach (var characterObject in PlayerRight.Characters)
-        {
-            var characterController = characterObject.GetComponent<CharacterMovement>();
-            characterController.RotatePivot(180);
-        }
+        player.Initialize(name, playerTurn);
     }
 }
 
