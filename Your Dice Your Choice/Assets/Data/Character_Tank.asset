@@ -16,6 +16,6 @@ MonoBehaviour:
   HP: 1200
   AP: 156
   DP: 84
-  Weapon1: 1
-  Weapon2: 7
+  WeaponRight: 1
+  WeaponLeft: 2
   ActionTypes: 01000000020000000300000000000000

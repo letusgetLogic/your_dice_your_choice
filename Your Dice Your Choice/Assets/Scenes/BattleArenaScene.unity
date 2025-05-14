@@ -707,6 +707,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 161836178}
   m_CullTransparentMesh: 1
+--- !u!1 &167483071
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 167483073}
+  - component: {fileID: 167483072}
+  m_Layer: 0
+  m_Name: Weapon Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &167483072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 167483071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 635295b485ba19441a3b15d856724945, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sword: {fileID: 4454906068307276358, guid: 8a2fe4dff3f74c84d97fe590b3dcf2db, type: 3}
+  _shield: {fileID: 2106958939825099808, guid: b3db58b855c74cf479f616ae0971db9c, type: 3}
+  _bow: {fileID: 1662544627993326492, guid: b759690d94541834fa2dbedce7ec0cfb, type: 3}
+  _knifeRight: {fileID: 5682825185749890722, guid: b64563ca19066bc4b94030c5883e045b, type: 3}
+  _knifeLeft: {fileID: 1566500919570171256, guid: 2cedfa19aa9f2744bbc7a42b5cfce612, type: 3}
+  _magicStaff: {fileID: 7953323789972346437, guid: 58c6297ebd8f9b04da17fa1d209d3ecc, type: 3}
+--- !u!4 &167483073
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 167483071}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.07584, y: 0.08424, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &182033680
 GameObject:
   m_ObjectHideFlags: 0
@@ -5300,11 +5350,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fieldPrefab: {fileID: 8115748279230849610, guid: 7ed5336a2a490944cac53886a444e9cf, type: 3}
-  _characterPrefab:
-  - {fileID: 5643954692354094509, guid: cac9bf3b51eba0945921652786c335a9, type: 3}
-  - {fileID: 5643954692354094509, guid: 865828294d91ab54a807e7c70bffa6ad, type: 3}
-  - {fileID: 5643954692354094509, guid: c5e6c6b913f01414b9e0dc34bf6b82e3, type: 3}
-  - {fileID: 5643954692354094509, guid: 7d13c63a1ec20c54eaf95a04a9428009, type: 3}
+  _characterPrefab: {fileID: 5643954692354094509, guid: 305f1e38bdd73a646858d5933e3f7202, type: 3}
+  _characterData:
+  - {fileID: 11400000, guid: b4104001d3ef93643a60f060ab7cadfa, type: 2}
+  - {fileID: 11400000, guid: 86cf1a308e570954ea573c8a6af223d2, type: 2}
+  - {fileID: 11400000, guid: ab30ec2e0827e0b47a97c3d60582eb2a, type: 2}
+  - {fileID: 11400000, guid: 56206443434f1ca47a9064deacb04ed3, type: 2}
   _groundTop: {fileID: 834742127920160186, guid: 42fcf58fec49d894caf5af3b6e9b7e74, type: 3}
   _groundBottom: {fileID: 4625472125776626442, guid: 5504157f5741a7e4f8b80454cf8984a2, type: 3}
   _groundLeft: {fileID: 6657365572333905674, guid: 415a740097fb40b49aa44090a67ca075, type: 3}
@@ -35871,3 +35922,4 @@ SceneRoots:
   - {fileID: 888338206}
   - {fileID: 1021290825}
   - {fileID: 513823983}
+  - {fileID: 167483073}

@@ -4,9 +4,7 @@ namespace Assets.Scripts.Characters
 {
     public class Character : MonoBehaviour
     {
-        [SerializeField] private CharacterData _data;
-
-        public CharacterData Data => _data;
+        public CharacterData Data { get; private set; }
 
         public GameObject Panel { get; private set; }
 
@@ -15,11 +13,20 @@ namespace Assets.Scripts.Characters
         /// </summary>
         private void Awake()
         {
-            Panel = null;
+            
         }
 
         /// <summary>
-        /// Sets the panel at the character and active.
+        /// Initialize Data.
+        /// </summary>
+        /// <param name="data"></param>
+        public void SetData(CharacterData data)
+        {
+            Data = data;
+        }
+
+        /// <summary>
+        /// Initialize Panel.
         /// </summary>
         /// <param name="panel"></param>
         public void SetPanel(GameObject panel)

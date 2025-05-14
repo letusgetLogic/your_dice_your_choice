@@ -18,10 +18,13 @@ namespace Assets.Scripts
 
         private bool _isClicking = false;
 
-        private void Start()
+        /// <summary>
+        /// Awake method.
+        /// </summary>
+        private void Awake()
         {
-            FoggyPanel.SetActive(true);
-            AnimationZoom.SetActive(true);
+            FoggyPanel.SetActive(false);
+            AnimationZoom.SetActive(false);
         }
 
         /// <summary>

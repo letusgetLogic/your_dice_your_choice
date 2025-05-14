@@ -12,11 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9531a790102358c4db39205d87e3d82e, type: 3}
   m_Name: Character_Assassin
   m_EditorClassIdentifier: 
-  Player: 2
   Type: 5
   HP: 900
   AP: 180
   DP: 50
-  Weapon1: 5
-  Weapon2: 5
-  ActionTypes: 01000000020000000100000000000000
+  WeaponRight: 4
+  WeaponLeft: 5
+  ActionTypes: 01000000020000000100000002000000

@@ -12,11 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9531a790102358c4db39205d87e3d82e, type: 3}
   m_Name: Character_Archer
   m_EditorClassIdentifier: 
-  Player: 2
   Type: 2
   HP: 600
   AP: 231
   DP: 40
-  Weapon1: 2
-  Weapon2: 0
+  WeaponRight: 3
+  WeaponLeft: 0
   ActionTypes: 01000000020000000000000000000000

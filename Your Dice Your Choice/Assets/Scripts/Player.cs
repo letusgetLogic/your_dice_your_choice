@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     {
         foreach (var characterObject in Characters)
         {
-            var characterMovement = characterObject.GetComponent<CharacterMovement>();
+            var characterMovement = characterObject.GetComponent<CharacterControl>();
             characterMovement.RotatePivot(number);
         }
     }

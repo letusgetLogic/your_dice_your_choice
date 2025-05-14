@@ -8,7 +8,8 @@ public class LevelGenerator : MonoBehaviour
     public static LevelGenerator Instance { get; private set; }
 
     [SerializeField] private GameObject _fieldPrefab;
-    [SerializeField] private GameObject[] _characterPrefab;
+    [SerializeField] private GameObject _characterPrefab;
+    [SerializeField] private CharacterData[] _characterData;
     [SerializeField] private GameObject _groundTop;
     [SerializeField] private GameObject _groundBottom;
     [SerializeField] private GameObject _groundLeft;
@@ -92,20 +93,26 @@ public class LevelGenerator : MonoBehaviour
 
         for (int i = 0; i < _data.CharacterAmount; i++)
         {
-            var prefab = _characterPrefab[Random.Range(0, _characterPrefab.Length)];
+            var data = _characterData[Random.Range(0, _characterData.Length)];
 
-            var characterObject = Instantiate(prefab, randPositions[i], Quaternion.identity);
+            var characterObject = Instantiate(_characterPrefab, randPositions[i], Quaternion.identity);
 
-            var characterMovement = characterObject.GetComponentInChildren<CharacterMovement>();
-            var characterControl = characterObject.GetComponentInChildren<CharacterControl>();
+            var character = characterObject.GetComponent<Character>();
+            var characterControl = characterObject.GetComponent<CharacterControl>();
+            var characterColor = characterObject.GetComponent<CharacterColor>();
 
             var panel = CharacterPanels(player)[i];
 
             var characterPanel = panel.GetComponent<CharacterPanel>();
 
-            if (player == TurnState.PlayerRight) characterMovement.RotatePivot(180);
+            character.SetData(data);
 
-            characterControl.SetColor(PLayerColor(player));
+            characterControl.SetWeaponToLeftHand(character);
+            characterControl.SetWeaponToRightHand(character);
+
+            if (player == TurnState.PlayerRight) characterControl.RotatePivot(180);
+
+            characterColor.SetColor(PLayerColor(player));
 
             panel.SetActive(true);
             characterPanel.SetCharacter(characterObject);

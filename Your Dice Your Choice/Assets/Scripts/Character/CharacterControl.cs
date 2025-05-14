@@ -1,29 +1,59 @@
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.TextCore.Text;
 
-public class CharacterControl : MonoBehaviour
+namespace Assets.Scripts.Characters
 {
-    private SpriteRenderer _bodySpriteRenderer;
-    private SpriteRenderer _leftHandSpriteRenderer;
-    private SpriteRenderer _rightHandSpriteRenderer;
-
-    /// <summary>
-    /// Awake method.
-    /// </summary>
-    private void Awake()
+    public class CharacterControl : MonoBehaviour
     {
-        _bodySpriteRenderer = transform.parent.Find("Pivot").Find("Character Body").Find("Color").gameObject.GetComponent<SpriteRenderer>();
-        _leftHandSpriteRenderer = transform.parent.Find("Pivot").Find("Character Left Hand").Find("Color").gameObject.GetComponent<SpriteRenderer>();
-        _rightHandSpriteRenderer = transform.parent.Find("Pivot").Find("Character Right Hand").Find("Color").gameObject.GetComponent<SpriteRenderer>();
-    }
+        public Transform CharacterTransform {  get; private set; }
+        public Transform PivotTransform { get; private set; }
+        public Transform BodyTransform {  get; private set; }
+        public Transform LeftHandTransform { get; private set; }
+        public Transform RightHandTransform { get; private set; }
 
-    /// <summary>
-    /// Sets the color to the character of the target player.
-    /// </summary>
-    /// <param name="color"></param>
-    public void SetColor(Color color)
-    {
-        _bodySpriteRenderer.color = color;
-        _leftHandSpriteRenderer.color = color;
-        _rightHandSpriteRenderer.color = color;
+
+        /// <summary>
+        /// Awake method.
+        /// </summary>
+        private void Awake()
+        {
+            CharacterTransform = transform;
+            PivotTransform = transform.Find("Pivot").gameObject.GetComponent<Transform>();
+            BodyTransform = transform.Find("Pivot").Find("Character Body").gameObject.GetComponent<Transform>();
+            LeftHandTransform = transform.Find("Pivot").Find("Character Left Hand").gameObject.GetComponent<Transform>();
+            RightHandTransform = transform.Find("Pivot").Find("Character Right Hand").gameObject.GetComponent<Transform>();
+        }
+
+        /// <summary>
+        /// Rotate the pivot point.
+        /// </summary>
+        public void RotatePivot(int number)
+        {
+            var rotation = PivotTransform.rotation;
+            rotation.z += number;
+            PivotTransform.rotation = rotation;
+        }
+
+        /// <summary>
+        /// Sets the weapon as child of left hand.
+        /// </summary>
+        /// <param name="weapon"></param>
+        /// <param name="transform"></param>
+        public void SetWeaponToLeftHand(Character character)
+        {
+            var weaponObject = Instantiate(WeaponManager.Instance.GetWeapon(character.Data.WeaponLeft));
+            weaponObject.transform.SetParent(LeftHandTransform, false);
+        }
+
+        /// <summary>
+        /// Sets the weapon as child of right hand.
+        /// </summary>
+        /// <param name="weapon"></param>
+        /// <param name="transform"></param>
+        public void SetWeaponToRightHand(Character character)
+        {
+            var weaponObject = Instantiate(WeaponManager.Instance.GetWeapon(character.Data.WeaponRight));
+            weaponObject.transform.SetParent(RightHandTransform, false);
+        }
     }
 }

@@ -11,8 +11,8 @@ namespace Assets.Scripts.Characters
         public float AP;
         public float DP;
 
-        public Weapon Weapon1;
-        public Weapon Weapon2;
+        public Weapon WeaponRight;
+        public Weapon WeaponLeft;
 
         public ActionType[] ActionTypes = new ActionType[4];
     }
