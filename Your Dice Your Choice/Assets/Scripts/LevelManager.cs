@@ -35,18 +35,14 @@ public class LevelManager : MonoBehaviour
     {
         if (Data != null)
         {
-            PhaseInitialization();
+            MatchIntroManager.Instance.Play();
+            //PhaseInitialization();
+            //TurnManager.Instance.PhaseSetFirstTurn();
         }
         else
         {
             throw new System.Exception("LevelManager.Instance.Data == null");
         }
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
 
     }
 
@@ -80,7 +76,6 @@ public class LevelManager : MonoBehaviour
     /// <exception cref="System.Exception"></exception>
     private void CreatePlayer()
     {
-
         switch (Data.MatchType)
         {
             case MatchType.None:

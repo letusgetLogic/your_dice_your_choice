@@ -25,10 +25,13 @@ public class BattleManager : MonoBehaviour
 
         Instance = this;
 
-        HeaderText.gameObject.SetActive(false);
+        
     }
 
-    private void StartMatch()
+    /// <summary>
+    /// 
+    /// </summary>
+    public void StartMatch()
     {
 
     }
