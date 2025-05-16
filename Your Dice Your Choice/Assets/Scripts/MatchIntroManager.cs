@@ -18,6 +18,8 @@ public class MatchIntroManager : MonoBehaviour
     public RectTransform EndPositionLeft;
     public RectTransform EndPositionRight;
 
+    public float IntroTime;
+
     [SerializeField] private float _animSpeedAct1;
     [SerializeField] private float _animFadeInTime;
     [SerializeField] private AnimationCurve _animCurve1;
@@ -100,7 +102,7 @@ public class MatchIntroManager : MonoBehaviour
     /// <summary>
     /// Sets the intro inactive.
     /// </summary>
-    private void SetIntroInactive()
+    public void SetIntroInactive()
     {
         _playStates = PlayStates.None;
 
@@ -109,6 +111,9 @@ public class MatchIntroManager : MonoBehaviour
             item.gameObject.SetActive(false);
             item.alpha = 0f;
         }
+
+        LeftIntroShaderRect.anchoredPosition = _startPositionLeft.anchoredPosition;
+        RightIntroShaderRect.anchoredPosition = _startPositionRight.anchoredPosition;
     }
 
     /// <summary>
@@ -117,11 +122,11 @@ public class MatchIntroManager : MonoBehaviour
     public void Play()
     {
         LeftIntroText.text = PlayerNameLeft;
+        LeftIntroShaderText.text = PlayerNameLeft;
         RightIntroText.text = PlayerNameRight;
+        RightIntroShaderText.text = PlayerNameRight;
 
         SetIntroActive();
-
-        
     }
 
     /// <summary>

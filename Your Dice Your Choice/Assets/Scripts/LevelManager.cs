@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Assets.Scripts;
 using UnityEngine;
 
@@ -36,7 +37,8 @@ public class LevelManager : MonoBehaviour
         if (Data != null)
         {
             MatchIntroManager.Instance.Play();
-            //PhaseInitialization();
+            StartCoroutine(PhaseInitialization());
+            
             //TurnManager.Instance.PhaseSetFirstTurn();
         }
         else
@@ -57,8 +59,12 @@ public class LevelManager : MonoBehaviour
     /// <summary>
     /// Phase Initialization.
     /// </summary>
-    private void PhaseInitialization()
+    private IEnumerator PhaseInitialization()
     {
+        yield return new WaitForSeconds(MatchIntroManager.Instance.IntroTime);
+
+        MatchIntroManager.Instance.SetIntroInactive();
+
         LevelGenerator.Instance.SetData();
 
         PanelManager.Instance.HideAllPanel();
