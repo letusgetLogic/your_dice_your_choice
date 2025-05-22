@@ -36,6 +36,8 @@ public class LevelManager : MonoBehaviour
     {
         if (Data != null)
         {
+            PanelManager.Instance.HideAllPanel();
+
             MatchIntroManager.Instance.Play();
             StartCoroutine(PhaseInitialization());
             
@@ -66,8 +68,6 @@ public class LevelManager : MonoBehaviour
         MatchIntroManager.Instance.SetIntroInactive();
 
         LevelGenerator.Instance.SetData();
-
-        PanelManager.Instance.HideAllPanel();
 
         FieldManager.Instance.InitializeFields();
 

@@ -12,6 +12,7 @@ public class PanelManager : MonoBehaviour
     public TextMeshProUGUI NameTextRight;
     public GameObject[] CharacterPanelsLeft;
     public GameObject[] CharacterPanelsRight;
+    public GameObject CharacterInfoPanel;
 
     /// <summary>
     /// Awake method.
@@ -40,6 +41,8 @@ public class PanelManager : MonoBehaviour
         {
             panel.gameObject.SetActive(false);
         }
+
+        CharacterInfoPanel.SetActive(false);
     }
 
     /// <summary>
@@ -61,5 +64,4 @@ public class PanelManager : MonoBehaviour
             panel.SetAction();
         }
     }
-
 }

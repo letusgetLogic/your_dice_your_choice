@@ -6,15 +6,11 @@ namespace Assets.Scripts.Characters
     {
         public CharacterData Data { get; private set; }
 
-        public GameObject Panel { get; private set; }
+        public float OriginHP { get; private set; }
+        public float OriginAP { get; private set; }
+        public float OriginDP { get; private set; }
 
-        /// <summary>
-        /// Sets the panel null.
-        /// </summary>
-        private void Awake()
-        {
-            
-        }
+        public GameObject Panel { get; private set; }
 
         /// <summary>
         /// Initialize Data.
@@ -23,6 +19,9 @@ namespace Assets.Scripts.Characters
         public void SetData(CharacterData data)
         {
             Data = data;
+            OriginHP = data.HP;
+            OriginAP = data.AP;
+            OriginDP = data.DP;
         }
 
         /// <summary>
