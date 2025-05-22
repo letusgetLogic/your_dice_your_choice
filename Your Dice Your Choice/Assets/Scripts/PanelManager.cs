@@ -12,6 +12,10 @@ public class PanelManager : MonoBehaviour
     public TextMeshProUGUI NameTextRight;
     public GameObject[] CharacterPanelsLeft;
     public GameObject[] CharacterPanelsRight;
+    public GameObject RollPanelLeft;
+    public GameObject RerollPanelLeft; 
+    public GameObject RollPanelRight;
+    public GameObject RerollPanelRight;
     public GameObject CharacterInfoPanel;
 
     /// <summary>
@@ -42,7 +46,22 @@ public class PanelManager : MonoBehaviour
             panel.gameObject.SetActive(false);
         }
 
+        RollPanelLeft.SetActive(false);
+        RerollPanelLeft.SetActive(false);
+        RollPanelRight.SetActive(false);
+        RerollPanelRight.SetActive(false);
         CharacterInfoPanel.SetActive(false);
+    }
+
+    /// <summary>
+    /// Shows the roll and reroll panels.
+    /// </summary>
+    public void ShowRollPanels()
+    {
+        RollPanelLeft.SetActive(true);
+        RerollPanelLeft.SetActive(true);
+        RollPanelRight.SetActive(true);
+        RerollPanelRight.SetActive(true);
     }
 
     /// <summary>

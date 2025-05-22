@@ -15,10 +15,10 @@ public class CharacterMouseEvent : MonoBehaviour, /*IPointerClickHandler, */IPoi
     /// </summary>
     public void OnPointerEnter(PointerEventData eventData)
     {
-        SetInfoPanelPosition();
+        CharacterInfoPanel.Instance.SetPosition(_characterObject);
 
-        _character = _characterObject.GetComponent<Character>(); 
-        
+        _character = _characterObject.GetComponent<Character>();
+
         var characterPanel = _character.Panel.GetComponent<CharacterPanel>();
 
         CharacterInfoPanel.Instance.TransferValues(
@@ -39,15 +39,4 @@ public class CharacterMouseEvent : MonoBehaviour, /*IPointerClickHandler, */IPoi
         CharacterInfoPanel.Instance.gameObject.SetActive(false);
         CharacterInfoPanel.Instance.SetDefault();
     }
-
-    /// <summary>
-    /// Sets the position of the info panel.
-    /// </summary>
-    private void SetInfoPanelPosition()
-    {
-        var pos = Camera.main.WorldToScreenPoint(_characterObject.transform.position);
-
-
-    }
-
 }

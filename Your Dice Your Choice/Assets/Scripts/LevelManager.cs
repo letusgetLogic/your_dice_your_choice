@@ -65,6 +65,8 @@ public class LevelManager : MonoBehaviour
     {
         yield return new WaitForSeconds(MatchIntroManager.Instance.IntroTime);
 
+        PanelManager.Instance.ShowRollPanels();
+
         MatchIntroManager.Instance.SetIntroInactive();
 
         LevelGenerator.Instance.SetData();
