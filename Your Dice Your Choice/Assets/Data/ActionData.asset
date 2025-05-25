@@ -9,14 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9531a790102358c4db39205d87e3d82e, type: 3}
-  m_Name: Character_Archer
+  m_Script: {fileID: 11500000, guid: 93353b8e3d28f4d4888a9fd821ec0561, type: 3}
+  m_Name: ActionData
   m_EditorClassIdentifier: 
-  Type: 2
-  HP: 600
-  AP: 231
-  DP: 40
-  WeaponRight: 3
-  WeaponLeft: 0
-  ActionTypes: 01000000020000000000000000000000
-  MovementDatas: []
+  ActionType: 0
+  DiceNumber: 0

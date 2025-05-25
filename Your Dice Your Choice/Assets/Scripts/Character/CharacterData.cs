@@ -15,5 +15,7 @@ namespace Assets.Scripts.Characters
         public Weapon WeaponLeft;
 
         public ActionType[] ActionTypes = new ActionType[4];
+
+        public MovementData[] MovementDatas;
     }
 }

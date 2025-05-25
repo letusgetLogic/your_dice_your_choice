@@ -1,19 +1,15 @@
 ﻿using System.Collections.Generic;
+using Assets.Scripts.Actions;
+using UnityEngine;
 
-class Action
+public class Action : MonoBehaviour
 {
     private ActionType _type;
-    private float _weightingValue;
-    private string _description;
    
-
-    public Action(ActionType type, float weightingValue, string description)
+    public Action(ActionType type)
     {
         _type = type;
-        _weightingValue = weightingValue;
-        _description = description;
     }
 
-    
 }
 
