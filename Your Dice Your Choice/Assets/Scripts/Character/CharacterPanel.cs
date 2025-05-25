@@ -3,6 +3,8 @@ using System.IO;
 using UnityEngine;
 using Assets.Scripts.Characters;
 using TMPro;
+using System.Collections;
+using UnityEngine.UI;
 
 public class CharacterPanel : MonoBehaviour
 {
@@ -13,7 +15,6 @@ public class CharacterPanel : MonoBehaviour
     public GameObject CharacterObject { get; private set; }
     public Character Character { get; private set; }
 
-    
     /// <summary>
     /// References Object and Script Character.
     /// </summary>

@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [HideInInspector] public string Name;
-    [HideInInspector] public TurnState PlayerTurn;
-    [HideInInspector] public List<GameObject> Characters;
+    public string Name{ get; private set; }
+    public TurnState PlayerTurn { get; private set; }
+    public List<GameObject> Characters { get; private set; }
 
     /// <summary>
     /// Initializes the data.
@@ -16,17 +16,19 @@ public class Player : MonoBehaviour
         Name = name;
         PlayerTurn = playerTurn;
         Characters = LevelGenerator.Instance.CreateCharactersFor(playerTurn);
+
+        if (PlayerTurn == TurnState.PlayerRight) RotateLookDirection(180);
     }
 
     /// <summary>
     /// Sets the look direction for the characters.
     /// </summary>
-    public void RotateLookDirection(int number)
+    private void RotateLookDirection(int number)
     {
         foreach (var characterObject in Characters)
         {
-            var characterMovement = characterObject.GetComponent<CharacterControl>();
-            characterMovement.RotatePivot(number);
+            var characterRotatation = characterObject.GetComponent<CharacterRotation>();
+            characterRotatation.RotatePivot(number);
         }
     }
 }

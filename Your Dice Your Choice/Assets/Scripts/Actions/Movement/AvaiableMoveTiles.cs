@@ -2,9 +2,9 @@
 {
     public enum AvaiableMoveTiles
     {
-        MoveX,
-        Move1_3,
-        Move1,
+        Mx,
+        M1_3,
+        M1,
     }
 }
 

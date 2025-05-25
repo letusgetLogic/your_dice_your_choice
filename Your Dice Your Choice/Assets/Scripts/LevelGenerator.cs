@@ -98,7 +98,7 @@ public class LevelGenerator : MonoBehaviour
             var characterObject = Instantiate(_characterPrefab, randPositions[i], Quaternion.identity);
 
             var character = characterObject.GetComponent<Character>();
-            var characterControl = characterObject.GetComponent<CharacterControl>();
+            var characterGetWeapon = characterObject.GetComponent<CharacterGetWeapon>();
             var characterColor = characterObject.GetComponent<CharacterColor>();
 
             var panel = CharacterPanels(player)[i];
@@ -107,10 +107,8 @@ public class LevelGenerator : MonoBehaviour
 
             character.SetData(data);
 
-            characterControl.SetWeaponToLeftHand(character);
-            characterControl.SetWeaponToRightHand(character);
-
-            if (player == TurnState.PlayerRight) characterControl.RotatePivot(180);
+            characterGetWeapon.SetWeaponToLeftHand(character);
+            characterGetWeapon.SetWeaponToRightHand(character);
 
             characterColor.SetColor(PLayerColor(player));
 
