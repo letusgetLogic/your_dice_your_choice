@@ -5,7 +5,7 @@ public class CharacterInfoPanel : MonoBehaviour
 {
     public static CharacterInfoPanel Instance { get; private set; }
 
-    [SerializeField] private GameObject _intro;
+    [SerializeField] private RectTransform _canvasRectTransform;
     [SerializeField] private TextMeshProUGUI _name;
     [SerializeField] private TextMeshProUGUI _maxHp;
     [SerializeField] private TextMeshProUGUI _currentHp;
@@ -64,8 +64,8 @@ public class CharacterInfoPanel : MonoBehaviour
     {
         var characterPos = characterObject.transform.position;
 
-        var pos = _intro.GetComponent<RectTransform>().InverseTransformPoint(characterPos);
-
+        var pos = _canvasRectTransform.InverseTransformPoint(characterPos);
+       
         gameObject.GetComponent<RectTransform>().localPosition = (Vector2)pos + Distance(pos);
     }
 

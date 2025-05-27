@@ -50,6 +50,9 @@ public class PanelManager : MonoBehaviour
         RerollPanelLeft.SetActive(false);
         RollPanelRight.SetActive(false);
         RerollPanelRight.SetActive(false);
+
+        // Set the inactive panel in the scene active to create the singleton instance.
+        CharacterInfoPanel.SetActive(true); 
         CharacterInfoPanel.SetActive(false);
     }
 

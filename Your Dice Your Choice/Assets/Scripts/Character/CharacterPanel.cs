@@ -35,7 +35,7 @@ public class CharacterPanel : MonoBehaviour
         {
             string action = Character.Data.ActionTypes[i].ToString();
             
-            DicePanel[i].GetComponent<DicePanel>().SetName(action);
+            DicePanel[i].GetComponent<DicePanel>().ActionName.text = action;
         }
     }
 }
