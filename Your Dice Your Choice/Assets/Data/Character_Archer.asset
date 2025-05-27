@@ -19,4 +19,5 @@ MonoBehaviour:
   WeaponRight: 3
   WeaponLeft: 0
   ActionTypes: 01000000020000000000000000000000
-  MovementDatas: []
+  MovementDatas:
+  - {fileID: 11400000, guid: a3779bf513dae8748b42f4a96ab8e936, type: 2}

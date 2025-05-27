@@ -1,16 +1,16 @@
 ﻿public enum MovementType
 {
-    D1_6_Any_Mx,
-    D1_6_Orthogonal_Mx,
-    D1_6_Diagonal_Mx,
+    Mx_D1_6_Any,
+    Mx_D1_6_Orthogonal,
+    Mx_D1_6_Diagonal,
 
-    D1_3_Any_Mx,
-    D1_3_Orthogonal_Mx,
-    D1_3_Diagonal_Mx,
+    Mx_D1_3_Any,
+    Mx_D1_3_Orthogonal_,
+    Mx_D1_3_Diagonal,
 
-    D4_6_Any_M1,
-    D4_6_Orthogonal_M1,
-    D4_6_Diagonal_M1,
+    M1_D4_6_Any,
+    M1_D4_6_Orthogonal,
+    M1_D4_6_Diagonal,
 }
 
 

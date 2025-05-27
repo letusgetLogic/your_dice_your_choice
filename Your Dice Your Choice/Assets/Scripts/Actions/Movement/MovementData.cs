@@ -12,19 +12,19 @@ namespace Assets.Scripts.Characters
         public MoveDirection Direction;
         public AvaiableMoveTiles MoveTiles;
         
-        public Dictionary<MovementType, string> Description = new Dictionary<MovementType, string>
+        public Dictionary<ActionKey, string> Description = new Dictionary<ActionKey, string>
         {
-            {MovementType.D1_6_Any_Mx, "Move in any direction X Tiles"},
-            {MovementType.D1_6_Orthogonal_Mx, "Move orthogonally X Tiles"},
-            {MovementType.D1_6_Diagonal_Mx, "Move diagonally X Tiles"},
+            {ActionKey.Mx_D1_6_Any, "Move in any direction X Tiles"},
+            {ActionKey.Mx_D1_6_Orthogonal, "Move orthogonally X Tiles"},
+            {ActionKey.Mx_D1_6_Diagonal, "Move diagonally X Tiles"},
 
-            {MovementType.D1_3_Any_Mx, "Move in any direction X Tiles, with Dice 1-3"},
-            {MovementType.D1_3_Orthogonal_Mx, "Move orthogonally X Tiles, with Dice 1-3"},
-            {MovementType.D1_3_Diagonal_Mx, "Move diagonally X Tiles, with Dice 1-3"},
+            {ActionKey.Mx_D1_3_Any, "Move in any direction X Tiles, with Dice 1-3"},
+            {ActionKey.Mx_D1_3_Orthogonal_, "Move orthogonally X Tiles, with Dice 1-3"},
+            {ActionKey.Mx_D1_3_Diagonal, "Move diagonally X Tiles, with Dice 1-3"},
 
-            {MovementType.D4_6_Any_M1, "Move in any direction 1 Tile, with Dice 4-6"},
-            {MovementType.D4_6_Orthogonal_M1, "Move orthogonally 1 Tile, with Dice 4-6"},
-            {MovementType.D4_6_Diagonal_M1, "Move diagonally 1 Tile, with Dice 4-6"},
+            {ActionKey.M1_D4_6_Any, "Move in any direction 1 Tile, with Dice 4-6"},
+            {ActionKey.M1_D4_6_Orthogonal, "Move orthogonally 1 Tile, with Dice 4-6"},
+            {ActionKey.M1_D4_6_Diagonal, "Move diagonally 1 Tile, with Dice 4-6"},
         };
     }
 }
