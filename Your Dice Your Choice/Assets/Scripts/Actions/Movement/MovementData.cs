@@ -7,10 +7,7 @@ namespace Assets.Scripts.Characters
     [CreateAssetMenu(fileName = "MovementData", menuName = "ScriptableData/MovementData", order = 2)]
     public class MovementData : ScriptableObject
     {
-        public MovementType MovementType;
-        public AvaiableDiceNumber DiceNumber;
-        public MoveDirection Direction;
-        public AvaiableMoveTiles MoveTiles;
+        public AvaiableTiles MoveTiles;
         
         public Dictionary<ActionKey, string> Description = new Dictionary<ActionKey, string>
         {

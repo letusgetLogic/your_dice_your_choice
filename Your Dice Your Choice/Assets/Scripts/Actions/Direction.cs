@@ -1,6 +1,6 @@
 ﻿namespace Assets.Scripts.Actions
 {
-    public enum MoveDirection
+    public enum Direction
     {
         Any,
         Horizontal,

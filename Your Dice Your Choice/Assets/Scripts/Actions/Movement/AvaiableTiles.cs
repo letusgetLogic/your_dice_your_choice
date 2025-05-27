@@ -1,6 +1,6 @@
 ﻿namespace Assets.Scripts.Actions
 {
-    public enum AvaiableMoveTiles
+    public enum AvaiableTiles
     {
         Mx,
         M1_3,

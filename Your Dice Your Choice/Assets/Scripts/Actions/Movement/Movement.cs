@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Actions
 {
-    public class Movement : Action
+    public class Movement : ActionInitialization
     {
         public Movement(ActionType type) : base(type) {}
     }
