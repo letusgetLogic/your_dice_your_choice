@@ -1,15 +1,23 @@
 ﻿public enum ActionKey
 {
+    None = 0,
+
     // --- Movement ---
-    Mx_D1_6_Any,
-    Mx_D1_6_Orthogonal,
-    Mx_D1_6_Diagonal,
+    Move_X_D1_6_Any,
+    Move_X_D1_6_Orthogonal,
+    Move_X_D1_6_Diagonal,
 
-    Mx_D1_3_Any,
-    Mx_D1_3_Orthogonal_,
-    Mx_D1_3_Diagonal,
+    Move_X_D1_3_Any,
+    Move_X_D1_3_Orthogonal,
+    Move_X_D1_3_Diagonal,
 
-    M1_D4_6_Any,
-    M1_D4_6_Orthogonal,
-    M1_D4_6_Diagonal,
+    Move_1_D4_6_Any,
+    Move_1_D4_6_Orthogonal,
+    Move_1_D4_6_Diagonal,
+
+    // --- Attack ---
+    Attack,
+
+    // --- Defend ---
+    Defend,
 }

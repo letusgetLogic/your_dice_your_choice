@@ -25,21 +25,22 @@ namespace Assets.Scripts.DicePanel
         }
 
         /// <summary>
-        /// Sets the values default.
+        /// Sets the text.
         /// </summary>
-        public void SetDefault()
+        public void SetText(GameObject dicePanelObject)
         {
-            _descriptionText.text = "";
+            string text = dicePanelObject.GetComponent<DicePanel>().Description;
+            _descriptionText.text = text;
         }
 
         /// <summary>
         /// Sets the position of the info panel.
         /// </summary>
-        public void SetPosition(GameObject characterObject)
+        public void SetPosition(GameObject dicePanelObject)
         {
-            var characterPos = characterObject.transform.position;
+            var panelPos = dicePanelObject.transform.position;
 
-            var pos = _canvasRectTransform.InverseTransformPoint(characterPos);
+            var pos = _canvasRectTransform.InverseTransformPoint(panelPos);
 
             gameObject.GetComponent<RectTransform>().localPosition = (Vector2)pos + Distance(pos);
         }
@@ -54,7 +55,6 @@ namespace Assets.Scripts.DicePanel
             Vector2 distance = new();
 
             distance.x = _distance.x * Direction(pos).x;
-            distance.y = _distance.y * Direction(pos).y;
 
             return distance;
         }

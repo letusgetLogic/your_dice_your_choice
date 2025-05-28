@@ -1,8 +1,10 @@
+using System;
+using Assets.Scripts.Actions;
 using UnityEngine;
 
 namespace Assets.Scripts.Characters
 {
-    [CreateAssetMenu(fileName = "CharacterData", menuName = "ScriptableData/CharacterData", order = 1)]
+    [CreateAssetMenu(fileName = "CharacterData", menuName = "ScriptableData/CharacterData")]
     public class CharacterData : ScriptableObject
     {
         public CharacterType Type;
@@ -14,8 +16,6 @@ namespace Assets.Scripts.Characters
         public Weapon WeaponRight;
         public Weapon WeaponLeft;
 
-        public ActionType[] ActionTypes = new ActionType[4];
-
-        public MovementData[] MovementDatas;
+        public ActionData[] ActionData = new ActionData[4];
     }
 }

@@ -1,10 +1,7 @@
-using System;
-using System.IO;
 using UnityEngine;
-using Assets.Scripts.Characters;
 using TMPro;
-using System.Collections;
-using UnityEngine.UI;
+using Assets.Scripts.Characters;
+using Assets.Scripts.DicePanel;
 
 public class CharacterPanel : MonoBehaviour
 {
@@ -33,9 +30,9 @@ public class CharacterPanel : MonoBehaviour
     {
         for (int i = 0; i < DicePanel.Length; i++)
         {
-            string action = Character.Data.ActionTypes[i].ToString();
-            
-            DicePanel[i].GetComponent<DicePanel>().ActionName.text = action;
+            var actionData = Character.Data.ActionData[i];
+
+            DicePanel[i].GetComponent<DicePanel>().SetData(actionData, CharacterObject);
         }
     }
 }

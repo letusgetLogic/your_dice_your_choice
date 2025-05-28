@@ -1,5 +1,7 @@
-﻿public enum AvaiableDiceNumber
+﻿public enum AllowedDiceNumber
 {
+    None = 0,
+
     D1_6,
     D1_3,
     D4_6,

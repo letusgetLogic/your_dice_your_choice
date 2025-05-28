@@ -1,47 +1,31 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Characters;
 using TMPro;
-using UnityEngine.EventSystems;
-using Assets.Scripts.DicePanel;
+using UnityEngine;
+using static UnityEngine.UI.Image;
 
-public class DicePanel : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
+namespace Assets.Scripts.DicePanel
 {
-    public TextMeshProUGUI ActionName;
-    public GameObject DiceSlot;
-
-
-    
-
-    /// <summary>
-    /// On drop event.
-    /// </summary>
-    /// <param name="eventData"></param>
-    public void OnDrop(PointerEventData eventData)
+    public class DicePanel : MonoBehaviour
     {
-       
-        if (eventData.pointerDrag != null)
+        [SerializeField] private TextMeshProUGUI _actionName;
+        public ActionData ActionData {  get; private set; }
+        public GameObject CharacterObject { get; private set; }
+        public Character Character { get; private set; }
+        public string Description { get; private set; }
+
+
+        /// <summary>
+        /// Initialize data.
+        /// </summary>
+        /// <param name="data"></param>
+        public void SetData(ActionData data, GameObject character)
         {
-            var item = eventData.pointerDrag;
-            item.transform.SetParent(DiceSlot.transform);
-            item.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
+            ActionData = data;
+            CharacterObject = character;
+            Character = CharacterObject.GetComponent<Character>();
+            _actionName.text = data.ActionType.ToString();
+            Description = data.Description;
         }
-    }
 
-    /// <summary>
-    /// Hovers the mouse over the character. 
-    /// </summary>
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        ActionDescriptionPanel.Instance.SetPosition(ActionDescriptionPanel.Instance.gameObject);
-        ActionDescriptionPanel.Instance.gameObject.SetActive(true);
-    }
-
-    /// <summary>
-    /// Mouse exits the collider.
-    /// </summary>
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        ActionDescriptionPanel.Instance.gameObject.SetActive(false);
-        ActionDescriptionPanel.Instance.SetDefault();
     }
 }
-

@@ -18,4 +18,8 @@ MonoBehaviour:
   DP: 84
   WeaponRight: 1
   WeaponLeft: 2
-  ActionTypes: 01000000020000000300000000000000
+  ActionData:
+  - {fileID: 11400000, guid: 0fe2206e57a49834ab9e79c9d24f1b51, type: 2}
+  - {fileID: 11400000, guid: f4eb0c5dce2fdc841a8bce6db3319bf3, type: 2}
+  - {fileID: 11400000, guid: fd6a8ae43f0f83d428b85554ff6f70e5, type: 2}
+  - {fileID: 11400000, guid: 167a0e00706621f46a3b8d37c8d9e3ce, type: 2}
