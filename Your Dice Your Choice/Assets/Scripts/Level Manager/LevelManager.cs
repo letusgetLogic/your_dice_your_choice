@@ -10,7 +10,6 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private LevelData[] _dataPrefab;
     [SerializeField] private int _dataIndex;
     
-
     public LevelData Data => _dataPrefab[_dataIndex];
 
     /// <summary>
@@ -24,7 +23,6 @@ public class LevelManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(Instance);
 
         SetMatch();
     }
@@ -69,11 +67,9 @@ public class LevelManager : MonoBehaviour
 
         MatchIntroManager.Instance.SetIntroInactive();
 
-        LevelGenerator.Instance.SetData();
-
         FieldManager.Instance.InitializeFields();
 
-        LevelGenerator.Instance.SpawnField();
+        LevelGenerator.Instance.Generate(Data);
 
         CreatePlayer();
     }

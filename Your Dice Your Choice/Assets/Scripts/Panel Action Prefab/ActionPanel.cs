@@ -3,9 +3,9 @@ using TMPro;
 using UnityEngine;
 using static UnityEngine.UI.Image;
 
-namespace Assets.Scripts.DicePanel
+namespace Assets.Scripts.ActionPanel
 {
-    public class DicePanel : MonoBehaviour
+    public class ActionPanel : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _actionName;
         public ActionData ActionData {  get; private set; }
@@ -15,7 +15,7 @@ namespace Assets.Scripts.DicePanel
 
 
         /// <summary>
-        /// Initialize data.
+        /// Initializes data.
         /// </summary>
         /// <param name="data"></param>
         public void SetData(ActionData data, GameObject character)

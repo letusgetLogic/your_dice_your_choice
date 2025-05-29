@@ -1,19 +1,19 @@
 ﻿using UnityEngine;
 using TMPro;
 using UnityEngine.EventSystems;
-using Assets.Scripts.DicePanel;
+using Assets.Scripts.ActionPanel;
 
-public class DicePanelMouseEvent : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
+public class ActionPanelMouseEvent : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public GameObject DiceSlot;
 
     /// <summary>
-    /// On drop event.
+    /// Mouse button is released
     /// </summary>
     /// <param name="eventData"></param>
     public void OnDrop(PointerEventData eventData)
     {
-       
+        Debug.Log("OnDrop");
         if (eventData.pointerDrag != null)
         {
             var item = eventData.pointerDrag;
@@ -23,7 +23,7 @@ public class DicePanelMouseEvent : MonoBehaviour, IDropHandler, IPointerEnterHan
     }
 
     /// <summary>
-    /// Hovers the mouse over the character. 
+    /// Mouse enters the collider of a game object. 
     /// </summary>
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -33,7 +33,7 @@ public class DicePanelMouseEvent : MonoBehaviour, IDropHandler, IPointerEnterHan
     }
 
     /// <summary>
-    /// Mouse exits the collider.
+    /// Mouse exits the collider of a game object.
     /// </summary>
     public void OnPointerExit(PointerEventData eventData)
     {

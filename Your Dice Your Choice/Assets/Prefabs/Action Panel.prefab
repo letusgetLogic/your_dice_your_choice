@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3144011488393902226}
   - component: {fileID: 7102619009427932503}
   m_Layer: 5
-  m_Name: DicePanel
+  m_Name: Action Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

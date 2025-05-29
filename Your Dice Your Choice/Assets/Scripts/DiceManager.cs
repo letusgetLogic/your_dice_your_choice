@@ -53,4 +53,16 @@ public class DiceManager : MonoBehaviour
         var rollPanel = panel.GetComponent<RollPanel>();
         rollPanel.HideAllDice();
     }
+    
+    /// <summary>
+    /// Hides Dice on Panel.
+    /// </summary>
+    /// <param name="panel"></param>
+    private void ShowDiceOnPanel(GameObject panel)
+    {
+        var rollPanel = panel.GetComponent<RollPanel>();
+        rollPanel.HideAllDice();
+    }
+
+
 }

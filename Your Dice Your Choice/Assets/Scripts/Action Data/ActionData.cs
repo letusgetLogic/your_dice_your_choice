@@ -7,7 +7,7 @@ public class ActionData : ScriptableObject
 {
     public ActionKey ActionKey;
     public ActionType ActionType;
-    public AllowedTiles AllowedTiles;
+    public AllowedTile AllowedTiles;
     public AllowedDiceNumber AllowedDiceNumber;
     public Direction Direction;
     public string Description = "...run method SetDescription() on Inspector...";

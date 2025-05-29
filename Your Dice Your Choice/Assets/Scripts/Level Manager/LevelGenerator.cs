@@ -17,8 +17,6 @@ public class LevelGenerator : MonoBehaviour
 
     private readonly int CharacterSpawnAreaMaxColumn = 2; // Max. value of columns of the spawn area for character. 
 
-    private LevelData _data;
-
     /// <summary>
     /// Awake method.
     /// </summary>
@@ -35,23 +33,32 @@ public class LevelGenerator : MonoBehaviour
     /// <summary>
     /// Spawn fields.
     /// </summary>
-    public void SpawnField()
+    public void Generate(LevelData levelData)
     {
-        Transform spawnTransform = GetComponent<Transform>();
-        Vector3 spawnPos = spawnTransform.position;
-
         // Length - 1 because the distance between pivot point of fields together is 1 field length less than the length of entire fields.
         // For example 9 fields have 8 distance between their pivot points.
-        float halfLength = (_data.MapLength - 1) * .5f;
-        float halfHeight = (_data.MapHeight - 1) * .5f;
+        float halfLength = (levelData.MapLength - 1) *  .5f;
+        float halfHeight = (levelData.MapHeight - 1) * .5f;
         float startPointHorizontal = -halfLength;
         float startPointVertical = halfHeight;
 
-        spawnPos = new Vector3(startPointHorizontal, startPointVertical, 0);
+        SpawnCoverGrounds(startPointHorizontal, startPointVertical);
+        SpawnFields(levelData, startPointHorizontal, startPointVertical);
+    }
 
-        for (int j = 0; j < _data.MapHeight; j++)
+    /// <summary>
+    /// Spawns fields.
+    /// </summary>
+    /// <param name="levelData"></param>
+    /// <param name="startPointHorizontal"></param>
+    /// <param name="startPointVertical"></param>
+    private void SpawnFields(LevelData levelData, float startPointHorizontal, float startPointVertical)
+    {
+        Vector3 spawnPos = new Vector3(startPointHorizontal, startPointVertical, 0);
+
+        for (int j = 0; j < levelData.MapHeight; j++)
         {
-            for (int i = 0; i < _data.MapLength; i++)
+            for (int i = 0; i < levelData.MapLength; i++)
             {
                 var field = Instantiate(_fieldPrefab, spawnPos, Quaternion.identity);
 
@@ -63,18 +70,29 @@ public class LevelGenerator : MonoBehaviour
             spawnPos.y -= 1;
             spawnPos.x = startPointHorizontal;
         }
+    }
 
-        spawnPos = new Vector3(0, startPointVertical + 1, 0);
-        Instantiate(_groundTop, spawnPos, Quaternion.identity); Debug.Log(spawnPos);
+    /// <summary>
+    /// Spawns cover grounds.
+    /// </summary>
+    /// <param name="startPointHorizontal"></param>
+    /// <param name="startPointVertical"></param>
+    private void SpawnCoverGrounds(float startPointHorizontal, float startPointVertical)
+    {
+        SpawnCoverGround(_groundTop, new Vector3(0, startPointVertical + 1, 0));
+        SpawnCoverGround(_groundBottom, new Vector3(0, -startPointVertical - 1, 0));
+        SpawnCoverGround(_groundLeft, new Vector3(startPointHorizontal - 1, 0, 0));
+        SpawnCoverGround(_groundRight, new Vector3(-startPointHorizontal + 1, 0, 0));
+    }
 
-        spawnPos = new Vector3(0, -startPointVertical - 1, 0);
-        Instantiate(_groundBottom, spawnPos, Quaternion.identity); Debug.Log(spawnPos);
-
-        spawnPos = new Vector3(startPointHorizontal - 1, 0, 0);
-        Instantiate(_groundLeft, spawnPos, Quaternion.identity); Debug.Log(spawnPos);
-
-        spawnPos = new Vector3(-startPointHorizontal + 1, 0, 0);
-        Instantiate(_groundRight, spawnPos, Quaternion.identity); Debug.Log(spawnPos);
+    /// <summary>
+    /// Spawns cover ground.
+    /// </summary>
+    /// <param name="ground"></param>
+    /// <param name="spawnPos"></param>
+    private void SpawnCoverGround(GameObject ground, Vector3 spawnPos)
+    {
+        Instantiate(ground, spawnPos, Quaternion.identity);
     }
 
     /// <summary>
@@ -87,13 +105,13 @@ public class LevelGenerator : MonoBehaviour
         var tempList = new List<GameObject>();
 
         // The array of random positions.
-        var randPositions = new Vector3[_data.CharacterAmount];
+        var randPositions = new Vector3[LevelManager.Instance.Data.CharacterAmount];
 
         RandomizePositionInArray(player, randPositions);
 
-        for (int i = 0; i < _data.CharacterAmount; i++)
+        for (int i = 0; i < LevelManager.Instance.Data.CharacterAmount; i++)
         {
-            var data = _characterData[Random.Range(0, _characterData.Length)];
+            var characterData = _characterData[Random.Range(0, _characterData.Length)];
 
             var characterObject = Instantiate(_characterPrefab, randPositions[i], Quaternion.identity);
 
@@ -105,7 +123,7 @@ public class LevelGenerator : MonoBehaviour
 
             var characterPanel = panel.GetComponent<CharacterPanel>();
 
-            character.SetData(data);
+            character.SetData(characterData);
 
             characterGetWeapon.SetWeaponToLeftHand(character);
             characterGetWeapon.SetWeaponToRightHand(character);
@@ -222,13 +240,5 @@ public class LevelGenerator : MonoBehaviour
         }
 
         return default;
-    }
-
-    /// <summary>
-    /// References _data.
-    /// </summary>
-    public void SetData()
-    {
-        _data = LevelManager.Instance.Data;
     }
 }

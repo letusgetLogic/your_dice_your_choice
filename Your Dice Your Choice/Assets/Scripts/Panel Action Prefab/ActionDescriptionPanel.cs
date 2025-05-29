@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-namespace Assets.Scripts.DicePanel
+namespace Assets.Scripts.ActionPanel
 {
     public class ActionDescriptionPanel : MonoBehaviour
     {
@@ -27,18 +27,18 @@ namespace Assets.Scripts.DicePanel
         /// <summary>
         /// Sets the text.
         /// </summary>
-        public void SetText(GameObject dicePanelObject)
+        public void SetText(GameObject actionPanelObject)
         {
-            string text = dicePanelObject.GetComponent<DicePanel>().Description;
+            string text = actionPanelObject.GetComponent<ActionPanel>().Description;
             _descriptionText.text = text;
         }
 
         /// <summary>
         /// Sets the position of the info panel.
         /// </summary>
-        public void SetPosition(GameObject dicePanelObject)
+        public void SetPosition(GameObject actionPanelObject)
         {
-            var panelPos = dicePanelObject.transform.position;
+            var panelPos = actionPanelObject.transform.position;
 
             var pos = _canvasRectTransform.InverseTransformPoint(panelPos);
 

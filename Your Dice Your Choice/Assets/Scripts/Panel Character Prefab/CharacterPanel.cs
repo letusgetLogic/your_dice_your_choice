@@ -1,13 +1,13 @@
 using UnityEngine;
 using TMPro;
 using Assets.Scripts.Characters;
-using Assets.Scripts.DicePanel;
+using Assets.Scripts.ActionPanel;
 
 public class CharacterPanel : MonoBehaviour
 {
     //public GameObject Avatar;
     public TextMeshProUGUI CharacterName;
-    public GameObject[] DicePanel;
+    public GameObject[] ActionPanel;
 
     public GameObject CharacterObject { get; private set; }
     public Character Character { get; private set; }
@@ -28,11 +28,11 @@ public class CharacterPanel : MonoBehaviour
     /// </summary>
     public void SetAction()
     {
-        for (int i = 0; i < DicePanel.Length; i++)
+        for (int i = 0; i < ActionPanel.Length; i++)
         {
             var actionData = Character.Data.ActionData[i];
 
-            DicePanel[i].GetComponent<DicePanel>().SetData(actionData, CharacterObject);
+            ActionPanel[i].GetComponent<ActionPanel>().SetData(actionData, CharacterObject);
         }
     }
 }
