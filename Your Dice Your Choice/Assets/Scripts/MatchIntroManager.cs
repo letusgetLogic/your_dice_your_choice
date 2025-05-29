@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 
@@ -18,10 +17,10 @@ public class MatchIntroManager : MonoBehaviour
     public RectTransform EndPositionLeft;
     public RectTransform EndPositionRight;
 
-    public float IntroTime;
+    public float IntroTime = 3f;
 
-    [SerializeField] private float _animSpeedAct1;
-    [SerializeField] private float _animFadeInTime;
+    [SerializeField] private float _animSpeedAct1 = 0.0001f;
+    [SerializeField] private float _animFadeInTime = 2f;
     [SerializeField] private AnimationCurve _animCurve1;
 
     private readonly string PlayerNameLeft = "Player 1";

@@ -12,20 +12,20 @@ public class RollPanel : MonoBehaviour
     [SerializeField] private float _animTimer = 0.25f;
     [SerializeField] private int _diceAmount = 4;
 
-    public List<GameObject> DiceOnPanel = new List<GameObject>();
+    public GameObject[] DiceOnPanel => new GameObject[_diceAmount];
 
     /// <summary>
     /// Shows Dice.
     /// </summary>
     /// <param name="amount"></param>
-    public void ShowDice(int amount)
+    public void ShowDice()
     {
-        for (int i = 0; i < amount; i++)
+        for (int i = 0; i < _diceAmount; i++)
         {
             var dice = Dice[i];
             dice.SetActive(true);
             DiceOnPanel[i] = dice;
-            dice.GetComponent<Dice>().InitializeIndex(i);
+            dice.GetComponent<Dice>().InitializeIndexOf(gameObject, i);
         }
     }
 
@@ -39,7 +39,6 @@ public class RollPanel : MonoBehaviour
         {
             var dice = Dice[i];
             dice.SetActive(false);
-            DiceOnPanel.RemoveAll(x => !x);
         }
     }
 

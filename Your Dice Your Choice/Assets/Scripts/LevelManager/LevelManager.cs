@@ -21,7 +21,7 @@ public class LevelManager : MonoBehaviour
         {
             Destroy(Instance.gameObject);
         }
-
+       
         Instance = this;
 
         SetMatch();
@@ -69,9 +69,11 @@ public class LevelManager : MonoBehaviour
 
         LevelGenerator.Instance.Generate(Data);
 
+        CreatePlayer();
+
         PanelManager.Instance.ShowRollPanels();
 
-        CreatePlayer();
+
     }
 
     /// <summary>

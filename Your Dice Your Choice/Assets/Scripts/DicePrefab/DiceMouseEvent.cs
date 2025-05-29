@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.DicePrefab;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class DiceMouseEvent : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
@@ -44,6 +45,9 @@ public class DiceMouseEvent : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
     {
         _canvasGroup.alpha = 1f;
         _canvasGroup.blocksRaycasts = true;
+
+        var diceMovement = GetComponent<DiceMovement>();
+        diceMovement.SendBackToBase();
     }
 }
 

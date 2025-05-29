@@ -13,6 +13,7 @@ namespace Assets.Scripts.DicePrefab
 
         public int CurrentNumber { get; private set; }
         public int IndexOnPanel { get; private set; }
+        public GameObject RollPanel { get; private set; }
         
         /// <summary>
         /// Start method.
@@ -35,11 +36,12 @@ namespace Assets.Scripts.DicePrefab
         }
 
         /// <summary>
-        /// Initializes the index of the dice on the panel.
+        /// Initializes the roll panel and its index.
         /// </summary>
         /// <param name="index"></param>
-        public void InitializeIndex(int index)
+        public void InitializeIndexOf(GameObject rollPanel, int index)
         {
+            RollPanel = rollPanel;
             IndexOnPanel = index;
         }
     }

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class CharacterPanelHint : MonoBehaviour
 {
     [SerializeField] private float _animLightenUpTime = 0.5f;
-    [SerializeField] private float _animSpeedAct;
+    [SerializeField] private float _animSpeedAct = 0.0001f;
     [SerializeField] private float _colorMaxRbg = 100f;
     [SerializeField] private AnimationCurve _animCurve1;
 

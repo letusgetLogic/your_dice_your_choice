@@ -2,12 +2,12 @@ using Assets.Scripts.CharacterPrefab;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.Rendering.DebugUI;
 
 public class PanelManager : MonoBehaviour
 {
     public static PanelManager Instance {  get; private set; }
 
+    public GameObject Canvas;
     public TextMeshProUGUI NameTextLeft;
     public TextMeshProUGUI NameTextRight;
     public GameObject[] CharacterPanelsLeft;
@@ -65,28 +65,11 @@ public class PanelManager : MonoBehaviour
     public void ShowRollPanels()
     {
         RollPanelLeft.SetActive(true);
+        DiceManager.Instance.ShowDiceOnPanel(RollPanelLeft);
         RerollPanelLeft.SetActive(true);
-        RollPanelRight.SetActive(true);
-        RerollPanelRight.SetActive(true);
-    }
 
-    /// <summary>
-    /// References the action for each DicePanel.
-    /// </summary>
-    public void SetAction()
-    {
-        for (int i = 0; i < PlayerManager.Instance.PlayerLeft.Characters.Count; i++)
-        {
-            var character = PlayerManager.Instance.PlayerLeft.Characters[i].GetComponent<Character>();
-            var panel = character.Panel.GetComponent<CharacterPanel>();
-            panel.SetAction();
-        }
-        
-        for (int i = 0; i < PlayerManager.Instance.PlayerRight.Characters.Count; i++)
-        {
-            var character = PlayerManager.Instance.PlayerRight.Characters[i].GetComponent<Character>();
-            var panel = character.Panel.GetComponent<CharacterPanel>();
-            panel.SetAction();
-        }
+        RollPanelRight.SetActive(true);
+        DiceManager.Instance.ShowDiceOnPanel(RollPanelRight);
+        RerollPanelRight.SetActive(true);
     }
 }

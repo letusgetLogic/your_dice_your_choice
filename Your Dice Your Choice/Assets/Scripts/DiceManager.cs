@@ -6,8 +6,6 @@ public class DiceManager : MonoBehaviour
 {
     public static DiceManager Instance { get; private set; }
 
-    public GameObject RollPanelLeft;
-    public GameObject RollPanelRight;
     public GameObject TurnDiceLeft;
     public GameObject TurnDiceRight;
 
@@ -29,8 +27,8 @@ public class DiceManager : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        HideDiceOnPanel(RollPanelLeft);
-        HideDiceOnPanel(RollPanelRight);
+        HideDiceOnPanel(PanelManager.Instance.RollPanelLeft);
+        HideDiceOnPanel(PanelManager.Instance.RollPanelRight);
         TurnDiceLeft.SetActive(false);
         TurnDiceRight.SetActive(false);
     }
@@ -46,14 +44,12 @@ public class DiceManager : MonoBehaviour
     }
     
     /// <summary>
-    /// Hides Dice on Panel.
+    /// Shows Dice on Panel.
     /// </summary>
     /// <param name="panel"></param>
-    private void ShowDiceOnPanel(GameObject panel)
+    public void ShowDiceOnPanel(GameObject panel)
     {
         var rollPanel = panel.GetComponent<RollPanel>();
-        rollPanel.HideAllDice();
+        rollPanel.ShowDice();
     }
-
-
 }

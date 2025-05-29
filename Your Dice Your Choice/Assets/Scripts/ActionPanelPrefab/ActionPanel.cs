@@ -40,7 +40,7 @@ namespace Assets.Scripts.ActionPanelPrefab
                 return;
             }
 
-            diceMovement.PositionsToDiceSlot();
+            diceMovement.PositionsToDiceSlot(gameObject.GetComponent<RectTransform>().anchoredPosition);
         }
 
         private bool CheckDiceInput(GameObject dice)

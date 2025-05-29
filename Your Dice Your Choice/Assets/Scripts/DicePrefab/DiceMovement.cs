@@ -7,12 +7,10 @@ namespace Assets.Scripts.DicePrefab
 {
     public class DiceMovement : MonoBehaviour
     {
-        public GameObject DiceSlot;
-
-        [SerializeField] private float _animTime = 0.5f;
-        [SerializeField] private float _animSpeed;
+        [SerializeField] private float _animSpeed = 0.0001f;
         [SerializeField] private AnimationCurve _animCurve;
 
+        private RectTransform _rectTransform => GetComponent<RectTransform>();
         private Vector2 _basePosition;
         private Vector2 _currentPosition;
 
@@ -24,8 +22,7 @@ namespace Assets.Scripts.DicePrefab
         /// </summary>
         private void Start()
         {
-            if (_basePosition == null)
-                _basePosition = GetComponent<RectTransform>().anchoredPosition;
+            _basePosition = _rectTransform.anchoredPosition;
         }
 
         /// <summary>
@@ -38,8 +35,8 @@ namespace Assets.Scripts.DicePrefab
 
         public void SendBackToBase()
         {
-            _currentPosition = GetComponent<RectTransform>().anchoredPosition;
-
+            _currentPosition = _rectTransform.anchoredPosition;
+            
             _isRunning = true;
         }
 
@@ -51,26 +48,29 @@ namespace Assets.Scripts.DicePrefab
         {
             if (_isRunning)
             {
-                if (GetComponent<RectTransform>().anchoredPosition == _basePosition)
+                if (_rectTransform.anchoredPosition == _basePosition)
                 {
+                    _current = 0f;
                     _isRunning = false;
                     return;
                 }
 
                 _current = Mathf.MoveTowards(_current, 1, _animSpeed / Time.deltaTime);
                 var lerpPos = Vector2.Lerp(_currentPosition, _basePosition, _animCurve.Evaluate(_current));
-                GetComponent<RectTransform>().anchoredPosition = lerpPos;
+                _rectTransform.anchoredPosition = lerpPos;
             }
         }
 
         /// <summary>
         /// Positions to the dice slot.
         /// </summary>
-        public void PositionsToDiceSlot()
+        public void PositionsToDiceSlot(Vector2 pos)
         {
-            transform.SetParent(DiceSlot.transform);
-            GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
-            
+            _rectTransform.anchoredPosition = pos;
+
+            var dice = GetComponent<Dice>();
+            var rollPanel = dice.RollPanel.GetComponent<RollPanel>();
+            rollPanel.SetNull(dice.IndexOnPanel);
         }
     }
 }
