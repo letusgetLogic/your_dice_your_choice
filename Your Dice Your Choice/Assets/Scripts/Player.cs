@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Assets.Scripts.Characters;
+using Assets.Scripts.CharacterPrefab;
 using UnityEngine;
 
 public class Player : MonoBehaviour

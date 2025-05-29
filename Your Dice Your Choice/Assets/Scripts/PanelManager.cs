@@ -1,4 +1,4 @@
-using Assets.Scripts.Characters;
+using Assets.Scripts.CharacterPrefab;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

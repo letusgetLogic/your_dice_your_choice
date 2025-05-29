@@ -15,6 +15,6 @@ MonoBehaviour:
   ActionKey: 3
   ActionType: 1
   AllowedTiles: 1
-  AllowedDiceNumber: 1
+  AllowedDiceNumber: 7
   Direction: 5
   Description: Move diagonally X Tiles

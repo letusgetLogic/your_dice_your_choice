@@ -15,6 +15,6 @@ MonoBehaviour:
   ActionKey: 8
   ActionType: 1
   AllowedTiles: 3
-  AllowedDiceNumber: 3
+  AllowedDiceNumber: 9
   Direction: 4
   Description: Move orthogonally 1 Tile, with Dice 4-6
