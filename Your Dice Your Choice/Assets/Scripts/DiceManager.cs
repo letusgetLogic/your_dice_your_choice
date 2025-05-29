@@ -11,15 +11,6 @@ public class DiceManager : MonoBehaviour
     public GameObject TurnDiceLeft;
     public GameObject TurnDiceRight;
 
-    [SerializeField] private int _diceAmount = 4;
-    [SerializeField] private int _rollFrequency = 10;
-    [SerializeField] private float _animTimer = 0.25f;
-
-    public int DiceAmount => _diceAmount;
-    public int RollFrequency => _rollFrequency;
-    public float AnimTimer => _animTimer;
-
-
     /// <summary>
     /// Awake method.
     /// </summary>

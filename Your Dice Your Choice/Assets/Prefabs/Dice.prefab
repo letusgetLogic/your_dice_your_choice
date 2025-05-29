@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7367674637462314456}
   m_Layer: 5
   m_Name: Dice
-  m_TagString: Untagged
+  m_TagString: Dice
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -59,14 +59,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99a2504984e332649bc68d9afd8c15d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DiceSide:
-  - {fileID: 1159649247, guid: 7130faa009faae44aa534a94fe788e64, type: 3}
-  - {fileID: -675309483, guid: 7130faa009faae44aa534a94fe788e64, type: 3}
-  - {fileID: -123078865, guid: 7130faa009faae44aa534a94fe788e64, type: 3}
-  - {fileID: 1454795454, guid: 7130faa009faae44aa534a94fe788e64, type: 3}
-  - {fileID: -1137614138, guid: 7130faa009faae44aa534a94fe788e64, type: 3}
-  - {fileID: 197335296, guid: 7130faa009faae44aa534a94fe788e64, type: 3}
-  - {fileID: 431537536, guid: 7130faa009faae44aa534a94fe788e64, type: 3}
   _canvas: {fileID: 0}
   _alphaValue: 0.6
 --- !u!114 &9031079582204954733

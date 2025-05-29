@@ -11,9 +11,9 @@ namespace Assets.Scripts.DicePrefab
 
         [SerializeField] private int _defaultDiceIndex = 6;
 
-        [HideInInspector] public int CurrentNumber { get; private set; }
-
-
+        public int CurrentNumber { get; private set; }
+        public int IndexOnPanel { get; private set; }
+        
         /// <summary>
         /// Start method.
         /// </summary>
@@ -24,7 +24,7 @@ namespace Assets.Scripts.DicePrefab
         }
 
         /// <summary>   
-        /// Initializes dice side.
+        /// Initializes the dice side.
         /// </summary>
         /// <param name="sideIndex"></param>
         public void InitializeSide(int sideIndex)
@@ -32,6 +32,15 @@ namespace Assets.Scripts.DicePrefab
             var currentImage = gameObject.GetComponent<Image>();
             currentImage.sprite = DiceSide[sideIndex];
             CurrentNumber = sideIndex;
+        }
+
+        /// <summary>
+        /// Initializes the index of the dice on the panel.
+        /// </summary>
+        /// <param name="index"></param>
+        public void InitializeIndex(int index)
+        {
+            IndexOnPanel = index;
         }
     }
 }

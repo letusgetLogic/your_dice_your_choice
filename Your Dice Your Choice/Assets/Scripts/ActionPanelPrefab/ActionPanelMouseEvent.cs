@@ -6,19 +6,17 @@ namespace Assets.Scripts.ActionPanelPrefab
 {
     public class ActionPanelMouseEvent : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
     {
-        public GameObject DiceSlot;
-
         /// <summary>
         /// Mouse button is released
         /// </summary>
         /// <param name="eventData"></param>
         public void OnDrop(PointerEventData eventData)
         {
-            if (eventData.pointerDrag != null)
+            if (eventData.pointerDrag.tag == "Dice")
             {
                 var dice = eventData.pointerDrag;
-                dice.transform.SetParent(DiceSlot.transform);
-                dice.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
+
+                GetComponent<ActionPanel>().ManageAction(dice);
             }
         }
 

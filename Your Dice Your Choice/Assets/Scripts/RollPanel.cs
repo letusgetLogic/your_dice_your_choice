@@ -8,20 +8,24 @@ public class RollPanel : MonoBehaviour
 {
     public GameObject[] Dice;
 
-    [NonSerialized] public List<GameObject> DiceOnPanel = new List<GameObject>();
+    [SerializeField] private int _rollFrequency = 10;
+    [SerializeField] private float _animTimer = 0.25f;
+    [SerializeField] private int _diceAmount = 4;
 
+    public List<GameObject> DiceOnPanel = new List<GameObject>();
 
     /// <summary>
     /// Shows Dice.
     /// </summary>
     /// <param name="amount"></param>
-    public void ShowDice(int  amount)
+    public void ShowDice(int amount)
     {
         for (int i = 0; i < amount; i++)
         {
             var dice = Dice[i];
             dice.SetActive(true);
-            DiceOnPanel.Add(dice);
+            DiceOnPanel[i] = dice;
+            dice.GetComponent<Dice>().InitializeIndex(i);
         }
     }
 
@@ -53,7 +57,7 @@ public class RollPanel : MonoBehaviour
     /// <returns></returns>
     private IEnumerator AnimateDiceRoll()
     {
-        for (int i = 0; i < DiceManager.Instance.RollFrequency; i++)
+        for (int i = 0; i < _rollFrequency; i++)
         {
             foreach (var dice in DiceOnPanel)
             {
@@ -62,7 +66,25 @@ public class RollPanel : MonoBehaviour
                 diceScript.InitializeSide(sideIndex);
             }
 
-            yield return new WaitForSeconds(DiceManager.Instance.AnimTimer); 
+            yield return new WaitForSeconds(_animTimer); 
         }
+    }
+
+    /// <summary>
+    /// Sets the slot on the panel null.
+    /// </summary>
+    /// <param name="index"></param>
+    public void SetNull(int index)
+    {
+        DiceOnPanel[index] = null;
+    }
+
+    /// <summary>
+    /// Sets the dice on the slot on the panel.
+    /// </summary>
+    /// <param name="index"></param>
+    public void SetInstance(GameObject dice, int index)
+    {
+        DiceOnPanel[index] = dice;
     }
 }

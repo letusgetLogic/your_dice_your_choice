@@ -21,17 +21,7 @@ namespace Assets.Scripts.Actions
             Instance = this;
         }
 
-        public void ManageAction(GameObject actionPanel, GameObject dice)
-        {
 
-        }
-
-        private bool CheckDiceInput(ActionData actionData, GameObject dice)
-        {
-            var allowedDiceNumber = actionData.AllowedDiceNumber;
-            var diceNumber = dice.GetComponent<Dice>().CurrentNumber;
-
-            return CheckDiceCondition.IsNumberAllowed(allowedDiceNumber, diceNumber);
-        }
+       
     }
 }
