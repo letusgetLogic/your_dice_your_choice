@@ -13,54 +13,41 @@ namespace Assets.Scripts.ActionPanelPrefab
     {
         [SerializeField] private TextMeshProUGUI _actionName;
 
-        public IAction action {  get; private set; }
+        public ActionBase Action {  get; private set; }
 
         /// <summary>
         /// Initializes data.
         /// </summary>
-        /// <param name="data"></param>
-        public void SetData(ActionData data, GameObject character)
+        /// <param name="actionData"></param>
+        public void SetData(ActionData actionData, GameObject character)
         {
-            _actionName.text = data.ActionType.ToString();
-            Create(data, character);
+            _actionName.text = actionData.ActionType.ToString();
+            Action = Create(actionData, character);
         }
 
-        private void Create(ActionData data, GameObject character)
+        /// <summary>
+        /// Creates the instace of Action.
+        /// </summary>
+        /// <param name="actionData"></param>
+        /// <param name="character"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        private ActionBase Create(ActionData actionData, GameObject character)
         {
-            switch(data.ActionType) 
+            switch(actionData.ActionType) 
             {
                 case ActionType.None:
                     throw new Exception("ActionType = None");
                 case ActionType.Move:
-                    action = new ActionMovement();
-                    return;
+                    return new Movement(actionData, character);
                 case ActionType.Attack:
-                    Description = "Attack";
-                    return;
+                    return new Attack(actionData, character);
                 case ActionType.Defend:
-                    Description = "Defend";
-                    return;
-            }
-        }
-
-        /// <summary>
-        /// Manages action.
-        /// </summary>
-        /// <param name="dice"></param>
-        public void ManageAction(GameObject dice)
-        {
-            var diceMovement = dice.GetComponent<DiceMovement>();
-            var allowedDiceNumber = ActionData.AllowedDiceNumber;
-            var diceNumber = dice.GetComponent<Dice>().CurrentNumber;
-
-
-            if (CheckDiceCondition.IsNumberAllowed(allowedDiceNumber, diceNumber) == false)
-            {
-                diceMovement.SendBackToBase();
-                return;
+                    return new Defend(actionData, character);
             }
 
-            diceMovement.PositionsTo(gameObject.GetComponent<RectTransform>().anchoredPosition);
+            return null;
         }
+
     }
 }
