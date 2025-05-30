@@ -1,8 +1,11 @@
-﻿using Assets.Scripts.CharacterPrefab;
+﻿
 using Assets.Scripts.Action;
 using TMPro;
 using UnityEngine;
 using Assets.Scripts.DicePrefab;
+using Unity.VisualScripting;
+using System;
+
 
 namespace Assets.Scripts.ActionPanelPrefab
 {
@@ -10,11 +13,7 @@ namespace Assets.Scripts.ActionPanelPrefab
     {
         [SerializeField] private TextMeshProUGUI _actionName;
 
-        public ActionData ActionData {  get; private set; }
-        public GameObject CharacterObject { get; private set; }
-        public Character Character { get; private set; }
-        public string Description { get; private set; }
-
+        public IAction action {  get; private set; }
 
         /// <summary>
         /// Initializes data.
@@ -22,33 +21,46 @@ namespace Assets.Scripts.ActionPanelPrefab
         /// <param name="data"></param>
         public void SetData(ActionData data, GameObject character)
         {
-            ActionData = data;
-            CharacterObject = character;
-            Character = CharacterObject.GetComponent<Character>();
             _actionName.text = data.ActionType.ToString();
-            Description = data.Description;
+            Create(data, character);
         }
 
+        private void Create(ActionData data, GameObject character)
+        {
+            switch(data.ActionType) 
+            {
+                case ActionType.None:
+                    throw new Exception("ActionType = None");
+                case ActionType.Move:
+                    action = new ActionMovement();
+                    return;
+                case ActionType.Attack:
+                    Description = "Attack";
+                    return;
+                case ActionType.Defend:
+                    Description = "Defend";
+                    return;
+            }
+        }
 
+        /// <summary>
+        /// Manages action.
+        /// </summary>
+        /// <param name="dice"></param>
         public void ManageAction(GameObject dice)
         {
             var diceMovement = dice.GetComponent<DiceMovement>();
+            var allowedDiceNumber = ActionData.AllowedDiceNumber;
+            var diceNumber = dice.GetComponent<Dice>().CurrentNumber;
 
-            if (!CheckDiceInput(dice))
+
+            if (CheckDiceCondition.IsNumberAllowed(allowedDiceNumber, diceNumber) == false)
             {
                 diceMovement.SendBackToBase();
                 return;
             }
 
-            diceMovement.PositionsToDiceSlot(gameObject.GetComponent<RectTransform>().anchoredPosition);
-        }
-
-        private bool CheckDiceInput(GameObject dice)
-        {
-            var allowedDiceNumber = ActionData.AllowedDiceNumber;
-            var diceNumber = dice.GetComponent<Dice>().CurrentNumber;
-
-            return CheckDiceCondition.IsNumberAllowed(allowedDiceNumber, diceNumber);
+            diceMovement.PositionsTo(gameObject.GetComponent<RectTransform>().anchoredPosition);
         }
     }
 }

@@ -35,7 +35,8 @@ public class LevelGenerator : MonoBehaviour
     /// </summary>
     public void Generate(LevelData levelData)
     {
-        // Length - 1 because the distance between pivot point of fields together is 1 field length less than the length of entire fields.
+        // Length - 1 because the distance between pivot point of fields together is 1 field length
+        // less than the length of entire fields.
         // For example 9 fields have 8 distance between their pivot points.
         float halfLength = (levelData.MapLength - 1) *  .5f;
         float halfHeight = (levelData.MapHeight - 1) * .5f;
@@ -44,6 +45,19 @@ public class LevelGenerator : MonoBehaviour
 
         SpawnCoverGrounds(startPointHorizontal, startPointVertical);
         SpawnFields(levelData, startPointHorizontal, startPointVertical);
+    }
+
+    /// <summary>
+    /// Spawns cover grounds.
+    /// </summary>
+    /// <param name="startPointHorizontal"></param>
+    /// <param name="startPointVertical"></param>
+    private void SpawnCoverGrounds(float startPointHorizontal, float startPointVertical)
+    {
+        SpawnCoverGround(_groundTop, new Vector3(0, startPointVertical + 1, 0));
+        SpawnCoverGround(_groundBottom, new Vector3(0, -startPointVertical - 1, 0));
+        SpawnCoverGround(_groundLeft, new Vector3(startPointHorizontal - 1, 0, 0));
+        SpawnCoverGround(_groundRight, new Vector3(-startPointHorizontal + 1, 0, 0));
     }
 
     /// <summary>
@@ -64,27 +78,12 @@ public class LevelGenerator : MonoBehaviour
 
                 FieldManager.Instance.SetField(field, j, i);
 
-                field.SetActive(false);
-
                 spawnPos.x += 1;
             }
 
             spawnPos.y -= 1;
             spawnPos.x = startPointHorizontal;
         }
-    }
-
-    /// <summary>
-    /// Spawns cover grounds.
-    /// </summary>
-    /// <param name="startPointHorizontal"></param>
-    /// <param name="startPointVertical"></param>
-    private void SpawnCoverGrounds(float startPointHorizontal, float startPointVertical)
-    {
-        SpawnCoverGround(_groundTop, new Vector3(0, startPointVertical + 1, 0));
-        SpawnCoverGround(_groundBottom, new Vector3(0, -startPointVertical - 1, 0));
-        SpawnCoverGround(_groundLeft, new Vector3(startPointHorizontal - 1, 0, 0));
-        SpawnCoverGround(_groundRight, new Vector3(-startPointHorizontal + 1, 0, 0));
     }
 
     /// <summary>

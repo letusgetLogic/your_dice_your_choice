@@ -62,9 +62,9 @@ namespace Assets.Scripts.DicePrefab
         }
 
         /// <summary>
-        /// Positions to the dice slot.
+        /// Positions to the dice slot in the action panel.
         /// </summary>
-        public void PositionsToDiceSlot(Vector2 pos)
+        public void PositionsTo(Vector2 pos)
         {
             _rectTransform.anchoredPosition = pos;
 

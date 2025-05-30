@@ -6,22 +6,10 @@ namespace Assets.Scripts.Actions
 {
     public class ActionManager : MonoBehaviour
     {
-        public static ActionManager Instance { get; private set; }
-
-        /// <summary>
-        /// Awake method.
-        /// </summary>
-        private void Awake()
+        public void Handle(ActionData actionData, GameObject character)
         {
-            if (Instance != null)
-            {
-                Destroy(Instance.gameObject);
-            }
-
-            Instance = this;
+            
         }
-
-
        
     }
 }
