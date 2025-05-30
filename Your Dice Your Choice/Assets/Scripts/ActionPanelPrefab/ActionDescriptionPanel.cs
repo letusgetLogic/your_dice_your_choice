@@ -29,7 +29,7 @@ namespace Assets.Scripts.ActionPanelPrefab
         /// </summary>
         public void SetText(GameObject actionPanelObject)
         {
-            string text = actionPanelObject.GetComponent<ActionPanel>().Description;
+            string text = actionPanelObject.GetComponent<ActionPanel>().Action.ActionData.Description;
             _descriptionText.text = text;
         }
 
