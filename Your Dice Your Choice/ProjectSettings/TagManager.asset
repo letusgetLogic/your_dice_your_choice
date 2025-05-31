@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 3
   tags:
   - Dice
+  - Field
+  - Character
   layers:
   - Default
   - TransparentFX
@@ -15,7 +17,7 @@ TagManager:
   - 
   - Character
   - 
-  - 
+  - Battleground
   - Underground
   - Map
   - 

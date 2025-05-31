@@ -4,7 +4,6 @@
     {
         public void MoveForward(int tiles)
         {
-            CharacterTransform = transform;
         }
     }
 }

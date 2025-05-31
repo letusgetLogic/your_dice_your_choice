@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1671490919891895021}
   - component: {fileID: 1973675020001016886}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Animation Click
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1068370204336815211}
   - component: {fileID: 5867337948677347677}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Animation Hover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,7 +184,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7996033149595946989}
   - component: {fileID: 2553125407303417166}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Foggy Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -270,13 +270,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3311930492384287218}
+  - component: {fileID: 3221151877401165236}
   - component: {fileID: 3216260691785901168}
   - component: {fileID: 1719382495379348813}
   - component: {fileID: 586475268459886930}
-  - component: {fileID: 1494094444507513154}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Field
-  m_TagString: Untagged
+  m_TagString: Field
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -300,6 +300,18 @@ Transform:
   - {fileID: 1671490919891895021}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3221151877401165236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8115748279230849610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c99fca5970bd2b04a9d911b926a72a3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3216260691785901168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -375,18 +387,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.9, y: 0.9}
   m_EdgeRadius: 0
---- !u!114 &1494094444507513154
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8115748279230849610}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1db22a15b57eb7d44a9d99357e7f037d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &9159352336250848926
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,7 +398,7 @@ GameObject:
   - component: {fileID: 6972047259063161279}
   - component: {fileID: 8234468206160828756}
   - component: {fileID: 1383767073951950790}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Animation Hint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

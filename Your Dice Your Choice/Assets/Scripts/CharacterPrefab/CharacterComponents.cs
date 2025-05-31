@@ -4,7 +4,6 @@ namespace Assets.Scripts.CharacterPrefab
 {
     public class CharacterComponents : MonoBehaviour
     {
-        public Transform CharacterTransform { get; protected set; }
         public Transform PivotTransform { get; protected set; }
         public Transform BodyTransform { get; protected set; }
         public Transform LeftHandTransform { get; protected set; }
@@ -16,7 +15,6 @@ namespace Assets.Scripts.CharacterPrefab
         /// </summary>
         private void Awake()
         {
-            CharacterTransform = transform;
             PivotTransform = transform.Find("Pivot").gameObject.GetComponent<Transform>();
             BodyTransform = transform.Find("Pivot").Find("Character Body").gameObject.GetComponent<Transform>();
             LeftHandTransform = transform.Find("Pivot").Find("Character Left Hand").gameObject.GetComponent<Transform>();

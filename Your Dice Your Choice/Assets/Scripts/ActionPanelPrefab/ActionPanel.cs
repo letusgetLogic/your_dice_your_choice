@@ -37,7 +37,7 @@ namespace Assets.Scripts.ActionPanelPrefab
             switch(actionData.ActionType) 
             {
                 case ActionType.None:
-                    throw new Exception("ActionType = None");
+                    return null;
                 case ActionType.Move:
                     return new Movement(actionData, character);
                 case ActionType.Attack:

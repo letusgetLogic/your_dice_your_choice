@@ -15,7 +15,6 @@ namespace Assets.Scripts
         [SerializeField] private Color _onPointerEnterColor;
         [SerializeField] private float _animTimer = .1f;
 
-            private BoxCollider2D _boxCollider2D => GetComponent<BoxCollider2D>();
         private bool _isClicking = false;
 
         /// <summary>
@@ -23,27 +22,9 @@ namespace Assets.Scripts
         /// </summary>
         private void Awake()
         {
-            _boxCollider2D.enabled = false;
-            FoggyPanel.SetActive(false);
-            AnimationHint.SetActive(false);
-            AnimationClick.SetActive(false);
-        }
-
-        /// <summary>
-        /// Sets the box collider active.
-        /// </summary>
-        public void ColliderOn()
-        {
-            _boxCollider2D.enabled = true;
-        }
-
-        /// <summary>
-        /// Shows the field hint.
-        /// </summary>
-        public void ShowFieldHint()
-        {
             FoggyPanel.SetActive(true);
             AnimationHint.SetActive(true);
+            AnimationClick.SetActive(false);
         }
 
         /// <summary>

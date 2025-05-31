@@ -1,3 +1,4 @@
+using Assets.Scripts.FieldPrefab;
 using UnityEngine;
 
 public class FieldManager : MonoBehaviour
@@ -37,6 +38,8 @@ public class FieldManager : MonoBehaviour
     public void SetField(GameObject field, int j, int i)
     {
         Fields[j, i] = field;
-    }
 
+        Vector2 index = new Vector2(j, i);
+        field.GetComponent<Field>().SetIndex(index);
+    }
 }

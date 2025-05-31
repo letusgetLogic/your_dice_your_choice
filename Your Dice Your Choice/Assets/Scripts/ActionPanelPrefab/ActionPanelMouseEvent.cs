@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine.EventSystems;
 using Assets.Scripts.Action;
 using Assets.Scripts.DicePrefab;
+using Assets.Scripts.Actions;
 
 namespace Assets.Scripts.ActionPanelPrefab
 {
@@ -18,7 +19,7 @@ namespace Assets.Scripts.ActionPanelPrefab
             {
                 var dice = eventData.pointerDrag;
 
-                ManageAction(dice);
+                GetComponent<ActionManager>().ManageAction(dice);
             }
         }
 
@@ -41,27 +42,6 @@ namespace Assets.Scripts.ActionPanelPrefab
         }
 
 
-        /// <summary>
-        /// Manages action.
-        /// </summary>
-        /// <param name="dice"></param>
-        private void ManageAction(GameObject dice)
-        {
-            var diceMovement = dice.GetComponent<DiceMovement>();
-            var actionPanel = GetComponent<ActionPanel>();
-            var allowedDiceNumber = actionPanel.Action.ActionData.AllowedDiceNumber;
-            var diceNumber = dice.GetComponent<Dice>().CurrentNumber;
-
-
-            if (CheckDiceCondition.IsNumberAllowed(allowedDiceNumber, diceNumber) == false)
-            {
-                diceMovement.SendBackToBase();
-                return;
-            }
-
-            diceMovement.PositionsTo(gameObject.GetComponent<RectTransform>().anchoredPosition);
-            
-        }
     }
 }
 
