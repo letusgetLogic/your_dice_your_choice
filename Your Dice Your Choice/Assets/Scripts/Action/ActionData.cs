@@ -7,7 +7,7 @@ namespace Assets.Scripts.Action
     {
         public ActionKey ActionKey;
         public ActionType ActionType;
-        public AllowedTile AllowedTiles;
+        public AllowedTile AllowedTile;
         public AllowedDiceNumber AllowedDiceNumber;
         public Direction Direction;
         public string Description = "...run method SetDescription() on Inspector...";

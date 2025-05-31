@@ -61,6 +61,16 @@ public class LevelGenerator : MonoBehaviour
     }
 
     /// <summary>
+    /// Spawns cover ground.
+    /// </summary>
+    /// <param name="ground"></param>
+    /// <param name="spawnPos"></param>
+    private void SpawnCoverGround(GameObject ground, Vector3 spawnPos)
+    {
+        Instantiate(ground, spawnPos, Quaternion.identity);
+    }
+
+    /// <summary>
     /// Spawns fields.
     /// </summary>
     /// <param name="levelData"></param>
@@ -84,16 +94,6 @@ public class LevelGenerator : MonoBehaviour
             spawnPos.y -= 1;
             spawnPos.x = startPointHorizontal;
         }
-    }
-
-    /// <summary>
-    /// Spawns cover ground.
-    /// </summary>
-    /// <param name="ground"></param>
-    /// <param name="spawnPos"></param>
-    private void SpawnCoverGround(GameObject ground, Vector3 spawnPos)
-    {
-        Instantiate(ground, spawnPos, Quaternion.identity);
     }
 
     /// <summary>
@@ -157,7 +157,7 @@ public class LevelGenerator : MonoBehaviour
         for (int i = 0; i < randPositions.Length; i++)
         {
             int row = Random.Range(0, rowAmount);
-            int col = RandomizeCol(player);
+            int col = RandomizeColumn(player);
             var field = FieldManager.Instance.Fields[row, col];
             var pos = field.transform.position;
 
@@ -187,7 +187,7 @@ public class LevelGenerator : MonoBehaviour
     /// </summary>
     /// <param name="player"></param>
     /// <returns></returns>
-    private int RandomizeCol(TurnState player)
+    private int RandomizeColumn(TurnState player)
     {
         if (player == TurnState.PlayerLeft)
         {
