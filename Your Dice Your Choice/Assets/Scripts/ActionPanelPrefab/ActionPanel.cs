@@ -10,13 +10,20 @@ namespace Assets.Scripts.ActionPanelPrefab
         [SerializeField] private TextMeshProUGUI _actionName;
 
         public ActionBase Action {  get; private set; }
+        public ActionData ActionData { get; private set; }
+        public CharacterPanel CharacterPanel {  get; private set; }
+        public Vector2Int[] ActionDirections { get; private set; }
 
         /// <summary>
         /// Initializes data.
         /// </summary>
         /// <param name="actionData"></param>
-        public void SetData(ActionData actionData, GameObject character)
+        public void SetData(ActionData actionData, GameObject character, CharacterPanel characterPanel)
         {
+            ActionData = actionData;
+            CharacterPanel = characterPanel;
+            ActionDirections = GetVector2FromDirection.Get(ActionData.Direction);
+
             _actionName.text = actionData.ActionType.ToString();
             Action = Create(actionData, character);
         }

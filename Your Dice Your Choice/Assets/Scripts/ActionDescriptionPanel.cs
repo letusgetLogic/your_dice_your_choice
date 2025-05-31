@@ -1,7 +1,9 @@
-﻿using TMPro;
+﻿using Assets.Scripts.ActionPanelPrefab;
+using TMPro;
 using UnityEngine;
 
-namespace Assets.Scripts.ActionPanelPrefab
+
+namespace Assets.Scripts
 {
     public class ActionDescriptionPanel : MonoBehaviour
     {
@@ -29,7 +31,7 @@ namespace Assets.Scripts.ActionPanelPrefab
         /// </summary>
         public void SetText(GameObject actionPanelObject)
         {
-            string text = actionPanelObject.GetComponent<ActionPanel>().Action.ActionData.Description;
+            string text = actionPanelObject.GetComponent<ActionPanel>().ActionData.Description;
             _descriptionText.text = text;
         }
 
@@ -81,6 +83,17 @@ namespace Assets.Scripts.ActionPanelPrefab
             }
 
             return dir;
+        }
+
+        /// <summary>
+        /// Sets the children game objects active or inactive.
+        /// </summary>
+        public void SetActiveChildren(bool value)
+        {
+            foreach (Transform child in transform)
+            {
+                child.gameObject.SetActive(value);
+            }
         }
     }
 }

@@ -7,30 +7,18 @@ using Assets.Scripts.Actions;
 
 namespace Assets.Scripts.ActionPanelPrefab
 {
-    public class ActionPanelMouseEvent : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
+    public class ActionPanelMouseEvent : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
-        /// <summary>
-        /// Mouse button is released
-        /// </summary>
-        /// <param name="eventData"></param>
-        public void OnDrop(PointerEventData eventData)
-        {
-            if (eventData.pointerDrag.tag == "Dice")
-            {
-                var dice = eventData.pointerDrag;
-
-                GetComponent<ActionManager>().ManageAction(dice);
-            }
-        }
-
         /// <summary>
         /// Mouse enters the collider of a game object. 
         /// </summary>
         public void OnPointerEnter(PointerEventData eventData)
         {
-            ActionDescriptionPanel.Instance.SetPosition(eventData.pointerEnter);
-            ActionDescriptionPanel.Instance.SetText(eventData.pointerEnter);
-            ActionDescriptionPanel.Instance.gameObject.SetActive(true);
+            var actionPanel = eventData.pointerEnter;
+
+            ActionDescriptionPanel.Instance.SetPosition(actionPanel);
+            ActionDescriptionPanel.Instance.SetText(actionPanel);
+            ActionDescriptionPanel.Instance.SetActiveChildren(true);
         }
 
         /// <summary>
@@ -38,10 +26,8 @@ namespace Assets.Scripts.ActionPanelPrefab
         /// </summary>
         public void OnPointerExit(PointerEventData eventData)
         {
-            ActionDescriptionPanel.Instance.gameObject.SetActive(false);
+            ActionDescriptionPanel.Instance.SetActiveChildren(false);
         }
-
-
     }
 }
 

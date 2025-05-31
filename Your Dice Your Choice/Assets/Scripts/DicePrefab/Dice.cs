@@ -20,8 +20,7 @@ namespace Assets.Scripts.DicePrefab
         /// </summary>
         private void Start()
         {
-            var defaultImage = gameObject.GetComponent<Image>();
-            defaultImage.sprite = DiceSide[_defaultDiceIndex];
+            InitializeSide(_defaultDiceIndex);
         }
 
         /// <summary>   

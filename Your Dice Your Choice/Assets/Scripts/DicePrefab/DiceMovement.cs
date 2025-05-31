@@ -36,8 +36,8 @@ namespace Assets.Scripts.DicePrefab
         public void SendBackToBase()
         {
             _currentPosition = _rectTransform.anchoredPosition;
-            
             _isRunning = true;
+            Debug.Log("set _isRunning " + _isRunning);
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Assets.Scripts.DicePrefab
                     _isRunning = false;
                     return;
                 }
-
+                Debug.Log("_isRunning " + _isRunning);
                 _current = Mathf.MoveTowards(_current, 1, _animSpeed / Time.deltaTime);
                 var lerpPos = Vector2.Lerp(_currentPosition, _basePosition, _animCurve.Evaluate(_current));
                 _rectTransform.anchoredPosition = lerpPos;
@@ -66,6 +66,7 @@ namespace Assets.Scripts.DicePrefab
         /// </summary>
         public void PositionsTo(Vector2 pos)
         {
+            Debug.Log("actionManager set _isRunning " + _isRunning);
             _rectTransform.anchoredPosition = pos;
 
             var dice = GetComponent<Dice>();

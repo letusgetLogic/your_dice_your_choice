@@ -12,7 +12,7 @@ namespace Assets.Scripts.CharacterPrefab
 
         public GameObject Panel { get; private set; }
 
-        public Vector2 FieldIndex { get; private set; }
+        public Vector2Int FieldIndex { get; private set; }
 
         /// <summary>
         /// Initialize Data.
@@ -36,7 +36,7 @@ namespace Assets.Scripts.CharacterPrefab
         /// Initializes FieldIndex.
         /// </summary>
         /// <param name="fieldIndex"></param>
-        public void SetFieldIndex(Vector2 fieldIndex) { FieldIndex = fieldIndex; }
+        public void SetFieldIndex(Vector2Int fieldIndex) { FieldIndex = fieldIndex; }
     }
 }
 

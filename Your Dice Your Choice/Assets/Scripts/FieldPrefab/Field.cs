@@ -4,7 +4,7 @@ namespace Assets.Scripts.FieldPrefab
 {
     public class Field : MonoBehaviour
     {
-        public Vector2 Index { get; private set; }
+        public Vector2Int Index { get; private set; }
 
         /// <summary>
         /// Awake method.
@@ -18,6 +18,6 @@ namespace Assets.Scripts.FieldPrefab
         /// Sets the field index.
         /// </summary>
         /// <param name="index"></param>
-        public void SetIndex(Vector2 index) { this.Index = index; }
+        public void SetIndex(Vector2Int index) { this.Index = index; }
     }
 }

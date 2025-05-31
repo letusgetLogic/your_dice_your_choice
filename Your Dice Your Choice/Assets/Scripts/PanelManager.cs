@@ -1,3 +1,4 @@
+using Assets.Scripts;
 using Assets.Scripts.CharacterPrefab;
 using TMPro;
 using UnityEngine;
@@ -55,8 +56,7 @@ public class PanelManager : MonoBehaviour
         // Set the inactive panel in the scene active to create the singleton instance.
         CharacterInfoPanel.SetActive(true); 
         CharacterInfoPanel.SetActive(false);
-        ActionDescriptionPanel.SetActive(true);
-        ActionDescriptionPanel.SetActive(false);
+        ActionDescriptionPanel.GetComponent<ActionDescriptionPanel>().SetActiveChildren(false);
     }
 
     /// <summary>

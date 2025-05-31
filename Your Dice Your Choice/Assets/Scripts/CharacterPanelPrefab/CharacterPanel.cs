@@ -32,7 +32,7 @@ public class CharacterPanel : MonoBehaviour
         {
             var actionData = Character.Data.ActionData[i];
 
-            ActionPanel[i].GetComponent<ActionPanel>().SetData(actionData, CharacterObject);
+            ActionPanel[i].GetComponent<ActionPanel>().SetData(actionData, CharacterObject, this);
         }
     }
 }

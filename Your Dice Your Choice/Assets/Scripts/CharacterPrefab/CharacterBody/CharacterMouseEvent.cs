@@ -33,7 +33,6 @@ namespace Assets.Scripts.CharacterPrefab.CharacterBody
         public void OnPointerClick(PointerEventData eventData)
         {
             _panelHint.StartHintAnim();
-            transform.root.position = new Vector2(0, 0);
         }
 
         /// <summary>

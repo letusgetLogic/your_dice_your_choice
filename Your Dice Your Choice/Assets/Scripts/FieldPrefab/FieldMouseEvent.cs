@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 
-namespace Assets.Scripts
+namespace Assets.Scripts.FieldPrefab
 {
     public class FieldMouseEvent : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
@@ -75,6 +75,16 @@ namespace Assets.Scripts
             {
                 AnimationHint.GetComponent<SpriteRenderer>().color = Color.white;
             }
+        }
+
+        /// <summary>
+        /// Hides the components for the mouse event.
+        /// </summary>
+        public void HideComponents()
+        {
+            FoggyPanel.SetActive(false);
+            AnimationHint.SetActive(false);
+            AnimationClick.SetActive(false);
         }
     }
 }

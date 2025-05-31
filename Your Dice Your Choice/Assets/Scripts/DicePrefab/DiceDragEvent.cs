@@ -2,10 +2,12 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DiceMouseEvent : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
+public class DiceDragEvent : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
     [SerializeField] private Canvas _canvas;
     [SerializeField] private float _alphaValue = .6f;
+
+    public bool IsDiceOnSlot { get; private set; }
 
     private CanvasGroup _canvasGroup;
 
@@ -14,6 +16,7 @@ public class DiceMouseEvent : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
     /// </summary>
     private void Start()
     {
+        IsDiceOnSlot = false;
         _canvasGroup = GetComponent<CanvasGroup>();
     }
 
@@ -46,8 +49,24 @@ public class DiceMouseEvent : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
         _canvasGroup.alpha = 1f;
         _canvasGroup.blocksRaycasts = true;
 
+        if (IsDiceOnSlot == true)
+        {
+            IsDiceOnSlot = false;
+            return;
+        }
+        
+        Debug.Log("endDrag set _isRunning ");
         var diceMovement = GetComponent<DiceMovement>();
         diceMovement.SendBackToBase();
+    }
+
+    /// <summary>
+    /// Sets IsDiceOnSlot true/false.
+    /// </summary>
+    /// <param name="value"></param>
+    public void SetDiceOnSlot(bool value)
+    {
+        IsDiceOnSlot = value;
     }
 }
 
