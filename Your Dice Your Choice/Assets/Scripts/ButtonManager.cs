@@ -36,7 +36,7 @@ public class ButtonManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Deactivate the roll buttons.
+    /// Deactivates the roll buttons.
     /// </summary>
     private void DeactivateRollButtons()
     {
@@ -44,6 +44,15 @@ public class ButtonManager : MonoBehaviour
         {
             button.interactable = false;
         }
+    }
+
+    /// <summary>
+    /// Activates the button.
+    /// </summary>
+    /// <param name="button"></param>
+    public void ButtonOn(Button button)
+    {
+        button.interactable = true;
     }
 }
 

@@ -39178,6 +39178,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3060669546078107396, guid: c74da118415bf6c42bc13b9807f00cd9, type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3378590553330585633, guid: c74da118415bf6c42bc13b9807f00cd9, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -39272,6 +39276,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4373753824729270965, guid: c74da118415bf6c42bc13b9807f00cd9, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5004862694232360740, guid: c74da118415bf6c42bc13b9807f00cd9, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5493381474151762222, guid: c74da118415bf6c42bc13b9807f00cd9, type: 3}
@@ -39358,6 +39366,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 6004423477637040600, guid: c74da118415bf6c42bc13b9807f00cd9, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6183955191739365413, guid: c74da118415bf6c42bc13b9807f00cd9, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -39386,6 +39398,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Action Grid Layout Group
       objectReference: {fileID: 0}
+    - target: {fileID: 6866859720758294863, guid: c74da118415bf6c42bc13b9807f00cd9, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7289820104607148463, guid: c74da118415bf6c42bc13b9807f00cd9, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -39408,6 +39424,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7289820104607148463, guid: c74da118415bf6c42bc13b9807f00cd9, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7679575279591251186, guid: c74da118415bf6c42bc13b9807f00cd9, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7924267352741938129, guid: c74da118415bf6c42bc13b9807f00cd9, type: 3}

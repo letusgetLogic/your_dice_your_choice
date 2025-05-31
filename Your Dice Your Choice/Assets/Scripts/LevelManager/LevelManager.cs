@@ -73,7 +73,7 @@ public class LevelManager : MonoBehaviour
 
         PanelManager.Instance.ShowRollPanels();
 
-
+        ButtonManager.Instance.ButtonOn(ButtonManager.Instance.RollButtonLeft);
     }
 
     /// <summary>

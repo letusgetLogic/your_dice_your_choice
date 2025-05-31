@@ -12,7 +12,15 @@ public class RollPanel : MonoBehaviour
     [SerializeField] private float _animTimer = 0.25f;
     [SerializeField] private int _diceAmount = 4;
 
-    public GameObject[] DiceOnPanel => new GameObject[_diceAmount];
+    public GameObject[] DiceOnPanel { get; private set; }
+
+    /// <summary>
+    /// Awake method.
+    /// </summary>
+    private void Awake()
+    {
+        DiceOnPanel = new GameObject[_diceAmount];
+    }
 
     /// <summary>
     /// Shows Dice.
@@ -24,7 +32,9 @@ public class RollPanel : MonoBehaviour
         {
             var dice = Dice[i];
             dice.SetActive(true);
+            
             DiceOnPanel[i] = dice;
+            
             dice.GetComponent<Dice>().InitializeIndexOf(gameObject, i);
         }
     }

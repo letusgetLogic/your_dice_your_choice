@@ -54,7 +54,7 @@ public class DiceDragEvent : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
             IsDiceOnSlot = false;
             return;
         }
-        
+
         Debug.Log("endDrag set _isRunning ");
         var diceMovement = GetComponent<DiceMovement>();
         diceMovement.SendBackToBase();
