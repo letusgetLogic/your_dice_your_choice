@@ -29,7 +29,7 @@ public class PlayerManager : MonoBehaviour
     /// </summary>
     public void CreateInstanceFor(Player player, string name, TurnState playerTurn)
     {
-        player = gameObject.AddComponent<Player>();
+        player = gameObject.AddComponent<Player>(); // Does it need a game object?
 
         player.Initialize(name, playerTurn);
     }

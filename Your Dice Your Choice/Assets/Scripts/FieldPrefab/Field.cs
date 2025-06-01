@@ -18,6 +18,9 @@ namespace Assets.Scripts.FieldPrefab
         /// Sets the field index.
         /// </summary>
         /// <param name="index"></param>
-        public void SetIndex(Vector2Int index) { this.Index = index; }
+        public void SetIndex(Vector2Int index) 
+        { 
+            this.Index = index; 
+        }
     }
 }

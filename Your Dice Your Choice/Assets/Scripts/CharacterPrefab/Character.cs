@@ -30,13 +30,19 @@ namespace Assets.Scripts.CharacterPrefab
         /// Initialize Panel.
         /// </summary>
         /// <param name="panel"></param>
-        public void SetPanel(GameObject panel) { Panel = panel; }
+        public void SetPanel(GameObject panel) 
+        { 
+            Panel = panel; 
+        }
 
         /// <summary>
         /// Initializes FieldIndex.
         /// </summary>
         /// <param name="fieldIndex"></param>
-        public void SetFieldIndex(Vector2Int fieldIndex) { FieldIndex = fieldIndex; }
+        public void SetFieldIndex(Vector2Int fieldIndex) 
+        { 
+            FieldIndex = fieldIndex; 
+        }
     }
 }
 

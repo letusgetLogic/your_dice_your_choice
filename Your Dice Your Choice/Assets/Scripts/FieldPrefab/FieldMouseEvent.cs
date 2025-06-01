@@ -8,9 +8,9 @@ namespace Assets.Scripts.FieldPrefab
 {
     public class FieldMouseEvent : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
-        public GameObject FoggyPanel;
-        public GameObject AnimationHint;
-        public GameObject AnimationClick;
+        [SerializeField] private  GameObject _foggyPanel;
+        [SerializeField] private  GameObject _animationHint;
+        [SerializeField] private GameObject _animationClick;
 
         [SerializeField] private Color _onPointerEnterColor;
         [SerializeField] private float _animTimer = .1f;
@@ -22,9 +22,9 @@ namespace Assets.Scripts.FieldPrefab
         /// </summary>
         private void Awake()
         {
-            FoggyPanel.SetActive(true);
-            AnimationHint.SetActive(true);
-            AnimationClick.SetActive(false);
+            _foggyPanel.SetActive(true);
+            _animationHint.SetActive(true);
+            _animationClick.SetActive(false);
         }
 
         /// <summary>
@@ -33,8 +33,8 @@ namespace Assets.Scripts.FieldPrefab
         public void OnPointerClick(PointerEventData eventData)
         {
             _isClicking = true;
-            AnimationHint.SetActive(false);
-            AnimationClick.SetActive(true);
+            _animationHint.SetActive(false);
+            _animationClick.SetActive(true);
             StartCoroutine(DisableAnimClick());
         }
 
@@ -46,8 +46,8 @@ namespace Assets.Scripts.FieldPrefab
         {
             yield return new WaitForSeconds(_animTimer);
 
-            FoggyPanel.SetActive(false);
-            AnimationClick.SetActive(false);
+            _foggyPanel.SetActive(false);
+            _animationClick.SetActive(false);
 
             var boxCollider = gameObject.GetComponent<BoxCollider2D>();
             boxCollider.enabled = false;
@@ -61,7 +61,7 @@ namespace Assets.Scripts.FieldPrefab
         {
             if (!_isClicking)
             {
-                AnimationHint.GetComponent<SpriteRenderer>().color = _onPointerEnterColor;
+                _animationHint.GetComponent<SpriteRenderer>().color = _onPointerEnterColor;
             }
         }
 
@@ -73,7 +73,7 @@ namespace Assets.Scripts.FieldPrefab
         {
             if (!_isClicking)
             {
-                AnimationHint.GetComponent<SpriteRenderer>().color = Color.white;
+                _animationHint.GetComponent<SpriteRenderer>().color = Color.white;
             }
         }
 
@@ -82,9 +82,9 @@ namespace Assets.Scripts.FieldPrefab
         /// </summary>
         public void HideComponents()
         {
-            FoggyPanel.SetActive(false);
-            AnimationHint.SetActive(false);
-            AnimationClick.SetActive(false);
+            _foggyPanel.SetActive(false);
+            _animationHint.SetActive(false);
+            _animationClick.SetActive(false);
         }
     }
 }

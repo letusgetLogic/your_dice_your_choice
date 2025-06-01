@@ -7,12 +7,12 @@ using Assets.Scripts.DicePrefab;
 public class RollPanel : MonoBehaviour
 {
     public GameObject[] Dice;
+    public GameObject[] DiceOnPanel { get; private set; }
 
     [SerializeField] private int _rollFrequency = 10;
     [SerializeField] private float _animTimer = 0.25f;
     [SerializeField] private int _diceAmount = 4;
 
-    public GameObject[] DiceOnPanel { get; private set; }
 
     /// <summary>
     /// Awake method.

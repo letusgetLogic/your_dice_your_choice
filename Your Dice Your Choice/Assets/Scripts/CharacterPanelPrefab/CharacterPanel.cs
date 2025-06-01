@@ -18,10 +18,10 @@ public class CharacterPanel : MonoBehaviour
     /// <summary>
     /// References Object and Script Character.
     /// </summary>
-    /// <param name="character"></param>
-    public void SetCharacter(GameObject character, TurnState player)
+    /// <param name="characterObject"></param>
+    public void SetCharacter(GameObject characterObject, TurnState player)
     {
-        CharacterObject = character;
+        CharacterObject = characterObject;
         Player = player;
         Character = CharacterObject.GetComponent<Character>();
         CharacterName.text = Character.Data.Type.ToString();

@@ -5,13 +5,13 @@ public class CharacterInfoPanel : MonoBehaviour
 {
     public static CharacterInfoPanel Instance { get; private set; }
 
-    [SerializeField] private RectTransform _canvasRectTransform;
+    [SerializeField] private RectTransform   _canvasRectTransform;
     [SerializeField] private TextMeshProUGUI _name;
     [SerializeField] private TextMeshProUGUI _maxHp;
     [SerializeField] private TextMeshProUGUI _currentHp;
     [SerializeField] private TextMeshProUGUI _ap;
     [SerializeField] private TextMeshProUGUI _dp;
-    [SerializeField] private Vector2 _distance;
+    [SerializeField] private Vector2         _distance;
 
     /// <summary>
     /// Awake method.
@@ -34,10 +34,10 @@ public class CharacterInfoPanel : MonoBehaviour
     /// <param name="currentHp"></param>
     /// <param name="ap"></param>
     /// <param name="dp"></param>
-    public void TransferValues(TextMeshProUGUI name, float maxHp, float currentHp, float ap, float dp)
+    public void TransferValues(string name, Color color, float maxHp, float currentHp, float ap, float dp)
     {
-        _name.text = name.text;
-        _name.color = name.color;
+        _name.text = name;
+        _name.color = color;
         _maxHp.text = maxHp.ToString();
         _currentHp.text = currentHp.ToString();
         _ap.text = ap.ToString();
@@ -66,7 +66,7 @@ public class CharacterInfoPanel : MonoBehaviour
 
         var pos = _canvasRectTransform.InverseTransformPoint(characterPos);
        
-        gameObject.GetComponent<RectTransform>().localPosition = (Vector2)pos + Distance(pos);
+        gameObject.GetComponent<RectTransform>().localPosition = pos + Distance(pos);
     }
 
     /// <summary>
@@ -74,9 +74,9 @@ public class CharacterInfoPanel : MonoBehaviour
     /// </summary>
     /// <param name="pos"></param>
     /// <returns></returns>
-    private Vector2 Distance(Vector3 pos)
+    private Vector3 Distance(Vector3 pos)
     {
-        Vector2 distance = new();
+        Vector3 distance = new();
 
         distance.x = _distance.x * Direction(pos).x;
         distance.y = _distance.y * Direction(pos).y;
@@ -89,9 +89,9 @@ public class CharacterInfoPanel : MonoBehaviour
     /// </summary>
     /// <param name="pos"></param>
     /// <returns></returns>
-    private Vector2 Direction(Vector3 pos)
+    private Vector3 Direction(Vector3 pos)
     {
-        Vector2 dir = new();
+        Vector3 dir = new();
 
         switch (pos.x)
         {

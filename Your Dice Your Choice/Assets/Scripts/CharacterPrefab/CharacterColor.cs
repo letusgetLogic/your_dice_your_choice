@@ -7,6 +7,7 @@ namespace Assets.Scripts.CharacterPrefab
         private SpriteRenderer _bodySpriteRenderer;
         private SpriteRenderer _leftHandSpriteRenderer;
         private SpriteRenderer _rightHandSpriteRenderer;
+        public Color PlayerColor {  get; private set; }
 
         /// <summary>
         /// Awake method.
@@ -27,6 +28,7 @@ namespace Assets.Scripts.CharacterPrefab
             _bodySpriteRenderer.color = color;
             _leftHandSpriteRenderer.color = color;
             _rightHandSpriteRenderer.color = color;
+            PlayerColor = color;
         }
     }
 }

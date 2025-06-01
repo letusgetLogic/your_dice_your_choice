@@ -11,8 +11,6 @@ namespace Assets.Scripts.ActionPanelPrefab
         [SerializeField] private TextMeshProUGUI _descriptionText;
         [SerializeField] private Vector2 _distance;
 
-        private RectTransform _canvasRectTransform => PanelManager.Instance.Canvas.GetComponent<RectTransform>();
-
         /// <summary>
         /// Sets the description text.
         /// </summary>

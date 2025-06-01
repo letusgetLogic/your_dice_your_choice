@@ -4,6 +4,7 @@ using Assets.Scripts.CharacterPrefab;
 using System.Collections;
 using System;
 using UnityEngine.UI;
+using UnityEditor.U2D.Animation;
 
 namespace Assets.Scripts.CharacterPrefab.CharacterBody
 {
@@ -11,8 +12,8 @@ namespace Assets.Scripts.CharacterPrefab.CharacterBody
     {
         private GameObject _characterObject;
         private Character _character;
-        private CharacterPanel _panel;
         private CharacterPanelHint _panelHint;
+        private Color _color;
 
         /// <summary>
         /// Awake method.
@@ -21,8 +22,8 @@ namespace Assets.Scripts.CharacterPrefab.CharacterBody
         {
             _characterObject = transform.root.gameObject;
             _character = transform.root.GetComponent<Character>();
-            _panel = _character.Panel.GetComponent<CharacterPanel>();
-            _panelHint = _character.Panel.GetComponent<CharacterPanelHint>(); ;
+            _panelHint = _character.Panel.GetComponent<CharacterPanelHint>();
+            _color = _characterObject.GetComponent<CharacterColor>().PlayerColor;
         }
 
         /// <summary>
@@ -43,7 +44,8 @@ namespace Assets.Scripts.CharacterPrefab.CharacterBody
             CharacterInfoPanel.Instance.SetPosition(_characterObject);
 
             CharacterInfoPanel.Instance.TransferValues(
-                _panel.CharacterName,
+                _character.Data.Type.ToString(),
+                _color,
                 _character.OriginHP,
                 _character.Data.HP,
                 _character.Data.AP,

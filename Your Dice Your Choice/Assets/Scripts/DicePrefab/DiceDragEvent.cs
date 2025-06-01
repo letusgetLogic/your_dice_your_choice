@@ -4,10 +4,10 @@ using UnityEngine.EventSystems;
 
 public class DiceDragEvent : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
-    [SerializeField] private Canvas _canvas;
-    [SerializeField] private float _alphaValue = .6f;
-
     public bool IsDiceOnSlot { get; private set; }
+
+    [SerializeField] private Canvas _canvas;
+    [SerializeField] private float  _alphaValue = .6f;
 
     private CanvasGroup _canvasGroup;
 

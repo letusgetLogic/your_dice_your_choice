@@ -2,7 +2,6 @@
 {
     public enum CharacterType
     {
-        Tower,
         Tank,
         Archer,
         Fighter,

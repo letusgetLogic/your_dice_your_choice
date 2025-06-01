@@ -7,11 +7,11 @@ public class CharacterPanelHint : MonoBehaviour
     [SerializeField] private float _animLightenUpTime = 0.5f;
     [SerializeField] private float _animSpeedAct = 0.0001f;
     [SerializeField] private float _colorMaxRbg = 100f;
-    [SerializeField] private AnimationCurve _animCurve1;
+    [SerializeField] private AnimationCurve _animCurve;
 
     private Image _image;
     private bool _isRunning = false;
-    private float _current = 0f;
+    private float _currentValue = 0f;
 
     /// <summary>
     /// Awake method.
@@ -58,8 +58,8 @@ public class CharacterPanelHint : MonoBehaviour
     {
         if (_isRunning)
         {
-            _current = Mathf.MoveTowards(_current, 1, _animSpeedAct / Time.deltaTime);
-            float dimValue = Mathf.Lerp(0f, _colorMaxRbg, _animCurve1.Evaluate(_current));
+            _currentValue = Mathf.MoveTowards(_currentValue, 1, _animSpeedAct / Time.deltaTime);
+            float dimValue = Mathf.Lerp(0f, _colorMaxRbg, _animCurve.Evaluate(_currentValue));
 
             _image.color = new Color(dimValue, dimValue, dimValue, _image.color.a);
         }

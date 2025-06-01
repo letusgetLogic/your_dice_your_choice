@@ -8,12 +8,12 @@ namespace Assets.Scripts.DicePrefab
         public static readonly int MaxNumber = 6;
 
         public Sprite[] DiceSide;
-
-        [SerializeField] private int _defaultDiceIndex = 6;
-
         public int CurrentNumber { get; private set; }
         public int IndexOnPanel { get; private set; }
         public GameObject RollPanel { get; private set; }
+
+        [SerializeField] private int _defaultDiceIndex = 6;
+
         
         /// <summary>
         /// Start method.
