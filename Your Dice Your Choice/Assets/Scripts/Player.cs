@@ -17,18 +17,34 @@ public class Player : MonoBehaviour
         PlayerTurn = playerTurn;
         Characters = LevelGenerator.Instance.CreateCharactersFor(playerTurn);
 
-        if (PlayerTurn == TurnState.PlayerRight) RotateLookDirection(180);
+        SettingsForCharacters();
     }
 
     /// <summary>
-    /// Sets the look direction for the characters.
+    /// Sets the look direction for each character and the description panel for each action.
     /// </summary>
-    private void RotateLookDirection(int number)
+    private void SettingsForCharacters()
     {
         foreach (var characterObject in Characters)
         {
-            var characterRotatation = characterObject.GetComponent<CharacterRotation>();
-            characterRotatation.RotatePivot(number);
+            if (PlayerTurn == TurnState.PlayerRight)
+            {
+                var characterRotatation = characterObject.GetComponent<CharacterRotation>();
+                characterRotatation.RotatePivot(180);
+            }
+
+            SetDescriptonPanel(characterObject);
         }
+    }
+
+    /// <summary>
+    /// Sets the description panel for each action for the character.
+    /// </summary>
+    /// <param name="characterObject"></param>
+    private void SetDescriptonPanel(GameObject characterObject)
+    {
+        var characterPanel = characterObject.GetComponent<Character>().Panel.GetComponent<CharacterPanel>();
+
+        characterPanel.SetDescriptonPanel();
     }
 }

@@ -3,85 +3,70 @@ using TMPro;
 using UnityEngine;
 
 
-namespace Assets.Scripts
+namespace Assets.Scripts.ActionPanelPrefab
 {
     public class ActionDescriptionPanel : MonoBehaviour
     {
-        public static ActionDescriptionPanel Instance { get; private set; }
-
-        [SerializeField] private RectTransform _canvasRectTransform;
+        [SerializeField] private GameObject _actionPanelObject;
         [SerializeField] private TextMeshProUGUI _descriptionText;
         [SerializeField] private Vector2 _distance;
 
-        /// <summary>
-        /// Awake method.
-        /// </summary>
-        private void Awake()
-        {
-            if (Instance != null)
-            {
-                Destroy(Instance.gameObject);
-            }
-
-            Instance = this;
-        }
+        private RectTransform _canvasRectTransform => PanelManager.Instance.Canvas.GetComponent<RectTransform>();
 
         /// <summary>
-        /// Sets the text.
+        /// Sets the description text.
         /// </summary>
-        public void SetText(GameObject actionPanelObject)
+        public void SetText(string description)
         {
-            string text = actionPanelObject.GetComponent<ActionPanel>().ActionData.Description;
-            _descriptionText.text = text;
+            _descriptionText.text = description;
         }
 
         /// <summary>
         /// Sets the position of the info panel.
         /// </summary>
-        public void SetPosition(GameObject actionPanelObject)
+        public void SetPosition(GameObject characterPanel)
         {
-            var panelPos = actionPanelObject.transform.position;
+            var panelPos = _actionPanelObject.transform.position;
 
-            var pos = _canvasRectTransform.InverseTransformPoint(panelPos);
-
-            gameObject.GetComponent<RectTransform>().localPosition = (Vector2)pos + Distance(pos);
+            gameObject.GetComponent<RectTransform>().localPosition += Distance(panelPos);
         }
 
         /// <summary>
-        /// Return the distance to the character.
+        /// Returns the distance to the character.
         /// </summary>
         /// <param name="pos"></param>
         /// <returns></returns>
-        private Vector2 Distance(Vector3 pos)
+        private Vector3 Distance(Vector3 pos)
         {
-            Vector2 distance = new();
+            Vector3 distance = new();
 
             distance.x = _distance.x * Direction(pos).x;
-
+            distance.y = _distance.y;
+            
             return distance;
         }
 
         /// <summary>
-        /// Return the direction of the distance.
+        /// Returns the direction of the distance.
         /// </summary>
         /// <param name="pos"></param>
         /// <returns></returns>
-        private Vector2 Direction(Vector3 pos)
+        private Vector3 Direction(Vector3 pos)
         {
-            Vector2 dir = new();
-
+            Vector3 dir = new();
+           
             switch (pos.x)
             {
                 case <= 0: dir.x = 1; break;
                 case > 0: dir.x = -1; break;
             }
-
+            
             switch (pos.y)
             {
                 case <= 0: dir.y = 1; break;
                 case > 0: dir.y = -1; break;
             }
-
+            
             return dir;
         }
 

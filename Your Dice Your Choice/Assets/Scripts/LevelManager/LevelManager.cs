@@ -67,7 +67,7 @@ public class LevelManager : MonoBehaviour
 
         FieldManager.Instance.InitializeFields();
 
-        LevelGenerator.Instance.Generate(Data);
+        LevelGenerator.Instance.GenerateFrom(Data);
 
         CreatePlayer();
 

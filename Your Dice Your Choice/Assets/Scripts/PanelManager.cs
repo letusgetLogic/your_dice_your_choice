@@ -1,4 +1,6 @@
+using System;
 using Assets.Scripts;
+using Assets.Scripts.ActionPanelPrefab;
 using Assets.Scripts.CharacterPrefab;
 using TMPro;
 using UnityEngine;
@@ -72,4 +74,43 @@ public class PanelManager : MonoBehaviour
         DiceManager.Instance.ShowDiceOnPanel(RollPanelRight);
         RerollPanelRight.SetActive(true);
     }
+
+    /// <summary>
+    /// Sets active, transfers data, sets action for the character panel.
+    /// </summary>
+    /// <param name="player"></param>
+    /// <param name="index"></param>
+    /// <param name="characterObject"></param>
+    /// <returns></returns>
+    public GameObject GetPanel(TurnState player, int index, GameObject characterObject)
+    {
+        var characterPanelObject = CharacterPanels(player)[index];
+        characterPanelObject.SetActive(true);
+
+        var characterPanel = characterPanelObject.GetComponent<CharacterPanel>();
+        characterPanel.SetCharacter(characterObject, player);
+        characterPanel.SetAction();
+
+        return characterPanelObject;
+    }
+
+    /// <summary>
+    /// Return the serialized panels in PanelManager for the corresponding player.
+    /// </summary>
+    /// <param name="player"></param>
+    /// <returns></returns>
+    private GameObject[] CharacterPanels(TurnState player)
+    {
+        if (player == TurnState.PlayerLeft)
+        {
+            return CharacterPanelsLeft;
+        }
+        else if (player == TurnState.PlayerRight)
+        {
+            return CharacterPanelsRight;
+        }
+
+        return null;
+    }
+
 }

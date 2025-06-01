@@ -31,9 +31,9 @@ public class LevelGenerator : MonoBehaviour
     }
 
     /// <summary>
-    /// Spawn fields.
+    /// Generates level from the data.
     /// </summary>
-    public void Generate(LevelData levelData)
+    public void GenerateFrom(LevelData levelData)
     {
         // Length - 1 because the distance between pivot point of fields together is 1 field length
         // less than the length of entire fields.
@@ -125,14 +125,8 @@ public class LevelGenerator : MonoBehaviour
             var characterColor = characterObject.GetComponent<CharacterColor>();
             characterColor.SetColor(PLayerColor(player));
 
-            var panelObject = CharacterPanels(player)[i];
-            panelObject.SetActive(true);
-
-            var characterPanel = panelObject.GetComponent<CharacterPanel>();
-            characterPanel.SetCharacter(characterObject);
-            characterPanel.SetAction();
-
-            character.SetPanel(panelObject);
+            var characterPanelObject = PanelManager.Instance.GetPanel(player, i, characterObject);
+            character.SetPanel(characterPanelObject);
 
             tempList.Add(characterObject);
         }
@@ -200,25 +194,6 @@ public class LevelGenerator : MonoBehaviour
         }
 
         return -1;
-    }
-
-    /// <summary>
-    /// Return the serialized panels in PanelManager for the corresponding player.
-    /// </summary>
-    /// <param name="player"></param>
-    /// <returns></returns>
-    private GameObject[] CharacterPanels(TurnState player)
-    {
-        if (player == TurnState.PlayerLeft)
-        {
-            return PanelManager.Instance.CharacterPanelsLeft;
-        }
-        else if (player == TurnState.PlayerRight)
-        {
-            return PanelManager.Instance.CharacterPanelsRight;
-        }
-
-        return default;
     }
 
     /// <summary>

@@ -63,7 +63,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CharacterName: {fileID: 1114063639640440616}
-  ActionPanel:
+  ActionPanelPrefabs:
   - {fileID: 5596627108373693861}
   - {fileID: 2992338403423472611}
   - {fileID: 5750705183303217582}

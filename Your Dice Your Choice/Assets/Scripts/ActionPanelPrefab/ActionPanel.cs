@@ -7,21 +7,30 @@ namespace Assets.Scripts.ActionPanelPrefab
 {
     public class ActionPanel : MonoBehaviour
     {
+        [SerializeField] private GameObject _behindLayer;
         [SerializeField] private TextMeshProUGUI _actionName;
+        [SerializeField] private GameObject _actionDescriptionPanelPrefab;
 
-        public ActionBase Action {  get; private set; }
+        public ActionBase Action { get; private set; }
         public ActionData ActionData { get; private set; }
-        public CharacterPanel CharacterPanel {  get; private set; }
+        public CharacterPanel CharacterPanel { get; private set; }
         public Vector2Int[] ActionDirections { get; private set; }
+        public int Index {  get; private set; }
+
+        public ActionDescriptionPanel ActionDescriptionPanel
+           => _actionDescriptionPanelPrefab.GetComponent<ActionDescriptionPanel>();
+
 
         /// <summary>
         /// Initializes data.
         /// </summary>
         /// <param name="actionData"></param>
-        public void SetData(ActionData actionData, GameObject character, CharacterPanel characterPanel)
+        public void SetData(ActionData actionData, GameObject character, CharacterPanel characterPanel, int index)
         {
             ActionData = actionData;
             CharacterPanel = characterPanel;
+            Index = index;
+
             ActionDirections = GetVector2FromDirection.Get(ActionData.Direction);
 
             _actionName.text = actionData.ActionType.ToString();
@@ -37,7 +46,7 @@ namespace Assets.Scripts.ActionPanelPrefab
         /// <exception cref="Exception"></exception>
         private ActionBase Create(ActionData actionData, GameObject character)
         {
-            switch(actionData.ActionType) 
+            switch (actionData.ActionType)
             {
                 case ActionType.None:
                     return null;
@@ -50,6 +59,14 @@ namespace Assets.Scripts.ActionPanelPrefab
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// Hides/shows the components because of text overlaying in UI.
+        /// </summary>
+        public void ShowComponents(bool value)
+        {
+            _behindLayer.SetActive(value);
         }
     }
 }
