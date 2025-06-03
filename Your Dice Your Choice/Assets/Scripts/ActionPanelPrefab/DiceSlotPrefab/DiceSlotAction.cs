@@ -7,6 +7,8 @@ namespace Assets.Scripts.ActionPanelPrefab.DiceSlotPrefab
 {
     public class DiceSlotAction : MonoBehaviour, IDropHandler
     {
+        private Transform actionPanelTransform => transform.parent.parent;
+
         /// <summary>
         /// Mouse button is released.
         /// </summary>
@@ -16,29 +18,26 @@ namespace Assets.Scripts.ActionPanelPrefab.DiceSlotPrefab
             Debug.Log("OnDrop");
             var dice = eventData.pointerDrag;
 
-            //if (dice.CompareTag("Dice"))
-            //{
-            //    var diceMovement = dice.GetComponent<DiceMovement>();
-            //    var diceNumber = dice.GetComponent<Dice>().CurrentNumber;
-            //    var actionPanel = GetComponent<ActionPanel>();
-            //    var allowedDiceNumber = actionPanel.ActionData.AllowedDiceNumber;
-            //    Debug.Log("allowedDiceNumber " + allowedDiceNumber + " / diceNumber " + diceNumber);
-            //    if (CheckDiceCondition.IsNumberAllowed(allowedDiceNumber, diceNumber) == false)
-            //    {
-            //        Debug.Log("actionManager set _isRunning ");
-            //        diceMovement.SendBackToBase();
-            //        return;
-            //    }
+            if (dice.CompareTag("Dice"))
+            {
+                var diceMovement = dice.GetComponent<DiceMovement>();
+                var diceNumber = dice.GetComponent<Dice>().CurrentNumber;
+                var actionPanel = actionPanelTransform.GetComponent<ActionPanel>();
+                var allowedDiceNumber = actionPanel.ActionData.AllowedDiceNumber;
 
-            //    dice.GetComponent<DiceDragEvent>().SetDiceOnSlot( true);
-            //    diceMovement.PositionsTo(gameObject.GetComponent<RectTransform>().anchoredPosition);
+                if (CheckDiceCondition.IsNumberAllowed(allowedDiceNumber, diceNumber) == false)
+                {
+                    return;
+                }
 
-            //    var character = actionPanel.CharacterPanel.Character;
-            //    var characterFieldIndex = character.FieldIndex;
-            //    var actionDirections = actionPanel.ActionDirections;
+                diceMovement.PositionsTo(GetComponent<RectTransform>().position);
 
-            //    FieldManager.Instance.ShowField(characterFieldIndex, actionDirections, diceNumber);
-            //}
+                var character = actionPanel.CharacterPanel.Character;
+                var characterFieldIndex = character.FieldIndex;
+                var actionDirections = actionPanel.ActionDirections;
+
+                FieldManager.Instance.ShowField(characterFieldIndex, actionDirections, diceNumber);
+            }
         }
     }
 }

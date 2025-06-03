@@ -5,11 +5,12 @@ using UnityEngine;
 
 namespace Assets.Scripts.DicePrefab
 {
-    public class DiceMovement : MonoBehaviour
+    public class DiceMovement : DiceManager
     {
         [SerializeField] private float _animSpeed = 0.0001f;
         [SerializeField] private AnimationCurve _animCurve;
 
+        
         private RectTransform _rectTransform => GetComponent<RectTransform>();
         private Vector2 _basePosition;
         private Vector2 _currentPosition;
@@ -31,6 +32,7 @@ namespace Assets.Scripts.DicePrefab
         private void Update()
         {
             LerpMovement();
+            Debug.Log("Dice Movement IsDiceOnSlot " + IsDiceOnSlot);
         }
 
 
@@ -44,11 +46,13 @@ namespace Assets.Scripts.DicePrefab
             {
                 if (_rectTransform.anchoredPosition == _basePosition)
                 {
+                    Debug.Log("_rectTransform.anchoredPosition " + _rectTransform.anchoredPosition);
                     _currentValue = 0f;
                     _isRunning = false;
+                    SetDragEventEnable(true);
                     return;
                 }
-                Debug.Log("_isRunning " + _isRunning);
+
                 _currentValue = Mathf.MoveTowards(_currentValue, 1, _animSpeed / Time.deltaTime);
                 var lerpPos = Vector2.Lerp(_currentPosition, _basePosition, _animCurve.Evaluate(_currentValue));
                 _rectTransform.anchoredPosition = lerpPos;
@@ -56,9 +60,12 @@ namespace Assets.Scripts.DicePrefab
         }
         public void SendBackToBase()
         {
+            Debug.Log("_basePosition " + _basePosition);
             _currentPosition = _rectTransform.anchoredPosition;
             _isRunning = true;
+            SetDragEventEnable(false);
             Debug.Log("set _isRunning " + _isRunning);
+           
         }
 
         /// <summary>
@@ -66,8 +73,10 @@ namespace Assets.Scripts.DicePrefab
         /// </summary>
         public void PositionsTo(Vector2 pos)
         {
-            Debug.Log("actionManager set _isRunning " + _isRunning);
-            _rectTransform.anchoredPosition = pos;
+            Debug.Log("diceSlot pos " + pos);
+            _rectTransform.position = pos;
+            Debug.Log("IsDiceOnSlot = true ");
+            IsDiceOnSlot = true;
 
             var dice = GetComponent<Dice>();
             var rollPanel = dice.RollPanel.GetComponent<RollPanel>();

@@ -32,12 +32,16 @@ public class PanelManager : MonoBehaviour
         }
 
         Instance = this;
+
+        HideAllPanel();
+        HideDiceOnPanel(RollPanelLeft);
+        HideDiceOnPanel(RollPanelRight);
     }
 
     /// <summary>
     /// Hides all character panels.
     /// </summary>
-    public void HideAllPanel()
+    private void HideAllPanel()
     {
         foreach (GameObject panel in CharacterPanelsLeft)
         {
@@ -65,12 +69,32 @@ public class PanelManager : MonoBehaviour
     public void ShowRollPanels()
     {
         RollPanelLeft.SetActive(true);
-        DiceManager.Instance.ShowDiceOnPanel(RollPanelLeft);
+        ShowDiceOnPanel(RollPanelLeft);
         RerollPanelLeft.SetActive(true);
 
         RollPanelRight.SetActive(true);
-        DiceManager.Instance.ShowDiceOnPanel(RollPanelRight);
+        ShowDiceOnPanel(RollPanelRight);
         RerollPanelRight.SetActive(true);
+    }
+
+    /// <summary>
+    /// Hides Dice on Panel.
+    /// </summary>
+    /// <param name="panel"></param>
+    private void HideDiceOnPanel(GameObject panel)
+    {
+        var rollPanel = panel.GetComponent<RollPanel>();
+        rollPanel.HideAllDice();
+    }
+
+    /// <summary>
+    /// Shows Dice on Panel.
+    /// </summary>
+    /// <param name="panel"></param>
+    private void ShowDiceOnPanel(GameObject panel)
+    {
+        var rollPanel = panel.GetComponent<RollPanel>();
+        rollPanel.ShowDice();
     }
 
     /// <summary>
@@ -110,5 +134,4 @@ public class PanelManager : MonoBehaviour
 
         return null;
     }
-
 }

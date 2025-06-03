@@ -2,12 +2,10 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DiceDragEvent : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
+public class DiceDragEvent : DiceManager, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
-    public bool IsDiceOnSlot { get; private set; }
-
     [SerializeField] private Canvas _canvas;
-    [SerializeField] private float  _alphaValue = .6f;
+    [SerializeField] private float _alphaValue = 0.6f;
 
     private CanvasGroup _canvasGroup;
 
@@ -16,7 +14,6 @@ public class DiceDragEvent : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
     /// </summary>
     private void Start()
     {
-        IsDiceOnSlot = false;
         _canvasGroup = GetComponent<CanvasGroup>();
     }
 
@@ -26,6 +23,7 @@ public class DiceDragEvent : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
     /// <param name="eventData"></param>
     public void OnBeginDrag(PointerEventData eventData)
     {
+
         _canvasGroup.alpha = _alphaValue;
         _canvasGroup.blocksRaycasts = false;
     }
@@ -46,27 +44,19 @@ public class DiceDragEvent : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
     /// <param name="eventData"></param>
     public void OnEndDrag(PointerEventData eventData)
     {
+        Debug.Log("OnEndDrag");
         _canvasGroup.alpha = 1f;
         _canvasGroup.blocksRaycasts = true;
-
-        if (IsDiceOnSlot == true)
+        Debug.Log("IsDiceOnSlot " + IsDiceOnSlot);
+        if (IsDiceOnSlot)
         {
-            IsDiceOnSlot = false;
+            SetDragEventEnable(false);
             return;
         }
-
-        Debug.Log("endDrag set _isRunning ");
+        
         var diceMovement = GetComponent<DiceMovement>();
         diceMovement.SendBackToBase();
     }
 
-    /// <summary>
-    /// Sets IsDiceOnSlot true/false.
-    /// </summary>
-    /// <param name="value"></param>
-    public void SetDiceOnSlot(bool value)
-    {
-        IsDiceOnSlot = value;
-    }
 }
 
