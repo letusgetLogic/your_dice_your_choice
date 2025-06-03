@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9531a790102358c4db39205d87e3d82e, type: 3}
   m_Name: Character_Tank
   m_EditorClassIdentifier: 
-  Type: 1
+  Type: 0
   HP: 1200
   AP: 156
   DP: 84

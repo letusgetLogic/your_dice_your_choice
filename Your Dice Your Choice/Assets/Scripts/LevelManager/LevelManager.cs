@@ -91,8 +91,8 @@ public class LevelManager : MonoBehaviour
                 break;
 
             case MatchType.Duell:
-                PlayerManager.Instance.CreateInstanceFor(PlayerManager.Instance.PlayerLeft, "Player 1", TurnState.PlayerLeft);
-                PlayerManager.Instance.CreateInstanceFor(PlayerManager.Instance.PlayerRight, "Player 2", TurnState.PlayerRight);
+                PlayerBase.PlayerLeft = new Player("Player 1", TurnState.PlayerLeft);
+                PlayerBase.PlayerRight = new Player("Player 2", TurnState.PlayerRight);
                 break;
 
             case MatchType.DuellAI:

@@ -20,7 +20,6 @@ public class PanelManager : MonoBehaviour
     public GameObject RollPanelRight;
     public GameObject RerollPanelRight;
     public GameObject CharacterInfoPanel;
-    public GameObject ActionDescriptionPanel;
 
     /// <summary>
     /// Awake method.
@@ -58,7 +57,6 @@ public class PanelManager : MonoBehaviour
         // Set the inactive panel in the scene active to create the singleton instance.
         CharacterInfoPanel.SetActive(true); 
         CharacterInfoPanel.SetActive(false);
-        ActionDescriptionPanel.GetComponent<ActionDescriptionPanel>().SetActiveChildren(false);
     }
 
     /// <summary>

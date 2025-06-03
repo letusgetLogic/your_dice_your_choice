@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9531a790102358c4db39205d87e3d82e, type: 3}
   m_Name: Character_Mage
   m_EditorClassIdentifier: 
-  Type: 4
+  Type: 3
   HP: 700
   AP: 200
   DP: 40

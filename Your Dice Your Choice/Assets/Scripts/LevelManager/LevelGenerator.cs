@@ -115,16 +115,20 @@ public class LevelGenerator : MonoBehaviour
             var characterObject = Instantiate(_characterPrefab, randPositions[i], Quaternion.identity);
             var character = characterObject.GetComponent<Character>();
 
+            // Data
             var characterData = _characterData[Random.Range(0, _characterData.Length)];
             character.SetData(characterData);
-
+            
+            // Weapon
             var characterGetWeapon = characterObject.GetComponent<CharacterGetWeapon>();
             characterGetWeapon.SetWeaponToLeftHand(character);
             characterGetWeapon.SetWeaponToRightHand(character);
 
+            // Color
             var characterColor = characterObject.GetComponent<CharacterColor>();
             characterColor.SetColor(PLayerColor(player));
 
+            // Panel
             var characterPanelObject = PanelManager.Instance.GetPanel(player, i, characterObject);
             character.SetPanel(characterPanelObject);
 

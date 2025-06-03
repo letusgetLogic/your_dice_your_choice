@@ -1,17 +1,15 @@
 using System.Collections.Generic;
+using Assets.Scripts;
 using Assets.Scripts.CharacterPrefab;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player
 {
-    public string Name{ get; private set; }
+    public string Name { get; private set; }
     public TurnState PlayerTurn { get; private set; }
     public List<GameObject> Characters { get; private set; }
 
-    /// <summary>
-    /// Initializes the data.
-    /// </summary>
-    public void Initialize(string name, TurnState playerTurn)
+    public Player(string name, TurnState playerTurn)
     {
         Name = name;
         PlayerTurn = playerTurn;

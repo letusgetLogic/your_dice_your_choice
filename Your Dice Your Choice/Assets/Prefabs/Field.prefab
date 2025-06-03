@@ -323,9 +323,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3def2d92de5b6c94bbdeb9ae935b6d69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FoggyPanel: {fileID: 3530496106706729831}
-  AnimationHint: {fileID: 9159352336250848926}
-  AnimationClick: {fileID: 510090375065560255}
+  _foggyPanel: {fileID: 3530496106706729831}
+  _animationHint: {fileID: 9159352336250848926}
+  _animationClick: {fileID: 510090375065560255}
   _onPointerEnterColor: {r: 1, g: 0.57254905, b: 0.57254905, a: 0}
   _animTimer: 0.01
 --- !u!61 &586475268459886930
