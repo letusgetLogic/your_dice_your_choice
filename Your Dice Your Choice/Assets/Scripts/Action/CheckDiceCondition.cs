@@ -10,7 +10,7 @@ namespace Assets.Scripts.Action
         /// <param name="allowedNumber"></param>
         /// <param name="number"></param>
         /// <returns></returns>
-        public static bool IsNumberAllowed(AllowedDiceNumber allowedNumber, int number)
+        public static bool IsNumberValid(AllowedDiceNumber allowedNumber, int number)
         {
             // This for-loop checks the first enum indexes, which starts by 1.
             for (int i = 1; i <= Dice.MaxNumber; i++)

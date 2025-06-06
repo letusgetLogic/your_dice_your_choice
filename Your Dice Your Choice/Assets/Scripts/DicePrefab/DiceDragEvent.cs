@@ -7,15 +7,7 @@ public class DiceDragEvent : DiceManager, IDragHandler, IBeginDragHandler, IEndD
     [SerializeField] private Canvas _canvas;
     [SerializeField] private float _alphaValue = 0.6f;
 
-    private CanvasGroup _canvasGroup;
-
-    /// <summary>
-    /// Start method.
-    /// </summary>
-    private void Start()
-    {
-        _canvasGroup = GetComponent<CanvasGroup>();
-    }
+    private CanvasGroup _canvasGroup => GetComponent<CanvasGroup>();
 
     /// <summary>
     /// Triggers event at the beginning of drag.

@@ -5,13 +5,16 @@ using UnityEngine;
 
 namespace Assets.Scripts.DicePrefab
 {
-    public class DiceMovement : DiceManager
+    public class DiceMovement : MonoBehaviour
     {
         [SerializeField] private float _animSpeed = 0.0001f;
         [SerializeField] private AnimationCurve _animCurve;
 
-        
+        private DiceManager _diceManager => GetComponent<DiceManager>();
         private RectTransform _rectTransform => GetComponent<RectTransform>();
+        private Dice _dice => GetComponent<Dice>();
+        private RollPanel _rollPanel => _dice.RollPanel.GetComponent<RollPanel>();
+
         private Vector2 _basePosition;
         private Vector2 _currentPosition;
 
@@ -32,7 +35,6 @@ namespace Assets.Scripts.DicePrefab
         private void Update()
         {
             LerpMovement();
-            Debug.Log("Dice Movement IsDiceOnSlot " + IsDiceOnSlot);
         }
 
 
@@ -49,7 +51,7 @@ namespace Assets.Scripts.DicePrefab
                     Debug.Log("_rectTransform.anchoredPosition " + _rectTransform.anchoredPosition);
                     _currentValue = 0f;
                     _isRunning = false;
-                    SetDragEventEnable(true);
+                    _diceManager.SetDragEventEnable(true);
                     return;
                 }
 
@@ -60,10 +62,11 @@ namespace Assets.Scripts.DicePrefab
         }
         public void SendBackToBase()
         {
+            if (_diceManager.DiceOnEndDrag)
             Debug.Log("_basePosition " + _basePosition);
             _currentPosition = _rectTransform.anchoredPosition;
             _isRunning = true;
-            SetDragEventEnable(false);
+            _diceManager.SetDragEventEnable(false);
             Debug.Log("set _isRunning " + _isRunning);
            
         }
@@ -75,12 +78,8 @@ namespace Assets.Scripts.DicePrefab
         {
             Debug.Log("diceSlot pos " + pos);
             _rectTransform.position = pos;
-            Debug.Log("IsDiceOnSlot = true ");
-            IsDiceOnSlot = true;
 
-            var dice = GetComponent<Dice>();
-            var rollPanel = dice.RollPanel.GetComponent<RollPanel>();
-            rollPanel.SetNull(dice.IndexOnPanel);
+            _rollPanel.SetNull(_dice.IndexOnPanel);
         }
     }
 }
