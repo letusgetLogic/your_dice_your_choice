@@ -9,7 +9,7 @@ namespace Assets.Scripts.ActionPanelPrefab.DiceSlotPrefab
     public class DiceSlotAction : MonoBehaviour, IDropHandler
     {
         private Transform _actionPanelTransform => transform.parent.parent;
-        private ActionPanel _actionPanel => _actionPanelTransform.GetComponent<ActionPanel>();
+        private ActionPanel _actionPanel => _actionPanelTransform.gameObject.GetComponent<ActionPanel>();
 
         /// <summary>
         /// Mouse button is released.
@@ -25,11 +25,11 @@ namespace Assets.Scripts.ActionPanelPrefab.DiceSlotPrefab
                 if (IsValid(dice) == false) return;
 
                 SetDiceOnSlot(dice);
-
+                
                 FieldManager.Instance.ShowField(
                     _actionPanel.CharacterPanel.Character.FieldIndex, 
-                    _actionPanel.ActionDirections, 
-                    dice.GetComponent<Dice>().CurrentNumber);
+                    _actionPanel.ActionDirections,
+                    GetIntFromAllowedTile.Get(_actionPanel.ActionData.AllowedTile, dice.GetComponent<Dice>().CurrentNumber));
             }
         }
 
@@ -42,7 +42,7 @@ namespace Assets.Scripts.ActionPanelPrefab.DiceSlotPrefab
         {
             var allowedDiceNumber = _actionPanel.ActionData.AllowedDiceNumber;
             var diceNumber = dice.GetComponent<Dice>().CurrentNumber;
-
+            
             return CheckDiceCondition.IsNumberValid(allowedDiceNumber, diceNumber);
         }
 

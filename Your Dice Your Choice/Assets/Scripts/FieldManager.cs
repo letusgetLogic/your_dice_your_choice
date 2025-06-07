@@ -1,4 +1,5 @@
 using Assets.Scripts;
+using Assets.Scripts.Action;
 using Assets.Scripts.FieldPrefab;
 using UnityEngine;
 
@@ -46,18 +47,19 @@ public class FieldManager : MonoBehaviour
         field.GetComponent<FieldMouseEvent>().enabled = false;
     }
 
-    public void ShowField(Vector2Int characterFieldIndex, Vector2Int[] actionDirections, int directionRange)
+    public void ShowField(Vector2Int characterFieldIndexOrigin, Vector2Int[] actionDirections, int directionRange)
     {
         foreach (Vector2Int actionDirection in actionDirections)
         {
-            characterFieldIndex += actionDirection * directionRange;
-            
-            if (characterFieldIndex.x < 0 || characterFieldIndex.x >= LevelManager.Instance.Data.MapHeight)
-                return;
-            if (characterFieldIndex.y < 0 || characterFieldIndex.y >= LevelManager.Instance.Data.MapLength)
-                return;
+            var fieldIndex = characterFieldIndexOrigin;
+            fieldIndex += actionDirection * directionRange;
 
-            Fields[characterFieldIndex.y, characterFieldIndex.x].GetComponent<FieldMouseEvent>().enabled = true; 
+            if (fieldIndex.x < 0 || fieldIndex.x >= LevelManager.Instance.Data.MapHeight)
+                continue;
+            if (fieldIndex.y < 0 || fieldIndex.y >= LevelManager.Instance.Data.MapLength)
+                continue;
+
+            Fields[fieldIndex.x, fieldIndex.y].GetComponent<FieldMouseEvent>().enabled = true; 
         }
     }
 }

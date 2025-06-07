@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ActionKey: 1
   ActionType: 1
-  AllowedTiles: 1
+  AllowedTile: 1
   AllowedDiceNumber: 7
   Direction: 1
   Description: Move in any direction X Tiles

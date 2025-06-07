@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ActionKey: 8
   ActionType: 1
-  AllowedTiles: 3
+  AllowedTile: 3
   AllowedDiceNumber: 9
-  Direction: 4
+  Direction: 2
   Description: Move orthogonally 1 Tile, with Dice 4-6

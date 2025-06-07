@@ -20,8 +20,9 @@ namespace Assets.Scripts.FieldPrefab
         /// <summary>
         /// Awake method.
         /// </summary>
-        private void Awake()
+        private void Start()
         {
+            Debug.Log("Start");
             _foggyPanel.SetActive(true);
             _animationHint.SetActive(true);
             _animationClick.SetActive(false);

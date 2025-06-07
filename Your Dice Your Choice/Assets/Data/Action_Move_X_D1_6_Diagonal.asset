@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ActionKey: 3
   ActionType: 1
-  AllowedTiles: 1
+  AllowedTile: 1
   AllowedDiceNumber: 7
-  Direction: 5
+  Direction: 3
   Description: Move diagonally X Tiles

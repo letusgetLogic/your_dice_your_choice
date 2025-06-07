@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ActionKey: 9
   ActionType: 1
-  AllowedTiles: 3
+  AllowedTile: 3
   AllowedDiceNumber: 9
-  Direction: 5
+  Direction: 3
   Description: Move diagonally 1 Tile, with Dice 4-6

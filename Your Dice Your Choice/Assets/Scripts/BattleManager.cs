@@ -24,8 +24,6 @@ public class BattleManager : MonoBehaviour
         }
 
         Instance = this;
-
-        
     }
 
     /// <summary>

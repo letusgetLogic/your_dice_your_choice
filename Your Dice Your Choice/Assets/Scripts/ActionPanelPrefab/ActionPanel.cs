@@ -32,7 +32,7 @@ namespace Assets.Scripts.ActionPanelPrefab
             Index = index;
 
             ActionDirections = GetVector2FromDirection.Get(ActionData.Direction);
-
+            
             _actionName.text = actionData.ActionType.ToString();
             Action = Create(actionData, character);
         }

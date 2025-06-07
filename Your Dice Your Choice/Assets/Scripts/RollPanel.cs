@@ -6,8 +6,8 @@ using Assets.Scripts.DicePrefab;
 
 public class RollPanel : MonoBehaviour
 {
-    public GameObject[] Dice;
-    public GameObject[] DiceOnPanel { get; private set; }
+    public GameObject[] AllDice;
+    public GameObject[] VisibleDice { get; private set; }
 
     [SerializeField] private int _rollFrequency = 10;
     [SerializeField] private float _animTimer = 0.25f;
@@ -19,7 +19,21 @@ public class RollPanel : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        DiceOnPanel = new GameObject[_diceAmount];
+        SetInteractionFor(AllDice, false);
+        VisibleDice = new GameObject[_diceAmount];
+    }
+
+    /// <summary>
+    /// Sets the dice active true/false.
+    /// </summary>
+    /// <param name="dice"></param>
+    /// <param name="value"></param>
+    private void SetInteractionFor(GameObject[] dice, bool value)
+    {
+        foreach (GameObject d in dice)
+        {
+            d.GetComponent<DiceManager>().SetDragEventEnable(value);
+        }
     }
 
     /// <summary>
@@ -30,10 +44,10 @@ public class RollPanel : MonoBehaviour
     {
         for (int i = 0; i < _diceAmount; i++)
         {
-            var dice = Dice[i];
+            var dice = AllDice[i];
             dice.SetActive(true);
             
-            DiceOnPanel[i] = dice;
+            VisibleDice[i] = dice;
             
             dice.GetComponent<Dice>().InitializeIndexOf(gameObject, i);
         }
@@ -45,9 +59,9 @@ public class RollPanel : MonoBehaviour
     /// <param name="amount"></param>
     public void HideAllDice()
     {
-        for (int i = 0; i < Dice.Length; i++)
+        for (int i = 0; i < AllDice.Length; i++)
         {
-            var dice = Dice[i];
+            var dice = AllDice[i];
             dice.SetActive(false);
         }
     }
@@ -68,7 +82,7 @@ public class RollPanel : MonoBehaviour
     {
         for (int i = 0; i < _rollFrequency; i++)
         {
-            foreach (var dice in DiceOnPanel)
+            foreach (var dice in VisibleDice)
             {
                 var diceScript = dice.GetComponent<Dice>();
                 int sideIndex = UnityEngine.Random.Range(1, diceScript.DiceSide.Length);
@@ -77,6 +91,8 @@ public class RollPanel : MonoBehaviour
 
             yield return new WaitForSeconds(_animTimer); 
         }
+
+        SetInteractionFor(VisibleDice, true);
     }
 
     /// <summary>
@@ -85,7 +101,7 @@ public class RollPanel : MonoBehaviour
     /// <param name="index"></param>
     public void SetNull(int index)
     {
-        DiceOnPanel[index] = null;
+        VisibleDice[index] = null;
     }
 
     /// <summary>
@@ -94,6 +110,6 @@ public class RollPanel : MonoBehaviour
     /// <param name="index"></param>
     public void SetInstance(GameObject dice, int index)
     {
-        DiceOnPanel[index] = dice;
+        VisibleDice[index] = dice;
     }
 }

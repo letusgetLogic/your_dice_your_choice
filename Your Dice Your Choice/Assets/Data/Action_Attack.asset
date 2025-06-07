@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ActionKey: 10
   ActionType: 2
-  AllowedTiles: 0
-  AllowedDiceNumber: 0
-  Direction: 0
+  AllowedTile: 1
+  AllowedDiceNumber: 1
+  Direction: 2
   Description: Attack

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ActionKey: 2
   ActionType: 1
-  AllowedTiles: 1
+  AllowedTile: 1
   AllowedDiceNumber: 7
-  Direction: 4
+  Direction: 2
   Description: Move orthogonally X Tiles
