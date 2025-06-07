@@ -1,13 +1,11 @@
-﻿using Assets.Scripts.DicePrefab;
+﻿using System.Collections;
+using Assets.Scripts.DicePrefab;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class DiceDragEvent : DiceManager, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
-    [SerializeField] private Canvas _canvas;
-    [SerializeField] private float _alphaValue = 0.6f;
-
-    private CanvasGroup _canvasGroup => GetComponent<CanvasGroup>();
+    [SerializeField] private float _diceMovementDelay = 0.001f;
 
     /// <summary>
     /// Triggers event at the beginning of drag.
@@ -15,9 +13,8 @@ public class DiceDragEvent : DiceManager, IDragHandler, IBeginDragHandler, IEndD
     /// <param name="eventData"></param>
     public void OnBeginDrag(PointerEventData eventData)
     {
-
-        _canvasGroup.alpha = _alphaValue;
-        _canvasGroup.blocksRaycasts = false;
+        SetAlphaDown();
+        SetBlocksRaycasts(false);
     }
 
     /// <summary>
@@ -27,7 +24,7 @@ public class DiceDragEvent : DiceManager, IDragHandler, IBeginDragHandler, IEndD
     public void OnDrag(PointerEventData eventData)
     {
         var rectTransform = gameObject.GetComponent<RectTransform>();
-        rectTransform.anchoredPosition += eventData.delta / _canvas.scaleFactor;
+        rectTransform.anchoredPosition += eventData.delta / MyCanvas().scaleFactor;
     }
 
     /// <summary>
@@ -36,19 +33,22 @@ public class DiceDragEvent : DiceManager, IDragHandler, IBeginDragHandler, IEndD
     /// <param name="eventData"></param>
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("OnEndDrag");
-        _canvasGroup.alpha = 1f;
-        _canvasGroup.blocksRaycasts = true;
-        Debug.Log("IsDiceOnSlot " + IsDiceOnSlot);
-        if (IsDiceOnSlot)
-        {
-            SetDragEventEnable(false);
-            return;
-        }
-        
+        SetAlphaDefault();
+        SetBlocksRaycasts(true);
+
+        StartCoroutine(MoveDice());
+    }
+
+    /// <summary>
+    /// Moves the dice.
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator MoveDice()
+    {
+        yield return new WaitForEndOfFrame();
+
         var diceMovement = GetComponent<DiceMovement>();
         diceMovement.SendBackToBase();
     }
-
 }
 

@@ -54,20 +54,10 @@ public class LevelGenerator : MonoBehaviour
     /// <param name="startPointVertical"></param>
     private void SpawnCoverGrounds(float startPointHorizontal, float startPointVertical)
     {
-        SpawnCoverGround(_groundTop, new Vector3(0, startPointVertical + 1, 0));
-        SpawnCoverGround(_groundBottom, new Vector3(0, -startPointVertical - 1, 0));
-        SpawnCoverGround(_groundLeft, new Vector3(startPointHorizontal - 1, 0, 0));
-        SpawnCoverGround(_groundRight, new Vector3(-startPointHorizontal + 1, 0, 0));
-    }
-
-    /// <summary>
-    /// Spawns cover ground.
-    /// </summary>
-    /// <param name="ground"></param>
-    /// <param name="spawnPos"></param>
-    private void SpawnCoverGround(GameObject ground, Vector3 spawnPos)
-    {
-        Instantiate(ground, spawnPos, Quaternion.identity);
+        Instantiate(_groundTop, new Vector3(0, startPointVertical + 1, 0), Quaternion.identity);
+        Instantiate(_groundBottom, new Vector3(0, -startPointVertical - 1, 0), Quaternion.identity);
+        Instantiate(_groundLeft, new Vector3(startPointHorizontal - 1, 0, 0), Quaternion.identity);
+        Instantiate(_groundRight, new Vector3(-startPointHorizontal + 1, 0, 0), Quaternion.identity);
     }
 
     /// <summary>

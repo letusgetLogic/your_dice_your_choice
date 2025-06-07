@@ -22,14 +22,9 @@ namespace Assets.Scripts.ActionPanelPrefab.DiceSlotPrefab
 
             if (dice.CompareTag("Dice"))
             {
-                if (IsValid(dice) == false) return; 
+                if (IsValid(dice) == false) return;
 
-                var diceManager = dice.GetComponent<DiceManager>();
-                diceManager.SetIsDiceOnSlot(true);
-                Debug.Log("IsDiceOnSlot " + diceManager.IsDiceOnSlot);
-
-                var diceMovement = dice.GetComponent<DiceMovement>();
-                diceMovement.PositionsTo(GetComponent<RectTransform>().position);
+                SetDiceOnSlot(dice);
 
                 FieldManager.Instance.ShowField(
                     _actionPanel.CharacterPanel.Character.FieldIndex, 
@@ -49,6 +44,22 @@ namespace Assets.Scripts.ActionPanelPrefab.DiceSlotPrefab
             var diceNumber = dice.GetComponent<Dice>().CurrentNumber;
 
             return CheckDiceCondition.IsNumberValid(allowedDiceNumber, diceNumber);
+        }
+
+        /// <summary>
+        /// Sets the dice on the slot, deactivates the drag event and sets the canvas group default.
+        /// </summary>
+        /// <param name="dice"></param>
+        private void SetDiceOnSlot(GameObject dice)
+        {
+            var diceMovement = dice.GetComponent<DiceMovement>();
+            diceMovement.PositionsTo(GetComponent<RectTransform>().position);
+            
+            var diceManager = dice.GetComponent<DiceManager>();
+
+            diceManager.SetDragEventEnable(false);
+            diceManager.SetAlphaDefault();
+            diceManager.SetBlocksRaycasts(true);
         }
     }
 }

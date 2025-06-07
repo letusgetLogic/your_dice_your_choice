@@ -48,7 +48,6 @@ namespace Assets.Scripts.DicePrefab
             {
                 if (_rectTransform.anchoredPosition == _basePosition)
                 {
-                    Debug.Log("_rectTransform.anchoredPosition " + _rectTransform.anchoredPosition);
                     _currentValue = 0f;
                     _isRunning = false;
                     _diceManager.SetDragEventEnable(true);
@@ -60,15 +59,15 @@ namespace Assets.Scripts.DicePrefab
                 _rectTransform.anchoredPosition = lerpPos;
             }
         }
+
+        /// <summary>
+        /// Sends the dice back to the roll panel.
+        /// </summary>
         public void SendBackToBase()
         {
-            if (_diceManager.DiceOnEndDrag)
-            Debug.Log("_basePosition " + _basePosition);
             _currentPosition = _rectTransform.anchoredPosition;
             _isRunning = true;
             _diceManager.SetDragEventEnable(false);
-            Debug.Log("set _isRunning " + _isRunning);
-           
         }
 
         /// <summary>
@@ -76,7 +75,6 @@ namespace Assets.Scripts.DicePrefab
         /// </summary>
         public void PositionsTo(Vector2 pos)
         {
-            Debug.Log("diceSlot pos " + pos);
             _rectTransform.position = pos;
 
             _rollPanel.SetNull(_dice.IndexOnPanel);

@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class DiceManager : MonoBehaviour
 {
-    public bool IsDiceOnSlot { get; private set; }
-    public bool DiceOnEndDrag { get; private set; }
-    public bool DiceSlotOnDrop { get; private set; }
+    [SerializeField] private Canvas _canvas;
+    [SerializeField] private float _alphaValue = 0.6f;
 
+    private CanvasGroup _canvasGroup => GetComponent<CanvasGroup>();
     private DiceDragEvent _dragEvent => GetComponent<DiceDragEvent>();
 
 
@@ -29,30 +29,35 @@ public class DiceManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Sets IsDIceOnSlot true/false
+    /// Sets the alpha at the default value.
     /// </summary>
-    /// <param name="value"></param>
-    public void SetIsDiceOnSlot(bool value)
+    public void SetAlphaDefault()
     {
-        IsDiceOnSlot = value;
+        _canvasGroup.alpha = 1f;
     }
 
     /// <summary>
-    /// Sets DiceOnEndDrag true/false
+    /// Sets the alpha at the defined value.
     /// </summary>
-    /// <param name="value"></param>
-    public void SetDiceOnEndDrag(bool value)
+    public void SetAlphaDown()
     {
-        DiceOnEndDrag = value;
+        _canvasGroup.alpha = _alphaValue;
+    }
+    
+    /// <summary>
+    /// Sets blocksRaycasts true/false.
+    /// </summary>
+    public void SetBlocksRaycasts(bool value)
+    {
+        _canvasGroup.blocksRaycasts = value;
     }
 
     /// <summary>
-    /// Sets DiceSlotOnDrop true/false
+    /// Accesses the canvas reference.
     /// </summary>
-    /// <param name="value"></param>
-    public void SetDiceSlotOnDrop(bool value)
+    /// <returns></returns>
+    public Canvas MyCanvas()
     {
-        DiceSlotOnDrop = value;
+        return _canvas;
     }
-
 }
