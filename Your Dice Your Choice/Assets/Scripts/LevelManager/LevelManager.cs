@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Assets.Scripts;
+using Assets.Scripts.LevelData;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
@@ -11,6 +12,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private int _dataIndex;
     
     public LevelData Data => _dataPrefab[_dataIndex];
+
+    public Phase CurrentPhase { get; private set; }
 
     /// <summary>
     /// Awake method.
@@ -34,6 +37,7 @@ public class LevelManager : MonoBehaviour
     {
         if (Data != null)
         {
+            CurrentPhase = Phase.Intro;
             MatchIntroManager.Instance.Play();
             StartCoroutine(PhaseInitialization());
             

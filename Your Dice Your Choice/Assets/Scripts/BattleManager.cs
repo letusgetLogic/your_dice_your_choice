@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
+using Assets.Scripts.ActionPanelPrefab;
 
 
 public class BattleManager : MonoBehaviour
@@ -12,6 +13,9 @@ public class BattleManager : MonoBehaviour
     public static BattleManager Instance;
 
     public TextMeshProUGUI HeaderText;
+
+    private ActionPanel _actionPanel;
+    private GameObject _character;
 
     /// <summary>
     /// Awake method.
@@ -27,11 +31,12 @@ public class BattleManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// Initializes _actionPanel
     /// </summary>
-    public void StartMatch()
+    public void SetData(ActionPanel actionPanel, GameObject character)
     {
-
+        _actionPanel = actionPanel;
+        _character = character;
     }
 
 }

@@ -30,6 +30,8 @@ namespace Assets.Scripts.ActionPanelPrefab.DiceSlotPrefab
                     _actionPanel.CharacterPanel.Character.FieldIndex, 
                     _actionPanel.ActionDirections,
                     GetIntFromAllowedTile.Get(_actionPanel.ActionData.AllowedTile, dice.GetComponent<Dice>().CurrentNumber));
+
+                BattleManager.Instance.SetData(_actionPanel, _actionPanel.Character);
             }
         }
 

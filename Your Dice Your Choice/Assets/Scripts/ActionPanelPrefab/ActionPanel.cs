@@ -14,6 +14,7 @@ namespace Assets.Scripts.ActionPanelPrefab
         public ActionBase Action { get; private set; }
         public ActionData ActionData { get; private set; }
         public CharacterPanel CharacterPanel { get; private set; }
+        public GameObject Character { get; private set; }
         public Vector2Int[] ActionDirections { get; private set; }
         public int Index {  get; private set; }
 
@@ -28,6 +29,7 @@ namespace Assets.Scripts.ActionPanelPrefab
         public void SetData(ActionData actionData, GameObject character, CharacterPanel characterPanel, int index)
         {
             ActionData = actionData;
+            Character = character;
             CharacterPanel = characterPanel;
             Index = index;
 
