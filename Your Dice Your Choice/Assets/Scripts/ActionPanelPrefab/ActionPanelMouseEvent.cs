@@ -10,18 +10,21 @@ namespace Assets.Scripts.ActionPanelPrefab
 {
     public class ActionPanelMouseEvent : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
-        [Range(0f, 1f)] private float _delayTime;
+        [SerializeField] [Range(0f, 1f)] private float _delayOnHoverTime = .5f;
 
         private ActionPanel _actionPanel => GetComponent<ActionPanel>();
         private ActionDescriptionPanel _actionDescriptionPanel => _actionPanel.ActionDescriptionPanel;
         private CharacterPanel _characterPanel => _actionPanel.CharacterPanel;
+
+        private IEnumerator _coroutine;
 
         /// <summary>
         /// Mouse enters the collider of a game object. 
         /// </summary>
         public void OnPointerEnter(PointerEventData eventData)
         {
-            StartCoroutine(ShowInfo());
+            _coroutine = ShowInfo();
+            StartCoroutine(_coroutine);
         }
 
         /// <summary>
@@ -29,22 +32,33 @@ namespace Assets.Scripts.ActionPanelPrefab
         /// </summary>
         public void OnPointerExit(PointerEventData eventData)
         {
-            StopCoroutine(ShowInfo());
-
-            _actionDescriptionPanel.SetActiveChildren(false);
-
-            if (_characterPanel.Player == TurnState.PlayerLeft)
-                HideRightPanels(false);
+            StopCoroutine(_coroutine);
+            HideInfo();
         }
 
+        /// <summary>
+        /// Shows the action description label.
+        /// </summary>
+        /// <returns></returns>
         private IEnumerator ShowInfo()
         {
-            yield return new WaitForSeconds(_delayTime);
+            yield return new WaitForSeconds(_delayOnHoverTime);
 
             _actionDescriptionPanel.SetActiveChildren(true);
 
             if (_characterPanel.Player == TurnState.PlayerLeft)
                 HideRightPanels(true);
+        }
+
+        /// <summary>
+        /// Hides the action description label.
+        /// </summary>
+        private void HideInfo()
+        {
+            _actionDescriptionPanel.SetActiveChildren(false);
+
+            if (_characterPanel.Player == TurnState.PlayerLeft)
+                HideRightPanels(false);
         }
 
         /// <summary>

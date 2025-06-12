@@ -5,15 +5,19 @@ using System.Collections;
 using System;
 using UnityEngine.UI;
 using UnityEditor.U2D.Animation;
+using Assets.Scripts.ActionPanelPrefab;
 
 namespace Assets.Scripts.CharacterPrefab.CharacterBody
 {
     public class CharacterMouseEvent : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
+        [SerializeField][Range(0f, 1f)] private float _delayOnHoverTime = .5f;
+
         private GameObject _characterObject;
         private Character _character;
         private CharacterPanelHint _panelHint;
         private Color _color;
+        private IEnumerator _coroutine;
 
         /// <summary>
         /// Awake method.
@@ -41,6 +45,27 @@ namespace Assets.Scripts.CharacterPrefab.CharacterBody
         /// </summary>
         public void OnPointerEnter(PointerEventData eventData)
         {
+            _coroutine = ShowInfo();
+            StartCoroutine(_coroutine);
+        }
+
+        /// <summary>
+        /// Mouse exits the collider.
+        /// </summary>
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            StopCoroutine(_coroutine);
+            HideInfo();
+        }
+
+        /// <summary>
+        /// Shows the action description label.
+        /// </summary>
+        /// <returns></returns>
+        private IEnumerator ShowInfo()
+        {
+            yield return new WaitForSeconds(_delayOnHoverTime);
+
             CharacterInfoPanel.Instance.SetPosition(_characterObject);
 
             CharacterInfoPanel.Instance.TransferValues(
@@ -55,9 +80,9 @@ namespace Assets.Scripts.CharacterPrefab.CharacterBody
         }
 
         /// <summary>
-        /// Mouse exits the collider.
+        /// Hides the action description label.
         /// </summary>
-        public void OnPointerExit(PointerEventData eventData)
+        private void HideInfo()
         {
             CharacterInfoPanel.Instance.gameObject.SetActive(false);
             CharacterInfoPanel.Instance.SetDefault();
