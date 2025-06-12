@@ -41,7 +41,7 @@ public class LevelManager : MonoBehaviour
             CurrentPhase = Phase.Intro;
             IsCheckingPhase = true;
             
-           
+            
             
             //TurnManager.Instance.PhaseSetFirstTurn();
         }
@@ -89,7 +89,7 @@ public class LevelManager : MonoBehaviour
     {
         int nextEnumIndex = (int)CurrentPhase + 1;
         CurrentPhase = (Phase)nextEnumIndex;
-        IsCheckingPhase = true;
+        IsCheckingPhase = true;Debug.Log(CurrentPhase.ToString());
     }
 
     /// <summary>
@@ -112,6 +112,8 @@ public class LevelManager : MonoBehaviour
         CreatePlayer();
 
         PanelManager.Instance.ShowRollPanels();
+
+        NextPhase();
     }
 
     /// <summary>

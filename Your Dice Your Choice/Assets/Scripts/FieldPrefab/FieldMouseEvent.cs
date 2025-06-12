@@ -13,7 +13,7 @@ namespace Assets.Scripts.FieldPrefab
         [SerializeField] private GameObject _animationClick;
 
         [SerializeField] private Color _onPointerEnterColor;
-        [SerializeField] private float _animTimer = .1f;
+        [SerializeField] private float _animClickTime = .01f;
 
         private bool _isClicking = false;
 
@@ -22,7 +22,6 @@ namespace Assets.Scripts.FieldPrefab
         /// </summary>
         private void Start()
         {
-            Debug.Log("Start");
             _foggyPanel.SetActive(true);
             _animationHint.SetActive(true);
             _animationClick.SetActive(false);
@@ -36,22 +35,21 @@ namespace Assets.Scripts.FieldPrefab
             _isClicking = true;
             _animationHint.SetActive(false);
             _animationClick.SetActive(true);
-            StartCoroutine(DisableAnimClick());
+            
+            StartCoroutine(DisableAnimClick(eventData.pointerClick));
         }
 
         /// <summary>
         /// Disable animation click.
         /// </summary>
         /// <returns></returns>
-        private IEnumerator DisableAnimClick()
+        private IEnumerator DisableAnimClick(GameObject fieldObject)
         {
-            yield return new WaitForSeconds(_animTimer);
+            yield return new WaitForSeconds(_animClickTime);
 
-            _foggyPanel.SetActive(false);
-            _animationClick.SetActive(false);
-
-            var boxCollider = gameObject.GetComponent<BoxCollider2D>();
-            boxCollider.enabled = false;
+            HideComponents();
+            FieldManager.Instance.DeactivateOtherFields(fieldObject);
+            BattleManager.Instance.HandleInput(fieldObject);
         }
 
         /// <summary>

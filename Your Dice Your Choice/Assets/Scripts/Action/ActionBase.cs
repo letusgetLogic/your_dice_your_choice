@@ -14,9 +14,10 @@ namespace Assets.Scripts.Action
             CharacterObject = characterObject;
         }
 
-        public virtual void HintField() 
-        {
-            
-        }
+        /// <summary>
+        /// Handles the input of player.
+        /// </summary>
+        /// <param name="fieldObject"></param>
+        public abstract void HandleInput(GameObject fieldObject);
     }
 }

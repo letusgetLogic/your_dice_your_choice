@@ -1,9 +1,12 @@
-﻿namespace Assets.Scripts.CharacterPrefab
+﻿using UnityEngine;
+
+namespace Assets.Scripts.CharacterPrefab
 {
     public class CharacterMovement : CharacterComponents
     {
-        public void MoveForward(int tiles)
+        public void MoveTo(Vector3 position)
         {
+            transform.position = position;
         }
     }
 }
