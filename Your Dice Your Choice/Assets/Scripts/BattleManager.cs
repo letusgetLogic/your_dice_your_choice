@@ -30,6 +30,11 @@ public class BattleManager : MonoBehaviour
         Instance = this;
     }
 
+    public void StartMatch()
+    {
+        ButtonManager.Instance.ButtonOn(ButtonManager.Instance.RollButtonLeft);
+    }
+
     /// <summary>
     /// Initializes _actionPanel
     /// </summary>
@@ -38,6 +43,8 @@ public class BattleManager : MonoBehaviour
         _actionPanel = actionPanel;
         _character = character;
     }
+
+    
 
 }
 

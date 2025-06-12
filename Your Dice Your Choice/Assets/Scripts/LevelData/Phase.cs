@@ -5,5 +5,6 @@
         None = 0,
         Intro,
         Initialization,
+        Battle,
     }
 }

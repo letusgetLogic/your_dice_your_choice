@@ -14,6 +14,7 @@ public class LevelManager : MonoBehaviour
     public LevelData Data => _dataPrefab[_dataIndex];
 
     public Phase CurrentPhase { get; private set; }
+    public bool IsCheckingPhase { get; private set; }
 
     /// <summary>
     /// Awake method.
@@ -38,8 +39,9 @@ public class LevelManager : MonoBehaviour
         if (Data != null)
         {
             CurrentPhase = Phase.Intro;
-            MatchIntroManager.Instance.Play();
-            StartCoroutine(PhaseInitialization());
+            IsCheckingPhase = true;
+            
+           
             
             //TurnManager.Instance.PhaseSetFirstTurn();
         }
@@ -47,7 +49,47 @@ public class LevelManager : MonoBehaviour
         {
             throw new System.Exception("LevelManager.Instance.Data == null");
         }
+    }
 
+    /// <summary>
+    /// Update method.
+    /// </summary>
+    /// <exception cref="System.Exception"></exception>
+    private void Update()
+    {
+        if (IsCheckingPhase)
+        {
+            IsCheckingPhase = false;
+
+            switch (CurrentPhase)
+            {
+                case Phase.None:
+                    throw new System.Exception("CurrentPhase = Phase.None");
+
+                case Phase.Intro:
+                    MatchIntroManager.Instance.Play();
+                    return;
+
+                case Phase.Initialization:
+                    PhaseInitialization();
+                    return;
+
+                case Phase.Battle:
+                    BattleManager.Instance.StartMatch();
+                    return;
+
+            }
+        }
+    }
+
+    /// <summary>
+    /// Switchs to the next phase.
+    /// </summary>
+    public void NextPhase()
+    {
+        int nextEnumIndex = (int)CurrentPhase + 1;
+        CurrentPhase = (Phase)nextEnumIndex;
+        IsCheckingPhase = true;
     }
 
     /// <summary>
@@ -61,12 +103,8 @@ public class LevelManager : MonoBehaviour
     /// <summary>
     /// Phase Initialization.
     /// </summary>
-    private IEnumerator PhaseInitialization()
+    private void PhaseInitialization()
     {
-        yield return new WaitForSeconds(MatchIntroManager.Instance.IntroTime);
-
-        MatchIntroManager.Instance.SetIntroInactive();
-
         FieldManager.Instance.InitializeFields();
 
         LevelGenerator.Instance.GenerateFrom(Data);
@@ -74,8 +112,6 @@ public class LevelManager : MonoBehaviour
         CreatePlayer();
 
         PanelManager.Instance.ShowRollPanels();
-
-        ButtonManager.Instance.ButtonOn(ButtonManager.Instance.RollButtonLeft);
     }
 
     /// <summary>

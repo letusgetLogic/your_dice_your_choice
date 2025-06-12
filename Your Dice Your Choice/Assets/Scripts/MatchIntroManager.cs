@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -76,9 +78,12 @@ public class MatchIntroManager : MonoBehaviour
             LeftIntroShaderRect.anchoredPosition = Vector2.Lerp(startPosLeft, endPosLeft, _animCurve1.Evaluate(_current));
             RightIntroShaderRect.anchoredPosition = Vector2.Lerp(startPosRight, endPosRight, _animCurve1.Evaluate(_current));
 
-            if (LeftIntroShaderRect.anchoredPosition == endPosLeft) _playStates = PlayStates.None;
-
             FadeIn();
+
+            if (LeftIntroShaderRect.anchoredPosition == endPosLeft)
+            {
+                _playStates = PlayStates.None;
+            }
         }
     }
 
@@ -126,6 +131,15 @@ public class MatchIntroManager : MonoBehaviour
         RightIntroShaderText.text = PlayerNameRight;
 
         SetIntroActive();
+        StartCoroutine(EndPhase());
+    }
+
+    private IEnumerator EndPhase()
+    {
+        yield return new WaitForSeconds(IntroTime);
+
+        MatchIntroManager.Instance.SetIntroInactive();
+        LevelManager.Instance.NextPhase();
     }
 
     /// <summary>
