@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
 using Assets.Scripts.CharacterPrefab;
-using Assets.Scripts.FieldPrefab;
 
 namespace Assets.Scripts.Action
 {
     public class Movement : ActionBase
     {
-        public Movement(ActionData actionData, GameObject characterObject) : base(actionData, characterObject) { }
+        public Movement(ActionData data, GameObject characterObject) : base(data, characterObject) { }
 
         public override void HandleInput(GameObject fieldObject)
         {

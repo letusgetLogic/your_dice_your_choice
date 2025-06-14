@@ -7,7 +7,7 @@ namespace Assets.Scripts.DicePrefab
 {
     public class DiceMovement : MonoBehaviour
     {
-        [SerializeField] private float _animSpeed = 0.0001f;
+        [SerializeField] private float _animSpeed = .0001f;
         [SerializeField] private AnimationCurve _animCurve;
 
         private DiceManager _diceManager => GetComponent<DiceManager>();

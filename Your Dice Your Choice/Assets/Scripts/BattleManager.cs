@@ -16,7 +16,7 @@ public class BattleManager : MonoBehaviour
     public TextMeshProUGUI HeaderText;
 
     private ActionPanel _currentActionPanel;
-    private GameObject _currentCharacter;
+    private GameObject _currentCharacterObject;
 
     /// <summary>
     /// Awake method.
@@ -38,14 +38,16 @@ public class BattleManager : MonoBehaviour
     {
         ButtonManager.Instance.ButtonOn(ButtonManager.Instance.RollButtonLeft);
     }
-
+    
     /// <summary>
-    /// Sets the current components.
+    /// Sets the data.
     /// </summary>
-    public void SetData(ActionPanel actionPanel, GameObject character)
+    /// <param name="actionPanel"></param>
+    /// <param name="characterObject"></param>
+    public void SetData(ActionPanel actionPanel, GameObject characterObject)
     {
         _currentActionPanel = actionPanel;
-        _currentCharacter = character;
+        _currentCharacterObject = characterObject;
     }
 
     /// <summary>

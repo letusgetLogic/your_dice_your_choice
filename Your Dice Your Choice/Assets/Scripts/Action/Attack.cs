@@ -5,7 +5,7 @@ namespace Assets.Scripts.Action
 {
     public class Attack : ActionBase
     {
-         public Attack(ActionData actionData, GameObject characterObject) : base(actionData, characterObject) { }
+         public Attack(ActionData data, GameObject characterObject) : base(data, characterObject) { }
 
 
         public override void HandleInput(GameObject fieldObject)

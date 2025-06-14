@@ -18,34 +18,21 @@ namespace Assets.Scripts.ActionPanelPrefab.DiceSlotPrefab
         public void OnDrop(PointerEventData eventData)
         {
             Debug.Log("OnDrop");
-            var dice = eventData.pointerDrag;
+            var diceObject = eventData.pointerDrag;
 
-            if (dice.CompareTag("Dice"))
+            if (diceObject.CompareTag("Dice"))
             {
-                if (IsValid(dice) == false) return;
+                var action = _actionPanel.Action;
+                var dice = diceObject.GetComponent<Dice>();
 
-                SetDiceOnSlot(dice);
-                
-                FieldManager.Instance.ShowField(
-                    _actionPanel.CharacterPanel.Character.FieldIndex, 
-                    _actionPanel.ActionDirections,
-                    GetIntFromAllowedTile.Get(_actionPanel.ActionData.AllowedTile, dice.GetComponent<Dice>().CurrentNumber));
+                if (action.IsValid(dice.CurrentNumber) == false) return;
 
-                BattleManager.Instance.SetData(_actionPanel, _actionPanel.Character);
+                SetDiceOnSlot(diceObject);
+
+                action.ShowInteractible(dice.CurrentNumber);
+
+                BattleManager.Instance.SetData(_actionPanel, _actionPanel.CharacterObject);
             }
-        }
-
-        /// <summary>
-        /// Checks the dice condition, appended to the dice's valid number.
-        /// </summary>
-        /// <param name="dice"></param>
-        /// <exception cref="NotImplementedException"></exception>
-        private bool IsValid(GameObject dice)
-        {
-            var allowedDiceNumber = _actionPanel.ActionData.AllowedDiceNumber;
-            var diceNumber = dice.GetComponent<Dice>().CurrentNumber;
-            
-            return CheckDiceCondition.IsNumberValid(allowedDiceNumber, diceNumber);
         }
 
         /// <summary>

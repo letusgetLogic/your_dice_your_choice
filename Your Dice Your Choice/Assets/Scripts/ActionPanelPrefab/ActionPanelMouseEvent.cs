@@ -1,9 +1,6 @@
 ﻿using UnityEngine;
 using TMPro;
 using UnityEngine.EventSystems;
-using Assets.Scripts.Action;
-using Assets.Scripts.DicePrefab;
-using Assets.Scripts.Actions;
 using System.Collections;
 
 namespace Assets.Scripts.ActionPanelPrefab

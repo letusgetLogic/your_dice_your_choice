@@ -5,7 +5,7 @@ namespace Assets.Scripts.Action
 {
     public class Defend : ActionBase
     {
-        public Defend(ActionData actionData, GameObject characterObject) : base(actionData, characterObject) { }
+        public Defend(ActionData data, GameObject characterObject) : base(data, characterObject) { }
 
         public override void HandleInput(GameObject fieldObject)
         {
