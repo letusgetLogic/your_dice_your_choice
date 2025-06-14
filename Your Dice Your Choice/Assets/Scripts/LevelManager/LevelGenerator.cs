@@ -107,7 +107,7 @@ public class LevelGenerator : MonoBehaviour
 
             // Data
             var characterData = _characterData[Random.Range(0, _characterData.Length)];
-            character.SetData(characterData);
+            character.SetData(player, characterData);
             
             // Weapon
             var characterGetWeapon = characterObject.GetComponent<CharacterGetWeapon>();

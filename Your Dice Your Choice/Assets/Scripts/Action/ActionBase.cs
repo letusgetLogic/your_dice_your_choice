@@ -30,6 +30,10 @@ namespace Assets.Scripts.Action
             return CheckDiceCondition.IsNumberValid(Data.AllowedDiceNumber, diceNumber);
         }
 
+        /// <summary>
+        /// Shows the interactible objects.
+        /// </summary>
+        /// <param name="diceNumber"></param>
         public virtual void ShowInteractible(int diceNumber)
         {
             FieldManager.Instance.ShowField(

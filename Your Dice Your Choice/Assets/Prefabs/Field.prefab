@@ -311,6 +311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c99fca5970bd2b04a9d911b926a72a3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Square: {fileID: 7967553190061282940, guid: 4b0c46e833d7890428d94758381de466, type: 3}
 --- !u!114 &1719382495379348813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -327,7 +328,7 @@ MonoBehaviour:
   _animationHint: {fileID: 9159352336250848926}
   _animationClick: {fileID: 510090375065560255}
   _onPointerEnterColor: {r: 1, g: 0.57254905, b: 0.57254905, a: 0}
-  _animTimer: 0.01
+  _animClickTime: 0.01
 --- !u!61 &586475268459886930
 BoxCollider2D:
   m_ObjectHideFlags: 0

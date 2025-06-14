@@ -5,7 +5,10 @@ namespace Assets.Scripts.CharacterPrefab.CharacterBody
 {
     public class CharacterCollider : MonoBehaviour
     {
-
+        /// <summary>
+        /// OnTriggerEnter2D.
+        /// </summary>
+        /// <param name="other"></param>
         public void OnTriggerEnter2D(Collider2D other)
         {
             if (other.gameObject.CompareTag("Field"))

@@ -80,11 +80,36 @@ public class FieldManager : MonoBehaviour
                 continue;
             if (fieldIndex.y < 0 || fieldIndex.y >= LevelManager.Instance.Data.MapLength)
                 continue;
+            if (IsAnyObstacleInWay(characterFieldIndexOrigin, actionDirection, directionRange))
+                continue;
 
             var mouseEvent = Fields[fieldIndex.x, fieldIndex.y].GetComponent<FieldMouseEvent>();
             SetEnabled(mouseEvent, true);
             DisplayedFields.Add(mouseEvent);
         }
+    }
+
+    /// <summary>
+    /// Is any obstacle in the way?
+    /// </summary>
+    /// <param name="characterFieldIndexOrigin"></param>
+    /// <param name="actionDirection"></param>
+    /// <param name="directionRange"></param>
+    /// <returns></returns>
+    private bool IsAnyObstacleInWay(Vector2Int characterFieldIndexOrigin, Vector2Int actionDirection, int directionRange)
+    {
+        for (int i = 1; i <= directionRange; i++)
+        {
+            var fieldIndex = characterFieldIndexOrigin;
+            fieldIndex += actionDirection * i;
+
+            var field = Fields[fieldIndex.x, fieldIndex.y].GetComponent<Field>();
+            
+            if (field.IsAnyObstacleOnField() == true)
+                return true;
+        }
+
+        return false;
     }
 
     /// <summary>

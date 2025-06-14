@@ -4,6 +4,7 @@ namespace Assets.Scripts.CharacterPrefab
 {
     public class Character : MonoBehaviour
     {
+        public TurnState Player { get; private set; }
         public CharacterData Data { get; private set; }
 
         public float OriginHP { get; private set; }
@@ -18,8 +19,9 @@ namespace Assets.Scripts.CharacterPrefab
         /// Initialize Data.
         /// </summary>
         /// <param name="data"></param>
-        public void SetData(CharacterData data)
+        public void SetData(TurnState player, CharacterData data)
         {
+            Player = player;
             Data = data;
             OriginHP = data.HP;
             OriginAP = data.AP;
@@ -27,7 +29,7 @@ namespace Assets.Scripts.CharacterPrefab
         }
 
         /// <summary>
-        /// Initialize Panel.
+        /// Initializes Panel.
         /// </summary>
         /// <param name="panel"></param>
         public void SetPanel(GameObject panel) 
