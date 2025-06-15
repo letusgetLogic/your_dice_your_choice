@@ -8,16 +8,15 @@ namespace Assets.Scripts.Action
     public abstract class ActionBase
     {
         public ActionData Data { get;  set; }
-        public Vector2Int[] ActionDirections { get; private set; }
+        
         public GameObject CharacterObject { get;  set; }
 
-        private Character _character => CharacterObject.GetComponent<Character>();
+        protected Character _character => CharacterObject.GetComponent<Character>();
 
         public ActionBase(ActionData data, GameObject characterObject)
         {
             Data = data;
             CharacterObject = characterObject;
-            ActionDirections = GetVector2FromDirection.Get(data.Direction);
         }
 
         /// <summary>
@@ -34,13 +33,7 @@ namespace Assets.Scripts.Action
         /// Shows the interactible objects.
         /// </summary>
         /// <param name="diceNumber"></param>
-        public virtual void ShowInteractible(int diceNumber)
-        {
-            FieldManager.Instance.ShowField(
-                _character.FieldIndex,
-                ActionDirections,
-                GetIntFromAllowedTile.Get(Data.AllowedTile, diceNumber));
-        }
+        public abstract void ShowInteractible(int diceNumber);
 
         /// <summary>
         /// Handles the input of player.

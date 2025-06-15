@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Assets.Scripts.CharacterPrefab;
+using Unity.VisualScripting;
 
 namespace Assets.Scripts.Action
 {
@@ -7,6 +8,10 @@ namespace Assets.Scripts.Action
     {
          public Attack(ActionData data, GameObject characterObject) : base(data, characterObject) { }
 
+        public override void ShowInteractible(int diceNumber)
+        {
+           
+        }
 
         public override void HandleInput(GameObject fieldObject)
         {

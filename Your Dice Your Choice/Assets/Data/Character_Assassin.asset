@@ -19,7 +19,7 @@ MonoBehaviour:
   WeaponRight: 4
   WeaponLeft: 5
   ActionData:
-  - {fileID: 11400000, guid: ff628ccade7ac0b41a4bd6aafe453e1b, type: 2}
-  - {fileID: 11400000, guid: 91c900ca152358d4e909e9d542115a3b, type: 2}
-  - {fileID: 11400000, guid: f4eb0c5dce2fdc841a8bce6db3319bf3, type: 2}
-  - {fileID: 11400000, guid: f4eb0c5dce2fdc841a8bce6db3319bf3, type: 2}
+  - {fileID: 11400000, guid: 08e826bb64b588b439c4166ac6570f7c, type: 2}
+  - {fileID: 11400000, guid: 7798f8ad97765a342a1ddcf8f8817b40, type: 2}
+  - {fileID: 11400000, guid: 134800ccdc984074e9243d4149c7c198, type: 2}
+  - {fileID: 11400000, guid: 134800ccdc984074e9243d4149c7c198, type: 2}

@@ -102,6 +102,11 @@ public class FieldManager : MonoBehaviour
             var fieldIndex = characterFieldIndexOrigin;
             fieldIndex += actionDirection * i;
 
+            if (fieldIndex.x < 0 || fieldIndex.x >= LevelManager.Instance.Data.MapHeight)
+                continue;
+            if (fieldIndex.y < 0 || fieldIndex.y >= LevelManager.Instance.Data.MapLength)
+                continue;
+
             var field = Fields[fieldIndex.x, fieldIndex.y].GetComponent<Field>();
             
             if (field.IsAnyObstacleOnField() == true)

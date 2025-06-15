@@ -31,7 +31,7 @@ public class Player
                 characterRotatation.RotatePivot(180);
             }
 
-            SetDescriptonPanel(characterObject);
+            SetDescriptonPanelForAction(characterObject);
         }
     }
 
@@ -39,10 +39,10 @@ public class Player
     /// Sets the description panel for each action for the character.
     /// </summary>
     /// <param name="characterObject"></param>
-    private void SetDescriptonPanel(GameObject characterObject)
+    private void SetDescriptonPanelForAction(GameObject characterObject)
     {
         var characterPanel = characterObject.GetComponent<Character>().Panel.GetComponent<CharacterPanel>();
 
-        characterPanel.SetDescriptonPanel();
+        characterPanel.SetDescriptonPanelForAction();
     }
 }

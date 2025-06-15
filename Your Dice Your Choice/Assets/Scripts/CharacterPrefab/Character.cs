@@ -20,7 +20,7 @@ namespace Assets.Scripts.CharacterPrefab
         /// Initialize Data.
         /// </summary>
         /// <param name="data"></param>
-        public void SetData(TurnState player, CharacterData data)
+        public void SetData(TurnState player, CharacterData data, Vector2Int fieldIndex)
         {
             Player = player;
             Data = data;
@@ -28,6 +28,8 @@ namespace Assets.Scripts.CharacterPrefab
             OriginHP = data.HP;
             OriginAP = data.AP;
             OriginDP = data.DP;
+
+            SetFieldIndex(fieldIndex);
         }
 
         /// <summary>

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using NUnit.Framework;
 using UnityEditor;
 using UnityEngine;
 
@@ -13,6 +12,8 @@ namespace Assets.Scripts.Action
 
         public override void OnInspectorGUI()
         {
+            EditorStyles.textField.wordWrap = true;
+
             _actionData = (ActionData)target;
 
             Draw();
@@ -30,8 +31,10 @@ namespace Assets.Scripts.Action
                     DrawMoveFields();
                     break;
                 case ActionType.Attack:
+                    DrawFields();
                     break;
                 case ActionType.Defend:
+                    DrawFields();
                     break;
             }
         }
@@ -61,22 +64,25 @@ namespace Assets.Scripts.Action
             };
 
             _actionData.MovementKey = EnumConverter.CreateEnumFrom(enumList);
-            EditorGUILayout.EnumPopup("Movement Key", _actionData.MovementKey);
+
+            EditorGUILayout.TextField("Movement Key", _actionData.MovementKey.ToString());
 
             _actionData.Description = MovementType.Description[_actionData.MovementKey];
+
+            EditorGUILayout.BeginHorizontal();
             EditorGUILayout.PrefixLabel("Description");
             EditorGUILayout.TextArea(_actionData.Description);
+            EditorGUILayout.EndHorizontal();
         }
 
-        private void DrawAttackFields()
+        private void DrawFields()
         {
+            _actionData.Description = "Move the dice over it to get more information";
 
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.PrefixLabel("Description");
+            EditorGUILayout.TextArea(_actionData.Description);
+            EditorGUILayout.EndHorizontal();
         }
-        
-        private void DrawDefendFields()
-        {
-
-        }
-
     }
 }

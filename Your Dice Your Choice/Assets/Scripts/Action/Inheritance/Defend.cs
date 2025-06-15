@@ -7,6 +7,11 @@ namespace Assets.Scripts.Action
     {
         public Defend(ActionData data, GameObject characterObject) : base(data, characterObject) { }
 
+        public override void ShowInteractible(int diceNumber)
+        {
+
+        }
+
         public override void HandleInput(GameObject fieldObject)
         {
             Debug.Log("Defend!");

@@ -19,5 +19,5 @@ MonoBehaviour:
   WeaponRight: 3
   WeaponLeft: 0
   ActionData:
-  - {fileID: 11400000, guid: 1612c221e4732f74f8c594e6b5e99191, type: 2}
-  - {fileID: 11400000, guid: f4eb0c5dce2fdc841a8bce6db3319bf3, type: 2}
+  - {fileID: 11400000, guid: 946cc14c6b932cd478dca5f2956928e2, type: 2}
+  - {fileID: 11400000, guid: 134800ccdc984074e9243d4149c7c198, type: 2}

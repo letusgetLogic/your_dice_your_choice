@@ -49,7 +49,7 @@ public class CharacterPanel : MonoBehaviour
     /// <summary>
     /// Sets the description panel for each action. 
     /// </summary>
-    public void SetDescriptonPanel() // Can't be in SetAction(), because the character panel's position has not yet been determined.
+    public void SetDescriptonPanelForAction() // Can't be in SetAction(), because the character panel's position has not yet been determined.
     {
         for (int i = 0; i < Character.Data.ActionData.Length; i++)
         {

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Assets.Scripts.CharacterPrefab;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI.Table;
 
 public class LevelGenerator : MonoBehaviour
 {
@@ -96,18 +97,20 @@ public class LevelGenerator : MonoBehaviour
         var tempList = new List<GameObject>();
 
         // The array of random positions.
-        var randPositions = new Vector3[LevelManager.Instance.Data.CharacterAmount];
+        var randomIndexes = new Vector2Int[LevelManager.Instance.Data.CharacterAmount];
+        var randomPositions = new Vector3[LevelManager.Instance.Data.CharacterAmount];
 
-        RandomizePositionInArray(player, randPositions);
+        RandomizeIndexes(player, randomIndexes);
+        GetSpawnPositions(randomPositions, randomIndexes);
 
         for (int i = 0; i < LevelManager.Instance.Data.CharacterAmount; i++)
         {
-            var characterObject = Instantiate(_characterPrefab, randPositions[i], Quaternion.identity);
+            var characterObject = Instantiate(_characterPrefab, randomPositions[i], Quaternion.identity);
             var character = characterObject.GetComponent<Character>();
 
             // Data
             var characterData = _characterData[Random.Range(0, _characterData.Length)];
-            character.SetData(player, characterData);
+            character.SetData(player, characterData, randomIndexes[i]);
             
             // Weapon
             var characterGetWeapon = characterObject.GetComponent<CharacterGetWeapon>();
@@ -131,25 +134,23 @@ public class LevelGenerator : MonoBehaviour
     /// <summary>
     /// Randomize the position of characters.
     /// </summary>
-    /// <param name="randPositions"></param>
-    private void RandomizePositionInArray(TurnState player, Vector3[] randPositions)
+    /// <param name="randomIndexes"></param>
+    private void RandomizeIndexes(TurnState player, Vector2Int[] randomIndexes)
     {
         // The array to check if the field index is already assigned. 
-        var fieldIndex = new Vector2[randPositions.Length];
+        var fieldIndex = new Vector2[randomIndexes.Length];
 
         for (int h = 0; h < fieldIndex.Length; h++)
             fieldIndex[h] = new Vector2(-1, -1); // Initializes for each index a null value.
 
         int rowAmount = FieldManager.Instance.Fields.GetLength(0);
 
-        for (int i = 0; i < randPositions.Length; i++)
+        for (int i = 0; i < randomIndexes.Length; i++)
         {
             int row = Random.Range(0, rowAmount);
             int col = RandomizeColumn(player);
-            var field = FieldManager.Instance.Fields[row, col];
-            var pos = field.transform.position;
-
-            randPositions[i] = pos;
+            
+            randomIndexes[i] = new Vector2Int(row, col);
 
             // Checks if the field index is already assigned. 
             var currentFieldIndex = new Vector2(row, col);
@@ -188,6 +189,18 @@ public class LevelGenerator : MonoBehaviour
         }
 
         return -1;
+    }
+
+    /// <summary>
+    /// Gets the spawn positions.
+    /// </summary>
+    private void GetSpawnPositions(Vector3[] randomPositions, Vector2Int[] randomIndexes)
+    {
+        for (int i = 0; i < randomIndexes.Length; i++)
+        {
+            var field = FieldManager.Instance.Fields[randomIndexes[i].x, randomIndexes[i].y];
+            randomPositions[i] = field.transform.position;
+        }
     }
 
     /// <summary>
