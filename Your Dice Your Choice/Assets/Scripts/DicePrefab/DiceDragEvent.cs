@@ -5,8 +5,6 @@ using UnityEngine.EventSystems;
 
 public class DiceDragEvent : DiceManager, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
-    [SerializeField] private float _diceMovementDelay = 0.01f;
-
     /// <summary>
     /// Triggers event at the beginning of drag.
     /// </summary>

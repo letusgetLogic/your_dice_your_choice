@@ -24,7 +24,6 @@ namespace Assets.Scripts.FieldPrefab
         {
             _foggyPanel.SetActive(true);
             _animationHint.SetActive(true);
-            Debug.Log($"_animationHint.SetActive({_animationHint.activeSelf})");
             _animationClick.SetActive(false);
         }
 
