@@ -57,7 +57,6 @@ public class FieldManager : MonoBehaviour
         field.GetComponent<Field>().SetIndex(index);
 
         var mouseEvent = field.GetComponent<FieldMouseEvent>();
-        mouseEvent.HideComponents();
         SetEnabled(mouseEvent, false);
     }
 
@@ -116,15 +115,13 @@ public class FieldManager : MonoBehaviour
     /// Deactivates the other displayed fields.
     /// </summary>
     /// <param name="clickedField"></param>
-    public void DeactivateOtherFields(GameObject clickedField)
+    public void DeactivateFields()
     {
-        var fieldMouseEvent = clickedField.GetComponent<FieldMouseEvent>();
-        DisplayedFields.Remove(fieldMouseEvent);
-
         foreach (var mouseEvent in DisplayedFields)
         {
-            mouseEvent.HideComponents();
             SetEnabled(mouseEvent, false);
         }
+
+        DisplayedFields.Clear();
     }
 }

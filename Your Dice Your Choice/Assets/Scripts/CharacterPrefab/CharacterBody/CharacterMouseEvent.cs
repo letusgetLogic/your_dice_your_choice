@@ -69,7 +69,7 @@ namespace Assets.Scripts.CharacterPrefab.CharacterBody
             CharacterInfoPanel.Instance.SetPosition(_characterObject);
 
             CharacterInfoPanel.Instance.TransferValues(
-                _character.Data.Type.ToString(),
+                _character.Name,
                 _color,
                 _character.OriginHP,
                 _character.Data.HP,

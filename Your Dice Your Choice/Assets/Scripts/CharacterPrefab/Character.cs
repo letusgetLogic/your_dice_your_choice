@@ -6,6 +6,7 @@ namespace Assets.Scripts.CharacterPrefab
     {
         public TurnState Player { get; private set; }
         public CharacterData Data { get; private set; }
+        public string Name { get; private set; }
 
         public float OriginHP { get; private set; }
         public float OriginAP { get; private set; }
@@ -23,6 +24,7 @@ namespace Assets.Scripts.CharacterPrefab
         {
             Player = player;
             Data = data;
+            Name = data.Type.ToString();
             OriginHP = data.HP;
             OriginAP = data.AP;
             OriginDP = data.DP;
@@ -43,7 +45,8 @@ namespace Assets.Scripts.CharacterPrefab
         /// <param name="fieldIndex"></param>
         public void SetFieldIndex(Vector2Int fieldIndex) 
         { 
-            FieldIndex = fieldIndex; 
+            FieldIndex = fieldIndex;
+            Debug.Log($"Character {Name} is on the field {FieldIndex}.");
         }
     }
 }

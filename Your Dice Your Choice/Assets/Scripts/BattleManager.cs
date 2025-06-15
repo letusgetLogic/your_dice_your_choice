@@ -37,6 +37,7 @@ public class BattleManager : MonoBehaviour
     public void StartMatch()
     {
         ButtonManager.Instance.ButtonOn(ButtonManager.Instance.RollButtonLeft);
+        ButtonManager.Instance.ButtonOn(ButtonManager.Instance.RollButtonRight);
     }
     
     /// <summary>

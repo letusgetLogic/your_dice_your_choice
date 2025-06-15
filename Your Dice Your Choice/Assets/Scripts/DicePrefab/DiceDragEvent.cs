@@ -33,7 +33,6 @@ public class DiceDragEvent : DiceManager, IDragHandler, IBeginDragHandler, IEndD
     /// <param name="eventData"></param>
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("OnEndDrag");
         SetAlphaDefault();
         SetBlocksRaycasts(true);
 

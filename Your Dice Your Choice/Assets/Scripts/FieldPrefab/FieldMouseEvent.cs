@@ -18,12 +18,13 @@ namespace Assets.Scripts.FieldPrefab
         private bool _isClicking = false;
 
         /// <summary>
-        /// Awake method.
+        /// OnEnable method.
         /// </summary>
-        private void Start()
+        private void OnEnable()
         {
             _foggyPanel.SetActive(true);
             _animationHint.SetActive(true);
+            Debug.Log($"_animationHint.SetActive({_animationHint.activeSelf})");
             _animationClick.SetActive(false);
         }
 
@@ -47,8 +48,8 @@ namespace Assets.Scripts.FieldPrefab
         {
             yield return new WaitForSeconds(_animClickTime);
 
-            HideComponents();
-            FieldManager.Instance.DeactivateOtherFields(fieldObject);
+            _isClicking = false;
+            FieldManager.Instance.DeactivateFields();
             BattleManager.Instance.HandleInput(fieldObject);
         }
 
@@ -79,11 +80,12 @@ namespace Assets.Scripts.FieldPrefab
         /// <summary>
         /// Hides the components for the mouse event.
         /// </summary>
-        public void HideComponents()
+        private void OnDisable()
         {
             _foggyPanel.SetActive(false);
             _animationHint.SetActive(false);
             _animationClick.SetActive(false);
+            _animationHint.GetComponent<SpriteRenderer>().color = Color.white;
         }
     }
 }

@@ -21,9 +21,9 @@ namespace Assets.Scripts.CharacterPrefab
         }
 
         /// <summary>
-        /// Update method.
+        /// FixedUpdate method.
         /// </summary>
-        public void Update()
+        public void FixedUpdate()
         {
             if (_isMoving)
             {

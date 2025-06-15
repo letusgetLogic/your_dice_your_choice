@@ -16,7 +16,7 @@ namespace Assets.Scripts.ActionPanelPrefab
         private IEnumerator _coroutine;
 
         /// <summary>
-        /// Mouse enters the collider of a game object. 
+        /// OnPointerEnter. 
         /// </summary>
         public void OnPointerEnter(PointerEventData eventData)
         {
@@ -25,7 +25,7 @@ namespace Assets.Scripts.ActionPanelPrefab
         }
 
         /// <summary>
-        /// Mouse exits the collider of a game object.
+        /// OnPointerExit.
         /// </summary>
         public void OnPointerExit(PointerEventData eventData)
         {

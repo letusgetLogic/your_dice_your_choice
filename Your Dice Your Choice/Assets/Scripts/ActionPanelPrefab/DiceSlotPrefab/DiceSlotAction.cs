@@ -17,7 +17,8 @@ namespace Assets.Scripts.ActionPanelPrefab.DiceSlotPrefab
         /// <param name="eventData"></param>
         public void OnDrop(PointerEventData eventData)
         {
-            Debug.Log("OnDrop");
+            if (eventData == null) Debug.Log("OnDrop(PointerEventData eventData) -> eventData = null");
+
             var diceObject = eventData.pointerDrag;
 
             if (diceObject.CompareTag("Dice"))
