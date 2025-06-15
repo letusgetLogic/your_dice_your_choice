@@ -27,7 +27,7 @@ namespace Assets.Scripts.Action
         {
             _actionData.ActionType = (ActionType)EditorGUILayout.EnumPopup("Action Type", _actionData.ActionType);
 
-
+            
 
 
             _actionData.ActionKey = (ActionKey)EditorGUILayout.EnumPopup(_actionData.ActionKey);

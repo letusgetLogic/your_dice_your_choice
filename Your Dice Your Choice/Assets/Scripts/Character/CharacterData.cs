@@ -17,6 +17,6 @@ namespace Assets.Scripts.CharacterPrefab
         public WeaponType WeaponRight;
         public WeaponType WeaponLeft;
 
-        public ActionData[] ActionData = new ActionData[4];
+        public ActionType[] ActionData = new ActionType[4];
     }
 }
