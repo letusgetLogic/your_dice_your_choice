@@ -906,56 +906,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 161836178}
   m_CullTransparentMesh: 1
---- !u!1 &167483071
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 167483073}
-  - component: {fileID: 167483072}
-  m_Layer: 0
-  m_Name: Weapon Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &167483072
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 167483071}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 635295b485ba19441a3b15d856724945, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _sword: {fileID: 4454906068307276358, guid: 8a2fe4dff3f74c84d97fe590b3dcf2db, type: 3}
-  _shield: {fileID: 2106958939825099808, guid: b3db58b855c74cf479f616ae0971db9c, type: 3}
-  _bow: {fileID: 1662544627993326492, guid: b759690d94541834fa2dbedce7ec0cfb, type: 3}
-  _knifeRight: {fileID: 5682825185749890722, guid: b64563ca19066bc4b94030c5883e045b, type: 3}
-  _knifeLeft: {fileID: 1566500919570171256, guid: 2cedfa19aa9f2744bbc7a42b5cfce612, type: 3}
-  _magicStaff: {fileID: 7953323789972346437, guid: 58c6297ebd8f9b04da17fa1d209d3ecc, type: 3}
---- !u!4 &167483073
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 167483071}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.07584, y: 0.08424, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &182033680
 GameObject:
   m_ObjectHideFlags: 0
@@ -39067,6 +39017,5 @@ SceneRoots:
   - {fileID: 1772476306}
   - {fileID: 888338206}
   - {fileID: 513823983}
-  - {fileID: 167483073}
   - {fileID: 134031256}
   - {fileID: 1565907548}

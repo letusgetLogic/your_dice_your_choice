@@ -16,8 +16,8 @@ MonoBehaviour:
   HP: 700
   AP: 200
   DP: 40
-  WeaponRight: 6
-  WeaponLeft: 0
+  WeaponRight: {fileID: 7953323789972346437, guid: 58c6297ebd8f9b04da17fa1d209d3ecc, type: 3}
+  WeaponLeft: {fileID: 0}
   ActionData:
   - {fileID: 11400000, guid: a99e4885038e1bd47b861de03854260d, type: 2}
   - {fileID: 11400000, guid: 134800ccdc984074e9243d4149c7c198, type: 2}

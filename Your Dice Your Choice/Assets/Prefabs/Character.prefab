@@ -848,13 +848,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 0.1
-  _animSpeed: 0.0001
-  _animCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!114 &8124959260350581310
 MonoBehaviour:
   m_ObjectHideFlags: 0

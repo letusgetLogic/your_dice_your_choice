@@ -12,7 +12,10 @@ namespace Assets.Scripts.CharacterPrefab
         /// <param name="transform"></param>
         public void SetWeaponToLeftHand(Character character)
         {
-            var weaponObject = Instantiate(WeaponManager.Instance.GetWeapon(character.Data.WeaponLeft));
+            if (character.Data.WeaponLeft == null)
+                return;
+
+            var weaponObject = Instantiate(character.Data.WeaponLeft);
             weaponObject.transform.SetParent(LeftHandTransform, false);
         }
 
@@ -23,7 +26,10 @@ namespace Assets.Scripts.CharacterPrefab
         /// <param name="transform"></param>
         public void SetWeaponToRightHand(Character character)
         {
-            var weaponObject = Instantiate(WeaponManager.Instance.GetWeapon(character.Data.WeaponRight));
+            if (character.Data.WeaponRight == null)
+                return;
+
+            var weaponObject = Instantiate(character.Data.WeaponRight);
             weaponObject.transform.SetParent(RightHandTransform, false);
         }
     }

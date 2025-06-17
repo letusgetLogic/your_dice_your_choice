@@ -14,11 +14,14 @@ namespace Assets.Scripts.Action
         {
             EditorStyles.textField.wordWrap = true;
 
-            _actionData = (ActionData)target;
+           _actionData = (ActionData)target;
 
             Draw();
         }
 
+        /// <summary>
+        /// Draw the inspector.
+        /// </summary>
         private void Draw()
         {
             _actionData.ActionType = (ActionType)EditorGUILayout.EnumPopup("Action Type", _actionData.ActionType);
@@ -27,18 +30,26 @@ namespace Assets.Scripts.Action
             {
                 case ActionType.None:
                     break;
+
                 case ActionType.Move:
                     DrawMoveFields();
                     break;
+
                 case ActionType.Attack:
-                    DrawFields();
+                    _actionData.Description = "Move the dice over it to get more information";
+                    DrawDescriptionFields();
                     break;
+
                 case ActionType.Defend:
-                    DrawFields();
+                    _actionData.Description = "Move the dice over it to get more information";
+                    DrawDescriptionFields();
                     break;
             }
         }
 
+        /// <summary>
+        /// Draw the fields for the action 'Move'.
+        /// </summary>
         private void DrawMoveFields()
         {
             _actionData.AllowedTile = (AllowedTile)EditorGUILayout.EnumPopup("Allowed Tile", _actionData.AllowedTile);
@@ -48,14 +59,24 @@ namespace Assets.Scripts.Action
             if (_actionData.AllowedTile != AllowedTile.None &&
                _actionData.AllowedDiceNumber != AllowedDiceNumber.None &&
                _actionData.Direction != Direction.None)
-            { 
-                DrawKeyAndDescription(); 
+            {
+                _actionData.MovementKey = EnumConverter.CreateEnumFrom(EnumsList());
+
+                EditorGUILayout.TextField("Movement Key", _actionData.MovementKey.ToString());
+
+                _actionData.Description = MovementType.Description[_actionData.MovementKey];
+
+                DrawDescriptionFields();
             }
         }
 
-        private void DrawKeyAndDescription()
+        /// <summary>
+        /// Enums list.
+        /// </summary>
+        /// <returns></returns>
+        private List<object> EnumsList()
         {
-            List<object> enumList = new List<object>
+            List<object> enumsList = new List<object>
             {
                 _actionData.ActionType,
                 _actionData.AllowedTile,
@@ -63,22 +84,14 @@ namespace Assets.Scripts.Action
                 _actionData.Direction
             };
 
-            _actionData.MovementKey = EnumConverter.CreateEnumFrom(enumList);
-
-            EditorGUILayout.TextField("Movement Key", _actionData.MovementKey.ToString());
-
-            _actionData.Description = MovementType.Description[_actionData.MovementKey];
-
-            EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.PrefixLabel("Description");
-            EditorGUILayout.TextArea(_actionData.Description);
-            EditorGUILayout.EndHorizontal();
+            return enumsList;
         }
 
-        private void DrawFields()
+        /// <summary>
+        /// Draw the fields for the description.
+        /// </summary>
+        private void DrawDescriptionFields()
         {
-            _actionData.Description = "Move the dice over it to get more information";
-
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.PrefixLabel("Description");
             EditorGUILayout.TextArea(_actionData.Description);
