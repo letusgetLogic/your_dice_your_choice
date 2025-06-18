@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e42d7787a854374ea3e3da25631e3b4, type: 3}
   m_Name: Attack
   m_EditorClassIdentifier: 
-  ActionType: 0
+  ActionType: 2
   MovementKey: 0
   AllowedTile: 0
   AllowedDiceNumber: 0
   Direction: 0
-  Description: 
+  Description: Move the dice over it to get more information
