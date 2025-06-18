@@ -11,7 +11,7 @@ namespace Assets.Scripts.Action
         
         public GameObject CharacterObject { get;  set; }
 
-        protected Character _character => CharacterObject.GetComponent<Character>();
+        protected Character character => CharacterObject.GetComponent<Character>();
 
         public ActionBase(ActionData data, GameObject characterObject)
         {
@@ -33,7 +33,7 @@ namespace Assets.Scripts.Action
         /// Shows the interactible objects.
         /// </summary>
         /// <param name="diceNumber"></param>
-        public abstract void ShowInteractible(int diceNumber);
+        public abstract void SetDisplayedFields(int diceNumber);
 
         /// <summary>
         /// Handles the input of player.

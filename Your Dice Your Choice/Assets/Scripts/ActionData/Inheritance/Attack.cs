@@ -8,7 +8,7 @@ namespace Assets.Scripts.Action
     {
          public Attack(ActionData data, GameObject characterObject) : base(data, characterObject) { }
 
-        public override void ShowInteractible(int diceNumber)
+        public override void SetDisplayedFields(int diceNumber)
         {
            
         }

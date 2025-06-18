@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e42d7787a854374ea3e3da25631e3b4, type: 3}
   m_Name: Move_Tile_1_D4_6_Diagonal
   m_EditorClassIdentifier: 
-  ActionType: 0
-  MovementKey: 0
-  AllowedTile: 0
-  AllowedDiceNumber: 0
-  Direction: 0
-  Description: 
+  ActionType: 1
+  MovementKey: 8
+  AllowedTile: 3
+  AllowedDiceNumber: 9
+  Direction: 3
+  Description: Move diagonally 1 Tile,\n with Dice 4-6

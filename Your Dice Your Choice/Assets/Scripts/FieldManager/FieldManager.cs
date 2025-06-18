@@ -61,12 +61,12 @@ public class FieldManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Shows the interactible fields.
+    /// Adds the interactible fields in the list DisplayedFields.
     /// </summary>
     /// <param name="characterFieldIndexOrigin"></param>
     /// <param name="actionDirections"></param>
     /// <param name="directionRange"></param>
-    public void ShowField(Vector2Int characterFieldIndexOrigin, Vector2Int[] actionDirections, int directionRange)
+    public void SetDisplayedFields(Vector2Int characterFieldIndexOrigin, Vector2Int[] actionDirections, int directionRange)
     {
         DisplayedFields = new();
 
@@ -83,9 +83,21 @@ public class FieldManager : MonoBehaviour
                 continue;
 
             var mouseEvent = Fields[fieldIndex.x, fieldIndex.y].GetComponent<FieldMouseEvent>();
-            SetEnabled(mouseEvent, true);
+            
             DisplayedFields.Add(mouseEvent);
         }
+    }
+
+    /// <summary>
+    /// Shows the interactible fields.
+    /// </summary>
+    /// <param name="characterFieldIndexOrigin"></param>
+    /// <param name="actionDirections"></param>
+    /// <param name="directionRange"></param>
+    public void ShowInteractibleFields()
+    {
+       foreach (var mouseEvent in DisplayedFields)
+            SetEnabled(mouseEvent, true);
     }
 
     /// <summary>

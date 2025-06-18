@@ -15,7 +15,7 @@ namespace Assets.Scripts.Action
             EditorStyles.textField.wordWrap = true;
 
            _actionData = (ActionData)target;
-
+           
             Draw();
         }
 
@@ -25,7 +25,7 @@ namespace Assets.Scripts.Action
         private void Draw()
         {
             _actionData.ActionType = (ActionType)EditorGUILayout.EnumPopup("Action Type", _actionData.ActionType);
-
+           
             switch ((_actionData.ActionType))
             {
                 case ActionType.None:

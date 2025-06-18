@@ -13,17 +13,18 @@ namespace Assets.Scripts.Action
             ActionDirections = GetVector2FromDirection.Get(data.Direction);
         }
 
+         public override void SetDisplayedFields(int diceNumber)
+        {
+            FieldManager.Instance.SetDisplayedFields(
+                character.FieldIndex,
+                ActionDirections,
+                GetIntFromAllowedTile.Get(Data.AllowedTile, diceNumber));
+        }
+
         public override void HandleInput(GameObject fieldObject)
         {
             CharacterObject.GetComponent<CharacterMovement>().MoveTo(fieldObject);
         }
 
-         public override void ShowInteractible(int diceNumber)
-        {
-            FieldManager.Instance.ShowField(
-                _character.FieldIndex,
-                ActionDirections,
-                GetIntFromAllowedTile.Get(Data.AllowedTile, diceNumber));
-        }
     }
 }

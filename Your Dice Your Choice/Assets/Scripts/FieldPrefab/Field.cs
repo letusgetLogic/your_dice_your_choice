@@ -20,13 +20,11 @@ namespace Assets.Scripts.FieldPrefab
         private void OnTriggerEnter2D(Collider2D collision)
         {
             _count++;
-            Debug.Log($"Field {Index} have {_count} Obstacle.");
         }
 
         private void OnTriggerExit2D(Collider2D collision)
         {
             _count--;
-            Debug.Log($"Field {Index} have {_count} Obstacle.");
         }
 
         /// <summary>
