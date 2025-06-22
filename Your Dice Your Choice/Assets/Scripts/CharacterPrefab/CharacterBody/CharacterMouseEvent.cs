@@ -5,7 +5,7 @@ using System.Collections;
 using System;
 using UnityEngine.UI;
 using UnityEditor.U2D.Animation;
-using Assets.Scripts.ActionPanelPrefab;
+using Assets.Scripts.ActionPopupPrefab;
 
 namespace Assets.Scripts.CharacterPrefab.CharacterBody
 {
@@ -66,9 +66,9 @@ namespace Assets.Scripts.CharacterPrefab.CharacterBody
         {
             yield return new WaitForSeconds(_delayOnHoverTime);
 
-            CharacterInfoPanel.Instance.SetPosition(_characterObject);
+            CharacterPopup.Instance.SetPosition(_characterObject);
 
-            CharacterInfoPanel.Instance.TransferValues(
+            CharacterPopup.Instance.TransferValues(
                 _character.Name,
                 _color,
                 _character.OriginHP,
@@ -76,7 +76,7 @@ namespace Assets.Scripts.CharacterPrefab.CharacterBody
                 _character.Data.AP,
                 _character.Data.DP);
 
-            CharacterInfoPanel.Instance.gameObject.SetActive(true);
+            CharacterPopup.Instance.gameObject.SetActive(true);
         }
 
         /// <summary>
@@ -84,8 +84,8 @@ namespace Assets.Scripts.CharacterPrefab.CharacterBody
         /// </summary>
         private void HideInfo()
         {
-            CharacterInfoPanel.Instance.gameObject.SetActive(false);
-            CharacterInfoPanel.Instance.SetDefault();
+            CharacterPopup.Instance.gameObject.SetActive(false);
+            CharacterPopup.Instance.SetDefault();
         }
     }
 }

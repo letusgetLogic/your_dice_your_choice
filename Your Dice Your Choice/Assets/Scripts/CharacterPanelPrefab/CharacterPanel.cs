@@ -1,8 +1,8 @@
 using UnityEngine;
 using TMPro;
 using Assets.Scripts.CharacterPrefab;
-using Assets.Scripts.ActionPanelPrefab;
-using Assets.Scripts.Action;
+using Assets.Scripts.ActionPopupPrefab;
+using Assets.Scripts.ActionDatas;
 using Assets.Scripts;
 
 public class CharacterPanel : MonoBehaviour
@@ -55,8 +55,8 @@ public class CharacterPanel : MonoBehaviour
         {
             var actionData = Character.Data.ActionData[i];
 
-            ActionPanelPrefabs[i].GetComponent<ActionPanel>().ActionDescriptionPanel.SetPosition(gameObject);
-            ActionPanelPrefabs[i].GetComponent<ActionPanel>().ActionDescriptionPanel.SetText(actionData.Description);
+            ActionPanelPrefabs[i].GetComponent<ActionPanel>().ActionPopup.SetPosition();
+            ActionPanelPrefabs[i].GetComponent<ActionPanel>().ActionPopup.SetText(actionData.Description);
         }
     }
 }

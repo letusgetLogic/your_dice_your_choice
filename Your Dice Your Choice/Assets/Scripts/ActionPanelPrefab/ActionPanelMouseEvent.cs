@@ -3,14 +3,14 @@ using TMPro;
 using UnityEngine.EventSystems;
 using System.Collections;
 
-namespace Assets.Scripts.ActionPanelPrefab
+namespace Assets.Scripts.ActionPopupPrefab
 {
     public class ActionPanelMouseEvent : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] [Range(0f, 1f)] private float _delayOnHoverTime = .5f;
 
         private ActionPanel _actionPanel => GetComponent<ActionPanel>();
-        private ActionDescriptionPanel _actionDescriptionPanel => _actionPanel.ActionDescriptionPanel;
+        private ActionPopup _actionPopup => _actionPanel.ActionPopup;
         private CharacterPanel _characterPanel => _actionPanel.CharacterPanel;
 
         private IEnumerator _coroutine;
@@ -34,25 +34,25 @@ namespace Assets.Scripts.ActionPanelPrefab
         }
 
         /// <summary>
-        /// Shows the action description label.
+        /// Shows the action popup.
         /// </summary>
         /// <returns></returns>
         private IEnumerator ShowInfo()
         {
             yield return new WaitForSeconds(_delayOnHoverTime);
 
-            _actionDescriptionPanel.SetActiveChildren(true);
+            _actionPopup.SetActiveChildren(true);
 
             if (_characterPanel.Player == TurnState.PlayerLeft)
                 HideRightPanels(true);
         }
 
         /// <summary>
-        /// Hides the action description label.
+        /// Hides the action popup.
         /// </summary>
         private void HideInfo()
         {
-            _actionDescriptionPanel.SetActiveChildren(false);
+            _actionPopup.SetActiveChildren(false);
 
             if (_characterPanel.Player == TurnState.PlayerLeft)
                 HideRightPanels(false);

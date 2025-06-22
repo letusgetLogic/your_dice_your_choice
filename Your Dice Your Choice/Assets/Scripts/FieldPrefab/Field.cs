@@ -1,10 +1,12 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.CharacterPrefab;
+using UnityEngine;
 
 namespace Assets.Scripts.FieldPrefab
 {
     public class Field : MonoBehaviour
     {
         public Vector2Int Index { get; private set; }
+        public GameObject CharacterObject { get; private set; }
 
         private int _count = 0;
 
@@ -19,16 +21,26 @@ namespace Assets.Scripts.FieldPrefab
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
+            if (collision.CompareTag("Character"))
+            {
+                CharacterObject = collision.gameObject;
+            }
+
             _count++;
         }
 
         private void OnTriggerExit2D(Collider2D collision)
         {
+            if (collision.CompareTag("Character"))
+            {
+                CharacterObject = null;
+            }
+
             _count--;
         }
 
         /// <summary>
-        /// Is any obstacle on the field?
+        /// Checks OnTrigger counter.
         /// </summary>
         /// <returns></returns>
         public bool IsAnyObstacleOnField()
@@ -39,5 +51,21 @@ namespace Assets.Scripts.FieldPrefab
             return true;
         }
 
+        /// <summary>
+        /// Gets the enemy character.
+        /// </summary>
+        /// <param name="currentPlayer"></param>
+        /// <returns></returns>
+        public GameObject EnemyObject(TurnState currentPlayer)
+        {
+            var character = CharacterObject.GetComponent<Character>();
+
+            if (character.Player != currentPlayer)
+            {
+                return CharacterObject;
+            }
+
+            return null;
+        }
     }
 }

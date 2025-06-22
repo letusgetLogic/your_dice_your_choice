@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Assets.Scripts.CharacterDatas;
 
 namespace Assets.Scripts.CharacterPrefab
 {

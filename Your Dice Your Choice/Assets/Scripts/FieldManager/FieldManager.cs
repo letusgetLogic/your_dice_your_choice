@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Assets.Scripts.Action;
+using Assets.Scripts.ActionDatas;
 using Assets.Scripts.FieldPrefab;
 using UnityEngine;
 
@@ -9,7 +9,7 @@ public class FieldManager : MonoBehaviour
     public static FieldManager Instance { get; private set; }
 
     public GameObject[,] Fields { get; private set; }
-    public List<FieldMouseEvent> DisplayedFields { get; private set; }
+    public List<FieldMouseEvent> InteractibleFields { get; private set; }
 
     /// <summary>
     /// Awake method.
@@ -61,14 +61,14 @@ public class FieldManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Adds the interactible fields in the list DisplayedFields.
+    /// Adds the interactible fields in the list InteractibleFields.
     /// </summary>
     /// <param name="characterFieldIndexOrigin"></param>
     /// <param name="actionDirections"></param>
     /// <param name="directionRange"></param>
-    public void SetDisplayedFields(Vector2Int characterFieldIndexOrigin, Vector2Int[] actionDirections, int directionRange)
+    public void SetInteractibleFields(Vector2Int characterFieldIndexOrigin, Vector2Int[] actionDirections, int directionRange)
     {
-        DisplayedFields = new();
+        InteractibleFields = new();
 
         foreach (Vector2Int actionDirection in actionDirections)
         {
@@ -84,10 +84,10 @@ public class FieldManager : MonoBehaviour
 
             var mouseEvent = Fields[fieldIndex.x, fieldIndex.y].GetComponent<FieldMouseEvent>();
             
-            DisplayedFields.Add(mouseEvent);
+            InteractibleFields.Add(mouseEvent);
         }
     }
-
+    
     /// <summary>
     /// Shows the interactible fields.
     /// </summary>
@@ -96,12 +96,12 @@ public class FieldManager : MonoBehaviour
     /// <param name="directionRange"></param>
     public void ShowInteractibleFields()
     {
-       foreach (var mouseEvent in DisplayedFields)
+       foreach (var mouseEvent in InteractibleFields)
             SetEnabled(mouseEvent, true);
     }
 
     /// <summary>
-    /// Is any obstacle in the way?
+    /// Checks every field between character and target field.
     /// </summary>
     /// <param name="characterFieldIndexOrigin"></param>
     /// <param name="actionDirection"></param>
@@ -134,11 +134,11 @@ public class FieldManager : MonoBehaviour
     /// <param name="clickedField"></param>
     public void DeactivateFields()
     {
-        foreach (var mouseEvent in DisplayedFields)
+        foreach (var mouseEvent in InteractibleFields)
         {
             SetEnabled(mouseEvent, false);
         }
 
-        DisplayedFields.Clear();
+        InteractibleFields.Clear();
     }
 }

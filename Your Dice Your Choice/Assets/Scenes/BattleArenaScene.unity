@@ -6018,7 +6018,7 @@ GameObject:
   - component: {fileID: 954535817}
   - component: {fileID: 954535819}
   m_Layer: 5
-  m_Name: Character Info Panel
+  m_Name: Character Popup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6094,7 +6094,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 954535815}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ddcf26cb0afe5d4d8da2a4830e96475, type: 3}
+  m_Script: {fileID: 11500000, guid: bf4a0376f1528cc4b970c7d5c8256582, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _canvasRectTransform: {fileID: 736680344}
@@ -6103,7 +6103,7 @@ MonoBehaviour:
   _currentHp: {fileID: 365519798}
   _ap: {fileID: 632171503}
   _dp: {fileID: 1411165565}
-  _distance: {x: 120, y: 50}
+  _distance: {x: 120, y: 0}
 --- !u!1 &974450203
 GameObject:
   m_ObjectHideFlags: 0

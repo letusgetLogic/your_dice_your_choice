@@ -1,6 +1,6 @@
 using System;
 using Assets.Scripts;
-using Assets.Scripts.ActionPanelPrefab;
+using Assets.Scripts.ActionPopupPrefab;
 using Assets.Scripts.CharacterPrefab;
 using TMPro;
 using UnityEngine;

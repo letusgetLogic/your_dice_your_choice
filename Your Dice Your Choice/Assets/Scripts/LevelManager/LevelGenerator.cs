@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Assets.Scripts.CharacterDatas;
 using Assets.Scripts.CharacterPrefab;
 using Unity.VisualScripting;
 using UnityEngine;

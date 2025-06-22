@@ -1,12 +1,12 @@
 ﻿using System;
-using Assets.Scripts.Action;
+using Assets.Scripts.ActionDatas;
 using Assets.Scripts.DicePrefab;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Collections;
 using Unity.VisualScripting;
 
-namespace Assets.Scripts.ActionPanelPrefab.DiceSlotPrefab
+namespace Assets.Scripts.ActionPopupPrefab.DiceSlotPrefab
 {
     public class DiceSlotAction : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IDropHandler
     {
@@ -16,6 +16,11 @@ namespace Assets.Scripts.ActionPanelPrefab.DiceSlotPrefab
         private ActionPanel _actionPanel => _actionPanelTransform.gameObject.GetComponent<ActionPanel>();
 
         private IEnumerator _coroutine;
+
+        /// <summary>
+        /// This bool is needed, when the character doesn't have any chance from the dice input, 
+        /// so the dice get back into base.
+        /// </summary>
         private bool _canFieldsBeingDeactivated = false;
 
         /// <summary>
@@ -23,7 +28,7 @@ namespace Assets.Scripts.ActionPanelPrefab.DiceSlotPrefab
         /// </summary>
         public void OnPointerEnter(PointerEventData eventData)
         {
-            _coroutine = SetDisplayedFields(eventData.pointerDrag);
+            _coroutine = ShowInteractible(eventData.pointerDrag);
             StartCoroutine(_coroutine);
         }
 
@@ -41,10 +46,10 @@ namespace Assets.Scripts.ActionPanelPrefab.DiceSlotPrefab
         }
 
         /// <summary>
-        /// Shows the action description label.
+        /// Shows the interactible objects.
         /// </summary>
         /// <returns></returns>
-        private IEnumerator SetDisplayedFields(GameObject diceBeingDragged)
+        private IEnumerator ShowInteractible(GameObject diceBeingDragged)
         {
             yield return new WaitForSeconds(_delayOnHoverTime);
 
@@ -56,8 +61,9 @@ namespace Assets.Scripts.ActionPanelPrefab.DiceSlotPrefab
                 if (action.IsValid(dice.CurrentNumber) == false) 
                     yield break;
 
-                action.SetDisplayedFields(dice.CurrentNumber);
-                FieldManager.Instance.ShowInteractibleFields();
+                action.SetDescriptionOf(_actionPanel.ActionPopup, dice.CurrentNumber);
+                action.SetInteractible(dice.CurrentNumber);
+                action.ShowInteractible();
 
                 _canFieldsBeingDeactivated = true;
             }
@@ -79,16 +85,16 @@ namespace Assets.Scripts.ActionPanelPrefab.DiceSlotPrefab
                 if (action.IsValid(dice.CurrentNumber) == false) 
                     return;
 
-                action.SetDisplayedFields(dice.CurrentNumber);
+                action.SetInteractible(dice.CurrentNumber);
 
-                if (FieldManager.Instance.DisplayedFields.Count == 0)
+                if (FieldManager.Instance.InteractibleFields.Count == 0)
                     return;
 
                 _canFieldsBeingDeactivated = false;
                        
                 SetDiceOnSlot(diceObject);
 
-                FieldManager.Instance.ShowInteractibleFields();
+                action.ShowInteractible();
 
                 BattleManager.Instance.SetData(_actionPanel, _actionPanel.CharacterObject);
             }

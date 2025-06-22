@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using Assets.Scripts;
-using Assets.Scripts.LevelData;
+using Assets.Scripts.LevelDatas;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
