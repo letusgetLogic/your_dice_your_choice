@@ -3,11 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Assets.Scripts.DicePrefab;
+using UnityEngine.UI;
 
 public class RollPanel : MonoBehaviour
 {
     public GameObject[] AllDice;
     public GameObject[] VisibleDice { get; private set; }
+
+    public Button RollButton;
 
     [SerializeField] private int _rollFrequency = 10;
     [SerializeField] private float _animTimer = 0.25f;
@@ -111,5 +114,14 @@ public class RollPanel : MonoBehaviour
     public void SetInstance(GameObject dice, int index)
     {
         VisibleDice[index] = dice;
+    }
+
+    /// <summary>
+    /// Sets roll button interactible true/false.
+    /// </summary>
+    /// <param name="value"></param>
+    public void SetRollButton(bool value)
+    {
+        ButtonManager.Instance.SetInteractible(RollButton, value);
     }
 }

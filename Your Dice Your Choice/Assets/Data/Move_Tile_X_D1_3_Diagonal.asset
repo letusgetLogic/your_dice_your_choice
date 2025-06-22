@@ -17,4 +17,5 @@ MonoBehaviour:
   AllowedTile: 1
   AllowedDiceNumber: 8
   Direction: 3
+  WeaponType: 0
   Description: Move diagonally X Tiles,\n with Dice 1-3

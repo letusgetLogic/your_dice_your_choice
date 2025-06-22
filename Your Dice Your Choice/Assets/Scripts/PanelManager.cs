@@ -39,6 +39,44 @@ public class PanelManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Gets the roll panel.
+    /// </summary>
+    /// <param name="player"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
+    public RollPanel GetRollPanelFor(PlayerType player)
+    {
+        switch (player)
+        {
+            case PlayerType.PlayerLeft:
+                return RollPanelLeft.GetComponent<RollPanel>();
+            case PlayerType.PlayerRight:
+                return RollPanelRight.GetComponent<RollPanel>();
+        }
+
+        throw new Exception("PanelManager.GetRollPanelFor() -> player case invalid");
+    }
+    
+    /// <summary>
+    /// Gets the roll panel.
+    /// </summary>
+    /// <param name="player"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
+    public GameObject GetRerollPanelFor(PlayerType player)
+    {
+        switch (player)
+        {
+            case PlayerType.PlayerLeft:
+                return RerollPanelLeft;
+            case PlayerType.PlayerRight:
+                return RerollPanelRight;
+        }
+
+        throw new Exception("PanelManager.GetRerollPanelFor() -> player case invalid");
+    }
+
+    /// <summary>
     /// Hides all character panels.
     /// </summary>
     private void HideAllPanel()
@@ -69,11 +107,9 @@ public class PanelManager : MonoBehaviour
     public void ShowRollPanels()
     {
         RollPanelLeft.SetActive(true);
-        ShowDiceOnPanel(RollPanelLeft);
         RerollPanelLeft.SetActive(true);
 
         RollPanelRight.SetActive(true);
-        ShowDiceOnPanel(RollPanelRight);
         RerollPanelRight.SetActive(true);
     }
 
@@ -88,23 +124,13 @@ public class PanelManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Shows Dice on Panel.
-    /// </summary>
-    /// <param name="panel"></param>
-    private void ShowDiceOnPanel(GameObject panel)
-    {
-        var rollPanel = panel.GetComponent<RollPanel>();
-        rollPanel.ShowDice();
-    }
-
-    /// <summary>
     /// Sets active, transfers data, sets action for the character panel.
     /// </summary>
     /// <param name="player"></param>
     /// <param name="index"></param>
     /// <param name="characterObject"></param>
     /// <returns></returns>
-    public GameObject GetPanel(TurnState player, int index, GameObject characterObject)
+    public GameObject GetPanel(PlayerType player, int index, GameObject characterObject)
     {
         var characterPanelObject = CharacterPanels(player)[index];
         characterPanelObject.SetActive(true);
@@ -121,13 +147,13 @@ public class PanelManager : MonoBehaviour
     /// </summary>
     /// <param name="player"></param>
     /// <returns></returns>
-    private GameObject[] CharacterPanels(TurnState player)
+    private GameObject[] CharacterPanels(PlayerType player)
     {
-        if (player == TurnState.PlayerLeft)
+        if (player == PlayerType.PlayerLeft)
         {
             return CharacterPanelsLeft;
         }
-        else if (player == TurnState.PlayerRight)
+        else if (player == PlayerType.PlayerRight)
         {
             return CharacterPanelsRight;
         }

@@ -6,14 +6,18 @@ using UnityEngine;
 public class Player
 {
     public string Name { get; private set; }
-    public TurnState PlayerTurn { get; private set; }
+    public PlayerType PlayerType { get; private set; }
     public List<GameObject> Characters { get; private set; }
+    public RollPanel RollPanel { get; private set; }
+    public GameObject RerollPanelObject { get; private set; }
 
-    public Player(string name, TurnState playerTurn)
+    public Player(string name, PlayerType player)
     {
         Name = name;
-        PlayerTurn = playerTurn;
-        Characters = LevelGenerator.Instance.CreateCharactersFor(playerTurn);
+        PlayerType = player; 
+        Characters = LevelGenerator.Instance.CreateCharactersFor(player);
+        RollPanel = PanelManager.Instance.GetRollPanelFor(player);
+        RerollPanelObject = PanelManager.Instance.GetRerollPanelFor(player);
 
         SettingsForCharacters();
     }
@@ -25,7 +29,7 @@ public class Player
     {
         foreach (var characterObject in Characters)
         {
-            if (PlayerTurn == TurnState.PlayerRight)
+            if (PlayerType == PlayerType.PlayerRight)
             {
                 var characterRotatation = characterObject.GetComponent<CharacterRotation>();
                 characterRotatation.RotatePivot(180);

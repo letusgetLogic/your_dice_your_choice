@@ -48,6 +48,11 @@ namespace Assets.Scripts.ActionDatas
         public abstract void ShowInteractible();
 
         /// <summary>
+        /// Deactivates the interactible objects.
+        /// </summary>
+        public abstract void DeactivateInteractible();
+
+        /// <summary>
         /// Handles the input of player.
         /// </summary>
         /// <param name="fieldObject"></param>

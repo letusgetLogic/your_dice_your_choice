@@ -36,16 +36,6 @@ public class FieldManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Sets the component FieldMouseEvent enabled true/false.
-    /// </summary>
-    /// <param name="component"></param>
-    /// <param name="value"></param>
-    private void SetEnabled(FieldMouseEvent component, bool value)
-    {
-        component.enabled = value;
-    }
-
-    /// <summary>
     /// Initializes the index of the array Fields and sets the index to the field.
     /// </summary>
     /// <param name="characterPrefab"></param>
@@ -129,7 +119,7 @@ public class FieldManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Deactivates the other displayed fields.
+    /// Deactivates the interactible fields.
     /// </summary>
     /// <param name="clickedField"></param>
     public void DeactivateFields()
@@ -138,7 +128,18 @@ public class FieldManager : MonoBehaviour
         {
             SetEnabled(mouseEvent, false);
         }
-
+        Debug.Log("Deactivates Fields");
         InteractibleFields.Clear();
     }
+
+    /// <summary>
+    /// Sets the component FieldMouseEvent enabled true/false.
+    /// </summary>
+    /// <param name="component"></param>
+    /// <param name="value"></param>
+    private void SetEnabled(FieldMouseEvent component, bool value)
+    {
+        component.enabled = value;
+    }
+
 }

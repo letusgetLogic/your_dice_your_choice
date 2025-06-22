@@ -62,6 +62,7 @@ namespace Assets.Scripts.CharacterPrefab
         /// </summary>
         private void OnDisable()
         {
+            _lightenState = LightenState.None;
             SetBorderColorR(_colorMinR);
         }
 

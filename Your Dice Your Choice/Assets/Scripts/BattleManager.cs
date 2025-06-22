@@ -37,8 +37,6 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     public void StartMatch()
     {
-        ButtonManager.Instance.ButtonOn(ButtonManager.Instance.RollButtonLeft);
-        ButtonManager.Instance.ButtonOn(ButtonManager.Instance.RollButtonRight);
     }
     
     /// <summary>
@@ -71,15 +69,23 @@ public class BattleManager : MonoBehaviour
                 continue;
             if (fieldIndex.y < 0 || fieldIndex.y >= LevelManager.Instance.Data.MapLength)
                 continue;
-
-            var enemyObject = EnemyCharacter(characterFieldIndexOrigin, actionDirection, directionRange);
-
-            if (enemyObject == null)
-            {
+            if (EnemyCharacter(characterFieldIndexOrigin, actionDirection, directionRange) == null)
                 continue;
-            }
-
+            
+            var enemyObject = EnemyCharacter(characterFieldIndexOrigin, actionDirection, directionRange);
             InteractibleCharacters.Add(enemyObject);
+        }
+    }
+
+    /// <summary>
+    /// Shows the interactible characters.
+    /// </summary>
+    public void ShowInteractibleCharacters()
+    {
+        foreach (var character in InteractibleCharacters)
+        {
+            var borderColor = character.GetComponent<CharacterBorderColor>();
+            SetEnabled(borderColor, true);
         }
     }
 
@@ -118,14 +124,35 @@ public class BattleManager : MonoBehaviour
 
             var field = FieldManager.Instance.Fields[fieldIndex.x, fieldIndex.y].GetComponent<Field>();
 
-            enemyObject = field.EnemyObject(TurnManager.Instance.Turn);
-
-            if (enemyObject != null)
-                return enemyObject;
+            if (field.EnemyObject(TurnManager.Instance.Turn) != null)
+                return field.EnemyObject(TurnManager.Instance.Turn);
         }
 
         return null;
     }
 
+    /// <summary>
+    /// Deactivates the interactible characters.
+    /// </summary>
+    public void DeactivateCharacters()
+    {
+        foreach (var character in InteractibleCharacters)
+        {
+            var borderColor = character.GetComponent<CharacterBorderColor>();
+            SetEnabled(borderColor, false);
+        }
+
+        InteractibleCharacters.Clear();
+    }
+
+    /// <summary>
+    /// Sets the component FieldMouseEvent enabled true/false.
+    /// </summary>
+    /// <param name="component"></param>
+    /// <param name="value"></param>
+    private void SetEnabled(CharacterBorderColor component, bool value)
+    {
+        component.enabled = value;
+    }
 }
 

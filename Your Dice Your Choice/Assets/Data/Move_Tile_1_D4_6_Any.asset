@@ -17,4 +17,5 @@ MonoBehaviour:
   AllowedTile: 3
   AllowedDiceNumber: 9
   Direction: 1
+  WeaponType: 0
   Description: Move in any direction 1 Tile,\n with Dice 4-6

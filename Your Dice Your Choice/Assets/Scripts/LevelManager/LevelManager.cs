@@ -29,21 +29,11 @@ public class LevelManager : MonoBehaviour
         Instance = this;
 
         SetMatch();
-    }
 
-    /// <summary>
-    /// Start method.
-    /// </summary>
-    private void Start()
-    {
         if (Data != null)
         {
             CurrentPhase = Phase.Intro;
             IsCheckingPhase = true;
-            
-            
-            
-            //TurnManager.Instance.PhaseSetFirstTurn();
         }
         else
         {
@@ -112,8 +102,6 @@ public class LevelManager : MonoBehaviour
         CreatePlayer();
 
         PanelManager.Instance.ShowRollPanels();
-
-        NextPhase();
     }
 
     /// <summary>
@@ -131,8 +119,8 @@ public class LevelManager : MonoBehaviour
                 break;
 
             case MatchType.Duell:
-                PlayerBase.Create(PlayerBase.PlayerLeft, "Player 1", TurnState.PlayerLeft);
-                PlayerBase.Create(PlayerBase.PlayerRight, "Player 2", TurnState.PlayerRight);
+                PlayerBase.Instance.Create("Player 1", PlayerType.PlayerLeft);
+                PlayerBase.Instance.Create("Player 2", PlayerType.PlayerRight);
                 break;
 
             case MatchType.DuellAI:

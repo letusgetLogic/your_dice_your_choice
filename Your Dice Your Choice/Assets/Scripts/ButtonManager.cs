@@ -47,12 +47,12 @@ public class ButtonManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Activates the button.
+    /// button.interactable = true/false.
     /// </summary>
     /// <param name="button"></param>
-    public void ButtonOn(Button button)
+    public void SetInteractible(Button button, bool value)
     {
-        button.interactable = true;
+        button.interactable = value;
     }
 }
 

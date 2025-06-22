@@ -93,7 +93,7 @@ public class LevelGenerator : MonoBehaviour
     /// </summary>
     /// <param name="player"></param>
     /// <returns></returns>
-    public List<GameObject> CreateCharactersFor(TurnState player)
+    public List<GameObject> CreateCharactersFor(PlayerType player)
     {
         var tempList = new List<GameObject>();
 
@@ -136,7 +136,7 @@ public class LevelGenerator : MonoBehaviour
     /// Randomize the position of characters.
     /// </summary>
     /// <param name="randomIndexes"></param>
-    private void RandomizeIndexes(TurnState player, Vector2Int[] randomIndexes)
+    private void RandomizeIndexes(PlayerType player, Vector2Int[] randomIndexes)
     {
         // The array to check if the field index is already assigned. 
         var fieldIndex = new Vector2[randomIndexes.Length];
@@ -177,13 +177,13 @@ public class LevelGenerator : MonoBehaviour
     /// </summary>
     /// <param name="player"></param>
     /// <returns></returns>
-    private int RandomizeColumn(TurnState player)
+    private int RandomizeColumn(PlayerType player)
     {
-        if (player == TurnState.PlayerLeft)
+        if (player == PlayerType.PlayerLeft)
         {
             return Random.Range(0, CharacterSpawnAreaMaxColumn);
         }
-        else if (player == TurnState.PlayerRight)
+        else if (player == PlayerType.PlayerRight)
         {
             int colAmount = FieldManager.Instance.Fields.GetLength(1);
             return Random.Range(colAmount - CharacterSpawnAreaMaxColumn, colAmount);
@@ -209,13 +209,13 @@ public class LevelGenerator : MonoBehaviour
     /// </summary>
     /// <param name="player"></param>
     /// <returns></returns>
-    private Color PLayerColor(TurnState player)
+    private Color PLayerColor(PlayerType player)
     {
-        if (player == TurnState.PlayerLeft)
+        if (player == PlayerType.PlayerLeft)
         {
             return PanelManager.Instance.NameTextLeft.color;
         }
-        else if (player == TurnState.PlayerRight)
+        else if (player == PlayerType.PlayerRight)
         {
             return PanelManager.Instance.NameTextRight.color;
         }

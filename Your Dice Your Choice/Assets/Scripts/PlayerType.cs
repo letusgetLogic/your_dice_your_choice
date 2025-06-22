@@ -1,4 +1,4 @@
-﻿public enum TurnState
+﻿public enum PlayerType
 {
     None,
     PlayerLeft,

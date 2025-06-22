@@ -25,6 +25,11 @@ namespace Assets.Scripts.ActionDatas
             FieldManager.Instance.ShowInteractibleFields();
         }
 
+        public override void DeactivateInteractible()
+        {
+            FieldManager.Instance.DeactivateFields();
+        }
+
         public override void HandleInput(GameObject fieldObject)
         {
             CharacterObject.GetComponent<CharacterMovement>().MoveTo(fieldObject);

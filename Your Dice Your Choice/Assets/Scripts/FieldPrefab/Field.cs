@@ -56,7 +56,7 @@ namespace Assets.Scripts.FieldPrefab
         /// </summary>
         /// <param name="currentPlayer"></param>
         /// <returns></returns>
-        public GameObject EnemyObject(TurnState currentPlayer)
+        public GameObject EnemyObject(PlayerType currentPlayer)
         {
             var character = CharacterObject.GetComponent<Character>();
 
@@ -64,7 +64,7 @@ namespace Assets.Scripts.FieldPrefab
             {
                 return CharacterObject;
             }
-
+            
             return null;
         }
     }

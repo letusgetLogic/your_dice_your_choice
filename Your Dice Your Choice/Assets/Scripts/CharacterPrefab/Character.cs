@@ -5,7 +5,7 @@ namespace Assets.Scripts.CharacterPrefab
 {
     public class Character : MonoBehaviour
     {
-        public TurnState Player { get; private set; }
+        public PlayerType Player { get; private set; }
         public CharacterData Data { get; private set; }
         public string Name { get; private set; }
 
@@ -21,7 +21,7 @@ namespace Assets.Scripts.CharacterPrefab
         /// Initialize Data.
         /// </summary>
         /// <param name="data"></param>
-        public void SetData(TurnState player, CharacterData data, Vector2Int fieldIndex)
+        public void SetData(PlayerType player, CharacterData data, Vector2Int fieldIndex)
         {
             Player = player;
             Data = data;

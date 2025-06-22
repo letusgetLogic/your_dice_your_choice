@@ -17,4 +17,5 @@ MonoBehaviour:
   AllowedTile: 0
   AllowedDiceNumber: 0
   Direction: 0
+  WeaponType: 1
   Description: Move the dice over it to get more information

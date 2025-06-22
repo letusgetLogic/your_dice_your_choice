@@ -3,20 +3,46 @@ using Assets.Scripts.CharacterPrefab;
 using TMPro;
 using UnityEngine;
 
-public static class PlayerBase
+public class PlayerBase : MonoBehaviour
 {
-    public static Player PlayerLeft { get; private set; }
-    public static Player PlayerRight { get; private set; }
+    public static PlayerBase Instance { get; private set; }
+    public Player PlayerLeft { get; private set; }
+    public Player PlayerRight { get; private set; }
+
+    /// <summary>
+    /// Awake method.
+    /// </summary>
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Destroy(Instance.gameObject);
+        }
+
+        Instance = this;
+    }
 
     /// <summary>
     /// Create an instance for the player.
     /// </summary>
     /// <param name="player"></param>
     /// <param name="name"></param>
-    /// <param name="playerTurn"></param>
-    public static void Create(Player player, string name, TurnState playerTurn)
+    /// <param name="player"></param>
+    public void Create(string name, PlayerType playerType)
     {
-        player = new Player(name, playerTurn);
+        switch (playerType)
+        {
+            case PlayerType.None:
+                throw new System.Exception("PlayerBAse.Create() -> player = None");
+
+            case PlayerType.PlayerLeft:
+                PlayerLeft = new Player(name, PlayerType.PlayerLeft);
+                break;
+
+            case PlayerType.PlayerRight:
+                PlayerRight = new Player(name, PlayerType.PlayerRight);
+                break;
+        }
     }
 }
 

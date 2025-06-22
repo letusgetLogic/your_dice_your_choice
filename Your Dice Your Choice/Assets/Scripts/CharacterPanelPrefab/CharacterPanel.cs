@@ -13,13 +13,13 @@ public class CharacterPanel : MonoBehaviour
 
     public GameObject CharacterObject { get; private set; }
     public Character Character { get; private set; }
-    public TurnState Player { get; private set; }
+    public PlayerType Player { get; private set; }
 
     /// <summary>
     /// References Object and Script Character.
     /// </summary>
     /// <param name="characterObject"></param>
-    public void SetCharacter(GameObject characterObject, TurnState player)
+    public void SetCharacter(GameObject characterObject, PlayerType player)
     {
         CharacterObject = characterObject;
         Player = player;

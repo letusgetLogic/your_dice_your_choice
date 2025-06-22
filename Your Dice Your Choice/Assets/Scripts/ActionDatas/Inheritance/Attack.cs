@@ -21,11 +21,10 @@ namespace Assets.Scripts.ActionDatas
         public override abstract void SetDescriptionOf(ActionPopup actionPopup, int index);
 
         public override abstract void SetInteractible(int diceNumber);
-        
-        public override void ShowInteractible()
-        {
-            
-        }
+
+        public override abstract void ShowInteractible();
+
+        public abstract override void DeactivateInteractible();
 
         public override void HandleInput(GameObject fieldObject)
         {

@@ -12,10 +12,21 @@ namespace Assets.Scripts.ActionDatas
 
         }
 
+        public override void ShowInteractible()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void DeactivateInteractible()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public override void HandleInput(GameObject fieldObject)
         {
             Debug.Log("Defend!");
         }
+
     }
 }
 

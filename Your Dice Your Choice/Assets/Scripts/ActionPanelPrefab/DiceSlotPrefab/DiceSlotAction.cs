@@ -17,11 +17,7 @@ namespace Assets.Scripts.ActionPopupPrefab.DiceSlotPrefab
 
         private IEnumerator _coroutine;
 
-        /// <summary>
-        /// This bool is needed, when the character doesn't have any chance from the dice input, 
-        /// so the dice get back into base.
-        /// </summary>
-        private bool _canFieldsBeingDeactivated = false;
+        private bool _isDeactivatingInteractible = false;
 
         /// <summary>
         /// Mouse enters UI Element. 
@@ -39,9 +35,9 @@ namespace Assets.Scripts.ActionPopupPrefab.DiceSlotPrefab
         {
             StopCoroutine(_coroutine);
 
-            if (_canFieldsBeingDeactivated)
+            if (_isDeactivatingInteractible)
             {
-                FieldManager.Instance.DeactivateFields();
+                _actionPanel.Action.DeactivateInteractible();
             }
         }
 
@@ -65,7 +61,7 @@ namespace Assets.Scripts.ActionPopupPrefab.DiceSlotPrefab
                 action.SetInteractible(dice.CurrentNumber);
                 action.ShowInteractible();
 
-                _canFieldsBeingDeactivated = true;
+                _isDeactivatingInteractible = true;
             }
         }
 
@@ -90,7 +86,7 @@ namespace Assets.Scripts.ActionPopupPrefab.DiceSlotPrefab
                 if (FieldManager.Instance.InteractibleFields.Count == 0)
                     return;
 
-                _canFieldsBeingDeactivated = false;
+                _isDeactivatingInteractible = false;
                        
                 SetDiceOnSlot(diceObject);
 

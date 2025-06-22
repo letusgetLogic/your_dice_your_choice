@@ -43,7 +43,7 @@ namespace Assets.Scripts.ActionPopupPrefab
 
             _actionPopup.SetActiveChildren(true);
 
-            if (_characterPanel.Player == TurnState.PlayerLeft)
+            if (_characterPanel.Player == PlayerType.PlayerLeft)
                 HideRightPanels(true);
         }
 
@@ -54,7 +54,7 @@ namespace Assets.Scripts.ActionPopupPrefab
         {
             _actionPopup.SetActiveChildren(false);
 
-            if (_characterPanel.Player == TurnState.PlayerLeft)
+            if (_characterPanel.Player == PlayerType.PlayerLeft)
                 HideRightPanels(false);
         }
 

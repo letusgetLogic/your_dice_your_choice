@@ -31,6 +31,16 @@ namespace Assets.Scripts.ActionDatas
                GetVector2FromDirection.Get(GetDirection(diceNumber)),
                Range(diceNumber));
         }
+        
+        public override void ShowInteractible()
+        {
+            BattleManager.Instance.ShowInteractibleCharacters();
+        }
+
+        public override void DeactivateInteractible()
+        {
+            BattleManager.Instance.DeactivateCharacters();
+        }
 
         /// <summary>
         /// The attack direction.
