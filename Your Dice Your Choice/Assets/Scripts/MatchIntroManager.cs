@@ -25,8 +25,8 @@ public class MatchIntroManager : MonoBehaviour
     public GameObject ForegroundTilemap;
     
 
-    [SerializeField] private float _act1Time = 2f;
-    [SerializeField] private float _act2Time = 2f;
+    [SerializeField] private float _act1Time = 3f;
+    [SerializeField] private float _act2Time = 3f;
 
     [SerializeField] private float _animSpeedAct1 = 0.0001f;
     [SerializeField] private float _animSpeedAct2 = 0.0001f;
@@ -116,7 +116,10 @@ public class MatchIntroManager : MonoBehaviour
             LeftIntroShaderRect.anchoredPosition = Vector2.Lerp(_startPositionLeftAct2, _endPositionLeftAct2, _animCurve1.Evaluate(_current));
             RightIntroShaderRect.anchoredPosition = Vector2.Lerp(_startPositionRightAct2, _endPositionRightAct2, _animCurve1.Evaluate(_current));
 
-            if (_animCurve1.Evaluate(_current) >= 1)
+            var value = _animCurve1.Evaluate(_current);
+            Debug.Log(value);
+
+            if (value >= 1)
             {
                 _current = 0f;
 
@@ -193,6 +196,7 @@ public class MatchIntroManager : MonoBehaviour
         foreach (var item in _textArray)
         {
             item.gameObject.SetActive(true);
+            item.alpha = 0f;
         }
 
         _playStates = PlayStates.Act1;
@@ -257,7 +261,6 @@ public class MatchIntroManager : MonoBehaviour
         foreach (var item in _textArray)
         {
             item.gameObject.SetActive(false);
-            item.alpha = 0f;
         }
 
         LeftIntroShaderRect.anchoredPosition = _startPositionLeftAct1;

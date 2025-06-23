@@ -19,7 +19,7 @@ public class TurnManager : MonoBehaviour
     [SerializeField] private GameObject _turnDiceLeft;
     [SerializeField] private GameObject _turnDiceRight;
 
-    [SerializeField] private GameObject _setTurnObject;
+    [SerializeField] private GameObject _setTurnShaderObject;
     [SerializeField] private TextMeshProUGUI _setTurnShaderText;
     [SerializeField] private TextMeshProUGUI _setTurnText;
 
@@ -80,7 +80,6 @@ public class TurnManager : MonoBehaviour
     /// <returns></returns>
     private IEnumerator AnimateDiceRoll()
     {
-        Debug.Log("RollDice");
         for (int i = 0; i < _rollFrequency; i++)
         {
             foreach (var dice in VisibleDice)
@@ -112,6 +111,7 @@ public class TurnManager : MonoBehaviour
     private IEnumerator Reroll()
     {
         yield return new WaitForSeconds(1);
+
         StartCoroutine(AnimateDiceRoll());
     }
 
@@ -123,12 +123,23 @@ public class TurnManager : MonoBehaviour
     private IEnumerator SetFirstTurn(PlayerType turnState)
     {
         yield return new WaitForSeconds(1);
-        Debug.Log("SetFirstTurn");
+
+        MatchIntroManager.Instance.LeftIntroShaderText.gameObject.SetActive(false);
+        MatchIntroManager.Instance.RightIntroShaderText.gameObject.SetActive(false);
+
+        SetTurn(turnState);
+
+        StartCoroutine(EndMatchIntro());
+    }
+
+    private IEnumerator EndMatchIntro()
+    {
+        yield return new WaitForSeconds(1);
+
         _turnDiceLeft.SetActive(false);
         _turnDiceRight.SetActive(false);
 
         MatchIntroManager.Instance.EndPhase();
-        SetTurn(turnState);
     }
 
     /// <summary>
@@ -186,16 +197,22 @@ public class TurnManager : MonoBehaviour
         SetRollPanel(player);
     }
 
+    /// <summary>
+    /// Sets and shows text.
+    /// </summary>
+    /// <param name="player"></param>
     private void SetTurnText(Player player)
     {
         _setTurnShaderText.text = player.Name + " is turn!";
-        _setTurnObject.SetActive(true);
+        _setTurnText.text = player.Name + " is turn!";
+        _setTurnShaderObject.SetActive(true);
+        //_setTurnShaderObject.transform.GetChild(0).gameObject.SetActive(true);
 
         StartCoroutine(TextEnd());
     }
 
     /// <summary>
-    /// 
+    /// Hides text.
     /// </summary>
     /// <returns></returns>
     private IEnumerator TextEnd()
@@ -203,9 +220,8 @@ public class TurnManager : MonoBehaviour
         yield return new WaitForSeconds(2);
 
         _setTurnShaderText.text = "";
-        _setTurnObject.SetActive(false);
-
-
+        _setTurnText.text = "";
+        _setTurnShaderObject.SetActive(false);
     }
 
     /// <summary>

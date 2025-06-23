@@ -9,7 +9,7 @@ public class Player
     public PlayerType PlayerType { get; private set; }
     public List<GameObject> Characters { get; private set; }
     public RollPanel RollPanel { get; private set; }
-    public GameObject RerollPanelObject { get; private set; }
+    //public GameObject RerollPanelObject { get; private set; }
 
     public Player(string name, PlayerType player)
     {
@@ -17,7 +17,7 @@ public class Player
         PlayerType = player; 
         Characters = LevelGenerator.Instance.CreateCharactersFor(player);
         RollPanel = PanelManager.Instance.GetRollPanelFor(player);
-        RerollPanelObject = PanelManager.Instance.GetRerollPanelFor(player);
+        //RerollPanelObject = PanelManager.Instance.GetRerollPanelFor(player);
 
         SettingsForCharacters();
     }

@@ -16,9 +16,9 @@ public class PanelManager : MonoBehaviour
     public GameObject[] CharacterPanelsLeft;
     public GameObject[] CharacterPanelsRight;
     public GameObject RollPanelLeft;
-    public GameObject RerollPanelLeft; 
+    //public GameObject RerollPanelLeft; 
     public GameObject RollPanelRight;
-    public GameObject RerollPanelRight;
+    //public GameObject RerollPanelRight;
     public GameObject CharacterInfoPanel;
 
     /// <summary>
@@ -57,24 +57,24 @@ public class PanelManager : MonoBehaviour
         throw new Exception("PanelManager.GetRollPanelFor() -> player case invalid");
     }
     
-    /// <summary>
-    /// Gets the roll panel.
-    /// </summary>
-    /// <param name="player"></param>
-    /// <returns></returns>
-    /// <exception cref="Exception"></exception>
-    public GameObject GetRerollPanelFor(PlayerType player)
-    {
-        switch (player)
-        {
-            case PlayerType.PlayerLeft:
-                return RerollPanelLeft;
-            case PlayerType.PlayerRight:
-                return RerollPanelRight;
-        }
+    ///// <summary>
+    ///// Gets the reroll panel.
+    ///// </summary>
+    ///// <param name="player"></param>
+    ///// <returns></returns>
+    ///// <exception cref="Exception"></exception>
+    //public GameObject GetRerollPanelFor(PlayerType player)
+    //{
+    //    switch (player)
+    //    {
+    //        case PlayerType.PlayerLeft:
+    //            return RerollPanelLeft;
+    //        case PlayerType.PlayerRight:
+    //            return RerollPanelRight;
+    //    }
 
-        throw new Exception("PanelManager.GetRerollPanelFor() -> player case invalid");
-    }
+    //    throw new Exception("PanelManager.GetRerollPanelFor() -> player case invalid");
+    //}
 
     /// <summary>
     /// Hides all character panels.
@@ -92,9 +92,9 @@ public class PanelManager : MonoBehaviour
         }
 
         RollPanelLeft.SetActive(false);
-        RerollPanelLeft.SetActive(false);
         RollPanelRight.SetActive(false);
-        RerollPanelRight.SetActive(false);
+        //RerollPanelLeft.SetActive(false);
+        //RerollPanelRight.SetActive(false);
 
         // Set the inactive panel in the scene active to create the singleton instance.
         CharacterInfoPanel.SetActive(true); 
@@ -107,10 +107,10 @@ public class PanelManager : MonoBehaviour
     public void ShowRollPanels()
     {
         RollPanelLeft.SetActive(true);
-        RerollPanelLeft.SetActive(true);
-
         RollPanelRight.SetActive(true);
-        RerollPanelRight.SetActive(true);
+
+        //RerollPanelLeft.SetActive(true);
+        //RerollPanelRight.SetActive(true);
     }
 
     /// <summary>
