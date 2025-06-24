@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
+using System.ComponentModel;
 using Assets.Scripts.DicePrefab;
+using Assets.Scripts.LevelDatas;
 using NUnit.Framework.Interfaces;
 using TMPro;
 using UnityEngine;
@@ -11,6 +13,7 @@ public class TurnManager : MonoBehaviour
     public static TurnManager Instance { get; private set; }
 
     public PlayerType Turn { get; private set; }
+    public PlayerType[] TurnStates { get; private set; }
     public GameObject[] VisibleDice { get; private set; }
 
     public GameObject PlayerPanelLeft;
@@ -20,6 +23,7 @@ public class TurnManager : MonoBehaviour
     [SerializeField] private GameObject _turnDiceRight;
 
     [SerializeField] private GameObject _setTurnShaderObject;
+    [SerializeField] private GameObject _setTurnObject;
     [SerializeField] private TextMeshProUGUI _setTurnShaderText;
     [SerializeField] private TextMeshProUGUI _setTurnText;
 
@@ -41,6 +45,15 @@ public class TurnManager : MonoBehaviour
         Instance = this;
 
         Turn = PlayerType.None;
+
+        TurnStates = new PlayerType[]
+        {
+            PlayerType.PlayerLeft,
+            PlayerType.PlayerRight
+        };
+
+        _setTurnShaderObject.SetActive(false);
+        _setTurnObject.SetActive(false);
 
         _startScale = _turnDiceLeft.GetComponent<RectTransform>().localScale;
     }
@@ -64,12 +77,11 @@ public class TurnManager : MonoBehaviour
     /// </summary>
     public void RollDice()
     {
-        
         VisibleDice = new GameObject[]
-       {
+        {
                 _turnDiceLeft,
                 _turnDiceRight,
-       };
+        };
 
         StartCoroutine(AnimateDiceRoll());
     }
@@ -103,7 +115,7 @@ public class TurnManager : MonoBehaviour
             StartCoroutine(SetFirstTurn(turnState));
         }
     }
-    
+
     /// <summary>
     /// Checks the turn dice.
     /// </summary>
@@ -127,7 +139,7 @@ public class TurnManager : MonoBehaviour
         MatchIntroManager.Instance.LeftIntroShaderText.gameObject.SetActive(false);
         MatchIntroManager.Instance.RightIntroShaderText.gameObject.SetActive(false);
 
-        SetTurn(turnState);
+        SwitchTurn(turnState);
 
         StartCoroutine(EndMatchIntro());
     }
@@ -149,88 +161,139 @@ public class TurnManager : MonoBehaviour
     {
         Vector3 diceScale = _startScale * ratio;
         Vector3 panelScale = new Vector3(ratio, ratio, ratio);
-       
+
         if (ratio >= 1)
         {
             _turnDiceLeft.GetComponent<RectTransform>().localScale = _startScale;
             return;
         }
-       
+
         _turnDiceLeft.GetComponent<RectTransform>().localScale = diceScale;
-        _turnDiceRight.GetComponent<RectTransform>().localScale = diceScale;  
+        _turnDiceRight.GetComponent<RectTransform>().localScale = diceScale;
 
         PlayerPanelLeft.GetComponent<RectTransform>().localScale = panelScale;
-        PlayerPanelRight.GetComponent<RectTransform>().localScale = panelScale; 
+        PlayerPanelRight.GetComponent<RectTransform>().localScale = panelScale;
     }
 
     /// <summary>
-    /// Sets turn.
+    /// Switchs turn.
     /// </summary>
     /// <param name="state"></param>
-    public void SetTurn(PlayerType state)
+    public void SwitchTurn()
     {
-        Turn = state;
-        SetOthers(state);
+        var lastTurn = Turn;
+        Turn = PlayerType.None;
+        SetOthers(lastTurn, GetOtherTurnFrom(lastTurn));
+    }
+
+    /// <summary>
+    /// Switchs turn for the next player.
+    /// </summary>
+    /// <param name="lastState"></param>
+    public void SwitchTurn(PlayerType nextTurn)
+    {
+        SetOthers(GetOtherTurnFrom(nextTurn), nextTurn);
     }
 
     /// <summary>
     /// Sets others.
     /// </summary>
-    /// <param name="state"></param>
-    private void SetOthers(PlayerType state)
+    /// <param name="lastState"></param>
+    private void SetOthers(PlayerType lastTurn, PlayerType nextTurn)
     {
-        Player player = null;
-        Player opponent = null;
+        Player lastPlayer = null;
+        Player nextPlayer = null;
 
-        if (PlayerBase.Instance.PlayerLeft.PlayerType == state)
+        if (PlayerBase.Instance.PlayerLeft.PlayerType == lastTurn)
         {
-            player = PlayerBase.Instance.PlayerLeft;
-            opponent = PlayerBase.Instance.PlayerRight;
+            lastPlayer = PlayerBase.Instance.PlayerLeft;
+            nextPlayer = PlayerBase.Instance.PlayerRight;
         }
-        else if (PlayerBase.Instance.PlayerRight.PlayerType == state)
+        else if (PlayerBase.Instance.PlayerRight.PlayerType == lastTurn)
         {
-            player = PlayerBase.Instance.PlayerRight;
-            opponent = PlayerBase.Instance.PlayerLeft;
+            lastPlayer = PlayerBase.Instance.PlayerRight;
+            nextPlayer = PlayerBase.Instance.PlayerLeft;
         }
 
-        SetTurnText(player);
-        SetRollPanel(player);
+        DeactivateRollPanel(lastPlayer);
+        SetTurnText(nextPlayer, nextTurn);
+    }
+
+    /// <summary>
+    /// Deactivates the roll panel for player in last turn.
+    /// </summary>
+    /// <param name="player"></param>
+    private void DeactivateRollPanel(Player opponent)
+    {
+        if (LevelManager.Instance.CurrentPhase == Phase.Battle)
+        {
+            opponent.RollPanel.SetInteractionFor(VisibleDice, false);
+            opponent.RollPanel.SetRollButton(false);
+            opponent.RollPanel.SendBackToBase(opponent.RollPanel.VisibleDice);
+            opponent.RollPanel.SetDefaultNumber(opponent.RollPanel.VisibleDice);
+        }
     }
 
     /// <summary>
     /// Sets and shows text.
     /// </summary>
-    /// <param name="player"></param>
-    private void SetTurnText(Player player)
+    /// <param name="nextPlayer"></param>
+    private void SetTurnText(Player nextPlayer, PlayerType nextTurn)
     {
-        _setTurnShaderText.text = player.Name + " is turn!";
-        _setTurnText.text = player.Name + " is turn!";
+        _setTurnShaderText.text = nextPlayer.Name + " is turn!";
+        _setTurnText.text = nextPlayer.Name + " is turn!";
         _setTurnShaderObject.SetActive(true);
-        //_setTurnShaderObject.transform.GetChild(0).gameObject.SetActive(true);
+        _setTurnObject.SetActive(true);
 
-        StartCoroutine(TextEnd());
+        StartCoroutine(EndTurnText(nextPlayer, nextTurn));
     }
 
     /// <summary>
     /// Hides text.
     /// </summary>
     /// <returns></returns>
-    private IEnumerator TextEnd()
+    private IEnumerator EndTurnText(Player nextPlayer, PlayerType nextTurn)
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
 
         _setTurnShaderText.text = "";
         _setTurnText.text = "";
         _setTurnShaderObject.SetActive(false);
+        _setTurnObject.SetActive(false);
+
+        SetTurn(nextPlayer, nextTurn);
     }
 
     /// <summary>
-    /// Sets the roll panel.
+    /// Sets turn.
+    /// </summary>
+    /// <param name="state"></param>
+    private void SetTurn(Player nextPlayer, PlayerType nextTurn)
+    {
+        Turn = nextTurn;
+
+        ActivateRollPanel(nextPlayer);
+        ButtonManager.Instance.SetInteractible(ButtonManager.Instance.EndTurnButton, true);
+    }
+
+    /// <summary>
+    /// Activates the roll panel for player in this turn.
     /// </summary>
     /// <param name="player"></param>
-    private void SetRollPanel(Player player)
+    private void ActivateRollPanel(Player player)
     {
         player.RollPanel.ShowDice();
         player.RollPanel.SetRollButton(true);
     }
+
+    /// <summary>
+    /// Returns other turn.
+    /// </summary>
+    /// <param name="targetTurn"></param>
+    /// <returns></returns>
+    private PlayerType GetOtherTurnFrom(PlayerType targetTurn)
+    {
+        return targetTurn == TurnStates[0] ? TurnStates[1] : TurnStates[0];
+    }
+
 }

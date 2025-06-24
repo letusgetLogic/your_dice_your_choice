@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Collections;
 using Unity.VisualScripting;
+using Assets.Scripts.CharacterPrefab;
 
 namespace Assets.Scripts.ActionPopupPrefab.DiceSlotPrefab
 {
@@ -14,6 +15,7 @@ namespace Assets.Scripts.ActionPopupPrefab.DiceSlotPrefab
 
         private Transform _actionPanelTransform => transform.parent.parent;
         private ActionPanel _actionPanel => _actionPanelTransform.gameObject.GetComponent<ActionPanel>();
+        private PlayerType _playerType => _actionPanel.CharacterObject.GetComponent<Character>().Player;
 
         private IEnumerator _coroutine;
 
@@ -24,6 +26,7 @@ namespace Assets.Scripts.ActionPopupPrefab.DiceSlotPrefab
         /// </summary>
         public void OnPointerEnter(PointerEventData eventData)
         {
+           
             _coroutine = ShowInteractible(eventData.pointerDrag);
             StartCoroutine(_coroutine);
         }
@@ -47,6 +50,9 @@ namespace Assets.Scripts.ActionPopupPrefab.DiceSlotPrefab
         /// <returns></returns>
         private IEnumerator ShowInteractible(GameObject diceBeingDragged)
         {
+            if (_playerType != TurnManager.Instance.Turn)
+                yield break;
+
             yield return new WaitForSeconds(_delayOnHoverTime);
 
             if (diceBeingDragged != null && diceBeingDragged.CompareTag("Dice"))
@@ -71,6 +77,9 @@ namespace Assets.Scripts.ActionPopupPrefab.DiceSlotPrefab
         /// <param name="eventData"></param>
         public void OnDrop(PointerEventData eventData)
         {
+            if (_playerType != TurnManager.Instance.Turn)
+                return;
+
             var diceObject = eventData.pointerDrag;
 
             if (diceObject.CompareTag("Dice"))
@@ -78,7 +87,7 @@ namespace Assets.Scripts.ActionPopupPrefab.DiceSlotPrefab
                 var action = _actionPanel.Action;
                 var dice = diceObject.GetComponent<Dice>();
 
-                if (action.IsValid(dice.CurrentNumber) == false) 
+                if (action.IsValid(dice.CurrentNumber) == false)
                     return;
 
                 action.SetInteractible(dice.CurrentNumber);

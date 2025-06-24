@@ -12,15 +12,16 @@ namespace Assets.Scripts.DicePrefab
         public int IndexOnPanel { get; private set; }
         public GameObject RollPanel { get; private set; }
 
-        [SerializeField] private int _defaultDiceIndex = 6;
+        [SerializeField] private int _defaultNumber = 6;
 
-        
+        public int DefaultNumber => _defaultNumber;
+
         /// <summary>
         /// Start method.
         /// </summary>
         private void Start()
         {
-            InitializeSide(_defaultDiceIndex);
+            InitializeSide(_defaultNumber);
         }
 
         /// <summary>   
@@ -43,5 +44,6 @@ namespace Assets.Scripts.DicePrefab
             RollPanel = rollPanel;
             IndexOnPanel = index;
         }
+
     }
 }

@@ -37,8 +37,9 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     public void StartMatch()
     {
+        ButtonManager.Instance.EndTurnButton.gameObject.SetActive(true);
     }
-    
+
     /// <summary>
     /// Sets the data.
     /// </summary>

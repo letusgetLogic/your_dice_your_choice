@@ -117,7 +117,6 @@ public class MatchIntroManager : MonoBehaviour
             RightIntroShaderRect.anchoredPosition = Vector2.Lerp(_startPositionRightAct2, _endPositionRightAct2, _animCurve1.Evaluate(_current));
 
             var value = _animCurve1.Evaluate(_current);
-            Debug.Log(value);
 
             if (value >= 1)
             {
@@ -142,6 +141,7 @@ public class MatchIntroManager : MonoBehaviour
         {
             _current = Mathf.MoveTowards(_current, 1, _animSpeedAct3 / Time.deltaTime);
 
+            // Dims up the battleground.
             ForegroundTilemap.GetComponent<Tilemap>().color = new Color(1, 1, 1, 1 - _animCurve1.Evaluate(_current));
 
             float ratio = Mathf.Lerp(0, 1, _animCurve1.Evaluate(_current));

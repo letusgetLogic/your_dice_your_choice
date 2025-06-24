@@ -10,7 +10,7 @@ public class DiceManager : MonoBehaviour
     private CanvasGroup _canvasGroup => GetComponent<CanvasGroup>();
     private DiceDragEvent _dragEvent => GetComponent<DiceDragEvent>();
 
-   /// <summary>
+    /// <summary>
     /// Sets the component DiceDragEvent true/false.
     /// </summary>
     public void SetDragEventEnable(bool value)

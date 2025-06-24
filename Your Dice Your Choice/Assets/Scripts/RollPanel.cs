@@ -29,16 +29,16 @@ public class RollPanel : MonoBehaviour
     /// <summary>
     /// Sets the dice active true/false.
     /// </summary>
-    /// <param name="dice"></param>
+    /// <param name="diceObjects"></param>
     /// <param name="value"></param>
-    private void SetInteractionFor(GameObject[] dice, bool value)
+    public void SetInteractionFor(GameObject[] diceObjects, bool value)
     {
-        foreach (GameObject d in dice)
+        foreach (GameObject diceObject in diceObjects)
         {
-            d.GetComponent<DiceManager>().SetDragEventEnable(value);
+            diceObject.GetComponent<DiceManager>().SetDragEventEnable(value);
         }
     }
-
+    
     /// <summary>
     /// Shows Dice.
     /// </summary>
@@ -74,6 +74,8 @@ public class RollPanel : MonoBehaviour
     /// </summary>
     public void RollDice()
     {
+        SetRollButton(false);
+
         StartCoroutine(AnimateDiceRoll()); 
     }
 
@@ -111,9 +113,9 @@ public class RollPanel : MonoBehaviour
     /// Sets the dice on the slot on the panel.
     /// </summary>
     /// <param name="index"></param>
-    public void SetInstance(GameObject dice, int index)
+    public void SetInstance(GameObject diceObject, int index)
     {
-        VisibleDice[index] = dice;
+        VisibleDice[index] = diceObject;
     }
 
     /// <summary>
@@ -124,4 +126,32 @@ public class RollPanel : MonoBehaviour
     {
         ButtonManager.Instance.SetInteractible(RollButton, value);
     }
+
+    /// <summary>
+    /// Sends the dice back to base.
+    /// </summary>
+    /// <param name="diceObjects"></param>
+    /// <param name="value"></param>
+    public void SendBackToBase(GameObject[] diceObjects)
+    {
+        foreach (GameObject diceObject in diceObjects)
+        {
+            diceObject.GetComponent<DiceMovement>().SendBackToBase();
+        }
+    }
+
+    /// <summary>
+    /// Sets the default number to dice.
+    /// </summary>
+    /// <param name="diceObjects"></param>
+    /// <param name="value"></param>
+    public void SetDefaultNumber(GameObject[] diceObjects)
+    {
+        foreach (GameObject diceObject in diceObjects)
+        {
+            var dice = diceObject.GetComponent<Dice>();
+            dice.InitializeSide(dice.DefaultNumber);
+        }
+    }
+
 }

@@ -50,7 +50,12 @@ namespace Assets.Scripts.DicePrefab
                 {
                     _currentValue = 0f;
                     _isRunning = false;
+
+                    if (TurnManager.Instance.Turn == PlayerType.None)
+                        return;
+
                     _diceManager.SetDragEventEnable(true);
+
                     return;
                 }
 
@@ -77,7 +82,7 @@ namespace Assets.Scripts.DicePrefab
         {
             _rectTransform.position = pos;
 
-            _rollPanel.SetNull(_dice.IndexOnPanel);
+            //_rollPanel.SetNull(_dice.IndexOnPanel);
         }
     }
 }
