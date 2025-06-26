@@ -3,7 +3,6 @@ using System.Collections;
 using System.ComponentModel;
 using Assets.Scripts.DicePrefab;
 using Assets.Scripts.LevelDatas;
-using NUnit.Framework.Interfaces;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,23 +13,11 @@ public class TurnManager : MonoBehaviour
 
     public PlayerType Turn { get; private set; }
     public PlayerType[] TurnStates { get; private set; }
-    public GameObject[] VisibleDice { get; private set; }
-
-    public GameObject PlayerPanelLeft;
-    public GameObject PlayerPanelRight;
-
-    [SerializeField] private GameObject _turnDiceLeft;
-    [SerializeField] private GameObject _turnDiceRight;
 
     [SerializeField] private GameObject _setTurnShaderObject;
     [SerializeField] private GameObject _setTurnObject;
     [SerializeField] private TextMeshProUGUI _setTurnShaderText;
     [SerializeField] private TextMeshProUGUI _setTurnText;
-
-    [SerializeField] private int _rollFrequency = 10;
-    [SerializeField] private float _rollTimer = 0.25f;
-
-    private Vector3 _startScale;
 
     /// <summary>
     /// Awake method.
@@ -44,135 +31,16 @@ public class TurnManager : MonoBehaviour
 
         Instance = this;
 
-        Turn = PlayerType.None;
-
         TurnStates = new PlayerType[]
         {
             PlayerType.PlayerLeft,
             PlayerType.PlayerRight
         };
 
+        Turn = PlayerType.None;
+
         _setTurnShaderObject.SetActive(false);
         _setTurnObject.SetActive(false);
-
-        _startScale = _turnDiceLeft.GetComponent<RectTransform>().localScale;
-    }
-
-    /// <summary>
-    /// Sets the turn dice and the player panel at the start state.
-    /// </summary>
-    public void SetDiceAndPanel()
-    {
-        _turnDiceLeft.GetComponent<RectTransform>().localScale = new Vector3(0, 0, 0);
-        _turnDiceRight.GetComponent<RectTransform>().localScale = new Vector3(0, 0, 0);
-        _turnDiceLeft.SetActive(true);
-        _turnDiceRight.SetActive(true);
-
-        PlayerPanelLeft.GetComponent<RectTransform>().localScale = new Vector3(0, 0, 0);
-        PlayerPanelRight.GetComponent<RectTransform>().localScale = new Vector3(0, 0, 0);
-    }
-
-    /// <summary>
-    /// Rolls dice.
-    /// </summary>
-    public void RollDice()
-    {
-        VisibleDice = new GameObject[]
-        {
-                _turnDiceLeft,
-                _turnDiceRight,
-        };
-
-        StartCoroutine(AnimateDiceRoll());
-    }
-
-    /// <summary>
-    /// Shows all dice per roll.
-    /// </summary>
-    /// <returns></returns>
-    private IEnumerator AnimateDiceRoll()
-    {
-        for (int i = 0; i < _rollFrequency; i++)
-        {
-            foreach (var dice in VisibleDice)
-            {
-                var diceScript = dice.GetComponent<Dice>();
-                int sideIndex = UnityEngine.Random.Range(1, diceScript.DiceSide.Length);
-                diceScript.InitializeSide(sideIndex);
-            }
-
-            yield return new WaitForSeconds(_rollTimer);
-        }
-
-        int numberLeft = _turnDiceLeft.GetComponent<Dice>().CurrentNumber;
-        int numberRight = _turnDiceRight.GetComponent<Dice>().CurrentNumber;
-
-        if (numberLeft == numberRight)
-            StartCoroutine(Reroll());
-        else
-        {
-            var turnState = numberLeft > numberRight ? PlayerType.PlayerLeft : PlayerType.PlayerRight;
-            StartCoroutine(SetFirstTurn(turnState));
-        }
-    }
-
-    /// <summary>
-    /// Checks the turn dice.
-    /// </summary>
-    /// <returns></returns>
-    private IEnumerator Reroll()
-    {
-        yield return new WaitForSeconds(1);
-
-        StartCoroutine(AnimateDiceRoll());
-    }
-
-    /// <summary>
-    /// Sets the first turn.
-    /// </summary>
-    /// <param name="turnState"></param>
-    /// <returns></returns>
-    private IEnumerator SetFirstTurn(PlayerType turnState)
-    {
-        yield return new WaitForSeconds(1);
-
-        MatchIntroManager.Instance.LeftIntroShaderText.gameObject.SetActive(false);
-        MatchIntroManager.Instance.RightIntroShaderText.gameObject.SetActive(false);
-
-        SwitchTurn(turnState);
-
-        StartCoroutine(EndMatchIntro());
-    }
-
-    private IEnumerator EndMatchIntro()
-    {
-        yield return new WaitForSeconds(1);
-
-        _turnDiceLeft.SetActive(false);
-        _turnDiceRight.SetActive(false);
-
-        MatchIntroManager.Instance.EndPhase();
-    }
-
-    /// <summary>
-    /// Scales up the alpha values. 
-    /// </summary>
-    public void ScaleUp(float ratio)
-    {
-        Vector3 diceScale = _startScale * ratio;
-        Vector3 panelScale = new Vector3(ratio, ratio, ratio);
-
-        if (ratio >= 1)
-        {
-            _turnDiceLeft.GetComponent<RectTransform>().localScale = _startScale;
-            return;
-        }
-
-        _turnDiceLeft.GetComponent<RectTransform>().localScale = diceScale;
-        _turnDiceRight.GetComponent<RectTransform>().localScale = diceScale;
-
-        PlayerPanelLeft.GetComponent<RectTransform>().localScale = panelScale;
-        PlayerPanelRight.GetComponent<RectTransform>().localScale = panelScale;
     }
 
     /// <summary>
@@ -220,17 +88,17 @@ public class TurnManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Deactivates the roll panel for player in last turn.
+    /// Deactivates the roll panel for the last player.
     /// </summary>
     /// <param name="player"></param>
-    private void DeactivateRollPanel(Player opponent)
+    private void DeactivateRollPanel(Player lastPlayer)
     {
         if (LevelManager.Instance.CurrentPhase == Phase.Battle)
         {
-            opponent.RollPanel.SetInteractionFor(VisibleDice, false);
-            opponent.RollPanel.SetRollButton(false);
-            opponent.RollPanel.SendBackToBase(opponent.RollPanel.VisibleDice);
-            opponent.RollPanel.SetDefaultNumber(opponent.RollPanel.VisibleDice);
+            lastPlayer.RollPanel.SetInteractionFor(lastPlayer.RollPanel.VisibleDice, false);
+            lastPlayer.RollPanel.SetRollButton(false);
+            lastPlayer.RollPanel.SendBackToBase(lastPlayer.RollPanel.VisibleDice);
+            lastPlayer.RollPanel.SetDefaultNumber(lastPlayer.RollPanel.VisibleDice);
         }
     }
 

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Assets.Scripts.DicePrefab;
 using UnityEngine.UI;
+using Assets.Scripts;
 
 public class RollPanel : MonoBehaviour
 {
@@ -27,19 +28,6 @@ public class RollPanel : MonoBehaviour
     }
 
     /// <summary>
-    /// Sets the dice active true/false.
-    /// </summary>
-    /// <param name="diceObjects"></param>
-    /// <param name="value"></param>
-    public void SetInteractionFor(GameObject[] diceObjects, bool value)
-    {
-        foreach (GameObject diceObject in diceObjects)
-        {
-            diceObject.GetComponent<DiceManager>().SetDragEventEnable(value);
-        }
-    }
-    
-    /// <summary>
     /// Shows Dice.
     /// </summary>
     /// <param name="amount"></param>
@@ -49,9 +37,9 @@ public class RollPanel : MonoBehaviour
         {
             var dice = AllDice[i];
             dice.SetActive(true);
-            
+
             VisibleDice[i] = dice;
-            
+
             dice.GetComponent<Dice>().InitializeIndexOf(gameObject, i);
         }
     }
@@ -76,28 +64,31 @@ public class RollPanel : MonoBehaviour
     {
         SetRollButton(false);
 
-        StartCoroutine(AnimateDiceRoll()); 
+        var rollDice = new RollDice();
+
+        rollDice.Roll(VisibleDice, _rollFrequency, _animTimer,
+            SetInteraction);
     }
 
     /// <summary>
-    /// Shows all dice per roll.
+    /// Sets interaction.
     /// </summary>
-    /// <returns></returns>
-    private IEnumerator AnimateDiceRoll()
+    private void SetInteraction()
     {
-        for (int i = 0; i < _rollFrequency; i++)
-        {
-            foreach (var dice in VisibleDice)
-            {
-                var diceScript = dice.GetComponent<Dice>();
-                int sideIndex = UnityEngine.Random.Range(1, diceScript.DiceSide.Length);
-                diceScript.InitializeSide(sideIndex);
-            }
-
-            yield return new WaitForSeconds(_animTimer); 
-        }
-
         SetInteractionFor(VisibleDice, true);
+    }
+
+    /// <summary>
+    /// Sets the dice active true/false.
+    /// </summary>
+    /// <param name="diceObjects"></param>
+    /// <param name="value"></param>
+    public void SetInteractionFor(GameObject[] diceObjects, bool value)
+    {
+        foreach (GameObject diceObject in diceObjects)
+        {
+            diceObject.GetComponent<DiceManager>().SetDragEventEnable(value);
+        }
     }
 
     /// <summary>

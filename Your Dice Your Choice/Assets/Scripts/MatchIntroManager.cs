@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Assets.Scripts;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -88,11 +89,9 @@ public class MatchIntroManager : MonoBehaviour
     {
         if (_playStates == PlayStates.Act1)
         {
-            _current = Mathf.MoveTowards(_current, 1, _animSpeedAct1 / Time.deltaTime);
-
-            LeftIntroShaderRect.anchoredPosition = Vector2.Lerp(_startPositionLeftAct1, _startPositionLeftAct2, _animCurve1.Evaluate(_current));
-            RightIntroShaderRect.anchoredPosition = Vector2.Lerp(_startPositionRightAct1, _startPositionRightAct2, _animCurve1.Evaluate(_current));
-
+            MoveText(_animSpeedAct1, _startPositionLeftAct1, _startPositionLeftAct2, 
+                _startPositionRightAct1, _startPositionRightAct2);
+            
             FadeIn();
 
             if (_animCurve1.Evaluate(_current) >= 1)
@@ -111,21 +110,15 @@ public class MatchIntroManager : MonoBehaviour
     {
         if (_playStates == PlayStates.Act2)
         {
-            _current = Mathf.MoveTowards(_current, 1, _animSpeedAct2 / Time.deltaTime);
+            MoveText(_animSpeedAct2, _startPositionLeftAct2, _endPositionLeftAct2,
+                _startPositionRightAct2, _endPositionRightAct2);
 
-            LeftIntroShaderRect.anchoredPosition = Vector2.Lerp(_startPositionLeftAct2, _endPositionLeftAct2, _animCurve1.Evaluate(_current));
-            RightIntroShaderRect.anchoredPosition = Vector2.Lerp(_startPositionRightAct2, _endPositionRightAct2, _animCurve1.Evaluate(_current));
-
-            var value = _animCurve1.Evaluate(_current);
-
-            if (value >= 1)
+            if (_animCurve1.Evaluate(_current) >= 1)
             {
-                _current = 0f;
-
-                TurnManager.Instance.SetDiceAndPanel();
-
+                SetFirstTurn.Instance.SetDiceAndPanel();
                 LevelManager.Instance.NextPhase();
 
+                _current = 0f;
                 _playStates = PlayStates.None;
             }
         }
@@ -146,17 +139,27 @@ public class MatchIntroManager : MonoBehaviour
 
             float ratio = Mathf.Lerp(0, 1, _animCurve1.Evaluate(_current));
 
-            TurnManager.Instance.ScaleUp(ratio);
+            SetFirstTurn.Instance.ScaleUp(ratio);
 
             if (ratio >= 1)
             {
-                _current = 0f;
-               
-                TurnManager.Instance.RollDice();
+                SetFirstTurn.Instance.RollDice();
 
+                _current = 0f;
                 _playStates = PlayStates.None;
             }
         }
+    }
+
+    private void MoveText(float animSpeed, Vector2 startPositionLeft, Vector2 endPOsitionLeft,
+        Vector2 startPositionRight, Vector2 endPOsitionRight)
+    {
+        _current = Mathf.MoveTowards(_current, 1, animSpeed / Time.deltaTime);
+
+        LeftIntroShaderRect.anchoredPosition = Vector2.Lerp(
+            startPositionLeft, endPOsitionLeft, _animCurve1.Evaluate(_current));
+        RightIntroShaderRect.anchoredPosition = Vector2.Lerp(
+            startPositionRight, endPOsitionRight, _animCurve1.Evaluate(_current));
     }
 
     /// <summary>
