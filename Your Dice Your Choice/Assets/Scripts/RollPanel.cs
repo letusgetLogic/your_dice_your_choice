@@ -58,15 +58,13 @@ public class RollPanel : MonoBehaviour
     }
 
     /// <summary>
-    /// Rolls dice.
+    /// Button call.
     /// </summary>
-    public void RollDice()
+    public void Roll()
     {
         SetRollButton(false);
 
-        var rollDice = new RollDice();
-
-        rollDice.Roll(VisibleDice, _rollFrequency, _animTimer,
+        RollDice.Instance.Roll(VisibleDice, _rollFrequency, _animTimer,
             SetInteraction);
     }
 
@@ -89,24 +87,6 @@ public class RollPanel : MonoBehaviour
         {
             diceObject.GetComponent<DiceManager>().SetDragEventEnable(value);
         }
-    }
-
-    /// <summary>
-    /// Sets the slot on the panel null.
-    /// </summary>
-    /// <param name="index"></param>
-    public void SetNull(int index)
-    {
-        VisibleDice[index] = null;
-    }
-
-    /// <summary>
-    /// Sets the dice on the slot on the panel.
-    /// </summary>
-    /// <param name="index"></param>
-    public void SetInstance(GameObject diceObject, int index)
-    {
-        VisibleDice[index] = diceObject;
     }
 
     /// <summary>

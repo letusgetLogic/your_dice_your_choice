@@ -37,13 +37,16 @@ namespace Assets.Scripts
             _startScale = _turnDiceLeft.GetComponent<RectTransform>().localScale;
         }
 
+        /// <summary>
+        /// Start method.
+        /// </summary>
         private void Start()
         {
             TurnDice = new GameObject[]
-           {
+            {
                 _turnDiceLeft,
                 _turnDiceRight,
-           };
+            };
         }
 
         /// <summary>
@@ -61,14 +64,11 @@ namespace Assets.Scripts
         }
 
         /// <summary>
-        /// Rolls dice.
+        /// Rolls turn dice.
         /// </summary>
-        public void RollDice()
+        public void RollTurnDice()
         {
-            var rollDice = new RollDice();
-
-            rollDice.Roll(TurnDice, _rollFrequency, _animTimer,
-                CheckDiceNumber);
+            RollDice.Instance.Roll(TurnDice, _rollFrequency, _animTimer, CheckDiceNumber);
         }
 
         /// <summary>
@@ -84,7 +84,8 @@ namespace Assets.Scripts
             else
             {
                 var turnState = numberLeft > numberRight ? 
-                                PlayerType.PlayerLeft : PlayerType.PlayerRight;
+                                PlayerType.PlayerLeft : 
+                                PlayerType.PlayerRight;
                 StartCoroutine(SetTurn(turnState));
             }
         }
@@ -97,7 +98,7 @@ namespace Assets.Scripts
         {
             yield return new WaitForSeconds(1);
 
-            RollDice();
+            RollTurnDice();
         }
 
         /// <summary>
@@ -117,6 +118,10 @@ namespace Assets.Scripts
             StartCoroutine(EndMatchIntro());
         }
 
+        /// <summary>
+        /// Ends the match intro.
+        /// </summary>
+        /// <returns></returns>
         private IEnumerator EndMatchIntro()
         {
             yield return new WaitForSeconds(1);

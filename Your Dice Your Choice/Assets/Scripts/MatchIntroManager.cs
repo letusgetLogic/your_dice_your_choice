@@ -65,7 +65,6 @@ public class MatchIntroManager : MonoBehaviour
 
         Instance = this;
 
-
         _current = 0f;
 
         InitializeArray();
@@ -80,6 +79,35 @@ public class MatchIntroManager : MonoBehaviour
         PlayAct1();
         PlayAct2();
         PlayAct3();
+    }
+
+    /// <summary>
+    /// Plays the intro.
+    /// </summary>
+    public void Play()
+    {
+        LeftIntroText.text = PlayerNameLeft;
+        LeftIntroShaderText.text = PlayerNameLeft;
+        RightIntroText.text = PlayerNameRight;
+        RightIntroShaderText.text = PlayerNameRight;
+
+        SetIntroActive();
+    }
+
+    /// <summary>
+    /// Sets the intro active.
+    /// </summary>
+    private void SetIntroActive()
+    {
+        foreach (var item in _textArray)
+        {
+            item.gameObject.SetActive(true);
+            item.alpha = 0f;
+        }
+
+        _playStates = PlayStates.Act1;
+
+        StartCoroutine(SetAct2());
     }
 
     /// <summary>
@@ -143,7 +171,7 @@ public class MatchIntroManager : MonoBehaviour
 
             if (ratio >= 1)
             {
-                SetFirstTurn.Instance.RollDice();
+                SetFirstTurn.Instance.RollTurnDice();
 
                 _current = 0f;
                 _playStates = PlayStates.None;
@@ -151,6 +179,14 @@ public class MatchIntroManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Moves the text objects.
+    /// </summary>
+    /// <param name="animSpeed"></param>
+    /// <param name="startPositionLeft"></param>
+    /// <param name="endPOsitionLeft"></param>
+    /// <param name="startPositionRight"></param>
+    /// <param name="endPOsitionRight"></param>
     private void MoveText(float animSpeed, Vector2 startPositionLeft, Vector2 endPOsitionLeft,
         Vector2 startPositionRight, Vector2 endPOsitionRight)
     {
@@ -160,51 +196,6 @@ public class MatchIntroManager : MonoBehaviour
             startPositionLeft, endPOsitionLeft, _animCurve1.Evaluate(_current));
         RightIntroShaderRect.anchoredPosition = Vector2.Lerp(
             startPositionRight, endPOsitionRight, _animCurve1.Evaluate(_current));
-    }
-
-    /// <summary>
-    /// Initializes the text array.
-    /// </summary>
-    private void InitializeArray()
-    {
-        _textArray = new[]
-        { 
-            LeftIntroText, 
-            VersusIntroText, 
-            RightIntroText, 
-            LeftIntroShaderText, 
-            VersusIntroShaderText, 
-            RightIntroShaderText
-        };
-    }
-
-    /// <summary>
-    /// Plays the intro.
-    /// </summary>
-    public void Play()
-    {
-        LeftIntroText.text = PlayerNameLeft;
-        LeftIntroShaderText.text = PlayerNameLeft;
-        RightIntroText.text = PlayerNameRight;
-        RightIntroShaderText.text = PlayerNameRight;
-
-        SetIntroActive();
-    }
-
-    /// <summary>
-    /// Sets the intro active.
-    /// </summary>
-    private void SetIntroActive()
-    {
-        foreach (var item in _textArray)
-        {
-            item.gameObject.SetActive(true);
-            item.alpha = 0f;
-        }
-
-        _playStates = PlayStates.Act1;
-
-        StartCoroutine(SetAct2());  
     }
 
     /// <summary>
@@ -241,7 +232,7 @@ public class MatchIntroManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Fades in the intro. 
+    /// Fades in the text components. 
     /// </summary>
     private void FadeIn()
     {
@@ -269,5 +260,22 @@ public class MatchIntroManager : MonoBehaviour
         LeftIntroShaderRect.anchoredPosition = _startPositionLeftAct1;
         RightIntroShaderRect.anchoredPosition = _startPositionRightAct1;
     }
+
+    /// <summary>
+    /// Initializes the text array.
+    /// </summary>
+    private void InitializeArray()
+    {
+        _textArray = new[]
+        { 
+            LeftIntroText, 
+            VersusIntroText, 
+            RightIntroText, 
+            LeftIntroShaderText, 
+            VersusIntroShaderText, 
+            RightIntroShaderText
+        };
+    }
+
 }
 

@@ -6,6 +6,21 @@ namespace Assets.Scripts
 {
     public class RollDice : MonoBehaviour
     {
+        public static RollDice Instance { get; private set; }
+
+        /// <summary>
+        /// Awake method.
+        /// </summary>
+        private void Awake()
+        {
+            if (Instance != null)
+            {
+                Destroy(Instance.gameObject);
+            }
+           
+            Instance = this;
+        }
+
         /// <summary>
         /// Rolls dice.
         /// </summary>

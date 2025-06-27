@@ -3,18 +3,18 @@ using System.Collections;
 using Assets.Scripts;
 using Assets.Scripts.LevelDatas;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class LevelManager : MonoBehaviour
 {
-    public static LevelManager Instance {  get; private set; }
+    public static LevelManager Instance { get; private set; }
 
     [SerializeField] private LevelData[] _dataPrefab;
     [SerializeField] private int _dataIndex;
-    
+
     public LevelData Data => _dataPrefab[_dataIndex];
 
     public Phase CurrentPhase { get; private set; }
-    public bool IsCheckingPhase { get; private set; }
 
     /// <summary>
     /// Awake method.
@@ -25,50 +25,37 @@ public class LevelManager : MonoBehaviour
         {
             Destroy(Instance.gameObject);
         }
-       
-        Instance = this;
 
-        SetMatch();
+        Instance = this;
+    }
+
+    /// <summary>
+    /// Start method.
+    /// </summary>
+    private void Start()
+    {
+        Data.MatchType = MatchType.Duell;
+        StartCoroutine(StartPhase());
+    }
+
+    /// <summary>
+    /// Starts the phase.
+    /// </summary>
+    /// <returns></returns>
+    /// <exception cref="System.Exception"></exception>
+    private IEnumerator StartPhase()
+    {
+        yield return new WaitForSeconds(0.1f);
 
         if (Data != null)
         {
             CurrentPhase = Phase.Intro;
-            IsCheckingPhase = true;
+
+            OnPhase();
         }
         else
         {
             throw new System.Exception("LevelManager.Instance.Data == null");
-        }
-    }
-
-    /// <summary>
-    /// Update method.
-    /// </summary>
-    /// <exception cref="System.Exception"></exception>
-    private void Update()
-    {
-        if (IsCheckingPhase)
-        {
-            IsCheckingPhase = false;
-
-            switch (CurrentPhase)
-            {
-                case Phase.None:
-                    throw new System.Exception("CurrentPhase = Phase.None");
-
-                case Phase.Intro:
-                    MatchIntroManager.Instance.Play();
-                    return;
-
-                case Phase.Initialization:
-                    PhaseInitialization();
-                    return;
-
-                case Phase.Battle:
-                    BattleManager.Instance.StartMatch();
-                    return;
-
-            }
         }
     }
 
@@ -79,15 +66,32 @@ public class LevelManager : MonoBehaviour
     {
         int nextEnumIndex = (int)CurrentPhase + 1;
         CurrentPhase = (Phase)nextEnumIndex;
-        IsCheckingPhase = true;Debug.Log(CurrentPhase.ToString());
+        OnPhase();
     }
 
     /// <summary>
-    /// Set the match.
+    /// Runs method in the phase.
     /// </summary>
-    private void SetMatch()
+    /// <exception cref="System.Exception"></exception>
+    private void OnPhase()
     {
-        Data.MatchType = MatchType.Duell;
+        switch (CurrentPhase)
+        {
+            case Phase.None:
+                throw new System.Exception("CurrentPhase = Phase.None");
+
+            case Phase.Intro:
+                MatchIntroManager.Instance.Play();
+                return;
+
+            case Phase.Initialization:
+                PhaseInitialization();
+                return;
+
+            case Phase.Battle:
+                BattleManager.Instance.StartMatch();
+                return;
+        }
     }
 
     /// <summary>
