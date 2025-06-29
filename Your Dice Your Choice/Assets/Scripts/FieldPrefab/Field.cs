@@ -58,6 +58,9 @@ namespace Assets.Scripts.FieldPrefab
         /// <returns></returns>
         public GameObject EnemyObject(PlayerType currentPlayer)
         {
+            if (CharacterObject == null) 
+                return null;   
+
             var character = CharacterObject.GetComponent<Character>();
 
             if (character.Player != currentPlayer)

@@ -47,9 +47,9 @@ namespace Assets.Scripts
                 }
 
                 yield return new WaitForSeconds(animTimer);
-
-                action?.Invoke();
             }
+
+            action?.Invoke();
         }
     }
 }

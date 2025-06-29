@@ -30718,7 +30718,7 @@ GameObject:
   m_Component:
   - component: {fileID: 826889790}
   m_Layer: 0
-  m_Name: '* Git Save'
+  m_Name: '- Git Save'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31264,6 +31264,8 @@ GameObject:
   m_Component:
   - component: {fileID: 982114002}
   - component: {fileID: 982114003}
+  - component: {fileID: 982114005}
+  - component: {fileID: 982114004}
   m_Layer: 5
   m_Name: 'Match Intro '
   m_TagString: Untagged
@@ -31309,25 +31311,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 326a8891424b7334aad77a12fdda02a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LeftIntroText: {fileID: 1970571366}
-  VersusIntroText: {fileID: 141934386}
-  RightIntroText: {fileID: 424311130}
-  LeftIntroShaderText: {fileID: 530607660}
-  VersusIntroShaderText: {fileID: 1069459060}
-  RightIntroShaderText: {fileID: 361756200}
-  LeftIntroShaderRect: {fileID: 530607659}
-  RightIntroShaderRect: {fileID: 361756199}
-  StartPositionLeftAct2: {fileID: 1789010414}
-  StartPositionRightAct2: {fileID: 1826107810}
-  EndPositionLeftAct2: {fileID: 2004075155}
-  EndPositionRightAct2: {fileID: 1940348662}
-  ForegroundTilemap: {fileID: 574825251}
+  _leftIntroShaderText: {fileID: 530607660}
+  _leftIntroText: {fileID: 1970571366}
+  _versusIntroShaderText: {fileID: 1069459060}
+  _versusIntroText: {fileID: 141934386}
+  _rightIntroShaderText: {fileID: 361756200}
+  _rightIntroText: {fileID: 424311130}
+  _leftIntroShaderRect: {fileID: 530607659}
+  _rightIntroShaderRect: {fileID: 361756199}
+  _startPositionLeftAct2: {fileID: 1789010414}
+  _startPositionRightAct2: {fileID: 1826107810}
+  _endPositionLeftAct2: {fileID: 2004075155}
+  _endPositionRightAct2: {fileID: 1940348662}
+  _foregroundTilemap: {fileID: 574825251}
+--- !u!114 &982114004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 982114001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08a6ca95f93898142a32314177eaabcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &982114005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 982114001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97d8eb7181ea01e42a4f2ae0f6cea9b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   _act1Time: 3
   _act2Time: 3
   _animSpeedAct1: 0.0001
   _animSpeedAct2: 0.0001
   _animSpeedAct3: 0.00015
-  _animFadeInTime: 2
+  _animFadeInTime: 3
   _animCurve1:
     serializedVersion: 2
     m_Curve:

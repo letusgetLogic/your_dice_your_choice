@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Assets.Scripts;
 using Assets.Scripts.LevelDatas;
+using Assets.Scripts.MatchIntro;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -81,7 +82,7 @@ public class LevelManager : MonoBehaviour
                 throw new System.Exception("CurrentPhase = Phase.None");
 
             case Phase.Intro:
-                MatchIntroManager.Instance.Play();
+                MatchIntroController.Instance.Play();
                 return;
 
             case Phase.Initialization:

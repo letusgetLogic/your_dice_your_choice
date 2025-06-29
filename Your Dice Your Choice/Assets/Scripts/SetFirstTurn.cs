@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using Assets.Scripts.DicePrefab;
+using Assets.Scripts.MatchIntro;
 using TMPro;
 using UnityEngine;
 
@@ -110,8 +111,7 @@ namespace Assets.Scripts
         {
             yield return new WaitForSeconds(1);
 
-            MatchIntroManager.Instance.LeftIntroShaderText.gameObject.SetActive(false);
-            MatchIntroManager.Instance.RightIntroShaderText.gameObject.SetActive(false);
+            MatchIntroController.Instance.SetIntroInactive();
 
             TurnManager.Instance.SwitchTurn(turnState);
 
@@ -129,7 +129,7 @@ namespace Assets.Scripts
             _turnDiceLeft.SetActive(false);
             _turnDiceRight.SetActive(false);
 
-            MatchIntroManager.Instance.EndPhase();
+            MatchIntroController.Instance.EndPhase();
         }
 
         /// <summary>
