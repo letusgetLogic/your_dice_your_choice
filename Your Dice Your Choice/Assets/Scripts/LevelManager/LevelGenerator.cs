@@ -121,6 +121,7 @@ public class LevelGenerator : MonoBehaviour
             // Color
             var characterColor = characterObject.GetComponent<CharacterColor>();
             characterColor.SetColor(PLayerColor(player));
+            characterObject.GetComponent<CharacterBorderColor>().enabled = false;
 
             // Panel
             var characterPanelObject = PanelManager.Instance.GetPanel(player, i, characterObject);

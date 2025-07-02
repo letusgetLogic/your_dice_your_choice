@@ -9,7 +9,6 @@ namespace Assets.Scripts.CharacterPrefab
         public Transform LeftHandTransform { get; protected set; }
         public Transform RightHandTransform { get; protected set; }
 
-
         /// <summary>
         /// Awake method.
         /// </summary>
@@ -17,8 +16,8 @@ namespace Assets.Scripts.CharacterPrefab
         {
             PivotTransform = transform.Find("Pivot");
             BodyTransform = transform.Find("Pivot").Find("Character Body");
-            LeftHandTransform = transform.Find("Pivot").Find("Character Left Hand");
-            RightHandTransform = transform.Find("Pivot").Find("Character Right Hand");
+            LeftHandTransform = transform.Find("Pivot").Find("Character Body").Find("Character Left Hand");
+            RightHandTransform = transform.Find("Pivot").Find("Character Body").Find("Character Right Hand");
         }
     }
 }

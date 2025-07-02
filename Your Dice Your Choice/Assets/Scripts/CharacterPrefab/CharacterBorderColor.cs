@@ -2,7 +2,7 @@
 
 namespace Assets.Scripts.CharacterPrefab
 {
-    public class CharacterBorderColor : MonoBehaviour
+    public class CharacterBorderColor : CharacterComponents
     {
         [SerializeField] private float _animSpeedAct = 0.0001f;
         [SerializeField] private float _colorMaxR = 0.6f;
@@ -20,23 +20,16 @@ namespace Assets.Scripts.CharacterPrefab
 
         private SpriteRenderer[] _borderSpriteRenderers;
 
-
         /// <summary>
-        /// Awake method.
+        /// OnEnable method.
         /// </summary>
-        private void Awake()
+        private void OnEnable()
         {
             _lightenState = LightenState.LightenUp;
-        }
 
-        /// <summary>
-        /// Start method.
-        /// </summary>
-        private void Start()
-        {
             _bodyBorderSpriteRenderer = transform.Find("Pivot").Find("Character Body").Find("Border").gameObject.GetComponent<SpriteRenderer>();
-            _leftHandBorderSpriteRenderer = transform.Find("Pivot").Find("Character Left Hand").Find("Border").gameObject.GetComponent<SpriteRenderer>();
-            _rightHandBorderSpriteRenderer = transform.Find("Pivot").Find("Character Right Hand").Find("Border").gameObject.GetComponent<SpriteRenderer>();
+            _leftHandBorderSpriteRenderer = transform.Find("Pivot").Find("Character Body").Find("Character Left Hand").Find("Border").gameObject.GetComponent<SpriteRenderer>();
+            _rightHandBorderSpriteRenderer = transform.Find("Pivot").Find("Character Body").Find("Character Right Hand").Find("Border").gameObject.GetComponent<SpriteRenderer>();
 
             _borderSpriteRenderers = new SpriteRenderer[]
             {
@@ -44,8 +37,6 @@ namespace Assets.Scripts.CharacterPrefab
                 _leftHandBorderSpriteRenderer,
                 _rightHandBorderSpriteRenderer
             };
-
-            this.enabled = false;
         }
 
         /// <summary>

@@ -30,6 +30,7 @@ namespace Assets.Scripts.CharacterPrefab
             OriginAP = data.AP;
             OriginDP = data.DP;
 
+            GetComponent<CharacterHealth>().SetHealthSlider();
             SetFieldIndex(fieldIndex);
         }
 

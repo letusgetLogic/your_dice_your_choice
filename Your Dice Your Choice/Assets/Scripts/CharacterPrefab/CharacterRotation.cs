@@ -7,9 +7,9 @@
         /// </summary>
         public void RotatePivot(int number)
         {
-            var rotation = PivotTransform.rotation;
+            var rotation = BodyTransform.rotation;
             rotation.z += number;
-            PivotTransform.rotation = rotation;
+            BodyTransform.rotation = rotation;
         }
     }
 }
