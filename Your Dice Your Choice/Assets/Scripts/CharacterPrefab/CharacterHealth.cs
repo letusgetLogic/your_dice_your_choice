@@ -1,5 +1,6 @@
 using System;
 using Assets.Scripts.CharacterPrefab;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +8,8 @@ public class CharacterHealth : MonoBehaviour
 {
     [SerializeField] private Slider _healthSlider;
     [SerializeField] private Image _fillImage;
+    [SerializeField] private TextMeshProUGUI _damageText;
+
     [SerializeField] private float _animSpeedAct = 0.0001f;
     [SerializeField] private AnimationCurve _animCurve;
 
@@ -24,7 +27,8 @@ public class CharacterHealth : MonoBehaviour
 
     public void SetHealthSlider()
     {
-        SetHealthSlider( CurrentHealth() /  _maxHealth); 
+        SetHealthSlider( CurrentHealth() /  _maxHealth);
+        _damageText.enabled = false;
     }
 
     private void SetHealthSlider(float value)
@@ -35,6 +39,8 @@ public class CharacterHealth : MonoBehaviour
     public void TakeDamage(float damage)
     {
         CalculateHealth(-damage);
+        _damageText.text = (-damage).ToString();
+        _damageText.enabled = true;
     }
 
     public void Heal(float amount)
@@ -58,6 +64,7 @@ public class CharacterHealth : MonoBehaviour
 
         _current = 0f;
         _isHealthChanging = false;
+        _damageText.enabled = false;
     }
 
     private float CurrentHealth()

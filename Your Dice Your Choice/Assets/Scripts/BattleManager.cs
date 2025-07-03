@@ -51,14 +51,14 @@ public class BattleManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Handles the input of player on the clicked field.
+    /// Handles the input of player on the clicked field or enemy character.
     /// </summary>
-    /// <param name="clickedField"></param>
-    public void HandleInput(GameObject clickedField)
+    /// <param name="clickedObject"></param>
+    public void HandleInput(GameObject clickedObject)
     {
         var action = _currentActionPanel.Action;
 
-        action.HandleInput(clickedField);
+        action.HandleInput(clickedObject);
     }
 
 }

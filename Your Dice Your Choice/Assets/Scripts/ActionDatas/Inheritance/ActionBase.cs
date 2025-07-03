@@ -2,6 +2,7 @@
 using Assets.Scripts.CharacterPrefab;
 using Assets.Scripts.ActionPopupPrefab;
 using Assets.Scripts.DicePrefab;
+using Assets.Scripts.CharacterDatas;
 
 namespace Assets.Scripts.ActionDatas
 {
@@ -12,6 +13,7 @@ namespace Assets.Scripts.ActionDatas
         public GameObject CharacterObject { get;  set; }
 
         protected Character character => CharacterObject.GetComponent<Character>();
+        protected CharacterData characterData => character.Data;
 
         public ActionBase(ActionData data, GameObject characterObject)
         {

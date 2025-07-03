@@ -9,7 +9,7 @@ using Assets.Scripts.ActionPopupPrefab;
 
 namespace Assets.Scripts.CharacterPrefab.CharacterBody
 {
-    public class CharacterMouseEvent : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+    public class CharacterMouseEvent : CharacterComponents, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField][Range(0f, 1f)] private float _delayOnHoverTime = .5f;
 
@@ -18,6 +18,8 @@ namespace Assets.Scripts.CharacterPrefab.CharacterBody
         private CharacterPanelHint _panelHint;
         private Color _color;
         private IEnumerator _coroutine;
+
+        public bool IsBeingAttacked = false;
 
         /// <summary>
         /// Awake method.
@@ -28,6 +30,7 @@ namespace Assets.Scripts.CharacterPrefab.CharacterBody
             _character = transform.root.GetComponent<Character>();
             _panelHint = _character.Panel.GetComponent<CharacterPanelHint>();
             _color = _characterObject.GetComponent<CharacterColor>().PlayerColor;
+            HoverColor.SetActive(false);
         }
 
         /// <summary>
@@ -37,6 +40,14 @@ namespace Assets.Scripts.CharacterPrefab.CharacterBody
         /// <exception cref="NotImplementedException"></exception>
         public void OnPointerClick(PointerEventData eventData)
         {
+            if (IsBeingAttacked)
+            {
+                HoverColor.SetActive(false );
+                BattleManager.Instance.HandleInput(eventData.pointerClick);
+                IsBeingAttacked = false;
+                return;
+            }
+
             _panelHint.StartHintAnim();
         }
 
@@ -45,6 +56,12 @@ namespace Assets.Scripts.CharacterPrefab.CharacterBody
         /// </summary>
         public void OnPointerEnter(PointerEventData eventData)
         {
+            if (IsBeingAttacked)
+            {
+                HoverColor.SetActive(true );
+                return;
+            }
+
             _coroutine = ShowInfo();
             StartCoroutine(_coroutine);
         }
@@ -54,6 +71,12 @@ namespace Assets.Scripts.CharacterPrefab.CharacterBody
         /// </summary>
         public void OnPointerExit(PointerEventData eventData)
         {
+            if (IsBeingAttacked)
+            {
+                HoverColor.SetActive(false ) ;
+                return;
+            }
+
             StopCoroutine(_coroutine);
             HideInfo();
         }

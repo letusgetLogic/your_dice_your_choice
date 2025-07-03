@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Assets.Scripts.CharacterPrefab;
+using Assets.Scripts.CharacterPrefab.CharacterBody;
 using Assets.Scripts.FieldPrefab;
 using UnityEngine;
 
@@ -57,11 +58,14 @@ namespace Assets.Scripts
         /// </summary>
         public void ShowInteractibleCharacters()
         {
-            foreach (var character in InteractibleCharacters)
+            foreach (var characterObject in InteractibleCharacters)
             {
-                var borderColor = character.GetComponent<CharacterBorderColor>();
+                var borderColor = characterObject.GetComponent<CharacterBorderColor>();
                 SetEnabled(borderColor, true);
-                Debug.Log(character + " is target!");
+
+                var components = characterObject.GetComponent<CharacterComponents>();
+                var mouseEvent = components.BodyTransform.GetComponent<CharacterMouseEvent>();
+                mouseEvent.IsBeingAttacked = true;
             }
         }
 

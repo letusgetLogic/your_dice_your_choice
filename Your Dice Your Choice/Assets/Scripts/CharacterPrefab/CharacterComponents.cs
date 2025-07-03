@@ -1,3 +1,4 @@
+using Assets.Scripts.CharacterPrefab.CharacterBody;
 using UnityEngine;
 
 namespace Assets.Scripts.CharacterPrefab
@@ -9,6 +10,8 @@ namespace Assets.Scripts.CharacterPrefab
         public Transform BodyTransform { get; protected set; }
         public Transform LeftHandTransform { get; protected set; }
         public Transform RightHandTransform { get; protected set; }
+        public GameObject HoverColor {  get; protected set; }
+        //public CharacterMouseEvent MouseEvent { get; protected set; }
 
         /// <summary>
         /// Awake method.
@@ -20,6 +23,9 @@ namespace Assets.Scripts.CharacterPrefab
             BodyTransform = BodyPivotTransform.Find("Character Body");
             LeftHandTransform = BodyTransform.Find("Character Left Hand");
             RightHandTransform = BodyTransform.Find("Character Right Hand");
+
+            HoverColor = BodyPivotTransform.Find("Hover Color").gameObject;
+            //MouseEvent = BodyTransform.gameObject.GetComponent<CharacterMouseEvent>();
         }
     }
 }
