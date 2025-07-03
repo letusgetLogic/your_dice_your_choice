@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Assets.Scripts;
 using Assets.Scripts.CharacterPrefab;
@@ -15,7 +16,7 @@ public class Player
     {
         Name = name;
         PlayerType = player; 
-        Characters = LevelGenerator.Instance.CreateCharactersFor(player);
+        Characters = CharacterGenerator.Instance.CreateCharactersFor(player);
         RollPanel = PanelManager.Instance.GetRollPanelFor(player);
         //RerollPanelObject = PanelManager.Instance.GetRerollPanelFor(player);
 
@@ -23,19 +24,31 @@ public class Player
     }
 
     /// <summary>
-    /// Sets the look direction for each character and the description panel for each action.
+    /// Sets others to character.
     /// </summary>
     private void SettingsForCharacters()
     {
         foreach (var characterObject in Characters)
         {
-            if (PlayerType == PlayerType.PlayerRight)
-            {
-                var characterRotatation = characterObject.GetComponent<CharacterRotation>();
-                characterRotatation.RotatePivot(180);
-            }
+            SetBattlePosition(characterObject);
 
             SetDescriptonPanelForAction(characterObject);
+        }
+    }
+
+    /// <summary>
+    /// Sets the position and look direction for each character in the right side.
+    /// </summary>
+    private void SetBattlePosition(GameObject characterObject)
+    {
+        if (PlayerType == PlayerType.PlayerRight)
+        {
+            var characterRotatation = characterObject.GetComponent<CharacterRotation>();
+            characterRotatation.RotateBodyTransform(180);
+
+            var characterMovement = characterObject.GetComponent<CharacterMovement>();
+            var localPosition = characterObject.GetComponent<CharacterComponents>().BodyPivotTransform.localPosition;
+            characterMovement.SetBodyPivot(new Vector3(localPosition.x * -1, localPosition.y, localPosition.z));
         }
     }
 

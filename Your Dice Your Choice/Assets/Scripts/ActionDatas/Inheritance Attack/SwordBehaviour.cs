@@ -26,20 +26,20 @@ namespace Assets.Scripts.ActionDatas
 
         public override void SetInteractible(int diceNumber)
         {
-            BattleManager.Instance.SetInteractibleEnemyCharacters(
+            CharacterManager.Instance.SetInteractibleEnemyCharacters(
                CharacterObject.GetComponent<Character>().FieldIndex,
-               GetVector2FromDirection.Get(GetDirection(diceNumber)),
+               GetVector2IntFromDirection.Get(GetDirection(diceNumber)),
                Range(diceNumber));
         }
         
         public override void ShowInteractible()
         {
-            BattleManager.Instance.ShowInteractibleCharacters();
+            CharacterManager.Instance.ShowInteractibleCharacters();
         }
 
         public override void DeactivateInteractible()
         {
-            BattleManager.Instance.DeactivateCharacters();
+            CharacterManager.Instance.DeactivateCharacters();
         }
 
         /// <summary>

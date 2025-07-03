@@ -27,9 +27,10 @@ namespace Assets.Scripts.CharacterPrefab
         {
             _lightenState = LightenState.LightenUp;
 
-            _bodyBorderSpriteRenderer = transform.Find("Pivot").Find("Character Body").Find("Border").gameObject.GetComponent<SpriteRenderer>();
-            _leftHandBorderSpriteRenderer = transform.Find("Pivot").Find("Character Body").Find("Character Left Hand").Find("Border").gameObject.GetComponent<SpriteRenderer>();
-            _rightHandBorderSpriteRenderer = transform.Find("Pivot").Find("Character Body").Find("Character Right Hand").Find("Border").gameObject.GetComponent<SpriteRenderer>();
+            var characterBody = transform.Find("Pivot").Find("Body Pivot").Find("Character Body");
+            _bodyBorderSpriteRenderer = characterBody.Find("Border").gameObject.GetComponent<SpriteRenderer>();
+            _leftHandBorderSpriteRenderer = characterBody.Find("Character Left Hand").Find("Border").gameObject.GetComponent<SpriteRenderer>();
+            _rightHandBorderSpriteRenderer = characterBody.Find("Character Right Hand").Find("Border").gameObject.GetComponent<SpriteRenderer>();
 
             _borderSpriteRenderers = new SpriteRenderer[]
             {

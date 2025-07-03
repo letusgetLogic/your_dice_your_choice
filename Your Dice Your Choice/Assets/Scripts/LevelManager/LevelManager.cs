@@ -102,7 +102,7 @@ public class LevelManager : MonoBehaviour
     {
         FieldManager.Instance.InitializeFields();
 
-        LevelGenerator.Instance.GenerateFrom(Data);
+        MapGenerator.Instance.GenerateMapFrom(Data);
 
         CreatePlayer();
 

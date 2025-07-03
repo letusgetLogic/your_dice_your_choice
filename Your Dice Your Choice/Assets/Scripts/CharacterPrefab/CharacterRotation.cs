@@ -3,9 +3,9 @@
     public class CharacterRotation : CharacterComponents
     {
         /// <summary>
-        /// Rotate the pivot point.
+        /// Rotate the body transform.
         /// </summary>
-        public void RotatePivot(int number)
+        public void RotateBodyTransform(int number)
         {
             var rotation = BodyTransform.rotation;
             rotation.z += number;

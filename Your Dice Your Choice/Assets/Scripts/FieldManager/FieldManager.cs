@@ -128,7 +128,7 @@ public class FieldManager : MonoBehaviour
         {
             SetEnabled(mouseEvent, false);
         }
-        Debug.Log("Deactivates Fields");
+        
         InteractibleFields.Clear();
     }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.ActionDatas
 {
-    public static class GetVector2FromDirection
+    public static class GetVector2IntFromDirection
     {
         private static readonly Vector2Int[] DirVector = new[]
         {

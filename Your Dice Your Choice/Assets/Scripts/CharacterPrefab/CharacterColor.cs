@@ -15,9 +15,10 @@ namespace Assets.Scripts.CharacterPrefab
         /// <param name="color"></param>
         public void SetColor(Color color)
         {
-            _bodySpriteRenderer = transform.Find("Pivot").Find("Character Body").Find("Color").gameObject.GetComponent<SpriteRenderer>();
-            _leftHandSpriteRenderer = transform.Find("Pivot").Find("Character Body").Find("Character Left Hand").Find("Color").gameObject.GetComponent<SpriteRenderer>();
-            _rightHandSpriteRenderer = transform.Find("Pivot").Find("Character Body").Find("Character Right Hand").Find("Color").gameObject.GetComponent<SpriteRenderer>();
+            var characterBody = transform.Find("Pivot").Find("Body Pivot").Find("Character Body");
+            _bodySpriteRenderer = characterBody.Find("Color").gameObject.GetComponent<SpriteRenderer>();
+            _leftHandSpriteRenderer = characterBody.Find("Character Left Hand").Find("Color").gameObject.GetComponent<SpriteRenderer>();
+            _rightHandSpriteRenderer = characterBody.Find("Character Right Hand").Find("Color").gameObject.GetComponent<SpriteRenderer>();
 
             _bodySpriteRenderer.color = color;
             _leftHandSpriteRenderer.color = color;

@@ -10,7 +10,7 @@ namespace Assets.Scripts.ActionDatas
 
         public Movement(ActionData data, GameObject characterObject) : base(data, characterObject)
         {
-            ActionDirections = GetVector2FromDirection.Get(data.Direction);
+            ActionDirections = GetVector2IntFromDirection.Get(data.Direction);
         }
        
         public override void SetInteractible(int diceNumber)

@@ -92,7 +92,8 @@ namespace Assets.Scripts.ActionPopupPrefab.DiceSlotPrefab
 
                 action.SetInteractible(dice.CurrentNumber);
 
-                if (FieldManager.Instance.InteractibleFields.Count == 0)
+                if (FieldManager.Instance.InteractibleFields.Count == 0 &&
+                    CharacterManager.Instance.InteractibleCharacters.Count == 0)
                     return;
 
                 _isDeactivatingInteractible = false;

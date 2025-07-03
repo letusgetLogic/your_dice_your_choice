@@ -21,21 +21,23 @@ namespace Assets.Scripts.FieldPrefab
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.CompareTag("Character"))
-            {
-                CharacterObject = collision.gameObject;
-            }
-
+            if (!collision.CompareTag("Character"))
+                return;
+            
+            CharacterObject = collision.gameObject;
+            var character = CharacterObject.GetComponent<Character>();
+            Debug.Log($"Character {character.Name} is on the field {character.FieldIndex}.");
             _count++;
         }
 
         private void OnTriggerExit2D(Collider2D collision)
         {
-            if (collision.CompareTag("Character"))
-            {
-                CharacterObject = null;
-            }
-
+            if (!collision.CompareTag("Character"))
+                return;
+                
+            CharacterObject = null;
+            var character = CharacterObject.GetComponent<Character>();
+            Debug.Log($"Character {character.Name} has left the field {character.FieldIndex}.");
             _count--;
         }
 
