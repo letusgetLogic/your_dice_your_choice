@@ -60,6 +60,13 @@ namespace Assets.Scripts.DicePrefab
                 }
 
                 _currentValue = Mathf.MoveTowards(_currentValue, 1, _animSpeed / Time.deltaTime);
+
+                if (_currentValue > 0.9f)
+                { 
+                    _rectTransform.anchoredPosition = _basePosition;
+                    return;
+                }
+
                 var lerpPos = Vector2.Lerp(_currentPosition, _basePosition, _animCurve.Evaluate(_currentValue));
                 _rectTransform.anchoredPosition = lerpPos;
             }

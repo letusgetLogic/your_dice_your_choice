@@ -4,9 +4,11 @@ namespace Assets.Scripts.CharacterPrefab
 {
     public class CharacterBorderColor : CharacterComponents
     {
-        [SerializeField] private float _animSpeedAct = 0.0001f;
+        [SerializeField] private float _animSpeedAct = 0.00005f;
         [SerializeField] private float _colorMaxR = 0.6f;
         [SerializeField] private float _colorMinR = 0.1f;
+        [SerializeField] private float _scaleMax = 1.2f;
+        [SerializeField] private float _scaleMin = 1f;
         [SerializeField] private AnimationCurve _animCurve;
 
         private enum LightenState { None, LightenUp, LightenDown }
@@ -14,11 +16,7 @@ namespace Assets.Scripts.CharacterPrefab
 
         private float _currentValue = 0f;
 
-        private SpriteRenderer _bodyBorderSpriteRenderer;
-        private SpriteRenderer _leftHandBorderSpriteRenderer;
-        private SpriteRenderer _rightHandBorderSpriteRenderer;
-
-        private SpriteRenderer[] _borderSpriteRenderers;
+        private GameObject[] _bodyParts;
 
         /// <summary>
         /// OnEnable method.
@@ -28,15 +26,15 @@ namespace Assets.Scripts.CharacterPrefab
             _lightenState = LightenState.LightenUp;
 
             var characterBody = transform.Find("Pivot").Find("Body Pivot").Find("Character Body");
-            _bodyBorderSpriteRenderer = characterBody.Find("Border").gameObject.GetComponent<SpriteRenderer>();
-            _leftHandBorderSpriteRenderer = characterBody.Find("Character Left Hand").Find("Border").gameObject.GetComponent<SpriteRenderer>();
-            _rightHandBorderSpriteRenderer = characterBody.Find("Character Right Hand").Find("Border").gameObject.GetComponent<SpriteRenderer>();
+            var characterBodyBorder = characterBody.Find("Border").gameObject;
+            var leftHandBorder = characterBody.Find("Character Left Hand").Find("Border").gameObject;
+            var rightHandBorder = characterBody.Find("Character Right Hand").Find("Border").gameObject;
 
-            _borderSpriteRenderers = new SpriteRenderer[]
+            _bodyParts = new GameObject[]
             {
-                _bodyBorderSpriteRenderer,
-                _leftHandBorderSpriteRenderer,
-                _rightHandBorderSpriteRenderer
+                characterBodyBorder,
+                leftHandBorder,
+                rightHandBorder
             };
         }
 
@@ -56,6 +54,7 @@ namespace Assets.Scripts.CharacterPrefab
         {
             _lightenState = LightenState.None;
             SetBorderColorR(_colorMinR);
+            SetBorderScale(_scaleMin);
         }
 
         /// <summary>
@@ -73,9 +72,12 @@ namespace Assets.Scripts.CharacterPrefab
                 }
 
                 _currentValue = Mathf.MoveTowards(_currentValue, 1f, _animSpeedAct / Time.deltaTime);
-                float dimValue = Mathf.Lerp(_colorMinR, _colorMaxR, _animCurve.Evaluate(_currentValue));
 
+                float dimValue = Mathf.Lerp(_colorMinR, _colorMaxR, _animCurve.Evaluate(_currentValue));
                 SetBorderColorR(dimValue);
+
+                float scaleValue = Mathf.Lerp(_scaleMin, _scaleMax, _animCurve.Evaluate(_currentValue));
+                SetBorderScale(scaleValue);
             }
         }
 
@@ -94,9 +96,12 @@ namespace Assets.Scripts.CharacterPrefab
                 }
 
                 _currentValue = Mathf.MoveTowards(_currentValue, 0f, _animSpeedAct / Time.deltaTime);
-                float dimValue = Mathf.Lerp(_colorMinR, _colorMaxR, _animCurve.Evaluate(_currentValue));
 
+                float dimValue = Mathf.Lerp(_colorMinR, _colorMaxR, _animCurve.Evaluate(_currentValue));
                 SetBorderColorR(dimValue);
+
+                float scaleValue = Mathf.Lerp(_scaleMin, _scaleMax, _animCurve.Evaluate(_currentValue));
+                SetBorderScale(scaleValue);
             }
         }
 
@@ -106,9 +111,22 @@ namespace Assets.Scripts.CharacterPrefab
         /// <param name="rValue"></param>
         private void SetBorderColorR(float rValue)
         {
-            foreach (var item in _borderSpriteRenderers)
+            foreach (var item in _bodyParts)
             {
-                item.color = new Color(rValue, item.color.g, item.color.b);
+                var spriteRenderer = item.GetComponent<SpriteRenderer>();
+                spriteRenderer.color = new Color(rValue, spriteRenderer.color.g, spriteRenderer.color.b);
+            }
+        }
+
+        /// <summary>
+        /// Sets the scale.
+        /// </summary>
+        /// <param name="rValue"></param>
+        private void SetBorderScale(float value)
+        {
+            foreach (var item in _bodyParts)
+            {
+                item.transform.localScale = new Vector3(value, value, value);
             }
         }
     }

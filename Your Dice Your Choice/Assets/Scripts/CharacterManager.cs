@@ -61,6 +61,7 @@ namespace Assets.Scripts
             {
                 var borderColor = character.GetComponent<CharacterBorderColor>();
                 SetEnabled(borderColor, true);
+                Debug.Log(character + " is target!");
             }
         }
 
@@ -88,7 +89,7 @@ namespace Assets.Scripts
                 var field = FieldManager.Instance.Fields[fieldIndex.x, fieldIndex.y].GetComponent<Field>();
 
                 if (field.EnemyObject(TurnManager.Instance.Turn) != null)
-                    return field.EnemyObject(TurnManager.Instance.Turn);
+                    return field.CharacterObject;
             }
 
             return null;

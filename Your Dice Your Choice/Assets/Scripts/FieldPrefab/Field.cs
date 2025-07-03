@@ -24,10 +24,8 @@ namespace Assets.Scripts.FieldPrefab
             if (!collision.CompareTag("Character"))
                 return;
             
-            CharacterObject = collision.gameObject;
-            var character = CharacterObject.GetComponent<Character>();
-            Debug.Log($"Character {character.Name} is on the field {character.FieldIndex}.");
             _count++;
+            CharacterObject = collision.transform.root.gameObject;
         }
 
         private void OnTriggerExit2D(Collider2D collision)
@@ -35,10 +33,8 @@ namespace Assets.Scripts.FieldPrefab
             if (!collision.CompareTag("Character"))
                 return;
                 
-            CharacterObject = null;
-            var character = CharacterObject.GetComponent<Character>();
-            Debug.Log($"Character {character.Name} has left the field {character.FieldIndex}.");
             _count--;
+            CharacterObject = null;
         }
 
         /// <summary>
