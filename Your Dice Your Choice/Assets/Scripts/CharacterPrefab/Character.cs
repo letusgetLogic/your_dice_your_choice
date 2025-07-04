@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Assets.Scripts.CharacterDatas;
+using Assets.Scripts.CharacterPrefab.CharacterBody;
 
 namespace Assets.Scripts.CharacterPrefab
 {
@@ -26,6 +27,7 @@ namespace Assets.Scripts.CharacterPrefab
             Player = player;
             Data = data;
             Name = data.Type.ToString();
+            Check();
             OriginHP = data.HP;
             OriginAP = data.AP;
             OriginDP = data.DP;
@@ -51,6 +53,35 @@ namespace Assets.Scripts.CharacterPrefab
         { 
             FieldIndex = fieldIndex;
             Debug.Log($"Character {Name} is on the field {FieldIndex}.");
+        }
+
+        private void Awake()
+        {
+            Debug.Log("Awake");
+            Check();
+        }
+
+        public void Check()
+        {
+            // Retrieve the component
+            CharacterMouseEvent myComponent = transform.Find("Pivot").Find("Body Pivot").Find("Character Body").gameObject.GetComponent<CharacterMouseEvent>();
+
+            // Check if the component is enabled
+            if (myComponent != null)
+            {
+                if (myComponent.enabled)
+                {
+                    Debug.Log(Name + " CharacterMouseEvent is enabled.");
+                }
+                else
+                {
+                    Debug.Log(Name + " CharacterMouseEvent is disabled.");
+                }
+            }
+            else
+            {
+                Debug.Log(Name + " CharacterMouseEvent could not be found.");
+            }
         }
     }
 }

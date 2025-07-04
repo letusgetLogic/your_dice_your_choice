@@ -1,3 +1,4 @@
+using System.Xml.Linq;
 using Assets.Scripts.CharacterPrefab.CharacterBody;
 using UnityEngine;
 
@@ -27,5 +28,13 @@ namespace Assets.Scripts.CharacterPrefab
             HoverColor = BodyPivotTransform.Find("Hover Color").gameObject;
             //MouseEvent = BodyTransform.gameObject.GetComponent<CharacterMouseEvent>();
         }
+
+        //private void Update()
+        //{
+        //    Debug.Log(transform.root.gameObject.GetComponent<Character>().Name + "CharacterMouseEvent>().enabled " + BodyTransform.gameObject.GetComponent<CharacterMouseEvent>().enabled);
+            
+        //    //if (BodyTransform.gameObject.GetComponent<CharacterMouseEvent>().enabled == false)
+        //    //    Debug.Log("CharacterMouseEvent of " + transform.root.gameObject.GetComponent<Character>().Name + " activeSelf = false!");
+        //}
     }
 }

@@ -45,7 +45,7 @@ public class CharacterGenerator : MonoBehaviour
         {
             var characterObject = Instantiate(_characterPrefab, randomPositions[i], Quaternion.identity);
             var character = characterObject.GetComponent<Character>();
-
+            character.Check();
             // Data
             var characterData = _characterData[Random.Range(0, _characterData.Length)];
             character.SetData(player, characterData, randomIndexes[i]);
