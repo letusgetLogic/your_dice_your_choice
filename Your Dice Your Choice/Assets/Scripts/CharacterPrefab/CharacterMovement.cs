@@ -4,12 +4,15 @@ using UnityEngine.UIElements;
 
 namespace Assets.Scripts.CharacterPrefab
 {
-    public class CharacterMovement : CharacterComponents
+    public class CharacterMovement : MonoBehaviour
     {
         [SerializeField] private float _speed = .01f;
-       
+
+        private Transform _bodyTransform => GetComponent<CharacterComponents>().BodyTransform;
+
         private Vector3 _targetPosition;
         private bool _isMoving = false;
+
 
         /// <summary>
         /// FixedUpdate method.
@@ -33,7 +36,7 @@ namespace Assets.Scripts.CharacterPrefab
         /// </summary>
         public void SetBodyPivot(Vector3 pos)
         {
-            BodyPivotTransform.localPosition = pos;
+            _bodyTransform.localPosition = pos;
         }
 
         /// <summary>

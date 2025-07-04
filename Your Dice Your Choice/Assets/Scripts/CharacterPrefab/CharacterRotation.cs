@@ -1,15 +1,19 @@
-﻿namespace Assets.Scripts.CharacterPrefab
+﻿using UnityEngine;
+
+namespace Assets.Scripts.CharacterPrefab
 {
-    public class CharacterRotation : CharacterComponents
+    public class CharacterRotation : MonoBehaviour
     {
+        private Transform _bodyTransform => GetComponent<CharacterComponents>().BodyTransform;
+
         /// <summary>
         /// Rotate the body transform.
         /// </summary>
         public void RotateBodyTransform(int number)
         {
-            var rotation = BodyTransform.rotation;
+            var rotation = _bodyTransform.rotation;
             rotation.z += number;
-            BodyTransform.rotation = rotation;
+            _bodyTransform.rotation = rotation;
         }
     }
 }

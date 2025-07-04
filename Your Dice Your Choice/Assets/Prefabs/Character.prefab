@@ -1501,6 +1501,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2bff5938b506f242ba0914e9b9f006d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PivotTransform: {fileID: 0}
+  BodyPivotTransform: {fileID: 0}
+  BodyTransform: {fileID: 0}
+  LeftHandTransform: {fileID: 0}
+  RightHandTransform: {fileID: 0}
+  HoverColor: {fileID: 0}
 --- !u!114 &2643295388591708874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1513,6 +1519,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9df170bf8d46a2c42a0e5c2924173405, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PivotTransform: {fileID: 0}
+  BodyPivotTransform: {fileID: 0}
+  BodyTransform: {fileID: 0}
+  LeftHandTransform: {fileID: 0}
+  RightHandTransform: {fileID: 0}
+  HoverColor: {fileID: 0}
 --- !u!114 &7240997328264629239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1525,6 +1537,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8b1b137c78819b4c88f2561b450c946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PivotTransform: {fileID: 0}
+  BodyPivotTransform: {fileID: 0}
+  BodyTransform: {fileID: 0}
+  LeftHandTransform: {fileID: 0}
+  RightHandTransform: {fileID: 0}
+  HoverColor: {fileID: 0}
   _speed: 0.1
 --- !u!114 &8124959260350581310
 MonoBehaviour:
@@ -1538,6 +1556,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94da7834f5051604ea43194b5f1e90f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PivotTransform: {fileID: 0}
+  BodyPivotTransform: {fileID: 0}
+  BodyTransform: {fileID: 0}
+  LeftHandTransform: {fileID: 0}
+  RightHandTransform: {fileID: 0}
+  HoverColor: {fileID: 0}
 --- !u!114 &1810067803880296511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1550,6 +1574,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cadebef507a95e941922ee0cb1c2b4df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PivotTransform: {fileID: 0}
+  BodyPivotTransform: {fileID: 0}
+  BodyTransform: {fileID: 0}
+  LeftHandTransform: {fileID: 0}
+  RightHandTransform: {fileID: 0}
+  HoverColor: {fileID: 0}
   _animSpeedAct: 0.00005
   _colorMaxR: 0.6
   _colorMinR: 0.1
@@ -1591,6 +1621,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cdaac76c7642cf40a6aa2c630ab3c72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PivotTransform: {fileID: 0}
+  BodyPivotTransform: {fileID: 0}
+  BodyTransform: {fileID: 0}
+  LeftHandTransform: {fileID: 0}
+  RightHandTransform: {fileID: 0}
+  HoverColor: {fileID: 0}
 --- !u!114 &1589228588283915217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1924,6 +1960,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ef7954f25234014eb73f0e955d818f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PivotTransform: {fileID: 1106446988484327606}
+  BodyPivotTransform: {fileID: 2098288980909553253}
+  BodyTransform: {fileID: 5792113122470517139}
+  LeftHandTransform: {fileID: 5972575020386444155}
+  RightHandTransform: {fileID: 5967337673226584335}
+  HoverColor: {fileID: 7900233103421084157}
   _delayOnHoverTime: 0.5
   IsBeingAttacked: 0
 --- !u!212 &7065920787256018453

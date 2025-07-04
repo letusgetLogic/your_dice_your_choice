@@ -2,7 +2,7 @@
 
 namespace Assets.Scripts.CharacterPrefab
 {
-    public class CharacterBorderColor : CharacterComponents
+    public class CharacterBorderColor : MonoBehaviour
     {
         [SerializeField] private float _animSpeedAct = 0.00005f;
         [SerializeField] private float _colorMaxR = 0.6f;
@@ -16,7 +16,7 @@ namespace Assets.Scripts.CharacterPrefab
 
         private float _currentValue = 0f;
 
-        private GameObject[] _bodyParts;
+        private GameObject[] _borders => GetComponent<CharacterComponents>().Borders;
 
         /// <summary>
         /// OnEnable method.
@@ -25,17 +25,17 @@ namespace Assets.Scripts.CharacterPrefab
         {
             _lightenState = LightenState.LightenUp;
 
-            var characterBody = transform.Find("Pivot").Find("Body Pivot").Find("Character Body");
-            var characterBodyBorder = characterBody.Find("Border").gameObject;
-            var leftHandBorder = characterBody.Find("Character Left Hand").Find("Border").gameObject;
-            var rightHandBorder = characterBody.Find("Character Right Hand").Find("Border").gameObject;
-
-            _bodyParts = new GameObject[]
-            {
-                characterBodyBorder,
-                leftHandBorder,
-                rightHandBorder
-            };
+            //var characterBody = transform.Find("Pivot").Find("Body Pivot").Find("Character Body");
+            //var characterBodyBorder = characterBody.Find("Border").gameObject;
+            //var leftHandBorder = characterBody.Find("Character Left Hand").Find("Border").gameObject;
+            //var rightHandBorder = characterBody.Find("Character Right Hand").Find("Border").gameObject;
+            
+            //_borders = new GameObject[]
+            //{
+            //    characterBodyBorder,
+            //    leftHandBorder,
+            //    rightHandBorder
+            //};
         }
 
         /// <summary>
@@ -111,7 +111,7 @@ namespace Assets.Scripts.CharacterPrefab
         /// <param name="rValue"></param>
         private void SetBorderColorR(float rValue)
         {
-            foreach (var item in _bodyParts)
+            foreach (var item in _borders)
             {
                 var spriteRenderer = item.GetComponent<SpriteRenderer>();
                 spriteRenderer.color = new Color(rValue, spriteRenderer.color.g, spriteRenderer.color.b);
@@ -124,7 +124,7 @@ namespace Assets.Scripts.CharacterPrefab
         /// <param name="rValue"></param>
         private void SetBorderScale(float value)
         {
-            foreach (var item in _bodyParts)
+            foreach (var item in _borders)
             {
                 item.transform.localScale = new Vector3(value, value, value);
             }

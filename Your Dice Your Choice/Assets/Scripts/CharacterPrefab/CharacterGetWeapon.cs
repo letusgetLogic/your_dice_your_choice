@@ -3,8 +3,11 @@ using UnityEngine.TextCore.Text;
 
 namespace Assets.Scripts.CharacterPrefab
 {
-    public class CharacterGetWeapon : CharacterComponents
+    public class CharacterGetWeapon : MonoBehaviour
     {
+        private Transform _leftHandTransform => GetComponent<CharacterComponents>().LeftHandTransform;
+        private Transform _rightHandTransform => GetComponent<CharacterComponents>().RightHandTransform;
+
         /// <summary>
         /// Sets the weapon as child of left hand.
         /// </summary>
@@ -16,7 +19,7 @@ namespace Assets.Scripts.CharacterPrefab
                 return;
 
             var weaponObject = Instantiate(character.Data.WeaponLeft);
-            weaponObject.transform.SetParent(LeftHandTransform, false);
+            weaponObject.transform.SetParent(_leftHandTransform, false);
         }
 
         /// <summary>
@@ -30,7 +33,7 @@ namespace Assets.Scripts.CharacterPrefab
                 return;
 
             var weaponObject = Instantiate(character.Data.WeaponRight);
-            weaponObject.transform.SetParent(RightHandTransform, false);
+            weaponObject.transform.SetParent(_rightHandTransform, false);
         }
     }
 }

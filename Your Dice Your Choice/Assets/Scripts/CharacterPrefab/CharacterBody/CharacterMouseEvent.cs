@@ -9,7 +9,7 @@ using Assets.Scripts.ActionPopupPrefab;
 
 namespace Assets.Scripts.CharacterPrefab.CharacterBody
 {
-    public class CharacterMouseEvent : CharacterComponents, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+    public class CharacterMouseEvent : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField][Range(0f, 1f)] private float _delayOnHoverTime = .5f;
 
@@ -21,6 +21,8 @@ namespace Assets.Scripts.CharacterPrefab.CharacterBody
 
         public bool IsBeingAttacked = false;
 
+        private GameObject _hoverColor => transform.root.GetComponent<CharacterComponents>().HoverColor;
+
         /// <summary>
         /// Awake method.
         /// </summary>
@@ -30,7 +32,7 @@ namespace Assets.Scripts.CharacterPrefab.CharacterBody
             _character = transform.root.GetComponent<Character>();
             _panelHint = _character.Panel.GetComponent<CharacterPanelHint>();
             _color = _characterObject.GetComponent<CharacterColor>().PlayerColor;
-            HoverColor.SetActive(false);
+            _hoverColor.SetActive(false);
         }
 
         /// <summary>
@@ -42,7 +44,7 @@ namespace Assets.Scripts.CharacterPrefab.CharacterBody
         {
             if (IsBeingAttacked)
             {
-                HoverColor.SetActive(false );
+                _hoverColor.SetActive(false );
                 BattleManager.Instance.HandleInput(eventData.pointerClick);
                 IsBeingAttacked = false;
                 return;
@@ -58,7 +60,7 @@ namespace Assets.Scripts.CharacterPrefab.CharacterBody
         {
             if (IsBeingAttacked)
             {
-                HoverColor.SetActive(true );
+                _hoverColor.SetActive(true );
                 return;
             }
 
@@ -73,7 +75,7 @@ namespace Assets.Scripts.CharacterPrefab.CharacterBody
         {
             if (IsBeingAttacked)
             {
-                HoverColor.SetActive(false ) ;
+                _hoverColor.SetActive(false ) ;
                 return;
             }
 

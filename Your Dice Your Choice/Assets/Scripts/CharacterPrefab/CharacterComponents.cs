@@ -11,8 +11,20 @@ namespace Assets.Scripts.CharacterPrefab
         public Transform BodyTransform { get; protected set; }
         public Transform LeftHandTransform { get; protected set; }
         public Transform RightHandTransform { get; protected set; }
-        public GameObject HoverColor {  get; protected set; }
-        //public CharacterMouseEvent MouseEvent { get; protected set; }
+        public GameObject HoverColor { get; protected set; }
+        public CharacterMouseEvent MouseEvent => BodyTransform.gameObject.GetComponent<CharacterMouseEvent>();
+        public GameObject[] Borders => new GameObject[]
+        {
+            BodyTransform.Find("Border").gameObject,
+            LeftHandTransform.Find("Border").gameObject,
+            RightHandTransform.Find("Border").gameObject,
+        };
+        public SpriteRenderer[] ColorSpriteRenderers => new SpriteRenderer[]
+        {
+            BodyTransform.Find("Color").gameObject.GetComponent<SpriteRenderer>(),
+            LeftHandTransform.Find("Color").gameObject.GetComponent < SpriteRenderer >(),
+            RightHandTransform.Find("Color").gameObject.GetComponent < SpriteRenderer >(),
+        };
 
         /// <summary>
         /// Awake method.
@@ -32,7 +44,7 @@ namespace Assets.Scripts.CharacterPrefab
         //private void Update()
         //{
         //    Debug.Log(transform.root.gameObject.GetComponent<Character>().Name + "CharacterMouseEvent>().enabled " + BodyTransform.gameObject.GetComponent<CharacterMouseEvent>().enabled);
-            
+
         //    //if (BodyTransform.gameObject.GetComponent<CharacterMouseEvent>().enabled == false)
         //    //    Debug.Log("CharacterMouseEvent of " + transform.root.gameObject.GetComponent<Character>().Name + " activeSelf = false!");
         //}
