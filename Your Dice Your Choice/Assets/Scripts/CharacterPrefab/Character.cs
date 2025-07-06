@@ -10,9 +10,9 @@ namespace Assets.Scripts.CharacterPrefab
         public CharacterData Data { get; private set; }
         public string Name { get; private set; }
 
-        public float OriginHP { get; private set; }
-        public float OriginAP { get; private set; }
-        public float OriginDP { get; private set; }
+        public float CurrentHP { get; private set; }
+        public float CurrentAP { get; private set; }
+        public float CurrentDP { get; private set; }
 
         public GameObject Panel { get; private set; }
 
@@ -27,10 +27,10 @@ namespace Assets.Scripts.CharacterPrefab
             Player = player;
             Data = data;
             Name = data.Type.ToString();
-            Check();
-            OriginHP = data.HP;
-            OriginAP = data.AP;
-            OriginDP = data.DP;
+            
+            CurrentHP = data.HP;
+            CurrentAP = data.AP;
+            CurrentDP = data.DP;
 
             GetComponent<CharacterHealth>().SetHealthSlider();
             SetFieldIndex(fieldIndex);
@@ -55,33 +55,14 @@ namespace Assets.Scripts.CharacterPrefab
             Debug.Log($"Character {Name} is on the field {FieldIndex}.");
         }
 
-        private void Awake()
+        /// <summary>
+        /// Sets the value of the attribute.
+        /// </summary>
+        /// <param name="attribute"></param>
+        /// <param name="value"></param>
+        public void SetAttributeValue(float attribute, float value)
         {
-            Debug.Log("Awake");
-            Check();
-        }
-
-        public void Check()
-        {
-            // Retrieve the component
-            CharacterMouseEvent myComponent = transform.Find("Pivot").Find("Body Pivot").Find("Character Body").gameObject.GetComponent<CharacterMouseEvent>();
-
-            // Check if the component is enabled
-            if (myComponent != null)
-            {
-                if (myComponent.enabled)
-                {
-                    Debug.Log(Name + " CharacterMouseEvent is enabled.");
-                }
-                else
-                {
-                    Debug.Log(Name + " CharacterMouseEvent is disabled.");
-                }
-            }
-            else
-            {
-                Debug.Log(Name + " CharacterMouseEvent could not be found.");
-            }
+            attribute = value;
         }
     }
 }

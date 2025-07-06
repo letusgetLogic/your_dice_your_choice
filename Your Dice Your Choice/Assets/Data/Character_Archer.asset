@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Character_Archer
   m_EditorClassIdentifier: 
   Type: 1
-  HP: 600
+  HP: 534
   AP: 231
   DP: 40
   WeaponRight: {fileID: 1662544627993326492, guid: b759690d94541834fa2dbedce7ec0cfb, type: 3}

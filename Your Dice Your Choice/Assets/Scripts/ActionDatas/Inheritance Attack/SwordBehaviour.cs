@@ -11,12 +11,17 @@ namespace Assets.Scripts.ActionDatas
         {
             "None",
             "Dice 1: Hit orthogonally 1 Tile",
+            "Dice 2",
+            "Dice 3",
+            "Dice 4",
+            "Dice 5",
+            "Dice 6",
         };
 
 
         public SwordBehaviour(ActionData data, GameObject characterObject) : base(data, characterObject) 
         {
-            AllowedDiceNumber = AllowedDiceNumber.D1;
+            AllowedDiceNumber = AllowedDiceNumber.D1_6;
         }
 
         public override void SetDescriptionOf(ActionPopup actionPopup, int index)
@@ -56,6 +61,11 @@ namespace Assets.Scripts.ActionDatas
                     throw new System.Exception("SwordBehaviour.GetDirection() -> index = 0");
 
                 case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
                     return Direction.Orthogonal;
             }
 
@@ -76,6 +86,11 @@ namespace Assets.Scripts.ActionDatas
                     throw new System.Exception("SwordBehaviour.Range() -> index = 0");
 
                 case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
                     return 1;
             }
 

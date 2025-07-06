@@ -16,6 +16,7 @@ namespace Assets.Scripts.CharacterPrefab.CharacterBody
         private GameObject _characterObject;
         private Character _character;
         private CharacterPanelHint _panelHint;
+        private CharacterBorderColor _borderColor;
         private Color _color;
         private IEnumerator _coroutine;
 
@@ -23,16 +24,36 @@ namespace Assets.Scripts.CharacterPrefab.CharacterBody
 
         private GameObject _hoverColor => transform.root.GetComponent<CharacterComponents>().HoverColor;
 
+        private bool _isShowing = false;
+
         /// <summary>
         /// Awake method.
         /// </summary>
         private void Start()
         {
             _characterObject = transform.root.gameObject;
-            _character = transform.root.GetComponent<Character>();
+            _character = _characterObject.GetComponent<Character>();
             _panelHint = _character.Panel.GetComponent<CharacterPanelHint>();
+            _borderColor = _characterObject.GetComponent <CharacterBorderColor>();
             _color = _characterObject.GetComponent<CharacterColor>().PlayerColor;
             _hoverColor.SetActive(false);
+        }
+
+        /// <summary>
+        /// Update method.
+        /// </summary>
+        private void Update()
+        {
+            if (_isShowing)
+            {
+                CharacterPopup.Instance.TransferValues(
+                    _character.Name,
+                    _color,
+                    _character.Data.HP,
+                    _character.CurrentHP,
+                    _character.CurrentAP,
+                    _character.CurrentDP);
+            }
         }
 
         /// <summary>
@@ -45,6 +66,7 @@ namespace Assets.Scripts.CharacterPrefab.CharacterBody
             if (IsBeingAttacked)
             {
                 _hoverColor.SetActive(false );
+                CharacterManager.Instance.DeactivateCharacters();
                 BattleManager.Instance.HandleInput(eventData.pointerClick);
                 IsBeingAttacked = false;
                 return;
@@ -91,16 +113,8 @@ namespace Assets.Scripts.CharacterPrefab.CharacterBody
         {
             yield return new WaitForSeconds(_delayOnHoverTime);
 
+            _isShowing = true;
             CharacterPopup.Instance.SetPosition(_characterObject);
-
-            CharacterPopup.Instance.TransferValues(
-                _character.Name,
-                _color,
-                _character.OriginHP,
-                _character.Data.HP,
-                _character.Data.AP,
-                _character.Data.DP);
-
             CharacterPopup.Instance.gameObject.SetActive(true);
         }
 
@@ -109,8 +123,10 @@ namespace Assets.Scripts.CharacterPrefab.CharacterBody
         /// </summary>
         private void HideInfo()
         {
+            _isShowing = false;
             CharacterPopup.Instance.gameObject.SetActive(false);
             CharacterPopup.Instance.SetDefault();
         }
+
     }
 }

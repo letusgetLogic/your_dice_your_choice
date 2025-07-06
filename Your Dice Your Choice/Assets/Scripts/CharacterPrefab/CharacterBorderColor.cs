@@ -129,5 +129,13 @@ namespace Assets.Scripts.CharacterPrefab
                 item.transform.localScale = new Vector3(value, value, value);
             }
         }
+
+        /// <summary>
+        /// Sets enabled false.
+        /// </summary>
+        public void SetEnabledFalse()
+        {
+            this.enabled = false;
+        }
     }
 }

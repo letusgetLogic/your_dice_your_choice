@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Character_Mage
   m_EditorClassIdentifier: 
   Type: 3
-  HP: 700
+  HP: 675
   AP: 200
   DP: 40
   WeaponRight: {fileID: 7953323789972346437, guid: 58c6297ebd8f9b04da17fa1d209d3ecc, type: 3}

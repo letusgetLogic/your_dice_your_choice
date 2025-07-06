@@ -48,7 +48,8 @@ public class Player
 
             var characterMovement = characterObject.GetComponent<CharacterMovement>();
             var localPosition = characterObject.GetComponent<CharacterComponents>().BodyPivotTransform.localPosition;
-            characterMovement.SetBodyPivot(new Vector3(localPosition.x * -1, localPosition.y, localPosition.z));
+            var newPosition = new Vector3(localPosition.x * (-1), localPosition.y, localPosition.z);
+            characterMovement.SetBodyPivot(newPosition);
         }
     }
 

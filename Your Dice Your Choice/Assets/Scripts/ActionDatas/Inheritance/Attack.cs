@@ -26,8 +26,10 @@ namespace Assets.Scripts.ActionDatas
 
         public abstract override void DeactivateInteractible();
 
-        public override void HandleInput(GameObject enemyObject)
+        public override void HandleInput(GameObject clickedCharacterBody)
         {
+            GameObject enemyObject = clickedCharacterBody.transform.root.gameObject;
+
             float damage = characterData.AP - enemyObject.GetComponent<Character>().Data.DP;
 
             enemyObject.GetComponent<CharacterHealth>().TakeDamage(damage);

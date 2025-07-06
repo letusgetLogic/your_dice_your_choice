@@ -8,7 +8,7 @@ namespace Assets.Scripts.CharacterPrefab
     {
         [SerializeField] private float _speed = .01f;
 
-        private Transform _bodyTransform => GetComponent<CharacterComponents>().BodyTransform;
+        private Transform _bodyPivotTransform => GetComponent<CharacterComponents>().BodyPivotTransform;
 
         private Vector3 _targetPosition;
         private bool _isMoving = false;
@@ -36,7 +36,7 @@ namespace Assets.Scripts.CharacterPrefab
         /// </summary>
         public void SetBodyPivot(Vector3 pos)
         {
-            _bodyTransform.localPosition = pos;
+            _bodyPivotTransform.localPosition = pos;
         }
 
         /// <summary>
