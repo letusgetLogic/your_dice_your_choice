@@ -33,6 +33,13 @@ namespace Assets.Scripts.ActionDatas
             throw new System.Exception("Didn't match any case in GetActionBase.Create()");
         }
 
+        /// <summary>
+        /// Create an instance of Attack attach to the weapon.
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="characterObject"></param>
+        /// <returns></returns>
+        /// <exception cref="System.Exception"></exception>
         private static Attack CreateChild(ActionData data, GameObject characterObject)
         {
             switch (data.WeaponType)
