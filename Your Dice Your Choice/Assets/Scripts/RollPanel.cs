@@ -85,7 +85,8 @@ public class RollPanel : MonoBehaviour
     {
         foreach (GameObject diceObject in diceObjects)
         {
-            diceObject.GetComponent<DiceManager>().SetDragEventEnable(value);
+            var diceComponents = diceObject.GetComponent<DiceComponents>();
+            diceComponents.SetEnabled(diceComponents.DragEvent, false);
         }
     }
 

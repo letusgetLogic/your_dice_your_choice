@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Assets.Scripts.ActionPopupPrefab;
 using Assets.Scripts.CharacterPrefab;
 using UnityEngine;
@@ -10,12 +11,12 @@ namespace Assets.Scripts.ActionDatas
         public static readonly string[] Description = new string[]
         {
             "None",
-            "Dice 1: Hit orthogonally 1 Tile",
-            "Dice 2",
-            "Dice 3",
-            "Dice 4",
-            "Dice 5",
-            "Dice 6",
+            "Dice 1: Attack with 100% AP",
+            "Dice 2: AP x2",
+            "Dice 3: AP x3",
+            "Dice 4: AP x4",
+            "Dice 5: AP x5",
+            "Dice 6: AP x6",
         };
 
 
@@ -45,6 +46,33 @@ namespace Assets.Scripts.ActionDatas
         public override void DeactivateInteractible()
         {
             CharacterManager.Instance.DeactivateCharacters();
+        }
+
+        public override void ActivateSkill(int diceNumber)
+        {
+            float buffedAP = character.CurrentAP + Buff(character.CurrentAP, diceNumber);
+            character.SetAP(buffedAP);
+        }
+
+        private float Buff(float ap, int index)
+        {
+            switch (index)
+            {
+                case 0:
+                    throw new System.Exception("SwordBehaviour.Buff() -> index = 0");
+
+                case 1:
+                    return 0f;
+
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                    return ap * index;
+            }
+
+            throw new System.Exception("SwordBehaviour.Buff() -> int index invalid");
         }
 
         /// <summary>

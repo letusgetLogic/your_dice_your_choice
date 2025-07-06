@@ -10,9 +10,10 @@ public class CharacterHealth : MonoBehaviour
     [SerializeField] private Image _fillImage;
     [SerializeField] private TextMeshProUGUI _damageText;
 
-    [SerializeField] private float _animSpeedAct = 0.0002f;
+    [SerializeField] private float _animSpeedTakeDamage = 0.0005f;
     [SerializeField] private AnimationCurve _animCurve;
 
+    public float CurrentHP { get; private set; }
     private float _maxHealth => GetComponent<Character>().Data.HP;
 
     private bool _isHealthChanging = false;
@@ -32,9 +33,10 @@ public class CharacterHealth : MonoBehaviour
     /// <summary>
     /// Sets the health slider at the beginning.
     /// </summary>
-    public void SetHealthSlider()
+    public void SetData()
     {
-        SetHealthSlider(GetComponent<Character>().CurrentHP / _maxHealth);
+        CurrentHP = _maxHealth;
+        SetHealthSlider(CurrentHP / _maxHealth);
         _damageText.enabled = false;
     }
 
@@ -46,7 +48,7 @@ public class CharacterHealth : MonoBehaviour
     {
         _healthSlider.value = normalizedValue;
         float currentHealth = normalizedValue * _maxHealth;
-        SetHealth(currentHealth);
+        CurrentHP = currentHealth;
     }
 
     /// <summary>
@@ -77,7 +79,7 @@ public class CharacterHealth : MonoBehaviour
         if (!_isHealthChanging)
             return;
 
-        _current = Mathf.MoveTowards(_current, 1, _animSpeedAct / Time.deltaTime);
+        _current = Mathf.MoveTowards(_current, 1, _animSpeedTakeDamage / Time.deltaTime);
         float interpolation = _animCurve.Evaluate(_current);
 
         SetHealthSlider(Mathf.Lerp(_oldValue, _newValue, interpolation));
@@ -87,7 +89,9 @@ public class CharacterHealth : MonoBehaviour
         {
             _current = 0f;
             _damageText.enabled = false;
-            SetHealth(_newHealth);
+
+            CurrentHP = _newHealth;
+
             _isHealthChanging = false;
         }
     }
@@ -98,7 +102,7 @@ public class CharacterHealth : MonoBehaviour
     /// <param name="value"></param>
     private void CalculateHealth(float value)
     {
-        float currentHealth = GetComponent<Character>().Data.HP;
+        float currentHealth = CurrentHP;
 
         _oldValue = currentHealth / _maxHealth;
 
@@ -107,24 +111,13 @@ public class CharacterHealth : MonoBehaviour
         if (_newHealth < 0)
         { 
             _newHealth = 0;
-            GetComponent<CharacterEye>().SetDownState();
+            GetComponent<Character>().SetInteractibleFalse();
         }
 
         _newValue = _newHealth / _maxHealth;
 
         _isHealthChanging = true;
     }
-
-    /// <summary>
-    /// Sets the health value.
-    /// </summary>
-    /// <param name="value"></param>
-    private void SetHealth(float value)
-    {
-        GetComponent<Character>().SetAttributeValue(
-            GetComponent<Character>().CurrentHP, value );
-    }
-
 }
 
 

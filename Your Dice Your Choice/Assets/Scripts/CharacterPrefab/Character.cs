@@ -9,14 +9,12 @@ namespace Assets.Scripts.CharacterPrefab
         public PlayerType Player { get; private set; }
         public CharacterData Data { get; private set; }
         public string Name { get; private set; }
-
-        public float CurrentHP { get; private set; }
         public float CurrentAP { get; private set; }
         public float CurrentDP { get; private set; }
-
         public GameObject Panel { get; private set; }
-
         public Vector2Int FieldIndex { get; private set; }
+
+        public CharacterHealth CharacterHealth => GetComponent<CharacterHealth>();
 
         /// <summary>
         /// Initialize Data.
@@ -28,11 +26,10 @@ namespace Assets.Scripts.CharacterPrefab
             Data = data;
             Name = data.Type.ToString();
             
-            CurrentHP = data.HP;
+            CharacterHealth.SetData();
             CurrentAP = data.AP;
             CurrentDP = data.DP;
 
-            GetComponent<CharacterHealth>().SetHealthSlider();
             SetFieldIndex(fieldIndex);
         }
 
@@ -56,13 +53,30 @@ namespace Assets.Scripts.CharacterPrefab
         }
 
         /// <summary>
-        /// Sets the value of the attribute.
+        /// Sets the value of attack points.
         /// </summary>
-        /// <param name="attribute"></param>
         /// <param name="value"></param>
-        public void SetAttributeValue(float attribute, float value)
+        public void SetAP(float value)
         {
-            attribute = value;
+            CurrentAP = value;
+        }
+
+        /// <summary>
+        /// Sets the default values.
+        /// </summary>
+        public void SetDefault()
+        {
+            CurrentAP = Data.AP;
+        }
+
+        /// <summary>
+        /// Sets the character interactible false, when hp = 0.
+        /// </summary>
+        public void SetInteractibleFalse()
+        {
+            gameObject.tag = "Obstacle";
+            GetComponent<CharacterEye>().SetDownState();
+            Panel.GetComponent<CharacterPanel>().SetActionInactive();
         }
     }
 }

@@ -7,6 +7,8 @@ public class CharacterEye : MonoBehaviour
     public GameObject DownState;
     public GameObject DownEye1;
     public GameObject DownEye2;
+
+    [SerializeField] private Vector3 _rotation;
     [SerializeField] private float _rotateSpeed = 1000f;
 
     private GameObject[] _downEyes;
@@ -62,8 +64,7 @@ public class CharacterEye : MonoBehaviour
     {
         foreach (var item in _downEyes)
         {
-            float rotateDirection = item.transform.rotation.z + (_rotateSpeed * Time.deltaTime);
-            item.transform.rotation = Quaternion.Euler(0, 0, rotateDirection);
+            item.transform.Rotate(_rotation * _rotateSpeed * Time.deltaTime);
         }
     }
 }

@@ -8,6 +8,8 @@ namespace Assets.Scripts.ActionDatas
     {
         public AllowedDiceNumber AllowedDiceNumber { get; protected set; }
 
+        public float BuffAP { get; protected set; }
+
         public Attack(ActionData data, GameObject characterObject) : base(data, characterObject) 
         {
             
@@ -30,15 +32,13 @@ namespace Assets.Scripts.ActionDatas
         {
             GameObject enemyObject = clickedCharacterBody.transform.root.gameObject;
 
-            float damage = characterData.AP - enemyObject.GetComponent<Character>().Data.DP;
+            float damage = character.CurrentAP - enemyObject.GetComponent<Character>().CurrentDP;
 
             enemyObject.GetComponent<CharacterHealth>().TakeDamage(damage);
 
-            Debug.Log("Attack!");
+            character.SetDefault();
         }
 
-
-       
     }
 }
 

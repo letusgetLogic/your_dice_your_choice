@@ -1704,7 +1704,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cadebef507a95e941922ee0cb1c2b4df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animSpeedAct: 0.00005
+  _animSpeedAct: 0.0002
   _colorMaxR: 0.6
   _colorMinR: 0.1
   _scaleMax: 1.2
@@ -1760,7 +1760,7 @@ MonoBehaviour:
   _healthSlider: {fileID: 6204576323055136816}
   _fillImage: {fileID: 1555208752840769769}
   _damageText: {fileID: 4686432980150634567}
-  _animSpeedAct: 0.0002
+  _animSpeedTakeDamage: 0.0005
   _animCurve:
     serializedVersion: 2
     m_Curve:
@@ -1801,7 +1801,8 @@ MonoBehaviour:
   DownState: {fileID: 2311599635427380403}
   DownEye1: {fileID: 2998005072799087598}
   DownEye2: {fileID: 6033051518124546497}
-  _rotateSpeed: 10
+  _rotation: {x: 0, y: 0, z: 90}
+  _rotateSpeed: 3
 --- !u!1 &6033051518124546497
 GameObject:
   m_ObjectHideFlags: 0

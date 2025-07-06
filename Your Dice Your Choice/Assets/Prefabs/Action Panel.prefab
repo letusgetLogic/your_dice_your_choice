@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1415101767450205266}
   - component: {fileID: 1998406024287402891}
   - component: {fileID: 9133780491778248315}
+  - component: {fileID: 8809972467490415470}
   - component: {fileID: 3144011488393902226}
   - component: {fileID: 7102619009427932503}
   m_Layer: 5
@@ -64,6 +65,19 @@ MonoBehaviour:
   _behindLayer: {fileID: 6931065590405077963}
   _actionName: {fileID: 7240826885235866854}
   _actionPopupPrefab: {fileID: 2025760211542377306}
+--- !u!114 &8809972467490415470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 421359889958457307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce6ab0343fb40ce4ab83d1c7a11e7ccf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _diceSlotAction: {fileID: 4360947806263819555}
 --- !u!114 &3144011488393902226
 MonoBehaviour:
   m_ObjectHideFlags: 0

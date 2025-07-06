@@ -2,22 +2,13 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
-public class DiceManager : MonoBehaviour
+public class DiceDisplay : MonoBehaviour
 {
     [SerializeField] private Canvas _canvas;
     [SerializeField] private float _alphaValue = 0.6f;
 
     private CanvasGroup _canvasGroup => GetComponent<CanvasGroup>();
-    private DiceDragEvent _dragEvent => GetComponent<DiceDragEvent>();
-
-    /// <summary>
-    /// Sets the component DiceDragEvent true/false.
-    /// </summary>
-    public void SetDragEventEnable(bool value)
-    {
-        _dragEvent.enabled = value;
-    }
-
+    
     /// <summary>
     /// Sets the alpha at the default value.
     /// </summary>

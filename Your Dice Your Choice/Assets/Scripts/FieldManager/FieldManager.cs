@@ -9,7 +9,7 @@ public class FieldManager : MonoBehaviour
     public static FieldManager Instance { get; private set; }
 
     public GameObject[,] Fields { get; private set; }
-    public List<FieldMouseEvent> InteractibleFields { get; private set; }
+    public List<GameObject> InteractibleFields { get; private set; }
 
     /// <summary>
     /// Awake method.
@@ -39,15 +39,16 @@ public class FieldManager : MonoBehaviour
     /// Initializes the index of the array Fields and sets the index to the field.
     /// </summary>
     /// <param name="characterPrefab"></param>
-    public void SetField(GameObject field, int j, int i)
+    public void SetField(GameObject fieldObject, int j, int i)
     {
-        Fields[j, i] = field;
+        Fields[j, i] = fieldObject;
 
         Vector2Int index = new Vector2Int(j, i);
-        field.GetComponent<Field>().SetIndex(index);
+        fieldObject.GetComponent<Field>().SetIndex(index);
 
-        var mouseEvent = field.GetComponent<FieldMouseEvent>();
-        SetEnabled(mouseEvent, false);
+        var fieldComponents = fieldObject.GetComponent<FieldComponents>();
+        fieldComponents.SetEnabled(fieldComponents.MouseEvent, false);
+
     }
 
     /// <summary>
@@ -72,9 +73,9 @@ public class FieldManager : MonoBehaviour
             if (IsAnyObstacleInWay(characterFieldIndexOrigin, actionDirection, directionRange))
                 continue;
 
-            var mouseEvent = Fields[fieldIndex.x, fieldIndex.y].GetComponent<FieldMouseEvent>();
+            var fieldObject = Fields[fieldIndex.x, fieldIndex.y];
             
-            InteractibleFields.Add(mouseEvent);
+            InteractibleFields.Add(fieldObject);
         }
     }
     
@@ -86,8 +87,11 @@ public class FieldManager : MonoBehaviour
     /// <param name="directionRange"></param>
     public void ShowInteractibleFields()
     {
-       foreach (var mouseEvent in InteractibleFields)
-            SetEnabled(mouseEvent, true);
+        foreach(var fieldObject in InteractibleFields)
+        {
+            var fieldComponents = fieldObject.GetComponent<FieldComponents>();
+            fieldComponents.SetEnabled(fieldComponents.MouseEvent, false);
+        }
     }
 
     /// <summary>
@@ -124,22 +128,14 @@ public class FieldManager : MonoBehaviour
     /// <param name="clickedField"></param>
     public void DeactivateFields()
     {
-        foreach (var mouseEvent in InteractibleFields)
+        foreach (var fieldObject in InteractibleFields)
         {
-            SetEnabled(mouseEvent, false);
+            var fieldComponents = fieldObject.GetComponent<FieldComponents>();
+            fieldComponents.SetEnabled(fieldComponents.MouseEvent, false);
         }
-        
+
         InteractibleFields.Clear();
     }
 
-    /// <summary>
-    /// Sets the component FieldMouseEvent enabled true/false.
-    /// </summary>
-    /// <param name="component"></param>
-    /// <param name="value"></param>
-    private void SetEnabled(FieldMouseEvent component, bool value)
-    {
-        component.enabled = value;
-    }
 
 }

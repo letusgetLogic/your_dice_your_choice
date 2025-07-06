@@ -14,27 +14,45 @@ namespace Assets.Scripts.FieldPrefab
         /// Sets the field index.
         /// </summary>
         /// <param name="index"></param>
-        public void SetIndex(Vector2Int index) 
-        { 
-            this.Index = index; 
+        public void SetIndex(Vector2Int index)
+        {
+            this.Index = index;
         }
 
+        /// <summary>
+        /// OnTriggerEnter2D.
+        /// </summary>
+        /// <param name="collision"></param>
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (!collision.CompareTag("Character"))
-                return;
-            
-            _count++;
-            CharacterObject = collision.transform.root.gameObject;
+            if (collision.CompareTag("Character"))
+            {
+                CharacterObject = collision.transform.root.gameObject;
+                _count++;
+            }
+
+            else if (collision.CompareTag("Obstacle"))
+            {
+                _count++;
+            }
         }
 
+        /// <summary>
+        /// OnTriggerExit2D.
+        /// </summary>
+        /// <param name="collision"></param>
         private void OnTriggerExit2D(Collider2D collision)
         {
-            if (!collision.CompareTag("Character"))
-                return;
-                
-            _count--;
-            CharacterObject = null;
+            if (collision.CompareTag("Character"))
+            {
+                CharacterObject = null;
+                _count--;
+            }
+
+            else if (collision.CompareTag("Obstacle"))
+            {
+                _count--;
+            }
         }
 
         /// <summary>
@@ -56,8 +74,8 @@ namespace Assets.Scripts.FieldPrefab
         /// <returns></returns>
         public GameObject EnemyObject(PlayerType currentPlayer)
         {
-            if (CharacterObject == null) 
-                return null;   
+            if (CharacterObject == null)
+                return null;
 
             var character = CharacterObject.GetComponent<Character>();
 
@@ -65,7 +83,7 @@ namespace Assets.Scripts.FieldPrefab
             {
                 return CharacterObject;
             }
-            
+
             return null;
         }
     }

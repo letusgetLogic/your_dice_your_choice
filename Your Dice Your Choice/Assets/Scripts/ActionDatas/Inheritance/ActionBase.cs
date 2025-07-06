@@ -55,6 +55,12 @@ namespace Assets.Scripts.ActionDatas
         public abstract void DeactivateInteractible();
 
         /// <summary>
+        /// Activates the skill of the action.
+        /// </summary>
+        public virtual void ActivateSkill(int diceNumber)
+        { }
+
+        /// <summary>
         /// Handles the input of player.
         /// </summary>
         /// <param name="fieldObject"></param>

@@ -3,7 +3,7 @@ using Assets.Scripts.DicePrefab;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DiceDragEvent : DiceManager, IDragHandler, IBeginDragHandler, IEndDragHandler
+public class DiceDragEvent : DiceDisplay, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
     /// <summary>
     /// Triggers event at the beginning of drag.

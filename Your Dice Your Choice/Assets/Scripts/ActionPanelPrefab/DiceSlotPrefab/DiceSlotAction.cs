@@ -26,8 +26,10 @@ namespace Assets.Scripts.ActionPopupPrefab.DiceSlotPrefab
         /// </summary>
         public void OnPointerEnter(PointerEventData eventData)
         {
-           
+            _isDeactivatingInteractible = true;
+
             _coroutine = ShowInteractible(eventData.pointerDrag);
+
             StartCoroutine(_coroutine);
         }
 
@@ -36,7 +38,8 @@ namespace Assets.Scripts.ActionPopupPrefab.DiceSlotPrefab
         /// </summary>
         public void OnPointerExit(PointerEventData eventData)
         {
-            StopCoroutine(_coroutine);
+            if (_coroutine != null) 
+                StopCoroutine(_coroutine);
 
             if (_isDeactivatingInteractible)
             {
@@ -66,8 +69,6 @@ namespace Assets.Scripts.ActionPopupPrefab.DiceSlotPrefab
                 action.SetDescriptionOf(_actionPanel.ActionPopup, dice.CurrentNumber);
                 action.SetInteractible(dice.CurrentNumber);
                 action.ShowInteractible();
-
-                _isDeactivatingInteractible = true;
             }
         }
 
@@ -77,6 +78,8 @@ namespace Assets.Scripts.ActionPopupPrefab.DiceSlotPrefab
         /// <param name="eventData"></param>
         public void OnDrop(PointerEventData eventData)
         {
+            _isDeactivatingInteractible = false;
+
             if (_playerType != TurnManager.Instance.Turn)
                 return;
 
@@ -96,11 +99,10 @@ namespace Assets.Scripts.ActionPopupPrefab.DiceSlotPrefab
                     CharacterManager.Instance.InteractibleCharacters.Count == 0)
                     return;
 
-                _isDeactivatingInteractible = false;
-                       
                 SetDiceOnSlot(diceObject);
 
                 action.ShowInteractible();
+                action.ActivateSkill(dice.CurrentNumber);
 
                 BattleManager.Instance.SetData(_actionPanel, _actionPanel.CharacterObject);
             }
@@ -112,12 +114,15 @@ namespace Assets.Scripts.ActionPopupPrefab.DiceSlotPrefab
         /// <param name="dice"></param>
         private void SetDiceOnSlot(GameObject dice)
         {
+            var diceComponents = dice.GetComponent<DiceComponents>();
+            diceComponents.SetEnabled(diceComponents.DragEvent, false);
+
             var diceMovement = dice.GetComponent<DiceMovement>();
             diceMovement.PositionsTo(GetComponent<RectTransform>().position);
 
-            var diceManager = dice.GetComponent<DiceManager>();
 
-            diceManager.SetDragEventEnable(false);
+            var diceManager = dice.GetComponent<DiceDisplay>();
+
             diceManager.SetAlphaDefault();
             diceManager.SetBlocksRaycasts(true);
         }

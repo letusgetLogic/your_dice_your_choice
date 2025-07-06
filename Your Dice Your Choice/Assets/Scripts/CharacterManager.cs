@@ -65,7 +65,7 @@ namespace Assets.Scripts
 
                 var components = characterObject.GetComponent<CharacterComponents>();
                 var mouseEvent = components.BodyTransform.GetComponent<CharacterMouseEvent>();
-                mouseEvent.IsBeingAttacked = true;
+                mouseEvent.SetIsBeingAttacked(true);
             }
         }
 

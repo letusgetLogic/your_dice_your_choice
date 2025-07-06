@@ -2,6 +2,7 @@
 using TMPro;
 using UnityEngine;
 using System;
+using Assets.Scripts.ActionPopupPrefab.DiceSlotPrefab;
 
 namespace Assets.Scripts.ActionPopupPrefab
 {
@@ -40,5 +41,12 @@ namespace Assets.Scripts.ActionPopupPrefab
             _behindLayer.SetActive(value);
         }
 
+        /// <summary>
+        /// Deactivates ActionPanelMouseEvent.
+        /// </summary>
+        public void DeactivateMouseEvent()
+        {
+            GetComponent<ActionPanelMouseEvent>().enabled = false;
+        }
     }
 }

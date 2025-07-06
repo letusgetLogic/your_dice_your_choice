@@ -19,6 +19,7 @@ namespace Assets.Scripts.CharacterPrefab
             LeftHandTransform.Find("Border").gameObject,
             RightHandTransform.Find("Border").gameObject,
         };
+
         public SpriteRenderer[] ColorSpriteRenderers => new SpriteRenderer[]
         {
             BodyTransform.Find("Color").gameObject.GetComponent<SpriteRenderer>(),
@@ -38,15 +39,19 @@ namespace Assets.Scripts.CharacterPrefab
             RightHandTransform = BodyTransform.Find("Character Right Hand");
 
             HoverColor = BodyPivotTransform.Find("Hover Color").gameObject;
-            //MouseEvent = BodyTransform.gameObject.GetComponent<CharacterMouseEvent>();
         }
 
-        //private void Update()
-        //{
-        //    Debug.Log(transform.root.gameObject.GetComponent<Character>().Name + "CharacterMouseEvent>().enabled " + BodyTransform.gameObject.GetComponent<CharacterMouseEvent>().enabled);
-
-        //    //if (BodyTransform.gameObject.GetComponent<CharacterMouseEvent>().enabled == false)
-        //    //    Debug.Log("CharacterMouseEvent of " + transform.root.gameObject.GetComponent<Character>().Name + " activeSelf = false!");
-        //}
+        /// <summary>
+        /// Sets the component enabled true/false.
+        /// </summary>
+        /// <param name="component"></param>
+        /// <param name="value"></param>
+        public void SetEnabled(Component component, bool value)
+        {
+            if (component is Behaviour behaviour)
+            {
+                behaviour.enabled = value;
+            }
+        }
     }
 }

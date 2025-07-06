@@ -4,6 +4,8 @@ using Assets.Scripts.CharacterPrefab;
 using Assets.Scripts.ActionPopupPrefab;
 using Assets.Scripts.ActionDatas;
 using Assets.Scripts;
+using UnityEngine.UI;
+using Assets.Scripts.ActionPanelPrefab;
 
 public class CharacterPanel : MonoBehaviour
 {
@@ -14,6 +16,9 @@ public class CharacterPanel : MonoBehaviour
     public GameObject CharacterObject { get; private set; }
     public Character Character { get; private set; }
     public PlayerType Player { get; private set; }
+    public GameObject[] ActiveActionPanels { get; private set; }
+
+    [SerializeField] private float _alphaValueInactive = 0.9f;
 
     /// <summary>
     /// References Object and Script Character.
@@ -32,16 +37,20 @@ public class CharacterPanel : MonoBehaviour
     /// </summary>
     public void SetAction()
     {
+        ActiveActionPanels = new GameObject[Character.Data.ActionData.Length];
+
         for (int i = 0; i < ActionPanelPrefabs.Length; i++)
         {
-            if (i >= Character.Data.ActionData.Length)
+            // The amount of action of a character can vary.
+            if (i >= Character.Data.ActionData.Length) 
             {
                 ActionPanelPrefabs[i].SetActive(false);
                 continue;
             }
 
-            var actionData = Character.Data.ActionData[i];
+            ActiveActionPanels[i] = ActionPanelPrefabs[i];
 
+            var actionData = Character.Data.ActionData[i];
             ActionPanelPrefabs[i].GetComponent<ActionPanel>().SetData(actionData, CharacterObject, this, i);
         }
     }
@@ -57,6 +66,25 @@ public class CharacterPanel : MonoBehaviour
 
             ActionPanelPrefabs[i].GetComponent<ActionPanel>().ActionPopup.SetPosition();
             ActionPanelPrefabs[i].GetComponent<ActionPanel>().ActionPopup.SetText(actionData.Description);
+        }
+    }
+
+    /// <summary>
+    /// Sets the action inactive.
+    /// </summary>
+    public void SetActionInactive()
+    {
+        foreach (var actionPanelObject in ActiveActionPanels)
+        {
+            var actionPanelComponents = actionPanelObject.GetComponent<ActionPanelComponents>();
+            var diceSlotAction = actionPanelComponents.DiceSlotAction;
+            var actionPanelMouseEvent = actionPanelComponents.ActionPanelMouseEvent;
+
+            actionPanelComponents.SetEnabled(diceSlotAction, false);
+            actionPanelComponents.SetEnabled(actionPanelMouseEvent, false);
+
+            var panelColor = GetComponent<Image>().color;
+            panelColor = new Color(panelColor.r, panelColor.g, panelColor.b, _alphaValueInactive);
         }
     }
 }
