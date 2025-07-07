@@ -75,7 +75,7 @@ namespace Assets.Scripts.CharacterPrefab
         public void SetInteractibleFalse()
         {
             gameObject.tag = "Obstacle";
-            GetComponent<CharacterEye>().SetDownState();
+            GetComponent<CharacterState>().SetDownState();
             Panel.GetComponent<CharacterPanel>().SetActionInactive();
         }
     }

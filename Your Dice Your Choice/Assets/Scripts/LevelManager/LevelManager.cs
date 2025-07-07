@@ -36,18 +36,16 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         Data.MatchType = MatchType.Duell;
-        StartCoroutine(StartPhase());
+        StartPhases();
     }
 
     /// <summary>
-    /// Starts the phase.
+    /// Starts the phases.
     /// </summary>
     /// <returns></returns>
     /// <exception cref="System.Exception"></exception>
-    private IEnumerator StartPhase()
+    private void StartPhases()
     {
-        yield return new WaitForSeconds(0.1f);
-
         if (Data != null)
         {
             CurrentPhase = Phase.Intro;
@@ -71,7 +69,7 @@ public class LevelManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Runs method in the phase.
+    /// Runs method in the current phase.
     /// </summary>
     /// <exception cref="System.Exception"></exception>
     private void OnPhase()

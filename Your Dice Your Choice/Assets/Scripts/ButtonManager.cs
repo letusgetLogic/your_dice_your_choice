@@ -50,7 +50,7 @@ public class ButtonManager : MonoBehaviour
     {
         foreach (var button in AllRollButtons)
         {
-            button.interactable = false;
+            SetInteractible(button, false);
         }
     }
 

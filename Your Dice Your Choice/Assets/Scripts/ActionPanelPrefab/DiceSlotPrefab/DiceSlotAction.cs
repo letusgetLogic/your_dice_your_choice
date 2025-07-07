@@ -104,7 +104,7 @@ namespace Assets.Scripts.ActionPopupPrefab.DiceSlotPrefab
                 action.ShowInteractible();
                 action.ActivateSkill(dice.CurrentNumber);
 
-                BattleManager.Instance.SetData(_actionPanel, _actionPanel.CharacterObject);
+                BattleManager.Instance.SetData(_actionPanel);
             }
         }
 

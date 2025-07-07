@@ -13,10 +13,9 @@ public class BattleManager : MonoBehaviour
     public static BattleManager Instance { get; private set; }
 
     public TextMeshProUGUI HeaderText;
+    public List<GameObject> InteractibleCharacters { get; private set; }
 
     private ActionPanel _currentActionPanel;
-    private GameObject _currentCharacterObject;
-    public List<GameObject> InteractibleCharacters { get; private set; }
 
     /// <summary>
     /// Awake method.
@@ -44,10 +43,9 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     /// <param name="actionPanel"></param>
     /// <param name="characterObject"></param>
-    public void SetData(ActionPanel actionPanel, GameObject characterObject)
+    public void SetData(ActionPanel actionPanel)
     {
         _currentActionPanel = actionPanel;
-        _currentCharacterObject = characterObject;
     }
 
     /// <summary>
