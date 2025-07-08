@@ -44,12 +44,10 @@ public class Player
         if (PlayerType == PlayerType.PlayerRight)
         {
             var characterRotatation = characterObject.GetComponent<CharacterRotation>();
-            characterRotatation.RotateBodyTransform(180);
+            characterRotatation.RotateBody(180);
 
             var characterMovement = characterObject.GetComponent<CharacterMovement>();
-            var localPosition = characterObject.GetComponent<CharacterComponents>().BodyPivotTransform.localPosition;
-            var newPosition = new Vector3(localPosition.x * (-1), localPosition.y, localPosition.z);
-            characterMovement.SetBodyPivot(newPosition);
+            characterMovement.SetBodyPivotPosition();
         }
     }
 

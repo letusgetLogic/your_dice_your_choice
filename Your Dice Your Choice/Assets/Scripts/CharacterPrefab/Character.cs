@@ -6,6 +6,8 @@ namespace Assets.Scripts.CharacterPrefab
 {
     public class Character : MonoBehaviour
     {
+        public CharacterMouseEvent CharacterMouseEvent;
+
         public PlayerType Player { get; private set; }
         public CharacterData Data { get; private set; }
         public string Name { get; private set; }
@@ -13,8 +15,6 @@ namespace Assets.Scripts.CharacterPrefab
         public float CurrentDP { get; private set; }
         public GameObject Panel { get; private set; }
         public Vector2Int FieldIndex { get; private set; }
-
-        public CharacterHealth CharacterHealth => GetComponent<CharacterHealth>();
 
         /// <summary>
         /// Initialize Data.
@@ -26,7 +26,7 @@ namespace Assets.Scripts.CharacterPrefab
             Data = data;
             Name = data.Type.ToString();
             
-            CharacterHealth.SetData();
+            GetComponent<CharacterHealth>().SetData();
             CurrentAP = data.AP;
             CurrentDP = data.DP;
 

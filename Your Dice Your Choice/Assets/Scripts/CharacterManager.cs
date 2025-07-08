@@ -63,8 +63,7 @@ namespace Assets.Scripts
                 var borderColor = characterObject.GetComponent<CharacterBorderColor>();
                 SetEnabled(borderColor, true);
 
-                var components = characterObject.GetComponent<CharacterComponents>();
-                var mouseEvent = components.BodyTransform.GetComponent<CharacterMouseEvent>();
+                var mouseEvent = characterObject.GetComponent<Character>().CharacterMouseEvent;
                 mouseEvent.SetIsBeingAttacked(true);
             }
         }

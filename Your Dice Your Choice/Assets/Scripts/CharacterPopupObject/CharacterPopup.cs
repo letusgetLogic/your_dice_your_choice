@@ -34,7 +34,7 @@ public class CharacterPopup : MonoBehaviour
     /// <param name="currentHp"></param>
     /// <param name="ap"></param>
     /// <param name="dp"></param>
-    public void TransferValues(string name, Color color, float maxHp, float currentHp, float ap, float dp)
+    public void SetData(string name, Color color, float maxHp, float currentHp, float ap, float dp)
     {
         _name.text = name;
         _name.color = color;

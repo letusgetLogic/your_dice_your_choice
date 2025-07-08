@@ -6,17 +6,17 @@ using UnityEngine.UI;
 
 public class CharacterHealth : MonoBehaviour
 {
-    [SerializeField] private Slider _healthSlider;
-    [SerializeField] private Image _fillImage;
+    [SerializeField] private Slider          _healthSlider;
+    [SerializeField] private Image           _fillImage;
     [SerializeField] private TextMeshProUGUI _damageText;
 
-    [SerializeField] private float _animSpeedTakeDamage = 0.0005f;
-    [SerializeField] private AnimationCurve _animCurve;
+    [SerializeField] private float           _animSpeedTakeDamage = 0.0005f;
+    [SerializeField] private AnimationCurve  _animCurve;
 
-    public float CurrentHP { get; private set; }
+    public float  CurrentHP { get; private set; }
     private float _maxHealth => GetComponent<Character>().Data.HP;
 
-    private bool _isHealthChanging = false;
+    private bool  _isHealthChanging = false;
     private float _current;
     private float _oldValue;
     private float _newValue;

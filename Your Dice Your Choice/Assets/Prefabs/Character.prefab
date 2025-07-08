@@ -397,7 +397,7 @@ GameObject:
   - component: {fileID: 5967337673226584335}
   - component: {fileID: 1674871747688155579}
   m_Layer: 9
-  m_Name: Character Right Hand
+  m_Name: Right Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1601,7 +1601,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1159564468610736511}
   - component: {fileID: 3838948868836878789}
-  - component: {fileID: 1340097866168760340}
   - component: {fileID: 2643295388591708874}
   - component: {fileID: 7240997328264629239}
   - component: {fileID: 8124959260350581310}
@@ -1645,18 +1644,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7ede45b933cec64581e39ad2a4fdf91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1340097866168760340
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5643954692354094509}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2bff5938b506f242ba0914e9b9f006d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  CharacterMouseEvent: {fileID: 756582597474049763}
 --- !u!114 &2643295388591708874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1669,6 +1657,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9df170bf8d46a2c42a0e5c2924173405, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _leftHandTransform: {fileID: 5972575020386444155}
+  _rightHandTransform: {fileID: 5967337673226584335}
 --- !u!114 &7240997328264629239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1682,6 +1672,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 0.1
+  _bodyPivotTransform: {fileID: 2098288980909553253}
 --- !u!114 &8124959260350581310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1694,6 +1685,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94da7834f5051604ea43194b5f1e90f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bodyTransform: {fileID: 5792113122470517139}
 --- !u!114 &1810067803880296511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1706,6 +1698,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cadebef507a95e941922ee0cb1c2b4df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _borders:
+  - {fileID: 6713686809384439832}
+  - {fileID: 948483527308166831}
+  - {fileID: 848932504243726649}
   _animSpeedAct: 0.0002
   _colorMaxR: 0.6
   _colorMinR: 0.1
@@ -1747,6 +1743,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cdaac76c7642cf40a6aa2c630ab3c72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _colorSpriteRenderers:
+  - {fileID: 3208305569458058478}
+  - {fileID: 121630038773133889}
+  - {fileID: 6760051673674147291}
 --- !u!114 &1589228588283915217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2235,7 +2235,7 @@ GameObject:
   - component: {fileID: 1465534783751511471}
   - component: {fileID: 6726623152664132908}
   m_Layer: 9
-  m_Name: Character Body
+  m_Name: Body
   m_TagString: Character
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2275,6 +2275,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _delayOnHoverTime: 0.5
+  _hoverColor: {fileID: 7900233103421084157}
 --- !u!212 &7065920787256018453
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2493,7 +2494,7 @@ GameObject:
   - component: {fileID: 5972575020386444155}
   - component: {fileID: 4006877271551877134}
   m_Layer: 9
-  m_Name: Character Left Hand
+  m_Name: Left Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -5,8 +5,8 @@ namespace Assets.Scripts.CharacterPrefab
 {
     public class CharacterGetWeapon : MonoBehaviour
     {
-        private Transform _leftHandTransform => GetComponent<CharacterComponents>().LeftHandTransform;
-        private Transform _rightHandTransform => GetComponent<CharacterComponents>().RightHandTransform;
+        [SerializeField] private Transform _leftHandTransform;
+        [SerializeField] private Transform _rightHandTransform;
 
         /// <summary>
         /// Sets the weapon as child of left hand.

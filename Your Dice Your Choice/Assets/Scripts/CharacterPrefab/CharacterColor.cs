@@ -4,12 +4,9 @@ namespace Assets.Scripts.CharacterPrefab
 {
     public class CharacterColor : MonoBehaviour
     {
-        private SpriteRenderer _bodySpriteRenderer;
-        private SpriteRenderer _leftHandSpriteRenderer;
-        private SpriteRenderer _rightHandSpriteRenderer;
-
         public Color PlayerColor {  get; private set; }
-        private SpriteRenderer[] _colorSpriteRenderers => GetComponent<CharacterComponents>().ColorSpriteRenderers;
+
+        [SerializeField] private SpriteRenderer[] _colorSpriteRenderers;
 
         /// <summary>
         /// Sets the color to the character of the target player.

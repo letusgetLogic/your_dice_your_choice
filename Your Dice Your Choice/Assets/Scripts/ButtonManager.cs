@@ -55,7 +55,7 @@ public class ButtonManager : MonoBehaviour
     }
 
     /// <summary>
-    /// button.gameObject.SetActive(true/false).
+    /// gameObject.SetActive true/false.
     /// </summary>
     /// <param name="button"></param>
     public void SetActive(Button button, bool value)

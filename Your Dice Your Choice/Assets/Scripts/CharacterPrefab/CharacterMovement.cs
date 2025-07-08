@@ -8,7 +8,7 @@ namespace Assets.Scripts.CharacterPrefab
     {
         [SerializeField] private float _speed = .01f;
 
-        private Transform _bodyPivotTransform => GetComponent<CharacterComponents>().BodyPivotTransform;
+        [SerializeField] private Transform _bodyPivotTransform;
 
         private Vector3 _targetPosition;
         private bool _isMoving = false;
@@ -26,7 +26,7 @@ namespace Assets.Scripts.CharacterPrefab
                     _isMoving = false;
                     return;
                 }
-
+                
                 transform.position = Vector3.MoveTowards(transform.position, _targetPosition, _speed);
             }
         }
@@ -34,9 +34,12 @@ namespace Assets.Scripts.CharacterPrefab
         /// <summary>
         /// Sets the body pivot local position.
         /// </summary>
-        public void SetBodyPivot(Vector3 pos)
+        public void SetBodyPivotPosition()
         {
-            _bodyPivotTransform.localPosition = pos;
+            _bodyPivotTransform.localPosition = new Vector3(
+                _bodyPivotTransform.localPosition.x * (-1),
+                _bodyPivotTransform.localPosition.y,
+                _bodyPivotTransform.localPosition.z); ;
         }
 
         /// <summary>

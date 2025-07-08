@@ -4,6 +4,7 @@ namespace Assets.Scripts.CharacterPrefab
 {
     public class CharacterBorderColor : MonoBehaviour
     {
+        [SerializeField] private GameObject[] _borders;
         [SerializeField] private float _animSpeedAct = 0.00005f;
         [SerializeField] private float _colorMaxR = 0.6f;
         [SerializeField] private float _colorMinR = 0.1f;
@@ -11,12 +12,15 @@ namespace Assets.Scripts.CharacterPrefab
         [SerializeField] private float _scaleMin = 1f;
         [SerializeField] private AnimationCurve _animCurve;
 
-        private enum LightenState { None, LightenUp, LightenDown }
+        private enum LightenState 
+        { 
+            None, 
+            LightenUp,
+            LightenDown 
+        }
         private LightenState _lightenState = LightenState.None;
 
         private float _currentValue = 0f;
-
-        private GameObject[] _borders => GetComponent<CharacterComponents>().Borders;
 
         /// <summary>
         /// OnEnable method.
@@ -24,18 +28,6 @@ namespace Assets.Scripts.CharacterPrefab
         private void OnEnable()
         {
             _lightenState = LightenState.LightenUp;
-
-            //var characterBody = transform.Find("Pivot").Find("Body Pivot").Find("Character Body");
-            //var characterBodyBorder = characterBody.Find("Border").gameObject;
-            //var leftHandBorder = characterBody.Find("Character Left Hand").Find("Border").gameObject;
-            //var rightHandBorder = characterBody.Find("Character Right Hand").Find("Border").gameObject;
-            
-            //_borders = new GameObject[]
-            //{
-            //    characterBodyBorder,
-            //    leftHandBorder,
-            //    rightHandBorder
-            //};
         }
 
         /// <summary>

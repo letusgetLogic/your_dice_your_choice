@@ -4,12 +4,12 @@ namespace Assets.Scripts.CharacterPrefab
 {
     public class CharacterRotation : MonoBehaviour
     {
-        private Transform _bodyTransform => GetComponent<CharacterComponents>().BodyTransform;
+        [SerializeField] private Transform _bodyTransform;
 
         /// <summary>
         /// Rotate the body transform.
         /// </summary>
-        public void RotateBodyTransform(int number)
+        public void RotateBody(int number)
         {
             var rotation = _bodyTransform.rotation;
             rotation.z += number;

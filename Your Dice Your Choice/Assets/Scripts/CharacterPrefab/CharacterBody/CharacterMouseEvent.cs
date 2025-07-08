@@ -10,31 +10,20 @@ namespace Assets.Scripts.CharacterPrefab.CharacterBody
 {
     public class CharacterMouseEvent : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
-        [SerializeField][Range(0f, 1f)] private float _delayOnHoverTime = .5f;
+        [SerializeField] private float       _delayOnHoverTime = 0.5f;
+        [SerializeField] private GameObject  _hoverColor;
 
-        private GameObject _characterObject;
-        private Character _character;
-        private CharacterPanelHint _panelHint;
-        private CharacterBorderColor _borderColor;
-        private Color _color;
         private IEnumerator _coroutine;
 
-        private bool _isBeingAttacked = false;
+        private bool        _isBeingAttacked = false;
 
-        private GameObject _hoverColor => transform.root.GetComponent<CharacterComponents>().HoverColor;
-
-        private bool _isShowing = false;
+        private bool        _isShowing = false;
 
         /// <summary>
         /// Start method.
         /// </summary>
         private void Start()
         {
-            _characterObject = transform.root.gameObject;
-            _character = _characterObject.GetComponent<Character>();
-            _panelHint = _character.Panel.GetComponent<CharacterPanelHint>();
-            _borderColor = _characterObject.GetComponent <CharacterBorderColor>();
-            _color = _characterObject.GetComponent<CharacterColor>().PlayerColor;
             _hoverColor.SetActive(false);
         }
 
@@ -45,13 +34,15 @@ namespace Assets.Scripts.CharacterPrefab.CharacterBody
         {
             if (_isShowing)
             {
-                CharacterPopup.Instance.TransferValues(
-                    _character.Name,
-                    _color,
-                    _character.Data.HP,
-                    _character.CharacterHealth.CurrentHP,
-                    _character.CurrentAP,
-                    _character.CurrentDP);
+                var character = transform.root.GetComponent<Character>();
+
+                CharacterPopup.Instance.SetData(
+                    character.Name,
+                    character.GetComponent<CharacterColor>().PlayerColor,
+                    character.Data.HP,
+                    character.GetComponent<CharacterHealth>().CurrentHP,
+                    character.CurrentAP,
+                    character.CurrentDP);
             }
         }
 
@@ -64,14 +55,17 @@ namespace Assets.Scripts.CharacterPrefab.CharacterBody
         {
             if (_isBeingAttacked)
             {
-                _hoverColor.SetActive(false );
+                _hoverColor.SetActive(false);
+
                 CharacterManager.Instance.DeactivateCharacters();
                 BattleManager.Instance.HandleInput(eventData.pointerClick);
                 _isBeingAttacked = false;
                 return;
             }
 
-            _panelHint.StartHintAnim();
+            var character = transform.root.GetComponent<Character>();
+            var panelHint = character.Panel.GetComponent<CharacterPanelHint>();
+            panelHint.StartHintAnim();
         }
 
         /// <summary>
@@ -81,7 +75,7 @@ namespace Assets.Scripts.CharacterPrefab.CharacterBody
         {
             if (_isBeingAttacked)
             {
-                _hoverColor.SetActive(true );
+                _hoverColor.SetActive(true);
                 return;
             }
 
@@ -96,7 +90,7 @@ namespace Assets.Scripts.CharacterPrefab.CharacterBody
         {
             if (_isBeingAttacked)
             {
-                _hoverColor.SetActive(false ) ;
+                _hoverColor.SetActive(false);
                 return;
             }
 
@@ -115,7 +109,7 @@ namespace Assets.Scripts.CharacterPrefab.CharacterBody
             yield return new WaitForSeconds(_delayOnHoverTime);
 
             _isShowing = true;
-            CharacterPopup.Instance.SetPosition(_characterObject);
+            CharacterPopup.Instance.SetPosition(transform.root.gameObject);
             CharacterPopup.Instance.gameObject.SetActive(true);
         }
 
