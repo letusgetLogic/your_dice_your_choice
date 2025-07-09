@@ -33,21 +33,11 @@ namespace Assets.Scripts.ActionDatas
         public override void SetInteractible(int diceNumber)
         {
             CharacterManager.Instance.SetInteractibleEnemyCharacters(
-               CharacterObject.GetComponent<Character>().FieldIndex,
+               character.FieldIndex,
                GetVector2IntFromDirection.Get(GetDirection(diceNumber)),
                Range(diceNumber));
         }
         
-        public override void ShowInteractible()
-        {
-            CharacterManager.Instance.ShowInteractibleCharacters();
-        }
-
-        public override void DeactivateInteractible()
-        {
-            CharacterManager.Instance.DeactivateCharacters();
-        }
-
         public override void ActivateSkill(int diceNumber)
         {
             float buffedAP = character.CurrentAP + Buff(character.CurrentAP, diceNumber);

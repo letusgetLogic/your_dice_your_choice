@@ -8,8 +8,6 @@ namespace Assets.Scripts.ActionDatas
     {
         public AllowedDiceNumber AllowedDiceNumber { get; protected set; }
 
-        public float BuffAP { get; protected set; }
-
         public Attack(ActionData data, GameObject characterObject) : base(data, characterObject) 
         {
             
@@ -24,9 +22,15 @@ namespace Assets.Scripts.ActionDatas
 
         public override abstract void SetInteractible(int diceNumber);
 
-        public override abstract void ShowInteractible();
+        public override void ShowInteractible()
+        {
+            CharacterManager.Instance.ShowInteractibleCharacters();
+        }
 
-        public abstract override void DeactivateInteractible();
+        public override void DeactivateInteractible()
+        {
+            CharacterManager.Instance.DeactivateCharacters();
+        }
 
         public override void HandleInput(GameObject clickedCharacterBody)
         {

@@ -9,12 +9,14 @@ namespace Assets.Scripts.ActionDatas
     public abstract class ActionBase
     {
         public ActionData Data { get;  set; }
-        
         public GameObject CharacterObject { get;  set; }
-
         protected Character character => CharacterObject.GetComponent<Character>();
-        protected CharacterData characterData => character.Data;
 
+        /// <summary>
+        /// Sets data when the constructor has been created.
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="characterObject"></param>
         public ActionBase(ActionData data, GameObject characterObject)
         {
             Data = data;

@@ -57,7 +57,7 @@ public class CharacterGenerator : MonoBehaviour
 
             // Color
             var characterColor = characterObject.GetComponent<CharacterColor>();
-            characterColor.SetColor(PLayerColor(player));
+            characterColor.SetColor(PlayerColor(player));
             characterObject.GetComponent<CharacterBorderColor>().SetEnabledFalse();
 
             // Panel
@@ -147,7 +147,7 @@ public class CharacterGenerator : MonoBehaviour
     /// </summary>
     /// <param name="player"></param>
     /// <returns></returns>
-    private Color PLayerColor(PlayerType player)
+    private Color PlayerColor(PlayerType player)
     {
         if (player == PlayerType.PlayerLeft)
         {
