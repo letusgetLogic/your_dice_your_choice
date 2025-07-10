@@ -12,6 +12,8 @@ public class CharacterGenerator : MonoBehaviour
 
     private readonly int CharacterSpawnAreaMaxColumn = 2; // Max. value of columns of the spawn area for character. 
 
+    public List<string> CharacterNames = CharacterName.Names;
+
     /// <summary>
     /// Awake method.
     /// </summary>
@@ -57,7 +59,7 @@ public class CharacterGenerator : MonoBehaviour
 
             // Color
             var characterColor = characterObject.GetComponent<CharacterColor>();
-            characterColor.SetColor(PlayerColor(player));
+            characterColor.SetColor(PlayerColor(player), character.Name);
             characterObject.GetComponent<CharacterBorderColor>().SetEnabledFalse();
 
             // Panel

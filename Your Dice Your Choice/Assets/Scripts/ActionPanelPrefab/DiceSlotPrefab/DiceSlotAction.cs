@@ -19,7 +19,7 @@ namespace Assets.Scripts.ActionPopupPrefab.DiceSlotPrefab
 
         private IEnumerator _coroutine;
 
-        private bool _isShowingInteractible = false;
+        private bool _canInteractibleBeDeactivated = false;
 
         /// <summary>
         /// Mouse enters UI Element. 
@@ -44,7 +44,7 @@ namespace Assets.Scripts.ActionPopupPrefab.DiceSlotPrefab
             if (_coroutine != null)
                 StopCoroutine(_coroutine);
 
-            if (_isShowingInteractible)
+            if (_canInteractibleBeDeactivated)
             {
                 Debug.Log("DiceSlotAction.OnPointerExit !!!");
                 _actionPanel.Action.DeactivateInteractible();
@@ -68,7 +68,7 @@ namespace Assets.Scripts.ActionPopupPrefab.DiceSlotPrefab
             action.SetDescriptionOf(_actionPanel.ActionPopup, dice.CurrentNumber);
             action.SetInteractible(dice.CurrentNumber);
             action.ShowInteractible();
-            _isShowingInteractible = true;
+            _canInteractibleBeDeactivated = true;
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace Assets.Scripts.ActionPopupPrefab.DiceSlotPrefab
         /// <param name="eventData"></param>
         public void OnDrop(PointerEventData eventData)
         {
-            _isShowingInteractible = false;
+            _canInteractibleBeDeactivated = false;
 
             if (_playerType != TurnManager.Instance.Turn)
                 return;

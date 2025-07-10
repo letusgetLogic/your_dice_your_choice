@@ -21,7 +21,6 @@ public class CharacterState : MonoBehaviour
         DownAct1, // @ @
         DownAct2, // @ @ (rotate)
         DownAct3, // X X 
-        DownAct4 // reserve
     }
     private BattleState _battleState;
 
@@ -65,9 +64,6 @@ public class CharacterState : MonoBehaviour
             case BattleState.DownAct3:
                 return;
 
-            case BattleState.DownAct4:
-                return;
-
             default:
                 return;
         }
@@ -108,10 +104,6 @@ public class CharacterState : MonoBehaviour
 
                 _downEyeX1.SetActive(true);
                 _downEyeX2.SetActive(true);
-                return;
-
-
-            case BattleState.DownAct4:
                 return;
 
 

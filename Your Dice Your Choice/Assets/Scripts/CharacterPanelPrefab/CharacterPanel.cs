@@ -29,7 +29,7 @@ public class CharacterPanel : MonoBehaviour
         CharacterObject = characterObject;
         Player = player;
         Character = CharacterObject.GetComponent<Character>();
-        CharacterName.text = Character.Data.Type.ToString();
+        CharacterName.text = Character.Name;
     }
 
     /// <summary>

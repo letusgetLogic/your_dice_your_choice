@@ -2,6 +2,8 @@
 using Assets.Scripts.CharacterDatas;
 using Assets.Scripts.CharacterPrefab.CharacterBody;
 using UnityEngine.TextCore.Text;
+using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace Assets.Scripts.CharacterPrefab
 {
@@ -84,7 +86,7 @@ namespace Assets.Scripts.CharacterPrefab
         {
             Player = player;
             Data = data;
-            Name = data.Type.ToString();
+            Name = CharacterName.GetName();
             
             GetComponent<CharacterHealth>().SetData();
             CurrentAP = data.AP;

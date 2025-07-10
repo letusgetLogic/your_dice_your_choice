@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Tilemaps;
+using static Assets.Scripts.MatchIntro.MatchIntroModel;
 
 namespace Assets.Scripts.MatchIntro
 {
@@ -9,19 +10,7 @@ namespace Assets.Scripts.MatchIntro
     {
         public static MatchIntroController Instance { get; private set; }
 
-        [SerializeField] private float _act1Time = 3.0f;
-        [SerializeField] private float _act2Time = 3.0f;
-
-        [SerializeField] private float _animSpeedAct1 = 0.0001f;
-        [SerializeField] private float _animSpeedAct2 = 0.0001f;
-        [SerializeField] private float _animSpeedAct3 = 0.00015f;
-        [SerializeField] private float _animFadeInTime = 3.0f;
-        [SerializeField] private AnimationCurve _animCurve1;
-
-        private enum PlayStates { None, Act1, Act2, Act3 }
-        private PlayStates _playStates;
-
-        private float _current;
+       
 
         /// <summary>
         /// Awake method.
@@ -35,7 +24,7 @@ namespace Assets.Scripts.MatchIntro
 
             Instance = this;
 
-            _playStates = PlayStates.None;
+            MatchIntroModel.Instance.SetPlayState(MatchIntroModel.PlayState.None);
         }
 
         /// <summary>
@@ -43,20 +32,20 @@ namespace Assets.Scripts.MatchIntro
         /// </summary>
         private void Update()
         {
-            switch (_playStates)
+            switch (MatchIntroModel.Instance.CurrentState)
             {
-                case PlayStates.None:
+                case MatchIntroModel.PlayState.None:
                     return;
 
-                case PlayStates.Act1:
+                case MatchIntroModel.PlayState.Act1:
                     PlayAct1();
                     return;
 
-                case PlayStates.Act2:
+                case MatchIntroModel.PlayState.Act2:
                     PlayAct2();
                     return;
 
-                case PlayStates.Act3:
+                case MatchIntroModel.PlayState.Act3:
                     PlayAct3();
                     return;
             }
@@ -77,8 +66,8 @@ namespace Assets.Scripts.MatchIntro
         /// </summary>
         private void PlayAct1()
         {
-            _current = Mathf.MoveTowards(_current, 1, _animSpeedAct1 / Time.deltaTime);
-            float value = _animCurve1.Evaluate(_current);
+            MatchIntroModel.Instance.RunCurrentValue(MatchIntroModel.Instance.AnimSpeedAct1);
+            float value = MatchIntroModel.Instance.GetInterpolation();
 
             MatchIntroModel.Instance.MoveText(
                 MatchIntroView.Instance.LeftIntroShaderRect, MatchIntroView.Instance.RightIntroShaderRect,
@@ -86,12 +75,11 @@ namespace Assets.Scripts.MatchIntro
                 MatchIntroView.Instance.StartPositionRightAct1, MatchIntroView.Instance.StartPositionRightAct2,
                 value);
 
-            MatchIntroView.Instance.FadeIn(_animFadeInTime);
+            MatchIntroView.Instance.FadeIn(MatchIntroModel.Instance.AnimFadeInTime);
 
             if (value >= 1)
             {
-                _current = 0f;
-                _playStates = PlayStates.None;
+                MatchIntroModel.Instance.SetDefault();
             }
         }
 
@@ -101,8 +89,8 @@ namespace Assets.Scripts.MatchIntro
         /// <exception cref="NotImplementedException"></exception>
         private void PlayAct2()
         {
-            _current = Mathf.MoveTowards(_current, 1, _animSpeedAct2 / Time.deltaTime);
-            float value = _animCurve1.Evaluate(_current);
+            MatchIntroModel.Instance.RunCurrentValue(MatchIntroModel.Instance.AnimSpeedAct2);
+            float value = MatchIntroModel.Instance.GetInterpolation();
 
             MatchIntroModel.Instance.MoveText(
                 MatchIntroView.Instance.LeftIntroShaderRect, MatchIntroView.Instance.RightIntroShaderRect,
@@ -114,9 +102,7 @@ namespace Assets.Scripts.MatchIntro
             {
                 SetFirstTurn.Instance.SetDiceAndPanel();
                 LevelManager.Instance.NextPhase();
-
-                _current = 0f;
-                _playStates = PlayStates.None;
+                MatchIntroModel.Instance.SetDefault();
             }
         }
 
@@ -126,8 +112,8 @@ namespace Assets.Scripts.MatchIntro
         /// <exception cref="NotImplementedException"></exception>
         private void PlayAct3()
         {
-            _current = Mathf.MoveTowards(_current, 1, _animSpeedAct3 / Time.deltaTime);
-            float value = _animCurve1.Evaluate(_current);
+            MatchIntroModel.Instance.RunCurrentValue(MatchIntroModel.Instance.AnimSpeedAct3);
+            float value = MatchIntroModel.Instance.GetInterpolation();
 
             MatchIntroView.Instance.DimDownForeground(1 - value);
 
@@ -138,11 +124,8 @@ namespace Assets.Scripts.MatchIntro
             if (ratio >= 1)
             {
                 MatchIntroView.Instance.SetForegroundActive(false);
-
                 SetFirstTurn.Instance.RollTurnDice();
-
-                _current = 0f;
-                _playStates = PlayStates.None;
+                MatchIntroModel.Instance.SetDefault();
             }
         }
 
@@ -153,7 +136,7 @@ namespace Assets.Scripts.MatchIntro
         {
             MatchIntroView.Instance.SetTextArrayActive(true);
 
-            _playStates = PlayStates.Act1;
+            MatchIntroModel.Instance.SetPlayState(MatchIntroModel.PlayState.Act1);
 
             StartCoroutine(SetAct2());
         }
@@ -164,8 +147,9 @@ namespace Assets.Scripts.MatchIntro
         /// <returns></returns>
         private IEnumerator SetAct2()
         {
-            yield return new WaitForSeconds(_act1Time);
-            _playStates = PlayStates.Act2;
+            yield return new WaitForSeconds(MatchIntroModel.Instance.Act1Time);
+
+            MatchIntroModel.Instance.SetPlayState(MatchIntroModel.PlayState.Act2);
 
             StartCoroutine(SetAct3());
         }
@@ -176,9 +160,9 @@ namespace Assets.Scripts.MatchIntro
         /// <returns></returns>
         private IEnumerator SetAct3()
         {
-            yield return new WaitForSeconds(_act2Time);
+            yield return new WaitForSeconds(MatchIntroModel.Instance.Act2Time);
 
-            _playStates = PlayStates.Act3;
+            MatchIntroModel.Instance.SetPlayState(MatchIntroModel.PlayState.Act3);
         }
 
         /// <summary>
@@ -188,7 +172,7 @@ namespace Assets.Scripts.MatchIntro
         {
             MatchIntroView.Instance.SetIntroInactive();
 
-            _playStates = PlayStates.None;
+            MatchIntroModel.Instance.SetPlayState(MatchIntroModel.PlayState.None);
         }
 
         /// <summary>
