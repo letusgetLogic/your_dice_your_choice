@@ -19,6 +19,12 @@ namespace Assets.Scripts.CharacterPrefab.CharacterBody
 
         private bool        _isShowing = false;
 
+        // Generator Tool
+        public void DeactivateHoverColor()
+        {
+            _hoverColor.SetActive(false);
+        }
+
         /// <summary>
         /// Start method.
         /// </summary>

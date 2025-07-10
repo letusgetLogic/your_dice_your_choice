@@ -8,6 +8,9 @@ namespace Assets.Scripts.CharacterPrefab
         [SerializeField] private Transform _leftHandTransform;
         [SerializeField] private Transform _rightHandTransform;
 
+        public GameObject WeaponObjectLeft {  get; private set; }
+        public GameObject WeaponObjectRight {  get; private set; }
+
         /// <summary>
         /// Sets the weapon as child of left hand.
         /// </summary>
@@ -18,8 +21,8 @@ namespace Assets.Scripts.CharacterPrefab
             if (character.Data.WeaponLeft == null)
                 return;
 
-            var weaponObject = Instantiate(character.Data.WeaponLeft);
-            weaponObject.transform.SetParent(_leftHandTransform, false);
+            WeaponObjectLeft = Instantiate(character.Data.WeaponLeft);
+            WeaponObjectLeft.transform.SetParent(_leftHandTransform, false);
         }
 
         /// <summary>
@@ -32,8 +35,8 @@ namespace Assets.Scripts.CharacterPrefab
             if (character.Data.WeaponRight == null)
                 return;
 
-            var weaponObject = Instantiate(character.Data.WeaponRight);
-            weaponObject.transform.SetParent(_rightHandTransform, false);
+            WeaponObjectRight = Instantiate(character.Data.WeaponRight);
+            WeaponObjectRight.transform.SetParent(_rightHandTransform, false);
         }
     }
 }

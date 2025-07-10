@@ -1,14 +1,12 @@
-using System;
-using System.Collections;
-using Assets.Scripts;
 using Assets.Scripts.LevelDatas;
 using Assets.Scripts.MatchIntro;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance { get; private set; }
+
+    [SerializeField] private GameObject _destroyEditorWeapon;
 
     [SerializeField] private LevelData[] _dataPrefab;
     [SerializeField] private int _dataIndex;
@@ -28,6 +26,8 @@ public class LevelManager : MonoBehaviour
         }
 
         Instance = this;
+
+        Destroy(_destroyEditorWeapon);
     }
 
     /// <summary>

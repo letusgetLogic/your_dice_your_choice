@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class CharacterState : MonoBehaviour
 {
-    [SerializeField] private GameObject _normalState;
-    [SerializeField] private GameObject _eyeDownState;
+    [SerializeField] private GameObject _battleEyes;
+    [SerializeField] private GameObject _downEyes;
     
     [SerializeField] private GameObject _downEyeAt1; // @
     [SerializeField] private GameObject _downEyeAt2; // @ 
@@ -17,11 +17,11 @@ public class CharacterState : MonoBehaviour
 
     private enum BattleState 
     { 
-        normal, // normal eyes in battle mode.
-        downAct1, // @ @
-        downAct2, // @ @ (rotate)
-        downAct3, // X X 
-        downAct4 // reserve
+        Battle, // battle eyes.
+        DownAct1, // @ @
+        DownAct2, // @ @ (rotate)
+        DownAct3, // X X 
+        DownAct4 // reserve
     }
     private BattleState _battleState;
 
@@ -30,8 +30,7 @@ public class CharacterState : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        _normalState.SetActive(true);
-        _eyeDownState.SetActive(false);
+        SetBattleState();
     }
 
     /// <summary>
@@ -49,13 +48,13 @@ public class CharacterState : MonoBehaviour
     {
         switch (_battleState)
         {
-            case BattleState.normal:
+            case BattleState.Battle:
                 return;
 
-            case BattleState.downAct1:
+            case BattleState.DownAct1:
                 return;
 
-            case BattleState.downAct2:
+            case BattleState.DownAct2:
                 RotateDownEyes(new GameObject[]
                 {
                     _downEyeAt1,
@@ -63,10 +62,10 @@ public class CharacterState : MonoBehaviour
                 });
                 return;
 
-            case BattleState.downAct3:
+            case BattleState.DownAct3:
                 return;
 
-            case BattleState.downAct4:
+            case BattleState.DownAct4:
                 return;
 
             default:
@@ -81,16 +80,16 @@ public class CharacterState : MonoBehaviour
     {
         switch (_battleState)
         {
-            case BattleState.normal:
-                _normalState.SetActive(true);
-                _eyeDownState.SetActive(false);
+            case BattleState.Battle:
+                _battleEyes.SetActive(true);
+                _downEyes.SetActive(false);
                 return;
 
 
-            case BattleState.downAct1:
-            case BattleState.downAct2:
-                _normalState.SetActive(false);
-                _eyeDownState.SetActive(true);
+            case BattleState.DownAct1:
+            case BattleState.DownAct2:
+                _battleEyes.SetActive(false);
+                _downEyes.SetActive(true);
 
                 _downEyeX1.SetActive(false);
                 _downEyeX2.SetActive(false);
@@ -100,9 +99,9 @@ public class CharacterState : MonoBehaviour
                 return;
 
 
-            case BattleState.downAct3:
-                _normalState.SetActive(false);
-                _eyeDownState.SetActive(true);
+            case BattleState.DownAct3:
+                _battleEyes.SetActive(false);
+                _downEyes.SetActive(true);
 
                 _downEyeAt1.SetActive(false);
                 _downEyeAt2.SetActive(false);
@@ -112,15 +111,24 @@ public class CharacterState : MonoBehaviour
                 return;
 
 
-            case BattleState.downAct4:
+            case BattleState.DownAct4:
                 return;
 
 
             default:
-                _normalState.SetActive(true);
-                _eyeDownState.SetActive(false);
+                _battleEyes.SetActive(true);
+                _downEyes.SetActive(false);
                 return;
         }
+    }
+
+    /// <summary>
+    /// Sets the battle state.
+    /// </summary>
+    public void SetBattleState()
+    {
+        _battleState = BattleState.Battle;
+        SwitchState();
     }
 
     /// <summary>

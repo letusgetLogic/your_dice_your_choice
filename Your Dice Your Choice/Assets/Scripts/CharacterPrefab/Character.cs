@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using Assets.Scripts.CharacterDatas;
 using Assets.Scripts.CharacterPrefab.CharacterBody;
+using UnityEngine.TextCore.Text;
 
 namespace Assets.Scripts.CharacterPrefab
 {
+    [ExecuteAlways]
     public class Character : MonoBehaviour
     {
         public CharacterMouseEvent CharacterMouseEvent;
@@ -27,11 +29,52 @@ namespace Assets.Scripts.CharacterPrefab
         [HideInInspector]
         public bool SettingsFoldout;
 
+        private void OnValidate()
+        {
+            _dataInstance = Instantiate(_data);
+            OnSettingsUpdate();
+        }
+
         public void OnSettingsUpdate()
         {
             Data = _dataInstance;
+
+            // Color
+            CharacterMouseEvent.DeactivateHoverColor();
+
+            // Eyes
+            GetComponent<CharacterState>().SetBattleState();
+
+            // Health
+            GetComponent<CharacterHealth>().SetData();
+
+            // Weapon
+            var characterGetWeapon = GetComponent<CharacterGetWeapon>();
+
+            if (characterGetWeapon.WeaponObjectLeft != null)
+            {
+                RemoveWeaponInEditor(characterGetWeapon.WeaponObjectLeft);
+            } 
+                
+            if (characterGetWeapon.WeaponObjectRight != null)
+            {
+                RemoveWeaponInEditor(characterGetWeapon.WeaponObjectRight);
+            }
+
+            characterGetWeapon.SetWeaponToLeftHand(this);
+            characterGetWeapon.SetWeaponToRightHand(this);
         }
+
+        private void RemoveWeaponInEditor(GameObject weaponObject)
+        {
+            var destroyEditorWeapon = GameObject.Find("DestroyEditorWeapon");
+            weaponObject.SetActive(false);
+            weaponObject.transform.SetParent(destroyEditorWeapon.transform);
+        }
+
         // 
+
+       
 
         /// <summary>
         /// Initialize Data.

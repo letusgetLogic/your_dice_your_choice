@@ -17,7 +17,6 @@ public class CharacterEditor : Editor
     {
         base.OnInspectorGUI();
 
-
         DrawSettingsEditor(_character.CharacterData, _character.OnSettingsUpdate,
             ref _character.SettingsFoldout, ref _settingsEditor);
     }

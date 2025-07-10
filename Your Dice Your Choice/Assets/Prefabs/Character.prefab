@@ -560,7 +560,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8710822936955585525}
   m_Layer: 9
-  m_Name: Eyes down state
+  m_Name: Eyes down eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -798,7 +798,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 11
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.7921569, g: 0.491466, b: 0.1843137, a: 1}
+  m_Color: {r: 1, g: 0.21782565, b: 0.2028302, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -818,7 +818,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3068248939713671018}
   m_Layer: 9
-  m_Name: Eyes normal state
+  m_Name: Eyes battle eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1304,7 +1304,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 1
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.7924528, g: 0.49411765, b: 0.18316127, a: 1}
+  m_Color: {r: 1, g: 0.21960784, b: 0.20392157, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1581,7 +1581,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 1
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.7924528, g: 0.49411765, b: 0.18316127, a: 1}
+  m_Color: {r: 1, g: 0.21960784, b: 0.20392157, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1645,6 +1645,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CharacterMouseEvent: {fileID: 756582597474049763}
+  _data: {fileID: 0}
+  SettingsFoldout: 0
 --- !u!114 &2643295388591708874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1799,8 +1801,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a24a3da5be4596f41a79937acbfdd9da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _normalState: {fileID: 2774575937060650936}
-  _eyeDownState: {fileID: 2311599635427380403}
+  _battleEyes: {fileID: 2774575937060650936}
+  _downEyes: {fileID: 2311599635427380403}
   _downEyeAt1: {fileID: 2998005072799087598}
   _downEyeAt2: {fileID: 6033051518124546497}
   _downEyeX1: {fileID: 8717174808930557741}
