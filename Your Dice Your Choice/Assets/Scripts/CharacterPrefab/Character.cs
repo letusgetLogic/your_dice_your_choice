@@ -16,6 +16,23 @@ namespace Assets.Scripts.CharacterPrefab
         public GameObject Panel { get; private set; }
         public Vector2Int FieldIndex { get; private set; }
 
+        // Generator Tool
+        public CharacterData CharacterData { get => _dataInstance; }
+
+        [SerializeField]
+        private CharacterData _data;
+
+        private CharacterData _dataInstance;
+
+        [HideInInspector]
+        public bool SettingsFoldout;
+
+        public void OnSettingsUpdate()
+        {
+            Data = _dataInstance;
+        }
+        // 
+
         /// <summary>
         /// Initialize Data.
         /// </summary>
