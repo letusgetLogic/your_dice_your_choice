@@ -6,6 +6,8 @@ public class GeneratorToolWindow : EditorWindow
 {
     private static GeneratorToolWindow _window;
 
+    public VisualTreeAsset VisualTreeAsset;
+
     [MenuItem("Tools/Generation Tool")]
     public static void ShowWindow()
     {
