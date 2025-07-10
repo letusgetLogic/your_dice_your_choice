@@ -10,10 +10,7 @@ namespace Assets.Scripts.DicePrefab
         [SerializeField] private float _animSpeed = .0001f;
         [SerializeField] private AnimationCurve _animCurve;
 
-        //private DiceManager _diceManager => GetComponent<DiceManager>();
         private RectTransform _rectTransform => GetComponent<RectTransform>();
-        private Dice _dice => GetComponent<Dice>();
-        private RollPanel _rollPanel => _dice.RollPanel.GetComponent<RollPanel>();
 
         private Vector2 _basePosition;
         private Vector2 _currentPosition;
@@ -54,8 +51,9 @@ namespace Assets.Scripts.DicePrefab
                     if (TurnManager.Instance.Turn == PlayerType.None)
                         return;
 
-                    var diceComponents = GetComponent<DiceComponents>();
-                    diceComponents.SetEnabled(diceComponents.DragEvent, true);
+                    var dice = GetComponent<Dice>();
+                    var diceDragEvent = GetComponent<DiceDragEvent>();
+                    dice.SetEnabled(diceDragEvent, true);
 
                     return;
                 }
@@ -81,8 +79,9 @@ namespace Assets.Scripts.DicePrefab
             _currentPosition = _rectTransform.anchoredPosition;
             _isRunning = true;
 
-            var diceComponents = GetComponent<DiceComponents>();
-            diceComponents.SetEnabled(diceComponents.DragEvent, false);
+            var dice = GetComponent<Dice>();
+            var diceDragEvent = GetComponent<DiceDragEvent>();
+            dice.SetEnabled(diceDragEvent, false);
         }
 
         /// <summary>

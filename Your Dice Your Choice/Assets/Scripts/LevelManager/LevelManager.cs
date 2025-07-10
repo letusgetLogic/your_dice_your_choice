@@ -35,7 +35,7 @@ public class LevelManager : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        Data.MatchType = MatchType.Duell;
+        Data.MatchType = MatchType.Duel;
         StartPhases();
     }
 
@@ -121,12 +121,12 @@ public class LevelManager : MonoBehaviour
             case MatchType.Singleplayer:
                 break;
 
-            case MatchType.Duell:
+            case MatchType.Duel:
                 PlayerBase.Instance.Create("Player 1", PlayerType.PlayerLeft);
                 PlayerBase.Instance.Create("Player 2", PlayerType.PlayerRight);
                 break;
 
-            case MatchType.DuellAI:
+            case MatchType.DuelAI:
                 break;
         }
     }

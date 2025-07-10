@@ -3,42 +3,35 @@ using UnityEngine;
 
 public class CharacterState : MonoBehaviour
 {
-    public GameObject NormalState;
-    public GameObject EyeDownState;
+    [SerializeField] private GameObject _normalState;
+    [SerializeField] private GameObject _eyeDownState;
     
-    public GameObject DownEyeAt1; // @
-    public GameObject DownEyeAt2; // @ 
-
-    public GameObject DownEyeX1; // X
-    public GameObject DownEyeX2; // X
+    [SerializeField] private GameObject _downEyeAt1; // @
+    [SerializeField] private GameObject _downEyeAt2; // @ 
+    
+    [SerializeField] private GameObject _downEyeX1; // X
+    [SerializeField] private GameObject _downEyeX2; // X
 
     [SerializeField] private Vector3 _rotation;
     [SerializeField] private float _rotateSpeed = 1000f;
 
-    enum BattleState { normal, downAct1, downAct2, downAct3, downAct4 }
+    private enum BattleState 
+    { 
+        normal, // normal eyes in battle mode.
+        downAct1, // @ @
+        downAct2, // @ @ (rotate)
+        downAct3, // X X 
+        downAct4 // reserve
+    }
     private BattleState _battleState;
-
-    private GameObject[] _downEyes;
 
     /// <summary>
     /// Awake method.
     /// </summary>
     private void Awake()
     {
-        NormalState.SetActive(true);
-        EyeDownState.SetActive(false);
-    }
-
-    /// <summary>
-    /// Start method.
-    /// </summary>
-    private void Start()
-    {
-        _downEyes = new GameObject[]
-        {
-            DownEyeAt1,
-            DownEyeAt2,
-        };
+        _normalState.SetActive(true);
+        _eyeDownState.SetActive(false);
     }
 
     /// <summary>
@@ -63,7 +56,11 @@ public class CharacterState : MonoBehaviour
                 return;
 
             case BattleState.downAct2:
-                RotateDownEye();
+                RotateDownEyes(new GameObject[]
+                {
+                    _downEyeAt1,
+                    _downEyeAt2,
+                });
                 return;
 
             case BattleState.downAct3:
@@ -85,33 +82,33 @@ public class CharacterState : MonoBehaviour
         switch (_battleState)
         {
             case BattleState.normal:
-                NormalState.SetActive(true);
-                EyeDownState.SetActive(false);
+                _normalState.SetActive(true);
+                _eyeDownState.SetActive(false);
                 return;
 
 
             case BattleState.downAct1:
             case BattleState.downAct2:
-                NormalState.SetActive(false);
-                EyeDownState.SetActive(true);
+                _normalState.SetActive(false);
+                _eyeDownState.SetActive(true);
 
-                DownEyeX1.SetActive(false);
-                DownEyeX2.SetActive(false);
+                _downEyeX1.SetActive(false);
+                _downEyeX2.SetActive(false);
 
-                DownEyeAt1.SetActive(true);
-                DownEyeAt2.SetActive(true);
+                _downEyeAt1.SetActive(true);
+                _downEyeAt2.SetActive(true);
                 return;
 
 
             case BattleState.downAct3:
-                NormalState.SetActive(false);
-                EyeDownState.SetActive(true);
+                _normalState.SetActive(false);
+                _eyeDownState.SetActive(true);
 
-                DownEyeAt1.SetActive(false);
-                DownEyeAt2.SetActive(false);
+                _downEyeAt1.SetActive(false);
+                _downEyeAt2.SetActive(false);
 
-                DownEyeX1.SetActive(true);
-                DownEyeX2.SetActive(true);
+                _downEyeX1.SetActive(true);
+                _downEyeX2.SetActive(true);
                 return;
 
 
@@ -120,8 +117,8 @@ public class CharacterState : MonoBehaviour
 
 
             default:
-                NormalState.SetActive(true);
-                EyeDownState.SetActive(false);
+                _normalState.SetActive(true);
+                _eyeDownState.SetActive(false);
                 return;
         }
     }
@@ -140,9 +137,9 @@ public class CharacterState : MonoBehaviour
     /// <summary>
     /// Rotates the down eyes.
     /// </summary>
-    private void RotateDownEye()
+    private void RotateDownEyes(GameObject[] downEyes)
     {
-        foreach (var item in _downEyes)
+        foreach (var item in downEyes)
         {
             item.transform.Rotate(_rotation * _rotateSpeed * Time.deltaTime);
         }

@@ -9,7 +9,6 @@ namespace Assets.Scripts
     public class SetFirstTurn : MonoBehaviour
     {
         public static SetFirstTurn Instance { get; private set; }
-        public GameObject[] TurnDice { get; private set; }
 
         public GameObject PlayerPanelLeft;
         public GameObject PlayerPanelRight;
@@ -39,18 +38,6 @@ namespace Assets.Scripts
         }
 
         /// <summary>
-        /// Start method.
-        /// </summary>
-        private void Start()
-        {
-            TurnDice = new GameObject[]
-            {
-                _turnDiceLeft,
-                _turnDiceRight,
-            };
-        }
-
-        /// <summary>
         /// Sets the turn dice and the player panel at the start state.
         /// </summary>
         public void SetDiceAndPanel()
@@ -69,7 +56,13 @@ namespace Assets.Scripts
         /// </summary>
         public void RollTurnDice()
         {
-            RollDice.Instance.Roll(TurnDice, _rollFrequency, _animTimer, CheckDiceNumber);
+            var turnDice = new GameObject[]
+            {
+                _turnDiceLeft,
+                _turnDiceRight,
+            };
+
+            RollDice.Instance.Roll(turnDice, _rollFrequency, _animTimer, CheckDiceNumber);
         }
 
         /// <summary>
@@ -87,6 +80,7 @@ namespace Assets.Scripts
                 var turnState = numberLeft > numberRight ? 
                                 PlayerType.PlayerLeft : 
                                 PlayerType.PlayerRight;
+
                 StartCoroutine(SetTurn(turnState));
             }
         }

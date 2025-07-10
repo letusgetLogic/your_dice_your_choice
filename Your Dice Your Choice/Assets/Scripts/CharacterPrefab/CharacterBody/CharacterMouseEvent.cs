@@ -56,7 +56,7 @@ namespace Assets.Scripts.CharacterPrefab.CharacterBody
             if (_isBeingAttacked)
             {
                 _hoverColor.SetActive(false);
-
+                
                 CharacterManager.Instance.DeactivateCharacters();
                 BattleManager.Instance.HandleInput(eventData.pointerClick);
                 _isBeingAttacked = false;

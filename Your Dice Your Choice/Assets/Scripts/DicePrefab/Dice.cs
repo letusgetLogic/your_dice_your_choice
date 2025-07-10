@@ -11,10 +11,10 @@ namespace Assets.Scripts.DicePrefab
         public int CurrentNumber { get; private set; }
         public int IndexOnPanel { get; private set; }
         public GameObject RollPanel { get; private set; }
+        public int DefaultNumber => _defaultNumber;
 
         [SerializeField] private int _defaultNumber = 6;
 
-        public int DefaultNumber => _defaultNumber;
 
         /// <summary>
         /// Start method.
@@ -43,6 +43,19 @@ namespace Assets.Scripts.DicePrefab
         {
             RollPanel = rollPanel;
             IndexOnPanel = index;
+        }
+
+        /// <summary>
+        /// Sets the component enabled true/false.
+        /// </summary>
+        /// <param name="component"></param>
+        /// <param name="value"></param>
+        public void SetEnabled(Component component, bool value)
+        {
+            if (component is Behaviour behaviour)
+            {
+                behaviour.enabled = value;
+            }
         }
 
     }

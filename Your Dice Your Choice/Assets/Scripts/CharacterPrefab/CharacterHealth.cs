@@ -108,7 +108,7 @@ public class CharacterHealth : MonoBehaviour
 
         _newHealth = currentHealth + value;
 
-        if (_newHealth < 0)
+        if (_newHealth <= 0)
         { 
             _newHealth = 0;
             GetComponent<Character>().SetInteractibleFalse();

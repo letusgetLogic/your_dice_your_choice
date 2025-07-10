@@ -19,18 +19,21 @@ namespace Assets.Scripts.ActionPopupPrefab.DiceSlotPrefab
 
         private IEnumerator _coroutine;
 
-        private bool _isDeactivatingInteractible = false;
+        private bool _isShowingInteractible = false;
 
         /// <summary>
         /// Mouse enters UI Element. 
         /// </summary>
         public void OnPointerEnter(PointerEventData eventData)
         {
-            _isDeactivatingInteractible = true;
+            if (_playerType != TurnManager.Instance.Turn)
+                return;
 
-            _coroutine = ShowInteractible(eventData.pointerDrag);
-
-            StartCoroutine(_coroutine);
+            if (eventData.pointerDrag != null && eventData.pointerDrag.CompareTag("Dice"))
+            {
+                _coroutine = ShowInteractible(eventData.pointerDrag);
+                StartCoroutine(_coroutine);
+            }
         }
 
         /// <summary>
@@ -38,11 +41,12 @@ namespace Assets.Scripts.ActionPopupPrefab.DiceSlotPrefab
         /// </summary>
         public void OnPointerExit(PointerEventData eventData)
         {
-            if (_coroutine != null) 
+            if (_coroutine != null)
                 StopCoroutine(_coroutine);
 
-            if (_isDeactivatingInteractible)
+            if (_isShowingInteractible)
             {
+                Debug.Log("DiceSlotAction.OnPointerExit !!!");
                 _actionPanel.Action.DeactivateInteractible();
             }
         }
@@ -53,23 +57,18 @@ namespace Assets.Scripts.ActionPopupPrefab.DiceSlotPrefab
         /// <returns></returns>
         private IEnumerator ShowInteractible(GameObject diceBeingDragged)
         {
-            if (_playerType != TurnManager.Instance.Turn)
-                yield break;
-
             yield return new WaitForSeconds(_delayOnHoverTime);
 
-            if (diceBeingDragged != null && diceBeingDragged.CompareTag("Dice"))
-            {
-                var action = _actionPanel.Action;
-                var dice = diceBeingDragged.GetComponent<Dice>();
+            var action = _actionPanel.Action;
+            var dice = diceBeingDragged.GetComponent<Dice>();
 
-                if (action.IsValid(dice.CurrentNumber) == false) 
-                    yield break;
+            if (action.IsValid(dice.CurrentNumber) == false)
+                yield break;
 
-                action.SetDescriptionOf(_actionPanel.ActionPopup, dice.CurrentNumber);
-                action.SetInteractible(dice.CurrentNumber);
-                action.ShowInteractible();
-            }
+            action.SetDescriptionOf(_actionPanel.ActionPopup, dice.CurrentNumber);
+            action.SetInteractible(dice.CurrentNumber);
+            action.ShowInteractible();
+            _isShowingInteractible = true;
         }
 
         /// <summary>
@@ -78,7 +77,7 @@ namespace Assets.Scripts.ActionPopupPrefab.DiceSlotPrefab
         /// <param name="eventData"></param>
         public void OnDrop(PointerEventData eventData)
         {
-            _isDeactivatingInteractible = false;
+            _isShowingInteractible = false;
 
             if (_playerType != TurnManager.Instance.Turn)
                 return;
@@ -99,7 +98,7 @@ namespace Assets.Scripts.ActionPopupPrefab.DiceSlotPrefab
                     CharacterManager.Instance.InteractibleCharacters.Count == 0)
                     return;
 
-                SetDiceOnSlot(diceObject);
+                SetDiceOnSlot(diceObject, dice);
 
                 action.ShowInteractible();
                 action.ActivateSkill(dice.CurrentNumber);
@@ -111,20 +110,18 @@ namespace Assets.Scripts.ActionPopupPrefab.DiceSlotPrefab
         /// <summary>
         /// Sets the dice on the slot, deactivates the drag event and sets the canvas group default.
         /// </summary>
-        /// <param name="dice"></param>
-        private void SetDiceOnSlot(GameObject dice)
+        /// <param name="diceObject"></param>
+        private void SetDiceOnSlot(GameObject diceObject, Dice dice)
         {
-            var diceComponents = dice.GetComponent<DiceComponents>();
-            diceComponents.SetEnabled(diceComponents.DragEvent, false);
+            var diceDragEvent = diceObject.GetComponent<DiceDragEvent>();
+            dice.SetEnabled(diceDragEvent, false);
 
-            var diceMovement = dice.GetComponent<DiceMovement>();
+            var diceMovement = diceObject.GetComponent<DiceMovement>();
             diceMovement.PositionsTo(GetComponent<RectTransform>().position);
 
-
-            var diceManager = dice.GetComponent<DiceDisplay>();
-
-            diceManager.SetAlphaDefault();
-            diceManager.SetBlocksRaycasts(true);
+            var diceDisplay = diceObject.GetComponent<DiceDisplay>();
+            diceDisplay.SetAlphaDefault();
+            diceDisplay.SetBlocksRaycasts(true);
         }
     }
 }

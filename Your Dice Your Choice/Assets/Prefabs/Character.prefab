@@ -852,7 +852,7 @@ GameObject:
   - component: {fileID: 2881122018678209943}
   - component: {fileID: 8960429653610352229}
   m_Layer: 9
-  m_Name: EyeAt
+  m_Name: EyeAt1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1799,12 +1799,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a24a3da5be4596f41a79937acbfdd9da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NormalState: {fileID: 2774575937060650936}
-  EyeDownState: {fileID: 2311599635427380403}
-  DownEyeAt1: {fileID: 2998005072799087598}
-  DownEyeAt2: {fileID: 6033051518124546497}
-  DownEyeX1: {fileID: 8717174808930557741}
-  DownEyeX2: {fileID: 5657565229368682987}
+  _normalState: {fileID: 2774575937060650936}
+  _eyeDownState: {fileID: 2311599635427380403}
+  _downEyeAt1: {fileID: 2998005072799087598}
+  _downEyeAt2: {fileID: 6033051518124546497}
+  _downEyeX1: {fileID: 8717174808930557741}
+  _downEyeX2: {fileID: 5657565229368682987}
   _rotation: {x: 0, y: 0, z: 90}
   _rotateSpeed: 3
 --- !u!1 &5657565229368682987
@@ -1818,7 +1818,7 @@ GameObject:
   - component: {fileID: 760940488963886979}
   - component: {fileID: 7818743810680450}
   m_Layer: 9
-  m_Name: EyeX
+  m_Name: EyeX2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1905,7 +1905,7 @@ GameObject:
   - component: {fileID: 1954755939747357772}
   - component: {fileID: 4412822689394526060}
   m_Layer: 9
-  m_Name: EyeAt
+  m_Name: EyeAt2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2583,7 +2583,7 @@ GameObject:
   - component: {fileID: 3449968236551033259}
   - component: {fileID: 3409050569698423005}
   m_Layer: 9
-  m_Name: EyeX
+  m_Name: EyeX1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

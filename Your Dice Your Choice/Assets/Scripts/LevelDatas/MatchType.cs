@@ -2,8 +2,8 @@
 {
     None,
     Singleplayer,
-    Duell,
-    DuellAI,
+    Duel,
+    DuelAI,
 }
 
 
