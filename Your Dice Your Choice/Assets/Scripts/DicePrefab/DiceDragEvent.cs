@@ -3,7 +3,7 @@ using Assets.Scripts.DicePrefab;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DiceDragEvent : DiceDisplay, IDragHandler, IBeginDragHandler, IEndDragHandler
+public class DiceDragEvent : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
     
     /// <summary>
@@ -12,9 +12,10 @@ public class DiceDragEvent : DiceDisplay, IDragHandler, IBeginDragHandler, IEndD
     /// <param name="eventData"></param>
     public void OnBeginDrag(PointerEventData eventData)
     {
-        SetAlphaDown();
-        SetBlocksRaycasts(false);
-        SetScale();
+        var diceDisplay = GetComponent<DiceDisplay>();
+        diceDisplay.SetAlphaDown();
+        diceDisplay.SetBlocksRaycasts(false);
+        diceDisplay.SetScale();
     }
 
     /// <summary>
@@ -23,7 +24,8 @@ public class DiceDragEvent : DiceDisplay, IDragHandler, IBeginDragHandler, IEndD
     /// <param name="eventData"></param>
     public void OnDrag(PointerEventData eventData)
     {
-        UpdatePosition(eventData);
+        var diceDisplay = GetComponent<DiceDisplay>();
+        diceDisplay.UpdatePosition(eventData);
     }
 
     /// <summary>
@@ -32,8 +34,9 @@ public class DiceDragEvent : DiceDisplay, IDragHandler, IBeginDragHandler, IEndD
     /// <param name="eventData"></param>
     public void OnEndDrag(PointerEventData eventData)
     {
-        SetDefault();
-        SetBlocksRaycasts(true);
+        var diceDisplay = GetComponent<DiceDisplay>();
+        diceDisplay.SetDefault();
+        diceDisplay.SetBlocksRaycasts(true);
 
         StartCoroutine(MoveDice());
     }

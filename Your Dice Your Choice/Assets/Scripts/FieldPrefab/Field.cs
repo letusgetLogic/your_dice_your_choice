@@ -79,7 +79,7 @@ namespace Assets.Scripts.FieldPrefab
 
             var character = CharacterObject.GetComponent<Character>();
 
-            if (character.Player != currentPlayer)
+            if (character.PlayerType != currentPlayer)
             {
                 return CharacterObject;
             }
@@ -105,7 +105,7 @@ namespace Assets.Scripts.FieldPrefab
         /// </summary>
         public void SetCharacterObjectNull()
         {
-            CharacterObject.SetActive(false);
+            CharacterObject = null;
         }
     }
 }

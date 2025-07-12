@@ -38,12 +38,12 @@ namespace Assets.Scripts.ActionDatas
 
                 case ActionType.Attack:
                     DrawAttackFields();
-                    _actionData.Description = "Move the dice over it to get more information";
+                    _actionData.Description = Attack.DefaultDescription;
                     DrawDescriptionFields();
                     break;
 
                 case ActionType.Defend:
-                    _actionData.Description = "Move the dice over it to get more information";
+                    _actionData.Description = Defend.DefaultDescription;
                     DrawDescriptionFields();
                     break;
             }

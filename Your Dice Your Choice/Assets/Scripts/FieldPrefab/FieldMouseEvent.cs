@@ -35,7 +35,7 @@ namespace Assets.Scripts.FieldPrefab
             _isClicking = true;
             _animationHint.SetActive(false);
             _animationClick.SetActive(true);
-            Debug.Log("OnPointerClick");
+            
             StartCoroutine(DisableAnimClick(eventData.pointerClick));
         }
 

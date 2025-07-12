@@ -12,12 +12,12 @@ public class Player
     public RollPanel RollPanel { get; private set; }
     //public GameObject RerollPanelObject { get; private set; }
 
-    public Player(string name, PlayerType player)
+    public Player(string name, PlayerType playerType)
     {
         Name = name;
-        PlayerType = player; 
-        Characters = CharacterGenerator.Instance.CreateCharactersFor(player);
-        RollPanel = PanelManager.Instance.GetRollPanelFor(player);
+        PlayerType = playerType; 
+        Characters = CharacterGenerator.Instance.CreateCharactersFor(this, playerType);
+        RollPanel = PanelManager.Instance.GetRollPanelFor(playerType);
         //RerollPanelObject = PanelManager.Instance.GetRerollPanelFor(player);
 
         SettingsForCharacters();
@@ -60,5 +60,20 @@ public class Player
         var characterPanel = characterObject.GetComponent<Character>().Panel.GetComponent<CharacterPanel>();
 
         characterPanel.SetDescriptonPanelForAction();
+    }
+
+    /// <summary>
+    /// Removes the character on the list.
+    /// </summary>
+    /// <param name="characterList"></param>
+    /// <param name="characterObject"></param>
+    public void RemoveCharacter(GameObject characterObject)
+    {
+        Characters.Remove(characterObject);
+
+        if (Characters.Count == 0)
+        {
+            LevelManager.Instance.NextPhase();
+        }
     }
 }

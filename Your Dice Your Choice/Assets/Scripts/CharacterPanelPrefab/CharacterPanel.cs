@@ -1,7 +1,6 @@
 using UnityEngine;
 using TMPro;
 using Assets.Scripts.CharacterPrefab;
-using Assets.Scripts.ActionPopupPrefab;
 using Assets.Scripts.ActionDatas;
 using Assets.Scripts;
 using UnityEngine.UI;
@@ -15,7 +14,7 @@ public class CharacterPanel : MonoBehaviour
 
     public GameObject CharacterObject { get; private set; }
     public Character Character { get; private set; }
-    public PlayerType Player { get; private set; }
+    public PlayerType PlayerType { get; private set; }
     public GameObject[] ActiveActionPanels { get; private set; }
 
     [SerializeField] private float _alphaValueInactive = 0.9f;
@@ -27,7 +26,7 @@ public class CharacterPanel : MonoBehaviour
     public void SetCharacter(GameObject characterObject, PlayerType player)
     {
         CharacterObject = characterObject;
-        Player = player;
+        PlayerType = player;
         Character = CharacterObject.GetComponent<Character>();
         CharacterName.text = Character.Name;
     }
@@ -76,12 +75,12 @@ public class CharacterPanel : MonoBehaviour
     {
         foreach (var actionPanelObject in ActiveActionPanels)
         {
-            var actionPanelComponents = actionPanelObject.GetComponent<ActionPanelComponents>();
-            var diceSlotAction = actionPanelComponents.DiceSlotAction;
-            var actionPanelMouseEvent = actionPanelComponents.ActionPanelMouseEvent;
+            var actionPanel = actionPanelObject.GetComponent<ActionPanel>();
+            var diceSlotAction = actionPanel.DiceSlotAction;
+            var actionPanelMouseEvent = actionPanel.GetComponent<ActionPanelMouseEvent>();
 
-            actionPanelComponents.SetEnabled(diceSlotAction, false);
-            actionPanelComponents.SetEnabled(actionPanelMouseEvent, false);
+            actionPanel.SetEnabled(diceSlotAction, false);
+            actionPanel.SetEnabled(actionPanelMouseEvent, false);
 
             var panelColor = GetComponent<Image>().color;
             panelColor = new Color(panelColor.r, panelColor.g, panelColor.b, _alphaValueInactive);

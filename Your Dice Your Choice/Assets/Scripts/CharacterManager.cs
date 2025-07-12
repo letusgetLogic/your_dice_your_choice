@@ -61,7 +61,8 @@ namespace Assets.Scripts
             foreach (var characterObject in InteractibleCharacters)
             {
                 var borderColor = characterObject.GetComponent<CharacterBorderColor>();
-                SetEnabled(borderColor, true);
+                var character = characterObject.GetComponent<Character>();
+                character.SetEnabled(borderColor, true);
 
                 var mouseEvent = characterObject.GetComponent<Character>().CharacterMouseEvent;
                 mouseEvent.SetIsBeingAttacked(true);
@@ -103,23 +104,14 @@ namespace Assets.Scripts
         /// </summary>
         public void DeactivateCharacters()
         {
-            foreach (var character in InteractibleCharacters)
+            foreach (var characterObject in InteractibleCharacters)
             {
-                var borderColor = character.GetComponent<CharacterBorderColor>();
-                SetEnabled(borderColor, false);
+                var borderColor = characterObject.GetComponent<CharacterBorderColor>();
+                var character = characterObject.GetComponent<Character>();
+                character.SetEnabled(borderColor, false);
             }
 
             InteractibleCharacters.Clear();
-        }
-
-        /// <summary>
-        /// Sets the component CharacterBorderColor enabled true/false.
-        /// </summary>
-        /// <param name="component"></param>
-        /// <param name="value"></param>
-        private void SetEnabled(CharacterBorderColor component, bool value)
-        {
-            component.enabled = value;
         }
 
     }

@@ -3,15 +3,11 @@ using TMPro;
 using UnityEngine.EventSystems;
 using System.Collections;
 
-namespace Assets.Scripts.ActionPopupPrefab
+namespace Assets.Scripts.ActionPanelPrefab
 {
     public class ActionPanelMouseEvent : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] [Range(0f, 1f)] private float _delayOnHoverTime = .5f;
-
-        private ActionPanel _actionPanel => GetComponent<ActionPanel>();
-        private ActionPopup _actionPopup => _actionPanel.ActionPopup;
-        private CharacterPanel _characterPanel => _actionPanel.CharacterPanel;
 
         private IEnumerator _coroutine;
 
@@ -41,9 +37,11 @@ namespace Assets.Scripts.ActionPopupPrefab
         {
             yield return new WaitForSeconds(_delayOnHoverTime);
 
-            _actionPopup.SetActiveChildren(true);
+            var actionPopup = GetComponent<ActionPanel>().ActionPopup;
+            actionPopup.SetActiveChildren(true);
 
-            if (_characterPanel.Player == PlayerType.PlayerLeft)
+            var characterPanel = GetComponent<ActionPanel>().CharacterPanel;
+            if (characterPanel.PlayerType == PlayerType.PlayerLeft)
                 HideRightPanels(true);
         }
 
@@ -52,9 +50,11 @@ namespace Assets.Scripts.ActionPopupPrefab
         /// </summary>
         private void HideInfo()
         {
-            _actionPopup.SetActiveChildren(false);
+            var actionPopup = GetComponent<ActionPanel>().ActionPopup;
+            actionPopup.SetActiveChildren(false);
 
-            if (_characterPanel.Player == PlayerType.PlayerLeft)
+            var characterPanel = GetComponent<ActionPanel>().CharacterPanel;
+            if (characterPanel.PlayerType == PlayerType.PlayerLeft)
                 HideRightPanels(false);
         }
 
@@ -63,15 +63,17 @@ namespace Assets.Scripts.ActionPopupPrefab
         /// </summary>
         private void HideRightPanels(bool isHiding)
         {
-            for (int i = _actionPanel.Index; i < _characterPanel.ActionPanelPrefabs.Length; i++)
-            {
-                if (i == _actionPanel.Index) 
-                    continue;
+            var actionPanel = GetComponent<ActionPanel>();
+            var characterPanel = actionPanel.CharacterPanel; 
 
+            for (int i = actionPanel.Index + 1; i < characterPanel.ActionPanelPrefabs.Length; i++)
+            {
                 if (isHiding) 
-                    _characterPanel.ActionPanelPrefabs[i].GetComponent<ActionPanel>().ShowComponents(false);
+                    characterPanel.ActionPanelPrefabs[i].
+                        GetComponent<ActionPanel>().ShowComponents(false);
                 else
-                    _characterPanel.ActionPanelPrefabs[i].GetComponent<ActionPanel>().ShowComponents(true);
+                    characterPanel.ActionPanelPrefabs[i].
+                        GetComponent<ActionPanel>().ShowComponents(true);
             }
         }
     }

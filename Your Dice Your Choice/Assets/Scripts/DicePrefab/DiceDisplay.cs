@@ -9,7 +9,6 @@ public class DiceDisplay : MonoBehaviour
     [SerializeField] private float _alphaValue = 0.6f;
     [SerializeField] private float _scaleSize = 1.1f;
 
-    private CanvasGroup _canvasGroup => GetComponent<CanvasGroup>();
     private Vector3 _originScale;
 
     /// <summary>
@@ -26,16 +25,18 @@ public class DiceDisplay : MonoBehaviour
     /// </summary>
     public void SetDefault()
     {
-        _canvasGroup.alpha = 1f;
+        var canvasGroup = GetComponent<CanvasGroup>();
+        canvasGroup.alpha = 1f;
         transform.localScale = _originScale;
     }
 
     /// <summary>
     /// Sets the alpha at the defined value.
     /// </summary>
-    protected void SetAlphaDown()
+    public void SetAlphaDown()
     {
-        _canvasGroup.alpha = _alphaValue;
+        var canvasGroup = GetComponent<CanvasGroup>();
+        canvasGroup.alpha = _alphaValue;
     }
     
     /// <summary>
@@ -43,14 +44,15 @@ public class DiceDisplay : MonoBehaviour
     /// </summary>
     public void SetBlocksRaycasts(bool value)
     {
-        _canvasGroup.blocksRaycasts = value;
+        var canvasGroup = GetComponent<CanvasGroup>();
+        canvasGroup.blocksRaycasts = value;
     }
 
     /// <summary>
     /// Updates the dice position.
     /// </summary>
     /// <param name="eventData"></param>
-    protected void UpdatePosition(PointerEventData eventData)
+    public void UpdatePosition(PointerEventData eventData)
     {
         var rectTransform = gameObject.GetComponent<RectTransform>();
         rectTransform.anchoredPosition += eventData.delta / _canvas.scaleFactor;
@@ -59,7 +61,7 @@ public class DiceDisplay : MonoBehaviour
     /// <summary>
     /// Sets the scale of dice.
     /// </summary>
-    protected void SetScale()
+    public void SetScale()
     {
         var rectTransform = gameObject.GetComponent<RectTransform>();
         rectTransform.localScale *= _scaleSize;

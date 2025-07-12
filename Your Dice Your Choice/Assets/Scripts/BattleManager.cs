@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
-using Assets.Scripts.ActionPopupPrefab;
+using Assets.Scripts.ActionPanelPrefab;
 using Assets.Scripts.FieldPrefab;
 
 public class BattleManager : MonoBehaviour

@@ -1,9 +1,8 @@
-﻿using Assets.Scripts.ActionPopupPrefab;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 
-namespace Assets.Scripts.ActionPopupPrefab
+namespace Assets.Scripts.ActionPanelPrefab
 {
     public class ActionPopup : MonoBehaviour
     {

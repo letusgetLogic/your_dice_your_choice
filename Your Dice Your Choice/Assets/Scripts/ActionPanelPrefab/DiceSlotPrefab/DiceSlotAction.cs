@@ -4,18 +4,16 @@ using Assets.Scripts.DicePrefab;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Collections;
-using Unity.VisualScripting;
 using Assets.Scripts.CharacterPrefab;
 
-namespace Assets.Scripts.ActionPopupPrefab.DiceSlotPrefab
+namespace Assets.Scripts.ActionPanelPrefab
 {
     public class DiceSlotAction : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IDropHandler
     {
         [SerializeField][Range(0f, 1f)] private float _delayOnHoverTime = .5f;
 
-        private Transform _actionPanelTransform => transform.parent.parent;
-        private ActionPanel _actionPanel => _actionPanelTransform.gameObject.GetComponent<ActionPanel>();
-        private PlayerType _playerType => _actionPanel.CharacterObject.GetComponent<Character>().Player;
+        private ActionPanel _actionPanel => transform.parent.parent.GetComponent<ActionPanel>();
+        private PlayerType _playerType => _actionPanel.CharacterObject.GetComponent<Character>().PlayerType;
 
         private IEnumerator _coroutine;
 
@@ -44,10 +42,24 @@ namespace Assets.Scripts.ActionPopupPrefab.DiceSlotPrefab
             if (_coroutine != null)
                 StopCoroutine(_coroutine);
 
+            StartCoroutine(DelayDeactivate());
+        }
+
+        /// <summary>
+        /// WaitForEndOfFrame and runs the method "DeactivateInteractable()".
+        /// </summary>
+        /// <returns></returns>
+        private IEnumerator DelayDeactivate()
+        {
+            yield return new WaitForSeconds(1f);
+
             if (_canInteractibleBeDeactivated)
             {
                 Debug.Log("DiceSlotAction.OnPointerExit !!!");
                 _actionPanel.Action.DeactivateInteractible();
+
+                var action = _actionPanel.Action;
+                action.SetDescriptionOf(_actionPanel, 0);
             }
         }
 
@@ -65,7 +77,7 @@ namespace Assets.Scripts.ActionPopupPrefab.DiceSlotPrefab
             if (action.IsValid(dice.CurrentNumber) == false)
                 yield break;
 
-            action.SetDescriptionOf(_actionPanel.ActionPopup, dice.CurrentNumber);
+            action.SetDescriptionOf(_actionPanel, dice.CurrentNumber);
             action.SetInteractible(dice.CurrentNumber);
             action.ShowInteractible();
             _canInteractibleBeDeactivated = true;
@@ -98,7 +110,7 @@ namespace Assets.Scripts.ActionPopupPrefab.DiceSlotPrefab
                     CharacterManager.Instance.InteractibleCharacters.Count == 0)
                     return;
 
-                SetDiceOnSlot(diceObject, dice);
+                dice.SetOnActionSlot(GetComponent<RectTransform>().position);
 
                 action.ShowInteractible();
                 action.ActivateSkill(dice.CurrentNumber);
@@ -107,21 +119,5 @@ namespace Assets.Scripts.ActionPopupPrefab.DiceSlotPrefab
             }
         }
 
-        /// <summary>
-        /// Sets the dice on the slot, deactivates the drag event and sets the canvas group default.
-        /// </summary>
-        /// <param name="diceObject"></param>
-        private void SetDiceOnSlot(GameObject diceObject, Dice dice)
-        {
-            var diceDragEvent = diceObject.GetComponent<DiceDragEvent>();
-            dice.SetEnabled(diceDragEvent, false);
-
-            var diceMovement = diceObject.GetComponent<DiceMovement>();
-            diceMovement.PositionsTo(GetComponent<RectTransform>().position);
-
-            var diceDisplay = diceObject.GetComponent<DiceDisplay>();
-            diceDisplay.SetDefault();
-            diceDisplay.SetBlocksRaycasts(true);
-        }
     }
 }

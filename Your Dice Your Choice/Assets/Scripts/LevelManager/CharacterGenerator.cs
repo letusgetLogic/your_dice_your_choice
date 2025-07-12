@@ -32,7 +32,7 @@ public class CharacterGenerator : MonoBehaviour
     /// </summary>
     /// <param name="player"></param>
     /// <returns></returns>
-    public List<GameObject> CreateCharactersFor(PlayerType player)
+    public List<GameObject> CreateCharactersFor(Player player, PlayerType playerType)
     {
         var tempList = new List<GameObject>();
 
@@ -40,7 +40,7 @@ public class CharacterGenerator : MonoBehaviour
         var randomIndexes = new Vector2Int[LevelManager.Instance.Data.CharacterAmount];
         var randomPositions = new Vector3[LevelManager.Instance.Data.CharacterAmount];
 
-        RandomizeIndexes(player, randomIndexes);
+        RandomizeIndexes(playerType, randomIndexes);
         GetSpawnPositions(randomPositions, randomIndexes);
 
         for (int i = 0; i < LevelManager.Instance.Data.CharacterAmount; i++)
@@ -50,7 +50,7 @@ public class CharacterGenerator : MonoBehaviour
             
             // Data
             var characterData = _characterData[Random.Range(0, _characterData.Length)];
-            character.SetData(player, characterData, randomIndexes[i]);
+            character.SetData(player, playerType, characterData, randomIndexes[i]);
             
             // Weapon
             var characterGetWeapon = characterObject.GetComponent<CharacterGetWeapon>();
@@ -59,11 +59,14 @@ public class CharacterGenerator : MonoBehaviour
 
             // Color
             var characterColor = characterObject.GetComponent<CharacterColor>();
-            characterColor.SetColor(PlayerColor(player), character.Name);
-            characterObject.GetComponent<CharacterBorderColor>().SetEnabledFalse();
+            characterColor.SetColor(PlayerColor(playerType), character.Name);
+
+            // Border Color
+            var characterBorderColor = characterObject.GetComponent<CharacterBorderColor>();
+            character.SetEnabled(characterBorderColor, false);
 
             // Panel
-            var characterPanelObject = PanelManager.Instance.GetPanel(player, i, characterObject);
+            var characterPanelObject = PanelManager.Instance.GetPanel(playerType, i, characterObject);
             character.SetPanel(characterPanelObject);
 
             tempList.Add(characterObject);

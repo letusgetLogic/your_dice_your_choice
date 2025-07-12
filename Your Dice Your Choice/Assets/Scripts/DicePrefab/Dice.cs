@@ -58,5 +58,20 @@ namespace Assets.Scripts.DicePrefab
             }
         }
 
+        /// <summary>
+        /// Sets the dice on the slot, deactivates the drag event and sets the canvas group default.
+        /// </summary>
+        public void SetOnActionSlot(Vector3 pos)
+        {
+            SetEnabled(GetComponent<DiceDragEvent>(), false);
+
+            var diceMovement = GetComponent<DiceMovement>();
+            diceMovement.PositionsTo(pos);
+
+            var diceDisplay = GetComponent<DiceDisplay>();
+            diceDisplay.SetDefault();
+            diceDisplay.SetBlocksRaycasts(true);
+        }
+
     }
 }

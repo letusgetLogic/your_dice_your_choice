@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Assets.Scripts.ActionPopupPrefab;
+using Assets.Scripts.ActionPanelPrefab;
 using Assets.Scripts.CharacterPrefab;
 using UnityEngine;
 
@@ -10,13 +10,13 @@ namespace Assets.Scripts.ActionDatas
     {
         public static readonly string[] Description = new string[]
         {
-            "None",
+            Attack.DefaultDescription,
             "Dice 1: Attack with 100% AP",
-            "Dice 2: AP x2",
-            "Dice 3: AP x3",
-            "Dice 4: AP x4",
-            "Dice 5: AP x5",
-            "Dice 6: AP x6",
+            "Dice 2: Attack with 200% AP",
+            "Dice 3: Attack with 300% AP",
+            "Dice 4: Attack with 400% AP",
+            "Dice 5: Attack with 500% AP",
+            "Dice 6: Attack with 600% AP",
         };
 
 
@@ -25,9 +25,14 @@ namespace Assets.Scripts.ActionDatas
             AllowedDiceNumber = AllowedDiceNumber.D1_6;
         }
 
-        public override void SetDescriptionOf(ActionPopup actionPopup, int index)
+        public override void SetDescriptionOf(ActionPanel actionPanel, int diceNumber)
         {
-            actionPopup.SetText(Description[index]);
+            actionPanel.ActionPopup.SetText(Description[diceNumber]);
+
+            if (diceNumber == 0) 
+                PanelManager.Instance.RemoveSetDefaultDescription(actionPanel);
+            else
+                PanelManager.Instance.AddSetDefaultDescription(actionPanel);
         }
 
         public override void SetInteractible(int diceNumber)

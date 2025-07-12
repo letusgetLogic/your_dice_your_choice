@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using Assets.Scripts.CharacterPrefab;
-using Assets.Scripts.ActionPopupPrefab;
+using Assets.Scripts.ActionPanelPrefab;
 using Assets.Scripts.DicePrefab;
 using Assets.Scripts.CharacterDatas;
 
@@ -36,8 +36,8 @@ namespace Assets.Scripts.ActionDatas
         /// <summary>
         /// Sets the description.
         /// </summary>
-        /// <param name="index"></param>
-        public virtual void SetDescriptionOf(ActionPopup actionPopup, int index)
+        /// <param name="diceNumber"></param>
+        public virtual void SetDescriptionOf(ActionPanel actionPanel, int diceNumber)
         {}
 
         /// <summary>

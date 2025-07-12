@@ -1,6 +1,7 @@
 using System;
+using System.Collections.Generic;
 using Assets.Scripts;
-using Assets.Scripts.ActionPopupPrefab;
+using Assets.Scripts.ActionPanelPrefab;
 using Assets.Scripts.CharacterPrefab;
 using TMPro;
 using UnityEngine;
@@ -20,6 +21,8 @@ public class PanelManager : MonoBehaviour
     public GameObject RollPanelRight;
     //public GameObject RerollPanelRight;
     public GameObject CharacterInfoPanel;
+
+    private List<ActionPanel> _actionPanelsSetDefaultDescription = new();
 
     /// <summary>
     /// Awake method.
@@ -159,5 +162,37 @@ public class PanelManager : MonoBehaviour
         }
 
         return null;
+    }
+
+    /// <summary>
+    /// Adds the action panel, it's description text will be set default at the end of a turn.
+    /// </summary>
+    /// <param name="actionPanel"></param>
+    public void AddSetDefaultDescription(ActionPanel actionPanel)
+    {
+        _actionPanelsSetDefaultDescription.Add(actionPanel);
+    }
+
+    /// <summary>
+    /// Removes the action panel, it's description text will be set default at the end of a turn.
+    /// </summary>
+    /// <param name="actionPanel"></param>
+    public void RemoveSetDefaultDescription(ActionPanel actionPanel)
+    {
+        _actionPanelsSetDefaultDescription.Remove(actionPanel);
+    }
+
+    /// <summary>
+    /// Sets the default description to the action of each panel on the list and clear the list.
+    /// </summary>
+    public void SetDefaultDescription()
+    {
+        foreach(var panel in _actionPanelsSetDefaultDescription)
+        {
+            var action = panel.Action;
+            action.SetDescriptionOf(panel, 0);
+        }
+
+        _actionPanelsSetDefaultDescription.Clear();
     }
 }

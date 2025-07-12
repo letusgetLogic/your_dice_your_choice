@@ -13,7 +13,8 @@ namespace Assets.Scripts.CharacterPrefab
     {
         public CharacterMouseEvent CharacterMouseEvent;
 
-        public PlayerType Player { get; private set; }
+        public Player Player {  get; private set; }
+        public PlayerType PlayerType { get; private set; }
         public CharacterData Data { get; private set; }
         public string Name { get; private set; }
         public float CurrentAP { get; private set; }
@@ -34,6 +35,9 @@ namespace Assets.Scripts.CharacterPrefab
 
         private void OnValidate()
         {
+            if (_data == null)
+                return;
+
             _dataInstance = Instantiate(_data);
             OnSettingsUpdate();
         }
@@ -83,9 +87,10 @@ namespace Assets.Scripts.CharacterPrefab
         /// Initialize Data.
         /// </summary>
         /// <param name="data"></param>
-        public void SetData(PlayerType player, CharacterData data, Vector2Int fieldIndex)
+        public void SetData(Player player, PlayerType playerType, CharacterData data, Vector2Int fieldIndex)
         {
             Player = player;
+            PlayerType = playerType;
             Data = data;
             Name = CharacterName.GetName();
             
@@ -143,6 +148,21 @@ namespace Assets.Scripts.CharacterPrefab
 
             var field = FieldManager.Instance.Fields[FieldIndex.x, FieldIndex.y].GetComponent<Field>();
             field.SetCharacterObjectNull();
+
+            Player.RemoveCharacter(gameObject);
+        }
+ 
+        /// <summary>
+        /// Sets the component enabled true/false.
+        /// </summary>
+        /// <param name="component"></param>
+        /// <param name="value"></param>
+        public void SetEnabled(Component component, bool value)
+        {
+            if (component is Behaviour behaviour)
+            {
+                behaviour.enabled = value;
+            }
         }
     }
 }

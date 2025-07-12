@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using Assets.Scripts.CharacterPrefab;
-using Assets.Scripts.ActionPopupPrefab;
+using Assets.Scripts.ActionPanelPrefab;
 
 namespace Assets.Scripts.ActionDatas
 {
     public abstract class Attack : ActionBase
     {
+        public static readonly string DefaultDescription = "Move the dice over it to get more information";
+
         public AllowedDiceNumber AllowedDiceNumber { get; protected set; }
 
         public Attack(ActionData data, GameObject characterObject) : base(data, characterObject) 
@@ -18,7 +20,7 @@ namespace Assets.Scripts.ActionDatas
             return CheckDiceCondition.IsNumberValid(AllowedDiceNumber, diceNumber);
         }
 
-        public override abstract void SetDescriptionOf(ActionPopup actionPopup, int index);
+        public override abstract void SetDescriptionOf(ActionPanel actionPanel, int diceNumber);
 
         public override abstract void SetInteractible(int diceNumber);
 

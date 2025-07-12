@@ -2,22 +2,22 @@
 using TMPro;
 using UnityEngine;
 using System;
-using Assets.Scripts.ActionPopupPrefab.DiceSlotPrefab;
 
-namespace Assets.Scripts.ActionPopupPrefab
+namespace Assets.Scripts.ActionPanelPrefab
 {
     public class ActionPanel : MonoBehaviour
     {
         [SerializeField] private GameObject _behindLayer;
         [SerializeField] private TextMeshProUGUI _actionName;
-        [SerializeField] private GameObject _actionPopupPrefab;
+        [SerializeField] private ActionPopup _actionPopup;
+        [SerializeField] private DiceSlotAction _diceSlotAction;
 
         public ActionBase Action { get; private set; }
         public GameObject CharacterObject { get; private set; }
         public CharacterPanel CharacterPanel { get; private set; }
         public int Index {  get; private set; }
-        public ActionPopup ActionPopup
-           => _actionPopupPrefab.GetComponent<ActionPopup>();
+        public ActionPopup ActionPopup => _actionPopup;
+        public DiceSlotAction DiceSlotAction => _diceSlotAction;
 
         /// <summary>
         /// Initializes data.
@@ -42,11 +42,17 @@ namespace Assets.Scripts.ActionPopupPrefab
         }
 
         /// <summary>
-        /// Deactivates ActionPanelMouseEvent.
+        /// Sets the component enabled true/false.
         /// </summary>
-        public void DeactivateMouseEvent()
+        /// <param name="component"></param>
+        /// <param name="value"></param>
+        public void SetEnabled(Component component, bool value)
         {
-            GetComponent<ActionPanelMouseEvent>().enabled = false;
+            if (component is Behaviour behaviour)
+            {
+                behaviour.enabled = value;
+            }
         }
+
     }
 }

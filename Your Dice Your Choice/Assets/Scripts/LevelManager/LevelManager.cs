@@ -90,6 +90,9 @@ public class LevelManager : MonoBehaviour
             case Phase.Battle:
                 BattleManager.Instance.StartMatch();
                 return;
+
+            case Phase.MatchOver:
+                return;
         }
     }
 

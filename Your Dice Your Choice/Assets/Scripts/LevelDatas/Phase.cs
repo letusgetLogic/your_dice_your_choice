@@ -6,5 +6,6 @@
         Intro,
         Initialization,
         Battle,
+        MatchOver,
     }
 }

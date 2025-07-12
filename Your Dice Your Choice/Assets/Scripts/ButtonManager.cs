@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class ButtonManager : MonoBehaviour
@@ -40,6 +41,9 @@ public class ButtonManager : MonoBehaviour
     /// </summary>
     public void OnEndButton()
     {
+        FieldManager.Instance.DeactivateFields();
+        CharacterManager.Instance.DeactivateCharacters();
+        PanelManager.Instance.SetDefaultDescription();
         TurnManager.Instance.SwitchTurn();
     }
 

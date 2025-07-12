@@ -4,7 +4,7 @@ using Assets.Scripts.CharacterPrefab;
 using System.Collections;
 using System;
 using UnityEngine.UI;
-using Assets.Scripts.ActionPopupPrefab;
+using Assets.Scripts.ActionPanelPrefab;
 
 namespace Assets.Scripts.CharacterPrefab.CharacterBody
 {

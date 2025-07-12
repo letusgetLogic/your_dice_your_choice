@@ -31346,7 +31346,7 @@ MonoBehaviour:
   _act2Time: 2
   _animSpeedAct1: 0.5
   _animSpeedAct2: 0.5
-  _animSpeedAct3: 0.2
+  _animSpeedAct3: 0.4
   _animFadeInTime: 3
   _animCurve1:
     serializedVersion: 2

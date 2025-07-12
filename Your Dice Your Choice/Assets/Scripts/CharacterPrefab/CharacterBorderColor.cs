@@ -60,16 +60,11 @@ namespace Assets.Scripts.CharacterPrefab
                 if (_currentValue == 1)
                 {
                     _lightenState = LightenState.LightenDown;
+                    Debug.Log(_lightenState);
                     return;
                 }
 
-                _currentValue = Mathf.MoveTowards(_currentValue, 1f, _animSpeedAct * 0.0001f / Time.deltaTime);
-
-                float dimValue = Mathf.Lerp(_colorMinR, _colorMaxR, _animCurve.Evaluate(_currentValue));
-                SetBorderColorR(dimValue);
-
-                float scaleValue = Mathf.Lerp(_scaleMin, _scaleMax, _animCurve.Evaluate(_currentValue));
-                SetBorderScale(scaleValue);
+                Interpolate(1f);
             }
         }
 
@@ -84,17 +79,28 @@ namespace Assets.Scripts.CharacterPrefab
                 if (_currentValue == 0)
                 {
                     _lightenState = LightenState.LightenUp;
+                    Debug.Log(_lightenState);
                     return;
                 }
 
-                _currentValue = Mathf.MoveTowards(_currentValue, 0f, _animSpeedAct / Time.deltaTime);
-
-                float dimValue = Mathf.Lerp(_colorMinR, _colorMaxR, _animCurve.Evaluate(_currentValue));
-                SetBorderColorR(dimValue);
-
-                float scaleValue = Mathf.Lerp(_scaleMin, _scaleMax, _animCurve.Evaluate(_currentValue));
-                SetBorderScale(scaleValue);
+                Interpolate(0f);
             }
+        }
+
+        /// <summary>
+        /// Interolates the value and sets the border color and scale.
+        /// </summary>
+        /// <param name="target"></param>
+        private void Interpolate(float target)
+        {
+            _currentValue = Mathf.MoveTowards(_currentValue, target, _animSpeedAct * 0.0001f / Time.deltaTime);
+
+            float dimValue = Mathf.Lerp(_colorMinR, _colorMaxR, _animCurve.Evaluate(_currentValue));
+            SetBorderColorR(dimValue);
+            Debug.Log(dimValue);
+            float scaleValue = Mathf.Lerp(_scaleMin, _scaleMax, _animCurve.Evaluate(_currentValue));
+            SetBorderScale(scaleValue);
+            Debug.Log(scaleValue);
         }
 
         /// <summary>
@@ -122,12 +128,5 @@ namespace Assets.Scripts.CharacterPrefab
             }
         }
 
-        /// <summary>
-        /// Sets enabled false.
-        /// </summary>
-        public void SetEnabledFalse()
-        {
-            this.enabled = false;
-        }
     }
 }
