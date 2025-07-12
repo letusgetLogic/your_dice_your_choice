@@ -12,6 +12,9 @@ namespace Assets.Scripts.MatchIntro
         public float AnimSpeedAct2 => _animSpeedAct2;
         public float AnimSpeedAct3 => _animSpeedAct3;
         public float AnimFadeInTime => _animFadeInTime;
+        public AnimationCurve AnimCurve1 => _animCurve1;
+        public AnimationCurve AnimCurve2 => _animCurve2;
+        public AnimationCurve AnimCurve3 => _animCurve3;
         public enum PlayState { None, Act1, Act2, Act3 }
         public PlayState CurrentState { get; private set; }
         public float CurrentValue { get; private set; }
@@ -19,11 +22,13 @@ namespace Assets.Scripts.MatchIntro
         [SerializeField] private float _act1Time = 3.0f;
         [SerializeField] private float _act2Time = 3.0f;
 
-        [SerializeField] private float _animSpeedAct1 = 0.0001f;
-        [SerializeField] private float _animSpeedAct2 = 0.0001f;
-        [SerializeField] private float _animSpeedAct3 = 0.00015f;
+        [SerializeField] private float _animSpeedAct1 = 1f;
+        [SerializeField] private float _animSpeedAct2 = 1f;
+        [SerializeField] private float _animSpeedAct3 = 1.55f;
         [SerializeField] private float _animFadeInTime = 3.0f;
-        [SerializeField] private AnimationCurve _animCurve;
+        [SerializeField] private AnimationCurve _animCurve1;
+        [SerializeField] private AnimationCurve _animCurve2;
+        [SerializeField] private AnimationCurve _animCurve3;
 
         /// <summary>
         /// Awake method.
@@ -53,16 +58,16 @@ namespace Assets.Scripts.MatchIntro
         /// <param name="animSpeed"></param>
         public void RunCurrentValue(float animSpeed)
         {
-            CurrentValue = Mathf.MoveTowards(CurrentValue, 1, animSpeed / Time.deltaTime);
+            CurrentValue = Mathf.MoveTowards(CurrentValue, 1, animSpeed * 0.0001f / Time.deltaTime);
         }
 
         /// <summary>
         /// Gets the value of interpolation.
         /// </summary>
         /// <returns></returns>
-        public float GetInterpolation()
+        public float GetInterpolation(AnimationCurve animationCurve)
         {
-            return _animCurve.Evaluate(CurrentValue);
+            return animationCurve.Evaluate(CurrentValue);
         }
 
         /// <summary>

@@ -67,7 +67,7 @@ namespace Assets.Scripts.MatchIntro
         private void PlayAct1()
         {
             MatchIntroModel.Instance.RunCurrentValue(MatchIntroModel.Instance.AnimSpeedAct1);
-            float value = MatchIntroModel.Instance.GetInterpolation();
+            float value = MatchIntroModel.Instance.GetInterpolation(MatchIntroModel.Instance.AnimCurve1);
 
             MatchIntroModel.Instance.MoveText(
                 MatchIntroView.Instance.LeftIntroShaderRect, MatchIntroView.Instance.RightIntroShaderRect,
@@ -90,7 +90,7 @@ namespace Assets.Scripts.MatchIntro
         private void PlayAct2()
         {
             MatchIntroModel.Instance.RunCurrentValue(MatchIntroModel.Instance.AnimSpeedAct2);
-            float value = MatchIntroModel.Instance.GetInterpolation();
+            float value = MatchIntroModel.Instance.GetInterpolation(MatchIntroModel.Instance.AnimCurve2);
 
             MatchIntroModel.Instance.MoveText(
                 MatchIntroView.Instance.LeftIntroShaderRect, MatchIntroView.Instance.RightIntroShaderRect,
@@ -113,7 +113,7 @@ namespace Assets.Scripts.MatchIntro
         private void PlayAct3()
         {
             MatchIntroModel.Instance.RunCurrentValue(MatchIntroModel.Instance.AnimSpeedAct3);
-            float value = MatchIntroModel.Instance.GetInterpolation();
+            float value = MatchIntroModel.Instance.GetInterpolation(MatchIntroModel.Instance.AnimCurve3);
 
             MatchIntroView.Instance.DimDownForeground(1 - value);
 

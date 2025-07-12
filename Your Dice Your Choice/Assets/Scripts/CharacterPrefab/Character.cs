@@ -4,6 +4,7 @@ using Assets.Scripts.CharacterPrefab.CharacterBody;
 using UnityEngine.TextCore.Text;
 using NUnit.Framework;
 using System.Collections.Generic;
+using Assets.Scripts.FieldPrefab;
 
 namespace Assets.Scripts.CharacterPrefab
 {
@@ -139,6 +140,9 @@ namespace Assets.Scripts.CharacterPrefab
             gameObject.tag = "Obstacle";
             GetComponent<CharacterState>().SetDownState();
             Panel.GetComponent<CharacterPanel>().SetActionInactive();
+
+            var field = FieldManager.Instance.Fields[FieldIndex.x, FieldIndex.y].GetComponent<Field>();
+            field.SetCharacterObjectNull();
         }
     }
 }

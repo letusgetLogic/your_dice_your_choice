@@ -99,5 +99,13 @@ namespace Assets.Scripts.FieldPrefab
                 behaviour.enabled = value;
             }
         }
+
+        /// <summary>
+        /// Set the character obejct null.
+        /// </summary>
+        public void SetCharacterObjectNull()
+        {
+            CharacterObject.SetActive(false);
+        }
     }
 }

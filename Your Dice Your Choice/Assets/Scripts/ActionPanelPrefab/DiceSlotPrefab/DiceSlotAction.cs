@@ -120,7 +120,7 @@ namespace Assets.Scripts.ActionPopupPrefab.DiceSlotPrefab
             diceMovement.PositionsTo(GetComponent<RectTransform>().position);
 
             var diceDisplay = diceObject.GetComponent<DiceDisplay>();
-            diceDisplay.SetAlphaDefault();
+            diceDisplay.SetDefault();
             diceDisplay.SetBlocksRaycasts(true);
         }
     }

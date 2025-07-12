@@ -5,7 +5,7 @@ namespace Assets.Scripts.CharacterPrefab
     public class CharacterBorderColor : MonoBehaviour
     {
         [SerializeField] private GameObject[] _borders;
-        [SerializeField] private float _animSpeedAct = 0.00005f;
+        [SerializeField] private float _animSpeedAct = 1f;
         [SerializeField] private float _colorMaxR = 0.6f;
         [SerializeField] private float _colorMinR = 0.1f;
         [SerializeField] private float _scaleMax = 1.2f;
@@ -63,7 +63,7 @@ namespace Assets.Scripts.CharacterPrefab
                     return;
                 }
 
-                _currentValue = Mathf.MoveTowards(_currentValue, 1f, _animSpeedAct / Time.deltaTime);
+                _currentValue = Mathf.MoveTowards(_currentValue, 1f, _animSpeedAct * 0.0001f / Time.deltaTime);
 
                 float dimValue = Mathf.Lerp(_colorMinR, _colorMaxR, _animCurve.Evaluate(_currentValue));
                 SetBorderColorR(dimValue);

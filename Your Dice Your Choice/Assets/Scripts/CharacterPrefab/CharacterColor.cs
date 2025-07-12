@@ -22,7 +22,6 @@ namespace Assets.Scripts.CharacterPrefab
                 item.color = color;
             }
 
-            _nameText.color = color;
             _nameText.text = characterName;
             _nameTextShader.text = characterName;
 

@@ -86,6 +86,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canvas: {fileID: 0}
   _alphaValue: 0.6
+  _scaleSize: 1.2
 --- !u!114 &5819641078766941038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,6 +138,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canvas: {fileID: 0}
   _alphaValue: 0.6
+  _scaleSize: 1.2
 --- !u!114 &9031079582204954733
 MonoBehaviour:
   m_ObjectHideFlags: 0

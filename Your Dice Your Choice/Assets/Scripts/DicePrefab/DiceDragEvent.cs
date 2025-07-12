@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 
 public class DiceDragEvent : DiceDisplay, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
+    
     /// <summary>
     /// Triggers event at the beginning of drag.
     /// </summary>
@@ -13,6 +14,7 @@ public class DiceDragEvent : DiceDisplay, IDragHandler, IBeginDragHandler, IEndD
     {
         SetAlphaDown();
         SetBlocksRaycasts(false);
+        SetScale();
     }
 
     /// <summary>
@@ -21,8 +23,7 @@ public class DiceDragEvent : DiceDisplay, IDragHandler, IBeginDragHandler, IEndD
     /// <param name="eventData"></param>
     public void OnDrag(PointerEventData eventData)
     {
-        var rectTransform = gameObject.GetComponent<RectTransform>();
-        rectTransform.anchoredPosition += eventData.delta / MyCanvas().scaleFactor;
+        UpdatePosition(eventData);
     }
 
     /// <summary>
@@ -31,7 +32,7 @@ public class DiceDragEvent : DiceDisplay, IDragHandler, IBeginDragHandler, IEndD
     /// <param name="eventData"></param>
     public void OnEndDrag(PointerEventData eventData)
     {
-        SetAlphaDefault();
+        SetDefault();
         SetBlocksRaycasts(true);
 
         StartCoroutine(MoveDice());
