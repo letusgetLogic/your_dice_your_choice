@@ -44,5 +44,22 @@ public class PlayerBase : MonoBehaviour
                 break;
         }
     }
+
+    /// <summary>
+    /// Determines the winning player based on the specified losing player.
+    /// </summary>
+    /// <param name="loser">The player type that represents the losing player. Must be either <see cref="PlayerType.PlayerLeft"/> or <see
+    /// cref="PlayerType.PlayerRight"/>.</param>
+    /// <returns>The <see cref="Player"/> instance representing the winning player.</returns>
+    /// <exception cref="System.Exception">Thrown if <paramref name="loser"/> is not a valid <see cref="PlayerType"/>.</exception>
+    public Player GetWinner(PlayerType loser)
+    {
+        return loser switch
+        {
+            PlayerType.PlayerLeft => PlayerRight,
+            PlayerType.PlayerRight => PlayerLeft,
+            _ => throw new System.Exception("PlayerBase.GetWinner() -> playerType is not valid"),
+        };
+    }
 }
 

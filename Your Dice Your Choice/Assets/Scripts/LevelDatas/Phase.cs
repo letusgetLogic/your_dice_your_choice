@@ -7,5 +7,6 @@
         Initialization,
         Battle,
         MatchOver,
+        WaitForInput,
     }
 }

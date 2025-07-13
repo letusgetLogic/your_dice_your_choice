@@ -2293,7 +2293,7 @@ MonoBehaviour:
   - {fileID: 6713686809384439832}
   - {fileID: 948483527308166831}
   - {fileID: 848932504243726649}
-  _animSpeedAct: 2
+  _animSpeedAct: 4
   _colorMaxR: 0.6
   _colorMinR: 0.1
   _scaleMax: 1.2
@@ -2398,7 +2398,7 @@ MonoBehaviour:
   _downEyeAt2: {fileID: 6033051518124546497}
   _downEyeX1: {fileID: 8717174808930557741}
   _downEyeX2: {fileID: 5657565229368682987}
-  _rotation: {x: 0, y: 0, z: 90}
+  _rotation: {x: 0, y: 0, z: -90}
   _rotateSpeed: 3
 --- !u!1 &5657565229368682987
 GameObject:

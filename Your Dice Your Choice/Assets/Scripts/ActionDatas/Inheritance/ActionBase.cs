@@ -67,5 +67,11 @@ namespace Assets.Scripts.ActionDatas
         /// </summary>
         /// <param name="fieldObject"></param>
         public abstract void HandleInput(GameObject fieldObject);
+
+        /// <summary>
+        /// Sets the default values.
+        /// </summary>
+        public virtual void SetDefault()
+        { }
     }
 }

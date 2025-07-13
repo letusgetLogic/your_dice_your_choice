@@ -42,9 +42,13 @@ namespace Assets.Scripts.ActionDatas
 
             enemyObject.GetComponent<CharacterHealth>().TakeDamage(damage);
 
-            character.SetDefault();
+            this.SetDefault();
         }
 
+        public override void SetDefault()
+        {
+            character.SetDefault();
+        }
     }
 }
 

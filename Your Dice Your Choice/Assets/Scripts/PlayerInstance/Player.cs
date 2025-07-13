@@ -71,9 +71,10 @@ public class Player
     {
         Characters.Remove(characterObject);
 
+        // If there are no characters left, end the match.
         if (Characters.Count == 0)
         {
-            LevelManager.Instance.NextPhase();
+            BattleManager.Instance.EndMatch(PlayerType);
         }
     }
 }
