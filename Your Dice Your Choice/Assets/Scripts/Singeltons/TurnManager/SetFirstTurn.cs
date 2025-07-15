@@ -93,11 +93,11 @@ namespace Assets.Scripts
                 StartCoroutine(Reroll());
             else
             {
-                var turnState = numberLeft > numberRight ?
+                var firstTurn = numberLeft > numberRight ?
                                 PlayerType.PlayerLeft :
                                 PlayerType.PlayerRight;
 
-                StartCoroutine(SetTurn(turnState));
+                StartCoroutine(SetTurn(firstTurn));
             }
         }
 
@@ -107,7 +107,7 @@ namespace Assets.Scripts
         /// <returns></returns>
         private IEnumerator Reroll()
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(1f);
 
             RollTurnDice();
         }
@@ -115,15 +115,15 @@ namespace Assets.Scripts
         /// <summary>
         /// Sets the first turn.
         /// </summary>
-        /// <param name="turnState"></param>
+        /// <param name="firstTurn"></param>
         /// <returns></returns>
-        private IEnumerator SetTurn(PlayerType turnState)
+        private IEnumerator SetTurn(PlayerType firstTurn)
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(1f);
 
             MatchIntroController.Instance.SetIntroInactive();
 
-            TurnManager.Instance.SwitchTurn(turnState);
+            TurnManager.Instance.SetFirstTurn(firstTurn);
 
             StartCoroutine(EndMatchIntro());
         }
@@ -134,7 +134,7 @@ namespace Assets.Scripts
         /// <returns></returns>
         private IEnumerator EndMatchIntro()
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(1f);
 
             _turnDiceLeft.SetActive(false);
             _turnDiceRight.SetActive(false);

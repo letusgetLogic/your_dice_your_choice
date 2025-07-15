@@ -103,8 +103,8 @@ namespace Assets.Scripts.MatchIntro
             if (value >= 1)
             {
                 SetFirstTurn.Instance.SetDiceAndPanel();
-                LevelManager.Instance.NextPhase();
                 MatchIntroModel.Instance.SetDefault();
+                LevelManager.Instance.NextPhase();
             }
         }
 
@@ -126,8 +126,8 @@ namespace Assets.Scripts.MatchIntro
             if (ratio >= 1)
             {
                 MatchIntroView.Instance.SetForegroundActive(false);
-                SetFirstTurn.Instance.RollTurnDice();
                 MatchIntroModel.Instance.SetDefault();
+                SetFirstTurn.Instance.RollTurnDice();
             }
         }
 

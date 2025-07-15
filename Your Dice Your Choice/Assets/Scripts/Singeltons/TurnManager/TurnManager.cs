@@ -11,7 +11,6 @@ public class TurnManager : MonoBehaviour
     public static TurnManager Instance { get; private set; }
 
     public PlayerType Turn { get; private set; }
-    public PlayerType[] TurnStates { get; private set; }
 
     [SerializeField] private GameObject _setTurnShaderObject;
     [SerializeField] private GameObject _setTurnObject;
@@ -30,16 +29,23 @@ public class TurnManager : MonoBehaviour
 
         Instance = this;
 
-        TurnStates = new PlayerType[]
-        {
-            PlayerType.PlayerLeft,
-            PlayerType.PlayerRight
-        };
-
         Turn = PlayerType.None;
 
         _setTurnShaderObject.SetActive(false);
         _setTurnObject.SetActive(false);
+    }
+
+    /// <summary>
+    /// Switchs turn for the next player.
+    /// </summary>
+    /// <param name="lastState"></param>
+    public void SetFirstTurn(PlayerType firstTurn)
+    {
+        var otherTurn = firstTurn == PlayerType.PlayerLeft
+                      ? PlayerType.PlayerRight
+                      : PlayerType.PlayerLeft;
+
+        SetOthers(otherTurn, firstTurn);
     }
 
     /// <summary>
@@ -49,17 +55,13 @@ public class TurnManager : MonoBehaviour
     public void SwitchTurn()
     {
         var lastTurn = Turn;
-        Turn = PlayerType.None;
-        SetOthers(lastTurn, GetOtherTurnFrom(lastTurn));
-    }
+        var nextTurn = lastTurn == PlayerType.PlayerLeft
+                      ? PlayerType.PlayerRight
+                      : PlayerType.PlayerLeft;
 
-    /// <summary>
-    /// Switchs turn for the next player.
-    /// </summary>
-    /// <param name="lastState"></param>
-    public void SwitchTurn(PlayerType nextTurn)
-    {
-        SetOthers(GetOtherTurnFrom(nextTurn), nextTurn);
+        Turn = PlayerType.None;
+
+        SetOthers(lastTurn, nextTurn);
     }
 
     /// <summary>
@@ -122,7 +124,7 @@ public class TurnManager : MonoBehaviour
     /// <returns></returns>
     private IEnumerator EndTurnText(Player nextPlayer, PlayerType nextTurn)
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1f);
 
         _setTurnShaderText.text = "";
         _setTurnText.text = "";
@@ -140,30 +142,12 @@ public class TurnManager : MonoBehaviour
     {
         Turn = nextTurn;
 
-        ActivateRollPanel(nextPlayer);
-        ButtonManager.Instance.SetInteractible(
-            ButtonManager.Instance.EndTurnButton, true);
-    }
-
-    /// <summary>
-    /// Activates the roll panel for player in this turn.
-    /// </summary>
-    /// <param name="player"></param>
-    private void ActivateRollPanel(Player player)
-    {
-        var panel = player.RollPanel;
+        var panel = nextPlayer.RollPanel;
         panel.ShowDice();
         ButtonManager.Instance.SetInteractible(panel.RollButton, true);
-    }
 
-    /// <summary>
-    /// Returns other turn.
-    /// </summary>
-    /// <param name="targetTurn"></param>
-    /// <returns></returns>
-    private PlayerType GetOtherTurnFrom(PlayerType targetTurn)
-    {
-        return targetTurn == TurnStates[0] ? TurnStates[1] : TurnStates[0];
+        ButtonManager.Instance.SetInteractible(
+            ButtonManager.Instance.EndTurnButton, true);
     }
 
 }

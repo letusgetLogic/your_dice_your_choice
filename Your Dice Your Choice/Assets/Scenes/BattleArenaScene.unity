@@ -643,8 +643,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d4682eb3bcb1ef46a9de72dd9ff8818, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerPanelLeft: {fileID: 877011351}
-  PlayerPanelRight: {fileID: 1803140635}
   _turnDiceLeft: {fileID: 945639520}
   _turnDiceRight: {fileID: 1367873308}
 --- !u!1 &137738934
@@ -59346,6 +59344,8 @@ MonoBehaviour:
   Canvas: {fileID: 736680340}
   NameTextLeft: {fileID: 723023387}
   NameTextRight: {fileID: 161836180}
+  PlayerPanelLeft: {fileID: 877011351}
+  PlayerPanelRight: {fileID: 1803140635}
   CharacterPanelsLeft:
   - {fileID: 160529471}
   - {fileID: 984278974}
@@ -60402,6 +60402,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
         m_MethodName: OnEndButton
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1770185893}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
+        m_MethodName: set_interactable
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

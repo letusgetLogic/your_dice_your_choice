@@ -77,11 +77,12 @@ namespace Assets.Scripts.DicePrefab
         public void SendBackToBase()
         {
             _currentPosition = _rectTransform.anchoredPosition;
-            _isRunning = true;
 
             var dice = GetComponent<Dice>();
             var diceDragEvent = GetComponent<DiceDragEvent>();
             dice.SetEnabled(diceDragEvent, false);
+
+            _isRunning = true;
         }
 
         /// <summary>

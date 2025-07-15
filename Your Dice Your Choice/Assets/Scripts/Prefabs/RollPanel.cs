@@ -110,6 +110,13 @@ public class RollPanel : MonoBehaviour
             var dice = diceObject.GetComponent<Dice>();
             var diceDragEvent = diceObject.GetComponent<DiceDragEvent>();
             dice.SetEnabled(diceDragEvent, value);
+            
+            var diceDisplay = diceObject.GetComponent<DiceDisplay>();
+            
+            if (value == true)
+                diceDisplay.SetDefault();
+            else
+                diceDisplay.SetAlphaDown();
         }
     }
 

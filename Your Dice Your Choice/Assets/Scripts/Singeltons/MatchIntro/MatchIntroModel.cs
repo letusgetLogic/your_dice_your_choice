@@ -6,12 +6,12 @@ namespace Assets.Scripts.MatchIntro
     {
         public static MatchIntroModel Instance { get; private set; }
 
-        [SerializeField] private float _act1Time = 3.0f;
-        [SerializeField] private float _act2Time = 3.0f;
+        [SerializeField] private float _act1Time = 2.0f;
+        [SerializeField] private float _act2Time = 2.0f;
 
-        [SerializeField] private float _animSpeedAct1 = 1f;
-        [SerializeField] private float _animSpeedAct2 = 1f;
-        [SerializeField] private float _animSpeedAct3 = 1.55f;
+        [SerializeField] private float _animSpeedAct1 = 0.5f;
+        [SerializeField] private float _animSpeedAct2 = 0.5f;
+        [SerializeField] private float _animSpeedAct3 = 0.4f;
         [SerializeField] private float _animFadeInTime = 3.0f;
         [SerializeField] private AnimationCurve _animCurve1;
         [SerializeField] private AnimationCurve _animCurve2;

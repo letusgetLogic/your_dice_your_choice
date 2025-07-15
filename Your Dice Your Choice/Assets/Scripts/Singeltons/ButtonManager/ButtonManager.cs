@@ -34,7 +34,7 @@ public class ButtonManager : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        EndTurnButton.gameObject.SetActive(false);
+        SetActive(EndTurnButton, false);
         DeactivateRollButtons();
     }
 
