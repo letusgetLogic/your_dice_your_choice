@@ -8,40 +8,20 @@ using Assets.Scripts;
 
 public class RollPanel : MonoBehaviour
 {
-    public GameObject[] DiceSlots;
-    public GameObject[] AllDice;
-    public GameObject[] VisibleDice { get; private set; }
-
-    public Button RollButton;
-
+    [SerializeField] private Button _rollButton;
     [SerializeField] private int _diceAmount = 4;
+    [SerializeField] private GameObject[] _allDice;
 
+    public GameObject[] VisibleDice { get; private set; }
+    public Button RollButton => _rollButton;
 
     /// <summary>
     /// Awake method.
     /// </summary>
     private void Awake()
     {
-        SetInteractionFor(AllDice, false);
+        SetInteractionFor(_allDice, false);
         VisibleDice = new GameObject[_diceAmount];
-        //SetDicePosition();
-    }
-
-    /// <summary>
-    /// Sets the position of the dice.
-    /// </summary>
-    /// <exception cref="NotImplementedException"></exception>
-    private void SetDicePosition()
-    {
-        for (int i = 0; i < AllDice.Length; i++)
-        {
-            var dice = AllDice[i];
-            var slot = DiceSlots[i];
-            dice.transform.SetParent(slot.transform);
-            dice.transform.localPosition = Vector3.zero;
-            dice.transform.SetParent(transform.root);
-            dice.transform.localScale = Vector3.one;
-        }
     }
 
     /// <summary>
@@ -52,12 +32,17 @@ public class RollPanel : MonoBehaviour
     {
         for (int i = 0; i < _diceAmount; i++)
         {
-            var dice = AllDice[i];
-            dice.SetActive(true);
+            var diceObject = _allDice[i];
+            diceObject.SetActive(true);
 
-            VisibleDice[i] = dice;
+            VisibleDice[i] = diceObject;
 
-            dice.GetComponent<Dice>().InitializeIndexOf(gameObject, i);
+            var dice = diceObject.GetComponent<Dice>();
+            dice.InitializeSide(dice.DefaultNumber);
+            dice.InitializeIndexOf(gameObject, i);
+
+            var diceDisplay = diceObject.GetComponent<DiceDisplay>();
+            diceDisplay.SetDefault();
         }
     }
 
@@ -67,9 +52,9 @@ public class RollPanel : MonoBehaviour
     /// <param name="amount"></param>
     public void HideAllDice()
     {
-        for (int i = 0; i < AllDice.Length; i++)
+        for (int i = 0; i < _allDice.Length; i++)
         {
-            var dice = AllDice[i];
+            var dice = _allDice[i];
             dice.SetActive(false);
         }
     }
@@ -113,9 +98,7 @@ public class RollPanel : MonoBehaviour
             
             var diceDisplay = diceObject.GetComponent<DiceDisplay>();
             
-            if (value == true)
-                diceDisplay.SetDefault();
-            else
+            if (value == false)
                 diceDisplay.SetAlphaDown();
         }
     }

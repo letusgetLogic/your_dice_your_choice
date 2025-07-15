@@ -210,13 +210,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0e66b1f49fbb1e469064f574b86af8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AllDice:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  RollButton: {fileID: 1849760534710273920}
+  _rollButton: {fileID: 1849760534710273920}
   _diceAmount: 4
+  _allDice: []
 --- !u!114 &2866427698826301703
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -333,7 +333,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 946038897408945833, guid: 1252024c3d6bad74392cffa4883f43f5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3376.8108
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 946038897408945833, guid: 1252024c3d6bad74392cffa4883f43f5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -504,7 +504,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 946038897408945833, guid: 1252024c3d6bad74392cffa4883f43f5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3376.8108
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 946038897408945833, guid: 1252024c3d6bad74392cffa4883f43f5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1620,8 +1620,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f397c708692d4ab41a44acc136b7629d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scaleSize: 1.2
-  _delayReset: 0.2
+  _scaleSize: 1.1
+  _delayReset: 0.05
 --- !u!1 &234495830 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1181180781010479432, guid: 1252024c3d6bad74392cffa4883f43f5, type: 3}
@@ -29319,7 +29319,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 946038897408945833, guid: 1252024c3d6bad74392cffa4883f43f5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3376.8108
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 946038897408945833, guid: 1252024c3d6bad74392cffa4883f43f5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -31226,18 +31226,18 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
@@ -31552,6 +31552,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5607547008144915611, guid: 7d6988503566f624bb3b25edaeaa4fcf, type: 3}
+      propertyPath: _allDice.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5607547008144915611, guid: 7d6988503566f624bb3b25edaeaa4fcf, type: 3}
       propertyPath: DiceSlots.Array.size
       value: 10
       objectReference: {fileID: 0}
@@ -31569,6 +31573,22 @@ PrefabInstance:
       objectReference: {fileID: 45062450}
     - target: {fileID: 5607547008144915611, guid: 7d6988503566f624bb3b25edaeaa4fcf, type: 3}
       propertyPath: 'AllDice.Array.data[3]'
+      value: 
+      objectReference: {fileID: 610796129}
+    - target: {fileID: 5607547008144915611, guid: 7d6988503566f624bb3b25edaeaa4fcf, type: 3}
+      propertyPath: '_allDice.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1908906405}
+    - target: {fileID: 5607547008144915611, guid: 7d6988503566f624bb3b25edaeaa4fcf, type: 3}
+      propertyPath: '_allDice.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1094576503}
+    - target: {fileID: 5607547008144915611, guid: 7d6988503566f624bb3b25edaeaa4fcf, type: 3}
+      propertyPath: '_allDice.Array.data[2]'
+      value: 
+      objectReference: {fileID: 45062450}
+    - target: {fileID: 5607547008144915611, guid: 7d6988503566f624bb3b25edaeaa4fcf, type: 3}
+      propertyPath: '_allDice.Array.data[3]'
       value: 
       objectReference: {fileID: 610796129}
     - target: {fileID: 5607547008144915611, guid: 7d6988503566f624bb3b25edaeaa4fcf, type: 3}
@@ -31763,7 +31783,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 946038897408945833, guid: 1252024c3d6bad74392cffa4883f43f5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3376.8108
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 946038897408945833, guid: 1252024c3d6bad74392cffa4883f43f5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -31888,7 +31908,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 946038897408945833, guid: 1252024c3d6bad74392cffa4883f43f5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3376.8108
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 946038897408945833, guid: 1252024c3d6bad74392cffa4883f43f5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -32781,7 +32801,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 946038897408945833, guid: 1252024c3d6bad74392cffa4883f43f5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3376.8108
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 946038897408945833, guid: 1252024c3d6bad74392cffa4883f43f5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -32826,6 +32846,10 @@ PrefabInstance:
     - target: {fileID: 1181180781010479432, guid: 1252024c3d6bad74392cffa4883f43f5, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1181180781010479432, guid: 1252024c3d6bad74392cffa4883f43f5, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 3950348896155111165, guid: 1252024c3d6bad74392cffa4883f43f5, type: 3}
       propertyPath: _canvas
@@ -58454,7 +58478,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 946038897408945833, guid: 1252024c3d6bad74392cffa4883f43f5, type: 3}
       propertyPath: m_Pivot.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 946038897408945833, guid: 1252024c3d6bad74392cffa4883f43f5, type: 3}
       propertyPath: m_Pivot.y
@@ -58526,7 +58550,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 946038897408945833, guid: 1252024c3d6bad74392cffa4883f43f5, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -419.82336
+      value: -432.32336
       objectReference: {fileID: 0}
     - target: {fileID: 946038897408945833, guid: 1252024c3d6bad74392cffa4883f43f5, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -61485,7 +61509,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 946038897408945833, guid: 1252024c3d6bad74392cffa4883f43f5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3376.8108
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 946038897408945833, guid: 1252024c3d6bad74392cffa4883f43f5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -62200,6 +62224,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5607547008144915611, guid: 7d6988503566f624bb3b25edaeaa4fcf, type: 3}
+      propertyPath: _allDice.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5607547008144915611, guid: 7d6988503566f624bb3b25edaeaa4fcf, type: 3}
       propertyPath: DiceSlots.Array.size
       value: 10
       objectReference: {fileID: 0}
@@ -62217,6 +62245,22 @@ PrefabInstance:
       objectReference: {fileID: 56240886}
     - target: {fileID: 5607547008144915611, guid: 7d6988503566f624bb3b25edaeaa4fcf, type: 3}
       propertyPath: 'AllDice.Array.data[3]'
+      value: 
+      objectReference: {fileID: 1301086190}
+    - target: {fileID: 5607547008144915611, guid: 7d6988503566f624bb3b25edaeaa4fcf, type: 3}
+      propertyPath: '_allDice.Array.data[0]'
+      value: 
+      objectReference: {fileID: 234495830}
+    - target: {fileID: 5607547008144915611, guid: 7d6988503566f624bb3b25edaeaa4fcf, type: 3}
+      propertyPath: '_allDice.Array.data[1]'
+      value: 
+      objectReference: {fileID: 122736332}
+    - target: {fileID: 5607547008144915611, guid: 7d6988503566f624bb3b25edaeaa4fcf, type: 3}
+      propertyPath: '_allDice.Array.data[2]'
+      value: 
+      objectReference: {fileID: 56240886}
+    - target: {fileID: 5607547008144915611, guid: 7d6988503566f624bb3b25edaeaa4fcf, type: 3}
+      propertyPath: '_allDice.Array.data[3]'
       value: 
       objectReference: {fileID: 1301086190}
     - target: {fileID: 5607547008144915611, guid: 7d6988503566f624bb3b25edaeaa4fcf, type: 3}
