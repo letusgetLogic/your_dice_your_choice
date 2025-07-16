@@ -102,7 +102,7 @@ namespace Assets.Scripts.MatchIntro
 
             if (value >= 1)
             {
-                SetFirstTurn.Instance.SetDiceAndPanel();
+                SetFirstTurn.Instance.SetTurnDiceAndPanel();
                 MatchIntroModel.Instance.SetDefault();
                 LevelManager.Instance.NextPhase();
             }

@@ -304,7 +304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8369337378fbf0c44821350e3325af8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _delayOnHoverTime: 0.5
+  _delayShowingInteractible: 0.2
 --- !u!114 &4460164696243950242
 MonoBehaviour:
   m_ObjectHideFlags: 0

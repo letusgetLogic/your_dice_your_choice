@@ -45,7 +45,7 @@ namespace Assets.Scripts
         /// <summary>
         /// Sets the turn dice and the player panel at the start state.
         /// </summary>
-        public void SetDiceAndPanel()
+        public void SetTurnDiceAndPanel()
         {
             _turnDiceLeft.GetComponent<RectTransform>().localScale = new Vector3(0, 0, 0);
             _turnDiceRight.GetComponent<RectTransform>().localScale = new Vector3(0, 0, 0);

@@ -14,9 +14,9 @@ public class DiceDisplay : MonoBehaviour
     /// <summary>
     /// Start method.
     /// </summary>
-    private void Start()
+    private void Awake()
     {
-        _originScale = transform.localScale;
+        _originScale = GetComponent<RectTransform>().localScale;
     }
 
     
@@ -27,7 +27,8 @@ public class DiceDisplay : MonoBehaviour
     {
         var canvasGroup = GetComponent<CanvasGroup>();
         canvasGroup.alpha = 1f;
-        transform.localScale = _originScale;
+        var rectTransform = gameObject.GetComponent<RectTransform>();
+        rectTransform.localScale = _originScale;
     }
 
     /// <summary>

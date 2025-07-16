@@ -146,18 +146,19 @@ public class PanelManager : MonoBehaviour
     /// Adds the action panel, it's description text will be set default at the end of a turn.
     /// </summary>
     /// <param name="actionPanel"></param>
-    public void AddSetDefaultDescription(ActionPanel actionPanel)
+    public int AddSetDefaultDescription(ActionPanel actionPanel)
     {
         _actionPanelsSetDefaultDescription.Add(actionPanel);
+        return _actionPanelsSetDefaultDescription.IndexOf(actionPanel);
     }
 
     /// <summary>
     /// Removes the action panel, it's description text will be set default at the end of a turn.
     /// </summary>
     /// <param name="actionPanel"></param>
-    public void RemoveSetDefaultDescription(ActionPanel actionPanel)
+    public void RemoveSetDefaultDescription(int index)
     {
-        _actionPanelsSetDefaultDescription.Remove(actionPanel);
+        _actionPanelsSetDefaultDescription.RemoveAt(index);
     }
 
     /// <summary>
@@ -165,6 +166,11 @@ public class PanelManager : MonoBehaviour
     /// </summary>
     public void SetDefaultDescription()
     {
+        if (_actionPanelsSetDefaultDescription == null || _actionPanelsSetDefaultDescription.Count == 0)
+        {
+            return;
+        }
+
         foreach (var panel in _actionPanelsSetDefaultDescription)
         {
             var action = panel.Action;

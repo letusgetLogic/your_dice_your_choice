@@ -51,11 +51,11 @@ public class BattleManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Sets the data.
+    /// Sets the current executable action.
     /// </summary>
     /// <param name="action"></param>
     /// <param name="characterObject"></param>
-    public void SetData(ActionBase action)
+    public void SetAction(ActionBase action)
     {
          CurrentAction = action;
         Debug.Log(action.GetType().Name + " is set as current action.");
@@ -86,9 +86,10 @@ public class BattleManager : MonoBehaviour
         if (CurrentAction == null) 
             return;
         
-        DeactivateInteractibleOfCurrentAction();
         CurrentAction.SetDescriptionOf(actionPanel, 0);
         CurrentAction.SetDefault();
+        CurrentAction.DeactivateInteractible();
+        CurrentAction = null;
     }
 
     /// <summary>
@@ -97,20 +98,11 @@ public class BattleManager : MonoBehaviour
     /// <param name="clickedObject"></param>
     public void HandleInput(GameObject clickedObject)
     {
-        DeactivateInteractibleOfCurrentAction();
+        CurrentAction.DeactivateInteractible();
 
         var action = CurrentAction;
         action.HandleInput(clickedObject);
 
-        CurrentAction = null;
-    }
-
-    /// <summary>
-    /// Deactivates the interactable objects of the current action.
-    /// </summary>
-    public void DeactivateInteractibleOfCurrentAction()
-    {
-        CurrentAction.DeactivateInteractible();
         CurrentAction = null;
     }
 

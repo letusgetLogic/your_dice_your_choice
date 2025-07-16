@@ -19,20 +19,24 @@ namespace Assets.Scripts.ActionDatas
             "Dice 6: Attack with 600% AP",
         };
 
+        private int _indexInList { get; set; }
 
-        public SwordBehaviour(ActionData data, GameObject characterObject) : base(data, characterObject) 
+        public SwordBehaviour(ActionData data, GameObject characterObject) : base(data, characterObject)
         {
             AllowedDiceNumber = AllowedDiceNumber.D1_6;
         }
 
-        public override void SetDescriptionOf(ActionPanel actionPanel, int diceNumber)
+        public override void SetDescriptionOf(ActionPanel actionPanel, int index)
         {
-            actionPanel.ActionPopup.SetText(Description[diceNumber]);
+            actionPanel.ActionPopup.SetText(Description[index]);
 
-            if (diceNumber == 0) 
-                PanelManager.Instance.RemoveSetDefaultDescription(actionPanel);
+            // index = 0 means the default description, so it should not be added to the list.
+            if (index == 0)
+                PanelManager.Instance.RemoveSetDefaultDescription(_indexInList);
             else
-                PanelManager.Instance.AddSetDefaultDescription(actionPanel);
+            {
+                _indexInList = PanelManager.Instance.AddSetDefaultDescription(actionPanel);
+            }
         }
 
         public override void SetInteractible(int diceNumber)
@@ -42,7 +46,7 @@ namespace Assets.Scripts.ActionDatas
                GetVector2IntFromDirection.Get(GetDirection(diceNumber)),
                Range(diceNumber));
         }
-        
+
         public override void ActivateSkill(int diceNumber)
         {
             float buffedAP = character.CurrentAP + Buff(character.CurrentAP, diceNumber);

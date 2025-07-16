@@ -34,7 +34,7 @@ public class RollPanel : MonoBehaviour
         {
             var diceObject = _allDice[i];
             diceObject.SetActive(true);
-
+            
             VisibleDice[i] = diceObject;
 
             var dice = diceObject.GetComponent<Dice>();

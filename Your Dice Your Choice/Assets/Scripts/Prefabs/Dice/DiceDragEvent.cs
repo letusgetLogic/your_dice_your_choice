@@ -5,7 +5,8 @@ using UnityEngine.EventSystems;
 
 public class DiceDragEvent : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
-    
+    [SerializeField] private float _delaySendBack = 0.5f;
+
     /// <summary>
     /// Triggers event at the beginning of drag.
     /// </summary>
@@ -50,10 +51,11 @@ public class DiceDragEvent : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
     /// <returns></returns>
     private IEnumerator MoveDice()
     {
-        yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(_delaySendBack);
 
         var diceMovement = GetComponent<DiceMovement>();
         diceMovement.SendBackToBase();
     }
+
 }
 
