@@ -86,8 +86,8 @@ namespace Assets.Scripts
         /// </summary>
         public void CheckDiceNumber()
         {
-            int numberLeft = _turnDiceLeft.GetComponent<Dice>().CurrentNumber;
-            int numberRight = _turnDiceRight.GetComponent<Dice>().CurrentNumber;
+            int numberLeft = _turnDiceLeft.GetComponent<DiceMovement>().CurrentNumber;
+            int numberRight = _turnDiceRight.GetComponent<DiceMovement>().CurrentNumber;
 
             if (numberLeft == numberRight)
                 StartCoroutine(Reroll());

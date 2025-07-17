@@ -47,7 +47,6 @@ public class ButtonManager : MonoBehaviour
 
         FieldManager.Instance.DeactivateFields();
         CharacterManager.Instance.DeactivateCharacters();
-        PanelManager.Instance.SetDefaultDescription();
         TurnManager.Instance.SwitchTurn();
     }
 

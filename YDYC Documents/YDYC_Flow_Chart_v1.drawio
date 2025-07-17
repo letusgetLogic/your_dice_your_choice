@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.0.4 Chrome/138.0.7204.97 Electron/37.2.1 Safari/537.36" version="28.0.4">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-    <mxGraphModel dx="1555" dy="771" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2411" dy="833" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
@@ -846,7 +846,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="gedLFGT0f-KSCk9Ec9lJ-64" value="SetDiceAndPanel()" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="gedLFGT0f-KSCk9Ec9lJ-63" vertex="1" connectable="0">
+        <mxCell id="gedLFGT0f-KSCk9Ec9lJ-64" value="SetTurnDiceAndPanel()" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="gedLFGT0f-KSCk9Ec9lJ-63" vertex="1" connectable="0">
           <mxGeometry x="0.0046" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
@@ -1335,7 +1335,7 @@
         <mxCell id="gedLFGT0f-KSCk9Ec9lJ-325" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="gedLFGT0f-KSCk9Ec9lJ-200" vertex="1">
           <mxGeometry x="45" y="580" width="10" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="JdG3uiDjpgcBNC4YMkyZ-0" value="&lt;span style=&quot;text-wrap-mode: wrap;&quot;&gt;:Dice&lt;/span&gt;" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="gedLFGT0f-KSCk9Ec9lJ-200">
+        <mxCell id="JdG3uiDjpgcBNC4YMkyZ-0" value="&lt;span style=&quot;text-wrap-mode: wrap;&quot;&gt;:Dice&lt;/span&gt;" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="gedLFGT0f-KSCk9Ec9lJ-200" vertex="1">
           <mxGeometry x="5.940000000000055" y="960" width="88.13" height="30" as="geometry" />
         </mxCell>
         <mxCell id="gedLFGT0f-KSCk9Ec9lJ-215" value=":RollPanel" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">

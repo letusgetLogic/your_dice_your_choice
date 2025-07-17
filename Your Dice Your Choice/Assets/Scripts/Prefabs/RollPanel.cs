@@ -11,6 +11,7 @@ public class RollPanel : MonoBehaviour
     [SerializeField] private Button _rollButton;
     [SerializeField] private int _diceAmount = 4;
     [SerializeField] private GameObject[] _allDice;
+    [SerializeField] private GameObject[] _diceSlots;
 
     public GameObject[] VisibleDice { get; private set; }
     public Button RollButton => _rollButton;
@@ -37,12 +38,15 @@ public class RollPanel : MonoBehaviour
             
             VisibleDice[i] = diceObject;
 
-            var dice = diceObject.GetComponent<Dice>();
+            var dice = diceObject.GetComponent<DiceMovement>();
             dice.InitializeSide(dice.DefaultNumber);
             dice.InitializeIndexOf(gameObject, i);
 
-            var diceDisplay = diceObject.GetComponent<DiceDisplay>();
+            var diceDisplay = diceObject.GetComponent<DiceView>();
             diceDisplay.SetDefault();
+
+            diceObject.transform.SetParent(_diceSlots[i].transform);
+            diceObject.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
         }
     }
 
@@ -92,11 +96,11 @@ public class RollPanel : MonoBehaviour
     {
         foreach (GameObject diceObject in diceObjects)
         {
-            var dice = diceObject.GetComponent<Dice>();
+            var dice = diceObject.GetComponent<DiceMovement>();
             var diceDragEvent = diceObject.GetComponent<DiceDragEvent>();
             dice.SetEnabled(diceDragEvent, value);
             
-            var diceDisplay = diceObject.GetComponent<DiceDisplay>();
+            var diceDisplay = diceObject.GetComponent<DiceView>();
             
             if (value == false)
                 diceDisplay.SetAlphaDown();
@@ -112,7 +116,7 @@ public class RollPanel : MonoBehaviour
     {
         foreach (GameObject diceObject in diceObjects)
         {
-            diceObject.GetComponent<DiceMovement>().SendBackToBase();
+            diceObject.GetComponent<DiceModelController>().SendBackToBase();
         }
     }
 
@@ -125,7 +129,7 @@ public class RollPanel : MonoBehaviour
     {
         foreach (GameObject diceObject in diceObjects)
         {
-            var dice = diceObject.GetComponent<Dice>();
+            var dice = diceObject.GetComponent<DiceMovement>();
             dice.InitializeSide(dice.DefaultNumber);
         }
     }

@@ -29,14 +29,6 @@ namespace Assets.Scripts.ActionDatas
         public override void SetDescriptionOf(ActionPanel actionPanel, int index)
         {
             actionPanel.ActionPopup.SetText(Description[index]);
-
-            // index = 0 means the default description, so it should not be added to the list.
-            if (index == 0)
-                PanelManager.Instance.RemoveSetDefaultDescription(_indexInList);
-            else
-            {
-                _indexInList = PanelManager.Instance.AddSetDefaultDescription(actionPanel);
-            }
         }
 
         public override void SetInteractible(int diceNumber)

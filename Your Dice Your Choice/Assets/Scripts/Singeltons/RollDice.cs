@@ -47,7 +47,7 @@ namespace Assets.Scripts
             {
                 foreach (var dice in diceList)
                 {
-                    var diceScript = dice.GetComponent<Dice>();
+                    var diceScript = dice.GetComponent<DiceMovement>();
                     int sideIndex = UnityEngine.Random.Range(1, diceScript.DiceSide.Length);
                     diceScript.InitializeSide(sideIndex);
                 }

@@ -16,9 +16,7 @@ public class BattleManager : MonoBehaviour
     public static BattleManager Instance { get; private set; }
 
     public ActionBase CurrentAction { get; private set; }
-
     public IEnumerator Coroutine { get; private set; }
-    public bool IsNextCoroutineActive { get; private set; }
 
     /// <summary>
     /// Awake method.

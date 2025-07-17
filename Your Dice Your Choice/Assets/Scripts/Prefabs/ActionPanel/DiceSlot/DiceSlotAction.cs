@@ -47,7 +47,7 @@ namespace Assets.Scripts.ActionPanelPrefab
         {
             yield return new WaitForSeconds(_delayShowingInteractible);
 
-            var dice = diceBeingDragged.GetComponent<Dice>();
+            var dice = diceBeingDragged.GetComponent<DiceMovement>();
             if (_actionPanel.Action.IsValid(dice.CurrentNumber) == false)
                 yield break;
 
@@ -55,6 +55,10 @@ namespace Assets.Scripts.ActionPanelPrefab
             BattleManager.Instance.ShowInteractible(dice.CurrentNumber, _actionPanel);
 
             //_canInteractibleBeingDeactivated = true;
+
+            if (FieldManager.Instance.InteractibleFields == null && 
+                CharacterManager.Instance.InteractibleCharacters == null) 
+                yield break;
 
             // It doesn't have any interactactible objects.
             if (FieldManager.Instance.InteractibleFields.Count == 0 &&
@@ -122,7 +126,7 @@ namespace Assets.Scripts.ActionPanelPrefab
 
             if (_canDiceBeingDropped)
             {
-                var dice = diceObject.GetComponent<Dice>();
+                var dice = diceObject.GetComponent<DiceMovement>();
                 dice.SetOnActionSlot(GetComponent<RectTransform>().position);
                 
                 _canDiceBeingDropped = false;

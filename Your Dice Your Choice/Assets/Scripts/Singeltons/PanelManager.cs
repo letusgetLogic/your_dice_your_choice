@@ -31,8 +31,6 @@ public class PanelManager : MonoBehaviour
     //public GameObject RerollPanelLeft; 
     //public GameObject RerollPanelRight;
 
-    private List<ActionPanel> _actionPanelsSetDefaultDescription = new();
-
     /// <summary>
     /// Awake method.
     /// </summary>
@@ -140,45 +138,6 @@ public class PanelManager : MonoBehaviour
         }
 
         throw new Exception("player case invalid in PanelManager.CharacterPanels(PlayerType player)");
-    }
-
-    /// <summary>
-    /// Adds the action panel, it's description text will be set default at the end of a turn.
-    /// </summary>
-    /// <param name="actionPanel"></param>
-    public int AddSetDefaultDescription(ActionPanel actionPanel)
-    {
-        _actionPanelsSetDefaultDescription.Add(actionPanel);
-        return _actionPanelsSetDefaultDescription.IndexOf(actionPanel);
-    }
-
-    /// <summary>
-    /// Removes the action panel, it's description text will be set default at the end of a turn.
-    /// </summary>
-    /// <param name="actionPanel"></param>
-    public void RemoveSetDefaultDescription(int index)
-    {
-        _actionPanelsSetDefaultDescription.RemoveAt(index);
-    }
-
-    /// <summary>
-    /// Sets the default description to the action of each panel on the list and clear the list.
-    /// </summary>
-    public void SetDefaultDescription()
-    {
-        if (_actionPanelsSetDefaultDescription == null || _actionPanelsSetDefaultDescription.Count == 0)
-        {
-            return;
-        }
-
-        foreach (var panel in _actionPanelsSetDefaultDescription)
-        {
-            var action = panel.Action;
-            action.SetDescriptionOf(panel, 0);
-        }
-
-        _actionPanelsSetDefaultDescription.Clear();
-        _actionPanelsSetDefaultDescription.TrimExcess();
     }
 
     /// <summary>
