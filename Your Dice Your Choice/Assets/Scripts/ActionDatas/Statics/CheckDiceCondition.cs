@@ -13,7 +13,7 @@ namespace Assets.Scripts.ActionDatas
         public static bool IsNumberValid(AllowedDiceNumber allowedNumber, int number)
         {
             // This for-loop checks the first enum indexes, which starts by 1 from D1.
-            for (int i = 1; i <= DiceMovement.MaxNumber; i++)
+            for (int i = 1; i <= Dice.MaxNumber; i++)
             {
                 if (number == (int)allowedNumber)
                     return true;

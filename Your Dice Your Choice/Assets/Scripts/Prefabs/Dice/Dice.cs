@@ -5,23 +5,25 @@ namespace Assets.Scripts.DicePrefab
 {
     public class Dice : MonoBehaviour
     {
-        public static readonly int MaxNumber = 6;
-
-        public Sprite[] DiceSide;
-        public int CurrentNumber { get; private set; }
-        public int IndexOnPanel { get; private set; }
-        public GameObject RollPanel { get; private set; }
-        public int DefaultNumber => _defaultNumber;
+        public static int MaxNumber => 6;
 
         [SerializeField] private int _defaultNumber = 6;
+        public int DefaultNumber => _defaultNumber;
+        public int CurrentNumber { get; private set; }
+        public GameObject RollPanel { get; private set; }
+        public int IndexOnPanel { get; private set; }
+
+        private DiceDisplay _diceDisplay;
+        private DiceMovement _diceMovement;
 
 
         /// <summary>
-        /// Start method.
+        /// Awake method.
         /// </summary>
-        private void Start()
+        private void Awake()
         {
-            InitializeSide(_defaultNumber);
+            _diceDisplay = GetComponent<DiceDisplay>();
+            _diceMovement = GetComponent<DiceMovement>();
         }
 
         /// <summary>   
@@ -30,8 +32,7 @@ namespace Assets.Scripts.DicePrefab
         /// <param name="sideIndex"></param>
         public void InitializeSide(int sideIndex)
         {
-            var currentImage = gameObject.GetComponent<Image>();
-            currentImage.sprite = DiceSide[sideIndex];
+            _diceDisplay.SetImage(sideIndex);
             CurrentNumber = sideIndex;
         }
 
@@ -65,12 +66,10 @@ namespace Assets.Scripts.DicePrefab
         {
             SetEnabled(GetComponent<DiceDragEvent>(), false);
 
-            var diceMovement = GetComponent<DiceMovement>();
-            diceMovement.PositionsTo(pos);
+            _diceMovement.PositionsTo(pos);
 
-            var diceDisplay = GetComponent<DiceDisplay>();
-            diceDisplay.SetDefault();
-            diceDisplay.SetBlocksRaycasts(true);
+            _diceDisplay.SetDefault();
+            _diceDisplay.SetBlocksRaycasts(true);
         }
 
     }

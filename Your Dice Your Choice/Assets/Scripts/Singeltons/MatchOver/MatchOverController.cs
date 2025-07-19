@@ -18,9 +18,6 @@ namespace Assets.Scripts.MatchOver
             }
 
             Instance = this;
-
-            MatchOverView.Instance.SetDefault();
-            MatchOverModel.Instance.SetPlayState(MatchOverModel.PlayState.None);
         }
 
         /// <summary>
@@ -48,6 +45,10 @@ namespace Assets.Scripts.MatchOver
         /// </summary>
         public void Congratulate(Player player)
         {
+            MatchOverModel.Instance.SetPlayState(MatchOverModel.PlayState.None);
+
+            MatchOverView.Instance.SetDefault();
+
             MatchOverView.Instance.SetText(player.Name);
 
             MatchOverView.Instance.SetTextArrayActive(true);

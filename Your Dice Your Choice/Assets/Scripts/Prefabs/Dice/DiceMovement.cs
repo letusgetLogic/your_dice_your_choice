@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections;
-using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.DicePrefab
 {
     public class DiceMovement : MonoBehaviour
     {
-        [SerializeField] private float _animSpeed = .0001f;
+        [SerializeField] private float _animSpeed = .1f;
         [SerializeField] private AnimationCurve _animCurve;
 
         private RectTransform _rectTransform => GetComponent<RectTransform>();
@@ -19,9 +17,9 @@ namespace Assets.Scripts.DicePrefab
         private float _currentValue = 0f;
 
         /// <summary>
-        /// Start method.
+        /// Awake method.
         /// </summary>
-        private void Start()
+        private void Awake()
         {
             _basePosition = _rectTransform.anchoredPosition;
         }
@@ -58,10 +56,10 @@ namespace Assets.Scripts.DicePrefab
                     return;
                 }
 
-                _currentValue = Mathf.MoveTowards(_currentValue, 1, _animSpeed / Time.deltaTime);
+                _currentValue = Mathf.MoveTowards(_currentValue, 1, _animSpeed * 1000 / Time.deltaTime);
 
                 if (_currentValue > 0.9f)
-                { 
+                {
                     _rectTransform.anchoredPosition = _basePosition;
                     return;
                 }
@@ -86,7 +84,6 @@ namespace Assets.Scripts.DicePrefab
         }
 
         /// <summary>
-        /// Positions to the dice slot in the action panel.
         /// </summary>
         public void PositionsTo(Vector2 pos)
         {
@@ -94,3 +91,4 @@ namespace Assets.Scripts.DicePrefab
         }
     }
 }
+

@@ -47,7 +47,7 @@ namespace Assets.Scripts.ActionPanelPrefab
         {
             yield return new WaitForSeconds(_delayShowingInteractible);
 
-            var dice = diceBeingDragged.GetComponent<DiceMovement>();
+            var dice = diceBeingDragged.GetComponent<Dice>();
             if (_actionPanel.Action.IsValid(dice.CurrentNumber) == false)
                 yield break;
 
@@ -126,7 +126,7 @@ namespace Assets.Scripts.ActionPanelPrefab
 
             if (_canDiceBeingDropped)
             {
-                var dice = diceObject.GetComponent<DiceMovement>();
+                var dice = diceObject.GetComponent<Dice>();
                 dice.SetOnActionSlot(GetComponent<RectTransform>().position);
                 
                 _canDiceBeingDropped = false;

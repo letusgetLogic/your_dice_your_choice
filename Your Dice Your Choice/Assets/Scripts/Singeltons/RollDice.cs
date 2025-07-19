@@ -45,11 +45,12 @@ namespace Assets.Scripts
         {
             for (int i = 0; i < rollFrequency; i++)
             {
-                foreach (var dice in diceList)
+                foreach (var diceObject in diceList)
                 {
-                    var diceScript = dice.GetComponent<DiceMovement>();
-                    int sideIndex = UnityEngine.Random.Range(1, diceScript.DiceSide.Length);
-                    diceScript.InitializeSide(sideIndex);
+                    var dice = diceObject.GetComponent<Dice>();
+                    var diceDisplay = diceObject.GetComponent<DiceDisplay>();
+                    int sideIndex = UnityEngine.Random.Range(1, diceDisplay.DiceSide.Length);
+                    dice.InitializeSide(sideIndex);
                 }
 
                 yield return new WaitForSeconds(animTimer);

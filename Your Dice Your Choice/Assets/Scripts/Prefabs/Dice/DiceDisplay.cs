@@ -2,13 +2,16 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class DiceDisplay : MonoBehaviour
 {
+    [SerializeField] private Sprite[] _diceSide;
     [SerializeField] private Canvas _canvas;
     [SerializeField] private float _alphaValue = 0.6f;
     [SerializeField] private float _scaleSize = 1.1f;
 
+    public Sprite[] DiceSide => _diceSide;
     private Vector3 _originScale;
 
     /// <summary>
@@ -19,7 +22,15 @@ public class DiceDisplay : MonoBehaviour
         _originScale = GetComponent<RectTransform>().localScale;
     }
 
-    
+    /// <summary>
+    /// Sets the dice side image based on the index.
+    /// </summary>
+    /// <param name="sprite"></param>
+    public void SetImage(int index)
+    {
+        GetComponent<Image>().sprite = _diceSide[index];
+    }
+
     /// <summary>
     /// Sets the default values.
     /// </summary>
