@@ -5,19 +5,28 @@ using Assets.Scripts.ActionDatas;
 using Assets.Scripts;
 using UnityEngine.UI;
 using Assets.Scripts.ActionPanelPrefab;
+using System;
+using System.Collections;
 
 public class CharacterPanel : MonoBehaviour
 {
-    //public GameObject Avatar;
-    public TextMeshProUGUI CharacterName;
-    public GameObject[] ActionPanelPrefabs;
+    [SerializeField] private TextMeshProUGUI _characterName;
+    [SerializeField] private GameObject[] _actionPanelPrefabs;
+    [SerializeField] private Image _panelImage;
+    [SerializeField] private GameObject _inactive;
+
+    [SerializeField] private Color _clickingCharacter;
+    public Color ClickingCharacter
+    {
+        get { return _clickingCharacter; }
+        private set { _clickingCharacter = value; }
+    }
+    [SerializeField] private float _resetColorTime = 0.5f;
 
     public GameObject CharacterObject { get; private set; }
     public Character Character { get; private set; }
     public PlayerType PlayerType { get; private set; }
     public GameObject[] ActiveActionPanels { get; private set; }
-
-    [SerializeField] private float _alphaValueInactive = 0.9f;
 
     /// <summary>
     /// References Object and Script Character.
@@ -28,7 +37,7 @@ public class CharacterPanel : MonoBehaviour
         CharacterObject = characterObject;
         PlayerType = player;
         Character = CharacterObject.GetComponent<Character>();
-        CharacterName.text = Character.Name;
+        _characterName.text = Character.Name;
     }
 
     /// <summary>
@@ -38,33 +47,19 @@ public class CharacterPanel : MonoBehaviour
     {
         ActiveActionPanels = new GameObject[Character.Data.ActionData.Length];
 
-        for (int i = 0; i < ActionPanelPrefabs.Length; i++)
+        for (int i = 0; i < _actionPanelPrefabs.Length; i++)
         {
             // The amount of action of a character can vary.
-            if (i >= Character.Data.ActionData.Length) 
+            if (i >= Character.Data.ActionData.Length)
             {
-                ActionPanelPrefabs[i].SetActive(false);
+                _actionPanelPrefabs[i].SetActive(false);
                 continue;
             }
 
-            ActiveActionPanels[i] = ActionPanelPrefabs[i];
+            ActiveActionPanels[i] = _actionPanelPrefabs[i];
 
             var actionData = Character.Data.ActionData[i];
-            ActionPanelPrefabs[i].GetComponent<ActionPanel>().SetData(actionData, CharacterObject, this, i);
-        }
-    }
-
-    /// <summary>
-    /// Sets the description panel for each action. 
-    /// </summary>
-    public void SetDescriptonPanelForAction() // Can't be in SetAction(), because the character panel's position has not yet been determined.
-    {
-        for (int i = 0; i < Character.Data.ActionData.Length; i++)
-        {
-            var actionData = Character.Data.ActionData[i];
-
-            ActionPanelPrefabs[i].GetComponent<ActionPanel>().ActionPopup.SetPosition();
-            ActionPanelPrefabs[i].GetComponent<ActionPanel>().ActionPopup.SetText(actionData.Description);
+            _actionPanelPrefabs[i].GetComponent<ActionPanel>().SetData(actionData, CharacterObject, this, i);
         }
     }
 
@@ -82,9 +77,40 @@ public class CharacterPanel : MonoBehaviour
             actionPanel.SetEnabled(diceSlotAction, false);
             actionPanel.SetEnabled(actionPanelMouseEvent, false);
 
-            var panelColor = GetComponent<Image>().color;
-            panelColor = new Color(panelColor.r, panelColor.g, panelColor.b, _alphaValueInactive);
+           _inactive.SetActive(true);
         }
+    }
+
+    /// <summary>
+    /// Changes the color of the panel when clicking on a character.
+    /// </summary>
+    public void ChangeColorOnClickingCharacter()
+    {
+        Color origin = _panelImage.color;
+        SetPanelColor(ClickingCharacter);
+        StartCoroutine(ResetPanelColor(origin));
+
+    }
+
+    /// <summary>
+    /// Resets the color of the panel after a delay.
+    /// </summary>
+    /// <param name="origin"></param>
+    /// <returns></returns>
+    private IEnumerator ResetPanelColor(Color origin)
+    {
+        yield return new WaitForSeconds(_resetColorTime);
+
+        SetPanelColor(origin);
+    }
+
+    /// <summary>
+    /// Sets the color of the panel.
+    /// </summary>
+    /// <param name="color"></param>
+    private void SetPanelColor(Color color)
+    {
+        _panelImage.color = color;
     }
 }
 

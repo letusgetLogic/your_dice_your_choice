@@ -42,13 +42,15 @@ namespace Assets.Scripts.CharacterPrefab.CharacterBody
             {
                 var character = transform.root.GetComponent<Character>();
 
-                CharacterPopup.Instance.SetData(
+                PopUpCharacter.Instance.SetData(
                     character.Name,
                     character.GetComponent<CharacterColor>().PlayerColor,
                     character.Data.HP,
                     character.GetComponent<CharacterHealth>().CurrentHP,
                     character.CurrentAP,
-                    character.CurrentDP);
+                    character.BuffAP,
+                    character.CurrentDP,
+                    character.BuffDP);
             }
         }
 
@@ -69,8 +71,8 @@ namespace Assets.Scripts.CharacterPrefab.CharacterBody
             }
 
             var character = transform.root.GetComponent<Character>();
-            var panelHint = character.Panel.GetComponent<CharacterPanelHint>();
-            panelHint.StartHintAnim();
+            var panel = character.Panel.GetComponent<CharacterPanel>();
+            panel.ChangeColorOnClickingCharacter();
         }
 
         /// <summary>
@@ -114,8 +116,8 @@ namespace Assets.Scripts.CharacterPrefab.CharacterBody
             yield return new WaitForSeconds(_delayOnHoverTime);
 
             _isShowing = true;
-            CharacterPopup.Instance.SetPosition(transform.root.gameObject);
-            CharacterPopup.Instance.gameObject.SetActive(true);
+            PopUpCharacter.Instance.SetPosition(transform.root.gameObject);
+            PopUpCharacter.Instance.gameObject.SetActive(true);
         }
 
         /// <summary>
@@ -124,8 +126,7 @@ namespace Assets.Scripts.CharacterPrefab.CharacterBody
         private void HideInfo()
         {
             _isShowing = false;
-            CharacterPopup.Instance.gameObject.SetActive(false);
-            CharacterPopup.Instance.SetDefault();
+            PopUpCharacter.Instance.gameObject.SetActive(false);
         }
 
         /// <summary>

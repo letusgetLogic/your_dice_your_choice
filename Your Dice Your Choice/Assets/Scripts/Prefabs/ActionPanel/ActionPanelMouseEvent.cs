@@ -37,12 +37,9 @@ namespace Assets.Scripts.ActionPanelPrefab
         {
             yield return new WaitForSeconds(_delayOnHoverTime);
 
-            var actionPopup = GetComponent<ActionPanel>().ActionPopup;
-            actionPopup.SetActiveChildren(true);
+            PopUpAction.Instance.SetPosition(gameObject);
+            PopUpAction.Instance.gameObject.SetActive(true);
 
-            var characterPanel = GetComponent<ActionPanel>().CharacterPanel;
-            if (characterPanel.PlayerType == PlayerType.PlayerLeft)
-                HideRightPanels(true);
         }
 
         /// <summary>
@@ -50,32 +47,9 @@ namespace Assets.Scripts.ActionPanelPrefab
         /// </summary>
         private void HideInfo()
         {
-            var actionPopup = GetComponent<ActionPanel>().ActionPopup;
-            actionPopup.SetActiveChildren(false);
-
-            var characterPanel = GetComponent<ActionPanel>().CharacterPanel;
-            if (characterPanel.PlayerType == PlayerType.PlayerLeft)
-                HideRightPanels(false);
+            PopUpAction.Instance.gameObject.SetActive(false);
         }
 
-        /// <summary>
-        /// Hides the components of the right action panels because of text overlaying in UI.
-        /// </summary>
-        private void HideRightPanels(bool isHiding)
-        {
-            var actionPanel = GetComponent<ActionPanel>();
-            var characterPanel = actionPanel.CharacterPanel; 
-
-            for (int i = actionPanel.Index + 1; i < characterPanel.ActionPanelPrefabs.Length; i++)
-            {
-                if (isHiding) 
-                    characterPanel.ActionPanelPrefabs[i].
-                        GetComponent<ActionPanel>().ShowComponents(false);
-                else
-                    characterPanel.ActionPanelPrefabs[i].
-                        GetComponent<ActionPanel>().ShowComponents(true);
-            }
-        }
     }
 }
 

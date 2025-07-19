@@ -6,27 +6,82 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.Rendering.DebugUI;
 
 public class PanelManager : MonoBehaviour
 {
     public static PanelManager Instance { get; private set; }
 
-    public GameObject Canvas;
+    [SerializeField] private GameObject _canvas;
 
-    public TextMeshProUGUI NameTextLeft;
-    public TextMeshProUGUI NameTextRight;
+    [SerializeField] 
+    private TextMeshProUGUI _nameTextLeft;
+    public TextMeshProUGUI NameTextLeft
+    {
+        get { return _nameTextLeft; }
+        set { _nameTextLeft = value; }
+    }
 
-    public GameObject PlayerPanelLeft;
-    public GameObject PlayerPanelRight;
+    [SerializeField] 
+    private TextMeshProUGUI _nameTextRight;
+    public TextMeshProUGUI NameTextRight
+    {
+        get { return _nameTextRight; }
+        set { _nameTextRight = value; }
+    }
 
-    public GameObject[] CharacterPanelsLeft;
-    public GameObject[] CharacterPanelsRight;
+    [SerializeField]
+    private GameObject _playerPanelLeft;
+    public GameObject PlayerPanelLeft
+    {
+        get { return _playerPanelLeft; }
+        set { _playerPanelLeft = value; }
+    }
 
-    public GameObject RollPanelLeft;
-    public GameObject RollPanelRight;
+    [SerializeField]
+    private GameObject _playerPanelRight;
+    public GameObject PlayerPanelRight
+    {
+        get { return _playerPanelRight; }
+        set { _playerPanelRight = value; }
+    }
 
-    public GameObject CharacterInfoPanel;
+    [SerializeField]
+    private GameObject[] _characterPanelsLeft;
+
+    [SerializeField]
+    private GameObject[] _characterPanelsRight;
+
+    [SerializeField]
+    private GameObject _rollPanelLeft;
+    public GameObject RollPanelLeft
+    {
+        get { return _rollPanelLeft; }
+        set { _rollPanelLeft = value; }
+    }
+
+    [SerializeField]
+    private GameObject _rollPanelRight;
+    public GameObject RollPanelRight
+    {
+        get { return _rollPanelRight; }
+        set { _rollPanelRight = value; }
+    }
+
+    [SerializeField]
+    private GameObject _popUpCharacter;
+    public GameObject PopUpCharacter
+    {
+        get { return _popUpCharacter; }
+        set { _popUpCharacter = value; }
+    }
+
+    [SerializeField]
+    private GameObject _popUpAction;
+    public GameObject PopUpAction
+    {
+        get { return _popUpAction; }
+        set { _popUpAction = value; }
+    }
 
     //public GameObject RerollPanelLeft; 
     //public GameObject RerollPanelRight;
@@ -74,12 +129,12 @@ public class PanelManager : MonoBehaviour
     /// </summary>
     private void HideAllPanel()
     {
-        foreach (GameObject panel in CharacterPanelsLeft)
+        foreach (GameObject panel in _characterPanelsLeft)
         {
             SetActive(panel, false);
         }
 
-        foreach (GameObject panel in CharacterPanelsRight)
+        foreach (GameObject panel in _characterPanelsRight)
         {
             SetActive(panel, false);
         }
@@ -88,8 +143,10 @@ public class PanelManager : MonoBehaviour
         SetActive(RollPanelRight, false);
 
         // Set the inactive panel in the scene active to create the singleton instance.
-        SetActive(CharacterInfoPanel, true);
-        SetActive(CharacterInfoPanel, false);
+        SetActive(PopUpCharacter, true);
+        SetActive(PopUpCharacter, false);
+        SetActive(PopUpAction, true);
+        SetActive(PopUpAction, false);
     }
 
     /// <summary>
@@ -130,11 +187,11 @@ public class PanelManager : MonoBehaviour
     {
         if (player == PlayerType.PlayerLeft)
         {
-            return CharacterPanelsLeft;
+            return _characterPanelsLeft;
         }
         else if (player == PlayerType.PlayerRight)
         {
-            return CharacterPanelsRight;
+            return _characterPanelsRight;
         }
 
         throw new Exception("player case invalid in PanelManager.CharacterPanels(PlayerType player)");

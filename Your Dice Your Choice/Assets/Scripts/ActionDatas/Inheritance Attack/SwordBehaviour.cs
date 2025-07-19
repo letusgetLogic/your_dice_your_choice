@@ -28,7 +28,7 @@ namespace Assets.Scripts.ActionDatas
 
         public override void SetDescriptionOf(ActionPanel actionPanel, int index)
         {
-            actionPanel.ActionPopup.SetText(Description[index]);
+            PopUpAction.Instance.SetData(Description[index]);
         }
 
         public override void SetInteractible(int diceNumber)
@@ -60,7 +60,9 @@ namespace Assets.Scripts.ActionDatas
                 case 4:
                 case 5:
                 case 6:
-                    return ap * index;
+                    var buffedAP = ap * index;
+                    character.SetBuffAP(buffedAP - ap);
+                    return buffedAP;
             }
 
             throw new System.Exception("SwordBehaviour.Buff() -> int index invalid");

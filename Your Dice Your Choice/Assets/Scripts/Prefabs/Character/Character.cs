@@ -18,7 +18,9 @@ namespace Assets.Scripts.CharacterPrefab
         public CharacterData Data { get; private set; }
         public string Name { get; private set; }
         public float CurrentAP { get; private set; }
+        public float BuffAP { get; private set; }
         public float CurrentDP { get; private set; }
+        public float BuffDP { get; private set; }
         public GameObject Panel { get; private set; }
         public Vector2Int FieldIndex { get; private set; }
 
@@ -130,11 +132,21 @@ namespace Assets.Scripts.CharacterPrefab
         }
 
         /// <summary>
+        /// Sets the value of attack points.
+        /// </summary>
+        /// <param name="value"></param>
+        public void SetBuffAP(float value)
+        {
+            BuffAP = value;
+        }
+
+        /// <summary>
         /// Sets the default values.
         /// </summary>
         public void SetDefault()
         {
             CurrentAP = Data.AP;
+            BuffAP = 0f;
         }
 
         /// <summary>

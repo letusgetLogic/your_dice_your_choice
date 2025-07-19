@@ -7,16 +7,13 @@ namespace Assets.Scripts.ActionPanelPrefab
 {
     public class ActionPanel : MonoBehaviour
     {
-        [SerializeField] private GameObject _behindLayer;
         [SerializeField] private TextMeshProUGUI _actionName;
-        [SerializeField] private ActionPopup _actionPopup;
         [SerializeField] private DiceSlotAction _diceSlotAction;
 
         public ActionBase Action { get; private set; }
         public GameObject CharacterObject { get; private set; }
         public CharacterPanel CharacterPanel { get; private set; }
         public int Index {  get; private set; }
-        public ActionPopup ActionPopup => _actionPopup;
         public DiceSlotAction DiceSlotAction => _diceSlotAction;
 
         /// <summary>
@@ -31,14 +28,6 @@ namespace Assets.Scripts.ActionPanelPrefab
             CharacterPanel = characterPanel;
             Index = index;
             _actionName.text = actionData.ActionType.ToString();
-        }
-
-        /// <summary>
-        /// Hides/shows the components because of text overlaying in UI.
-        /// </summary>
-        public void ShowComponents(bool value)
-        {
-            _behindLayer.SetActive(value);
         }
 
         /// <summary>

@@ -31,8 +31,6 @@ public class Player
         foreach (var characterObject in Characters)
         {
             SetBattlePosition(characterObject);
-
-            SetDescriptonPanelForAction(characterObject);
         }
     }
 
@@ -49,17 +47,6 @@ public class Player
             var characterMovement = characterObject.GetComponent<CharacterMovement>();
             characterMovement.SetBodyPivotPosition();
         }
-    }
-
-    /// <summary>
-    /// Sets the description panel for each action for the character.
-    /// </summary>
-    /// <param name="characterObject"></param>
-    private void SetDescriptonPanelForAction(GameObject characterObject)
-    {
-        var characterPanel = characterObject.GetComponent<Character>().Panel.GetComponent<CharacterPanel>();
-
-        characterPanel.SetDescriptonPanelForAction();
     }
 
     /// <summary>

@@ -23,48 +23,9 @@ namespace Assets.Scripts.ActionPanelPrefab
         /// </summary>
         public void SetPosition()
         {
-            var panelPos = _actionPanelObject.transform.position;
-
-            gameObject.GetComponent<RectTransform>().localPosition += Distance(panelPos);
-        }
-
-        /// <summary>
-        /// Returns the distance to the action panel.
-        /// </summary>
-        /// <param name="pos"></param>
-        /// <returns></returns>
-        private Vector3 Distance(Vector3 pos)
-        {
-            Vector3 distance = new();
-
-            distance.x = _distance.x * Direction(pos).x;
-            distance.y = _distance.y;
-            
-            return distance;
-        }
-
-        /// <summary>
-        /// Returns the direction of the distance.
-        /// </summary>
-        /// <param name="pos"></param>
-        /// <returns></returns>
-        private Vector3 Direction(Vector3 pos)
-        {
-            Vector3 dir = new();
-           
-            switch (pos.x)
-            {
-                case <= 0: dir.x = 1; break;
-                case > 0: dir.x = -1; break;
-            }
-            
-            switch (pos.y)
-            {
-                case <= 0: dir.y = 1; break;
-                case > 0: dir.y = -1; break;
-            }
-            
-            return dir;
+             gameObject.GetComponent<RectTransform>().localPosition += PopUpBehaviour.Distance(
+                _actionPanelObject.transform.position,
+                _distance);
         }
 
         /// <summary>
