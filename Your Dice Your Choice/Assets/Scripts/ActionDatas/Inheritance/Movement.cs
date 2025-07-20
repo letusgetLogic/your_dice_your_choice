@@ -1,5 +1,6 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.ActionPanelPrefab;
 using Assets.Scripts.CharacterPrefab;
+using UnityEngine;
 using UnityEngine.TextCore.Text;
 
 namespace Assets.Scripts.ActionDatas
@@ -12,7 +13,7 @@ namespace Assets.Scripts.ActionDatas
         {
             ActionDirections = GetVector2IntFromDirection.Get(data.Direction);
         }
-       
+        
         public override void SetInteractible(int diceNumber)
         {
             FieldManager.Instance.SetInteractibleFields(

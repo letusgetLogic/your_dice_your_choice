@@ -139,14 +139,14 @@ public class PanelManager : MonoBehaviour
             SetActive(panel, false);
         }
         
-        SetActive(RollPanelLeft, false);
-        SetActive(RollPanelRight, false);
+        SetActive(_rollPanelLeft, false);
+        SetActive(_rollPanelRight, false);
 
         // Set the inactive panel in the scene active to create the singleton instance.
-        SetActive(PopUpCharacter, true);
-        SetActive(PopUpCharacter, false);
-        SetActive(PopUpAction, true);
-        SetActive(PopUpAction, false);
+        SetActive(_popUpCharacter, true);
+        SetActive(_popUpCharacter, false);
+        SetActive(_popUpAction, true);
+        SetActive(_popUpAction, false);
     }
 
     /// <summary>
@@ -198,6 +198,15 @@ public class PanelManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Sets the scale of the RectTransform.
+    /// </summary>
+    /// <param name="button"></param>
+    public void SetScale(GameObject gameObject, Vector3 scaleSize)
+    {
+        gameObject.GetComponent<RectTransform>().localScale = scaleSize;
+    }
+
+    /// <summary>
     /// Sets the game object active true/false.
     /// </summary>
     /// <param name="button"></param>
@@ -206,12 +215,4 @@ public class PanelManager : MonoBehaviour
         gameObject.SetActive(value);
     }
 
-    /// <summary>
-    /// Sets the scale of the RectTransform.
-    /// </summary>
-    /// <param name="button"></param>
-    public void SetScale(GameObject gameObject, Vector3 scaleSize)
-    {
-        gameObject.GetComponent<RectTransform>().localScale = scaleSize;
-    }
 }

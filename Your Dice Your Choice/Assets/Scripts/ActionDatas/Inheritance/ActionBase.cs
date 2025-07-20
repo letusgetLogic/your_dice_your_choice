@@ -8,8 +8,8 @@ namespace Assets.Scripts.ActionDatas
 {
     public abstract class ActionBase
     {
-        public ActionData Data { get;  set; }
-        public GameObject CharacterObject { get;  set; }
+        public ActionData Data { get; private set; }
+        public GameObject CharacterObject { get; private set; }
         protected Character character => CharacterObject.GetComponent<Character>();
 
         /// <summary>
@@ -38,7 +38,10 @@ namespace Assets.Scripts.ActionDatas
         /// </summary>
         /// <param name="diceNumber"></param>
         public virtual void SetDescriptionOf(ActionPanel actionPanel, int diceNumber)
-        {}
+        {
+            PopUpAction.Instance.SetData(character.Data.ActionData[actionPanel.Index].Description);
+            PopUpAction.Instance.SetPosition(CharacterObject);
+        }
 
         /// <summary>
         /// Sets the interactible objects.

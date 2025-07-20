@@ -37,9 +37,7 @@ namespace Assets.Scripts.ActionPanelPrefab
         {
             yield return new WaitForSeconds(_delayOnHoverTime);
 
-            PopUpAction.Instance.SetPosition(gameObject);
-            PopUpAction.Instance.gameObject.SetActive(true);
-
+            PanelManager.Instance.SetActive(PanelManager.Instance.PopUpAction, true);
         }
 
         /// <summary>
@@ -47,7 +45,7 @@ namespace Assets.Scripts.ActionPanelPrefab
         /// </summary>
         private void HideInfo()
         {
-            PopUpAction.Instance.gameObject.SetActive(false);
+            PanelManager.Instance.SetActive(PanelManager.Instance.PopUpAction, false);
         }
 
     }

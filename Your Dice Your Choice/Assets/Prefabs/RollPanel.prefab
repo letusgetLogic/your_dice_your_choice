@@ -213,17 +213,6 @@ MonoBehaviour:
   _rollButton: {fileID: 1849760534710273920}
   _diceAmount: 4
   _allDice: []
-  _diceSlots:
-  - {fileID: 4301452456479279148}
-  - {fileID: 5929402644994673044}
-  - {fileID: 3459528561827775057}
-  - {fileID: 9223089238031842657}
-  - {fileID: 8774779457250134032}
-  - {fileID: 7127190572823372176}
-  - {fileID: 9157464844261795384}
-  - {fileID: 6955009612177712465}
-  - {fileID: 8183158983568639406}
-  - {fileID: 2069481326830685560}
 --- !u!114 &2866427698826301703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,7 +233,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1

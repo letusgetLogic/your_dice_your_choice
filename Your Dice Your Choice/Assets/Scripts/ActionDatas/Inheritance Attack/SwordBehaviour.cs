@@ -29,6 +29,7 @@ namespace Assets.Scripts.ActionDatas
         public override void SetDescriptionOf(ActionPanel actionPanel, int index)
         {
             PopUpAction.Instance.SetData(Description[index]);
+            PopUpAction.Instance.SetPosition(CharacterObject);
         }
 
         public override void SetInteractible(int diceNumber)

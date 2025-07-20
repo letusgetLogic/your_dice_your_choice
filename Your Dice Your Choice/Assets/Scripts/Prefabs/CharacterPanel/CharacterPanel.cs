@@ -53,13 +53,13 @@ public class CharacterPanel : MonoBehaviour
             if (i >= Character.Data.ActionData.Length)
             {
                 _actionPanelPrefabs[i].SetActive(false);
-                continue;
+                break;
             }
 
             ActiveActionPanels[i] = _actionPanelPrefabs[i];
 
             var actionData = Character.Data.ActionData[i];
-            _actionPanelPrefabs[i].GetComponent<ActionPanel>().SetData(actionData, CharacterObject, this, i);
+            ActiveActionPanels[i].GetComponent<ActionPanel>().SetData(actionData, CharacterObject, this, i);
         }
     }
 
@@ -112,5 +112,7 @@ public class CharacterPanel : MonoBehaviour
     {
         _panelImage.color = color;
     }
+
+
 }
 

@@ -5,6 +5,7 @@ using System.Collections;
 using System;
 using UnityEngine.UI;
 using Assets.Scripts.ActionPanelPrefab;
+using Assets.Scripts.LevelDatas;
 
 namespace Assets.Scripts.CharacterPrefab.CharacterBody
 {
@@ -61,6 +62,11 @@ namespace Assets.Scripts.CharacterPrefab.CharacterBody
         /// <exception cref="NotImplementedException"></exception>
         public void OnPointerClick(PointerEventData eventData)
         {
+            if (LevelManager.Instance.CurrentPhase != Phase.Battle)
+            {
+                return;
+            }
+
             if (_isBeingAttacked)
             {
                 _hoverColor.SetActive(false);
@@ -80,6 +86,11 @@ namespace Assets.Scripts.CharacterPrefab.CharacterBody
         /// </summary>
         public void OnPointerEnter(PointerEventData eventData)
         {
+            if (LevelManager.Instance.CurrentPhase != Phase.Battle)
+            {
+                return;
+            }
+
             if (_isBeingAttacked)
             {
                 _hoverColor.SetActive(true);
@@ -95,6 +106,11 @@ namespace Assets.Scripts.CharacterPrefab.CharacterBody
         /// </summary>
         public void OnPointerExit(PointerEventData eventData)
         {
+            if (LevelManager.Instance.CurrentPhase != Phase.Battle)
+            {
+                return;
+            }
+
             if (_isBeingAttacked)
             {
                 _hoverColor.SetActive(false);
@@ -116,8 +132,9 @@ namespace Assets.Scripts.CharacterPrefab.CharacterBody
             yield return new WaitForSeconds(_delayOnHoverTime);
 
             _isShowing = true;
-            PopUpCharacter.Instance.SetPosition(transform.root.gameObject);
-            PopUpCharacter.Instance.gameObject.SetActive(true);
+            var popUpCharacter = PanelManager.Instance.PopUpCharacter.GetComponent<PopUpCharacter>();
+            popUpCharacter.SetPosition(transform.root.gameObject);
+            PanelManager.Instance.SetActive(PanelManager.Instance.PopUpCharacter, true);
         }
 
         /// <summary>
@@ -126,7 +143,7 @@ namespace Assets.Scripts.CharacterPrefab.CharacterBody
         private void HideInfo()
         {
             _isShowing = false;
-            PopUpCharacter.Instance.gameObject.SetActive(false);
+            PanelManager.Instance.SetActive(PanelManager.Instance.PopUpCharacter, false);
         }
 
         /// <summary>

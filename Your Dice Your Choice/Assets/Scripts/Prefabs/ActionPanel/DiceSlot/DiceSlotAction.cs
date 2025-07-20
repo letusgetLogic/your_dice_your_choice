@@ -11,7 +11,7 @@ namespace Assets.Scripts.ActionPanelPrefab
     {
         [SerializeField][Range(0f, 1f)] private float _delayShowingInteractible = .5f;
 
-        private ActionPanel _actionPanel => transform.parent.parent.GetComponent<ActionPanel>();
+        private ActionPanel _actionPanel => transform.parent.GetComponent<ActionPanel>();
         private PlayerType _playerType => _actionPanel.CharacterObject.GetComponent<Character>().PlayerType;
 
         private bool _canDiceBeingDropped { get; set; } = false;
