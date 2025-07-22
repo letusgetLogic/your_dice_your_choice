@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5579d120ca700954baed81a2094977e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animSpeed: 0.1
+  _animSpeed: 1
   _animCurve:
     serializedVersion: 2
     m_Curve:

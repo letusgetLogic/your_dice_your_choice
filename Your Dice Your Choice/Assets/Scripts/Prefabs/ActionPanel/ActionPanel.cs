@@ -10,10 +10,10 @@ namespace Assets.Scripts.ActionPanelPrefab
         [SerializeField] private TextMeshProUGUI _actionName;
         [SerializeField] private DiceSlotAction _diceSlotAction;
 
+        public ActionData ActionData { get; private set; }
         public ActionBase Action { get; private set; }
         public GameObject CharacterObject { get; private set; }
         public CharacterPanel CharacterPanel { get; private set; }
-        public int Index {  get; private set; }
         public DiceSlotAction DiceSlotAction => _diceSlotAction;
 
         /// <summary>
@@ -23,10 +23,10 @@ namespace Assets.Scripts.ActionPanelPrefab
         public void SetData(ActionDatas.ActionData actionData, GameObject characterObject, 
                             CharacterPanel characterPanel, int index)
         {
+            ActionData = actionData;
             Action = GetActionBase.Create(actionData, characterObject);
             CharacterObject = characterObject;
             CharacterPanel = characterPanel;
-            Index = index;
             _actionName.text = actionData.ActionType.ToString();
         }
 

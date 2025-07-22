@@ -68,13 +68,18 @@ namespace Assets.Scripts.MatchIntro
         /// </summary>
         private void PlayAct1()
         {
-            MatchIntroModel.Instance.RunCurrentValue(MatchIntroModel.Instance.AnimSpeedAct1);
-            float value = MatchIntroModel.Instance.GetInterpolation(MatchIntroModel.Instance.AnimCurve1);
+            MatchIntroModel.Instance.RunCurrentValue(
+                MatchIntroModel.Instance.AnimSpeedAct1);
+            float value = MatchIntroModel.Instance.GetInterpolation(
+                MatchIntroModel.Instance.AnimCurve1);
 
             MatchIntroModel.Instance.MoveText(
-                MatchIntroView.Instance.LeftIntroShaderRect, MatchIntroView.Instance.RightIntroShaderRect,
-                MatchIntroView.Instance.StartPositionLeftAct1, MatchIntroView.Instance.StartPositionLeftAct2,
-                MatchIntroView.Instance.StartPositionRightAct1, MatchIntroView.Instance.StartPositionRightAct2,
+                MatchIntroView.Instance.LeftIntroShaderRect, 
+                MatchIntroView.Instance.RightIntroShaderRect,
+                MatchIntroView.Instance.StartPositionLeftAct1, 
+                MatchIntroView.Instance.StartPositionLeftAct2,
+                MatchIntroView.Instance.StartPositionRightAct1, 
+                MatchIntroView.Instance.StartPositionRightAct2,
                 value);
 
             MatchIntroView.Instance.FadeIn(MatchIntroModel.Instance.AnimFadeInTime);
@@ -91,13 +96,18 @@ namespace Assets.Scripts.MatchIntro
         /// <exception cref="NotImplementedException"></exception>
         private void PlayAct2()
         {
-            MatchIntroModel.Instance.RunCurrentValue(MatchIntroModel.Instance.AnimSpeedAct2);
-            float value = MatchIntroModel.Instance.GetInterpolation(MatchIntroModel.Instance.AnimCurve2);
+            MatchIntroModel.Instance.RunCurrentValue(
+                MatchIntroModel.Instance.AnimSpeedAct2);
+            float value = MatchIntroModel.Instance.GetInterpolation(
+                MatchIntroModel.Instance.AnimCurve2);
 
             MatchIntroModel.Instance.MoveText(
-                MatchIntroView.Instance.LeftIntroShaderRect, MatchIntroView.Instance.RightIntroShaderRect,
-                MatchIntroView.Instance.StartPositionLeftAct2, MatchIntroView.Instance.EndPositionLeftAct2,
-                MatchIntroView.Instance.StartPositionRightAct2, MatchIntroView.Instance.EndPositionRightAct2,
+                MatchIntroView.Instance.LeftIntroShaderRect, 
+                MatchIntroView.Instance.RightIntroShaderRect,
+                MatchIntroView.Instance.StartPositionLeftAct2, 
+                MatchIntroView.Instance.EndPositionLeftAct2,
+                MatchIntroView.Instance.StartPositionRightAct2, 
+                MatchIntroView.Instance.EndPositionRightAct2,
                 value);
 
             if (value >= 1)
@@ -114,8 +124,10 @@ namespace Assets.Scripts.MatchIntro
         /// <exception cref="NotImplementedException"></exception>
         private void PlayAct3()
         {
-            MatchIntroModel.Instance.RunCurrentValue(MatchIntroModel.Instance.AnimSpeedAct3);
-            float value = MatchIntroModel.Instance.GetInterpolation(MatchIntroModel.Instance.AnimCurve3);
+            MatchIntroModel.Instance.RunCurrentValue(
+                MatchIntroModel.Instance.AnimSpeedAct3);
+            float value = MatchIntroModel.Instance.GetInterpolation(
+                MatchIntroModel.Instance.AnimCurve3);
 
             MatchIntroView.Instance.DimDownForeground(1 - value);
 

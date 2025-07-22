@@ -11,6 +11,8 @@ namespace Assets.Scripts
         [SerializeField] private TextMeshProUGUI _description;
         [SerializeField] private Vector2 _distance;
 
+        private int _priorityIndex = 0;
+
         /// <summary>
         /// Awake method.
         /// </summary>
@@ -29,6 +31,7 @@ namespace Assets.Scripts
         /// </summary>
         private void OnEnable()
         {
+            _priorityIndex = 0;
             _description.text = "";
         }
 
@@ -40,9 +43,16 @@ namespace Assets.Scripts
         /// <param name="currentHp"></param>
         /// <param name="ap"></param>
         /// <param name="dp"></param>
-        public void SetData(string description)
+        public void SetData(string description, int priority)
         {
+            Debug.Log(_priorityIndex);
+            if (_priorityIndex == 0)
+                _priorityIndex = priority;
+            else if (priority >= _priorityIndex) // 1 has the highest priority 
+                return;
+
             _description.text = description;
+            Debug.Log("PopUpAction.SetData() -> " + _description.text);
         }
 
         /// <summary>
@@ -50,10 +60,12 @@ namespace Assets.Scripts
         /// </summary>
         public void SetPosition(GameObject targetObject)
         {
-            gameObject.GetComponent<RectTransform>().localPosition += PopUpBehaviour.Distance(
-               targetObject.transform.position,
-               _distance);
-        }
+            gameObject.GetComponent<RectTransform>().localPosition =
+                PopUpBehaviour.NewWorldToLocalPosition(
+                    _canvasRectTransform,
+                    targetObject.transform.position,
+                    _distance);
 
+        }
     }
 }

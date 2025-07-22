@@ -7,7 +7,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,8 +14,9 @@ public class BattleManager : MonoBehaviour
 {
     public static BattleManager Instance { get; private set; }
 
-    public ActionBase CurrentAction { get; private set; }
-    public IEnumerator Coroutine { get; private set; }
+    public ActionBase CurrentAction { get; set; }
+    public IEnumerator Coroutine { get; set; }
+    public bool IsDiceBeingDropped { get; set; } = false;
 
     /// <summary>
     /// Awake method.
@@ -40,23 +40,16 @@ public class BattleManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Sets the coroutine to be executed.
+    /// Checks if the coroutine is running and stops it if necessary, setting it to null.
     /// </summary>
-    /// <param name="coroutine">The coroutine to assign. Cannot be null.</param>
-    public void SetCoroutine(IEnumerator coroutine)
+    public void CheckCoroutine()
     {
-        Coroutine = coroutine;
-    }
-
-    /// <summary>
-    /// Sets the current executable action.
-    /// </summary>
-    /// <param name="action"></param>
-    /// <param name="characterObject"></param>
-    public void SetAction(ActionBase action)
-    {
-         CurrentAction = action;
-        Debug.Log(action.GetType().Name + " is set as current action.");
+        // Ensure that the coroutine is not null before stopping it.
+        if (Coroutine != null)
+        {
+            StopCoroutine(Coroutine);
+            Coroutine = null;
+        }
     }
 
     /// <summary>
@@ -69,7 +62,7 @@ public class BattleManager : MonoBehaviour
         if (CurrentAction == null)
             return;
 
-        CurrentAction.SetDescriptionOf(actionPanel, diceNumber);
+        CurrentAction.ShowPopUpAction(diceNumber, actionPanel);
         CurrentAction.SetInteractible(diceNumber);
         CurrentAction.ShowInteractible();
         CurrentAction.ActivateSkill(diceNumber);
@@ -79,15 +72,27 @@ public class BattleManager : MonoBehaviour
     /// Deactivates the interactible objects. Being called from the DiceSlotAction script.
     /// </summary>
     /// <param name="actionPanel"></param>
-    public void DeactivateInteractible(ActionPanel actionPanel)
+    public void DeactivateInteractible()
     {
         if (CurrentAction == null) 
             return;
         
-        CurrentAction.SetDescriptionOf(actionPanel, 0);
         CurrentAction.SetDefault();
         CurrentAction.DeactivateInteractible();
         CurrentAction = null;
+    }
+
+    /// <summary>
+    /// DiceDragEvent.OnEndDrag() method calls this method to send the dice back to 
+    /// its base position, when dice is not being dropped.
+    /// </summary>
+    /// <param name="diceMovement"></param>
+    public void SendDiceBackToBase(DiceMovement diceMovement)
+    {
+        if (IsDiceBeingDropped)
+            return;
+
+        diceMovement.SendBackToBase();
     }
 
     /// <summary>

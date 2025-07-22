@@ -20,7 +20,7 @@ namespace Assets.Scripts.ActionDatas
             return CheckDiceCondition.IsNumberValid(AllowedDiceNumber, diceNumber);
         }
 
-        public override abstract void SetDescriptionOf(ActionPanel actionPanel, int diceNumber);
+        public override abstract void ShowPopUpAction(int diceNumber, ActionPanel actionPanel);
 
         public override abstract void SetInteractible(int diceNumber);
 

@@ -22,7 +22,7 @@ namespace Assets.Scripts
         /// </summary>
         /// <param name="targetLocalPos"></param>
         /// <returns></returns>
-        public static Vector3 Distance(Vector3 targetLocalPos, Vector2 distanceV2)
+        private static Vector3 Distance(Vector3 targetLocalPos, Vector2 distanceV2)
         {
             Vector3 distance = new();
 

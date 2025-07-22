@@ -21,15 +21,17 @@ namespace Assets.Scripts.ActionDatas
 
         private int _indexInList { get; set; }
 
-        public SwordBehaviour(ActionData data, GameObject characterObject) : base(data, characterObject)
+        public SwordBehaviour(ActionData data, GameObject characterObject) : 
+            base(data, characterObject)
         {
             AllowedDiceNumber = AllowedDiceNumber.D1_6;
         }
 
-        public override void SetDescriptionOf(ActionPanel actionPanel, int index)
+        public override void ShowPopUpAction(int index, ActionPanel actionPanel)
         {
-            PopUpAction.Instance.SetData(Description[index]);
-            PopUpAction.Instance.SetPosition(CharacterObject);
+            PanelManager.Instance.SetActive(PanelManager.Instance.PopUpAction, true);
+            PopUpAction.Instance.SetData(Description[index], 1);
+            PopUpAction.Instance.SetPosition(actionPanel.gameObject);
         }
 
         public override void SetInteractible(int diceNumber)
@@ -80,7 +82,8 @@ namespace Assets.Scripts.ActionDatas
             switch (index)
             {
                 case 0:
-                    throw new System.Exception("SwordBehaviour.GetDirection() -> index = 0");
+                    throw new System.Exception(
+                        "SwordBehaviour.GetDirection() -> index = 0");
 
                 case 1:
                 case 2:
@@ -91,7 +94,8 @@ namespace Assets.Scripts.ActionDatas
                     return Direction.Orthogonal;
             }
 
-            throw new System.Exception("SwordBehaviour.GetDirection() -> int index invalid");
+            throw new System.Exception(
+                "SwordBehaviour.GetDirection() -> int index invalid");
         }
 
         /// <summary>

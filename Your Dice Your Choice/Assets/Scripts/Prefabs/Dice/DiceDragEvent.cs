@@ -3,17 +3,15 @@ using Assets.Scripts.DicePrefab;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DiceDragEvent : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
+public class DiceDragEvent : MonoBehaviour, 
+    IDragHandler, IBeginDragHandler, IEndDragHandler
 {
-    [SerializeField] private float _delaySendBack = 0.5f;
-
     /// <summary>
     /// Triggers event at the beginning of drag.
     /// </summary>
     /// <param name="eventData"></param>
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("OnBeginDrag");
         var diceDisplay = GetComponent<DiceDisplay>();
         diceDisplay.SetAlphaDown();
         diceDisplay.SetBlocksRaycasts(false);
@@ -26,7 +24,6 @@ public class DiceDragEvent : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
     /// <param name="eventData"></param>
     public void OnDrag(PointerEventData eventData)
     {
-        Debug.Log("OnDrag");
         var diceDisplay = GetComponent<DiceDisplay>();
         diceDisplay.UpdatePosition(eventData);
     }
@@ -42,20 +39,8 @@ public class DiceDragEvent : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
         diceDisplay.SetDefault();
         diceDisplay.SetBlocksRaycasts(true);
 
-        StartCoroutine(MoveDice());
+        BattleManager.Instance.SendDiceBackToBase(
+            GetComponent<DiceMovement>());
     }
-
-    /// <summary>
-    /// Moves the dice.
-    /// </summary>
-    /// <returns></returns>
-    private IEnumerator MoveDice()
-    {
-        yield return new WaitForSeconds(_delaySendBack);
-
-        var diceMovement = GetComponent<DiceMovement>();
-        diceMovement.SendBackToBase();
-    }
-
 }
 

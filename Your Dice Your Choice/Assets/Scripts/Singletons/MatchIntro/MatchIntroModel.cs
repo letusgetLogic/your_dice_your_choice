@@ -58,7 +58,8 @@ namespace Assets.Scripts.MatchIntro
         /// <param name="animSpeed"></param>
         public void RunCurrentValue(float animSpeed)
         {
-            CurrentValue = Mathf.MoveTowards(CurrentValue, 1, animSpeed * 0.0001f / Time.deltaTime);
+            CurrentValue = 
+                Mathf.MoveTowards(CurrentValue, 1, animSpeed * 0.0001f / Time.deltaTime);
         }
 
         /// <summary>
@@ -83,8 +84,10 @@ namespace Assets.Scripts.MatchIntro
                             Vector2 startPositionRight, Vector2 endPositionRight,
                             float value)
         {
-            rect1.anchoredPosition = Vector2.Lerp(startPositionLeft, endPositionLeft, value);
-            rect2.anchoredPosition = Vector2.Lerp(startPositionRight, endPositionRight, value);
+            rect1.anchoredPosition = 
+                Vector2.Lerp(startPositionLeft, endPositionLeft, value);
+            rect2.anchoredPosition = 
+                Vector2.Lerp(startPositionRight, endPositionRight, value);
         }
 
         /// <summary>

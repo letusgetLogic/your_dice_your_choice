@@ -5,7 +5,7 @@ namespace Assets.Scripts.DicePrefab
 {
     public class DiceMovement : MonoBehaviour
     {
-        [SerializeField] private float _animSpeed = .1f;
+        [SerializeField] private float _animSpeed = 1f;
         [SerializeField] private AnimationCurve _animCurve;
 
         private RectTransform _rectTransform => GetComponent<RectTransform>();
@@ -56,7 +56,7 @@ namespace Assets.Scripts.DicePrefab
                     return;
                 }
 
-                _currentValue = Mathf.MoveTowards(_currentValue, 1, _animSpeed * 1000 / Time.deltaTime);
+                _currentValue = Mathf.MoveTowards(_currentValue, 1, _animSpeed * 0.0001f / Time.deltaTime);
 
                 if (_currentValue > 0.9f)
                 {

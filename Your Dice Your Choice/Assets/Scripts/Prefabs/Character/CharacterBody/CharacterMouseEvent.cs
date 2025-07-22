@@ -77,8 +77,7 @@ namespace Assets.Scripts.CharacterPrefab.CharacterBody
             }
 
             var character = transform.root.GetComponent<Character>();
-            var panel = character.Panel.GetComponent<CharacterPanel>();
-            panel.ChangeColorOnClickingCharacter();
+            character.Panel.ChangeColorOnClickingCharacter();
         }
 
         /// <summary>

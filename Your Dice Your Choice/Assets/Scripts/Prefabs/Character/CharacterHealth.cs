@@ -10,7 +10,7 @@ public class CharacterHealth : MonoBehaviour
     [SerializeField] private Image           _fillImage;
     [SerializeField] private TextMeshProUGUI _damageText;
 
-    [SerializeField] private float           _animSpeedTakeDamage = 0.0005f;
+    [SerializeField] private float           _animSpeedTakeDamage = 5f;
     [SerializeField] private AnimationCurve  _animCurve;
 
     public float  CurrentHP { get; private set; }
@@ -79,7 +79,7 @@ public class CharacterHealth : MonoBehaviour
         if (!_isHealthChanging)
             return;
 
-        _current = Mathf.MoveTowards(_current, 1, _animSpeedTakeDamage / Time.deltaTime);
+        _current = Mathf.MoveTowards(_current, 1, _animSpeedTakeDamage * 0.0001f / Time.deltaTime);
         float interpolation = _animCurve.Evaluate(_current);
 
         SetHealthSlider(Mathf.Lerp(_oldValue, _newValue, interpolation));

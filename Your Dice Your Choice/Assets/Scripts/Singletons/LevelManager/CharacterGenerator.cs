@@ -10,7 +10,8 @@ public class CharacterGenerator : MonoBehaviour
     [SerializeField] private GameObject _characterPrefab;
     [SerializeField] private CharacterData[] _characterData;
 
-    private readonly int CharacterSpawnAreaMaxColumn = 2; // Max. value of columns of the spawn area for character. 
+    // Max. value of columns of the spawn area for character. 
+    private readonly int CharacterSpawnAreaMaxColumn = 2; 
 
     [HideInInspector] public List<string> CharacterNames = CharacterName.Names;
 
@@ -45,7 +46,8 @@ public class CharacterGenerator : MonoBehaviour
 
         for (int i = 0; i < LevelManager.Instance.Data.CharacterAmount; i++)
         {
-            var characterObject = Instantiate(_characterPrefab, randomPositions[i], Quaternion.identity);
+            var characterObject = 
+                Instantiate(_characterPrefab, randomPositions[i], Quaternion.identity);
             var character = characterObject.GetComponent<Character>();
             
             // Data
@@ -62,12 +64,14 @@ public class CharacterGenerator : MonoBehaviour
             characterColor.SetColor(PlayerColor(playerType), character.Name);
 
             // Border Color
-            var characterBorderColor = characterObject.GetComponent<CharacterBorderColor>();
+            var characterBorderColor = 
+                characterObject.GetComponent<CharacterBorderColor>();
             character.SetEnabled(characterBorderColor, false);
 
             // Panel
-            var characterPanelObject = PanelManager.Instance.GetPanel(playerType, i, characterObject);
-            character.SetPanel(characterPanelObject);
+            var characterPanelObject = 
+                PanelManager.Instance.GetPanel(playerType, i, characterObject);
+            character.SetPanel(characterPanelObject.GetComponent<CharacterPanel>());
 
             tempList.Add(characterObject);
         }
@@ -84,8 +88,9 @@ public class CharacterGenerator : MonoBehaviour
         // The array to check if the field index is already assigned. 
         var fieldIndex = new Vector2[randomIndexes.Length];
 
+        // Initializes for each index a null value.
         for (int h = 0; h < fieldIndex.Length; h++)
-            fieldIndex[h] = new Vector2(-1, -1); // Initializes for each index a null value.
+            fieldIndex[h] = new Vector2(-1, -1); 
 
         int rowAmount = FieldManager.Instance.Fields.GetLength(0);
 
@@ -101,15 +106,18 @@ public class CharacterGenerator : MonoBehaviour
 
             for (int j = 0; j <= i; j++) 
             {
-                if (currentFieldIndex == fieldIndex[j]) // ex. for the first loop, fieldIndex[0] = Vector2(-1,-1) => false.
+                // ex. for the first loop, fieldIndex[0] = Vector2(-1,-1) => false.
+                if (currentFieldIndex == fieldIndex[j]) 
                 {
                     i--; // The main for-loop repeats this loop.
                     break;
                 }
 
-                if (j == i) // only sets in the last loop.
-                { 
-                    fieldIndex[j] = currentFieldIndex; // ex. fieldIndex[0] = Vector2(row, col).
+                // only sets in the last loop.
+                if (j == i) 
+                {
+                    fieldIndex[j] = currentFieldIndex; 
+                    // ex. fieldIndex[0] = Vector2(row, col).
                 }
             }
         }
@@ -142,7 +150,8 @@ public class CharacterGenerator : MonoBehaviour
     {
         for (int i = 0; i < randomIndexes.Length; i++)
         {
-            var field = FieldManager.Instance.Fields[randomIndexes[i].x, randomIndexes[i].y];
+            var field = 
+                FieldManager.Instance.Fields[randomIndexes[i].x, randomIndexes[i].y];
             randomPositions[i] = field.transform.position;
         }
     }

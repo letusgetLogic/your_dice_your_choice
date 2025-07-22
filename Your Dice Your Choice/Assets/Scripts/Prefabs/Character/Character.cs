@@ -21,7 +21,7 @@ namespace Assets.Scripts.CharacterPrefab
         public float BuffAP { get; private set; }
         public float CurrentDP { get; private set; }
         public float BuffDP { get; private set; }
-        public GameObject Panel { get; private set; }
+        public CharacterPanel Panel { get; private set; }
         public Vector2Int FieldIndex { get; private set; }
 
         // Generator Tool
@@ -107,7 +107,7 @@ namespace Assets.Scripts.CharacterPrefab
         /// Initializes Panel.
         /// </summary>
         /// <param name="panel"></param>
-        public void SetPanel(GameObject panel) 
+        public void SetPanel(CharacterPanel panel) 
         { 
             Panel = panel; 
         }
@@ -156,7 +156,7 @@ namespace Assets.Scripts.CharacterPrefab
         {
             gameObject.tag = "Obstacle";
             GetComponent<CharacterState>().SetDownState();
-            Panel.GetComponent<CharacterPanel>().SetActionInactive();
+            Panel.SetActionInactive();
 
             var field = FieldManager.Instance.Fields[FieldIndex.x, FieldIndex.y].GetComponent<Field>();
             field.SetCharacterObjectNull();

@@ -4,15 +4,18 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Collections;
 using Assets.Scripts.CharacterPrefab;
+using Assets.Scripts.LevelDatas;
 
 namespace Assets.Scripts.ActionPanelPrefab
 {
-    public class DiceSlotAction : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IDropHandler
+    public class DiceSlotAction : MonoBehaviour, 
+        IPointerEnterHandler, IPointerExitHandler, IDropHandler
     {
         [SerializeField][Range(0f, 1f)] private float _delayShowingInteractible = .5f;
 
         private ActionPanel _actionPanel => transform.parent.GetComponent<ActionPanel>();
-        private PlayerType _playerType => _actionPanel.CharacterObject.GetComponent<Character>().PlayerType;
+        private PlayerType _playerType => 
+            _actionPanel.CharacterObject.GetComponent<Character>().PlayerType;
 
         private bool _canDiceBeingDropped { get; set; } = false;
 
@@ -21,19 +24,25 @@ namespace Assets.Scripts.ActionPanelPrefab
         /// </summary>
         public void OnPointerEnter(PointerEventData eventData)
         {
+            if (LevelManager.Instance.CurrentPhase != Phase.Battle)
+                return;
+
             if (_playerType != TurnManager.Instance.Turn)
                 return;
 
             if (eventData.pointerDrag != null && eventData.pointerDrag.CompareTag("Dice"))
             {
-                // If the player don't use the previous action and the interactable are still showed,
+                // If the player don't use the previous action and
+                // the interactable are still showed,
                 // deactivate the interactable of the previous action panel.
                 if (BattleManager.Instance.Coroutine != null)
                 {
-                    BattleManager.Instance.DeactivateInteractible(_actionPanel);
+                    BattleManager.Instance.CheckCoroutine();
+                    BattleManager.Instance.DeactivateInteractible();
                 }
 
-                BattleManager.Instance.SetCoroutine(ShowInteractible(eventData.pointerDrag));
+                BattleManager.Instance.Coroutine = 
+                    ShowInteractible(eventData.pointerDrag);
                 
                 StartCoroutine(BattleManager.Instance.Coroutine);
             }
@@ -47,26 +56,28 @@ namespace Assets.Scripts.ActionPanelPrefab
         {
             yield return new WaitForSeconds(_delayShowingInteractible);
 
+            BattleManager.Instance.Coroutine = null;
+
             var dice = diceBeingDragged.GetComponent<Dice>();
             if (_actionPanel.Action.IsValid(dice.CurrentNumber) == false)
                 yield break;
 
-            BattleManager.Instance.SetAction(_actionPanel.Action);
+            BattleManager.Instance.CurrentAction = _actionPanel.Action;
             BattleManager.Instance.ShowInteractible(dice.CurrentNumber, _actionPanel);
 
-            //_canInteractibleBeingDeactivated = true;
-
+            // Both lists are null.
             if (FieldManager.Instance.InteractibleFields == null && 
                 CharacterManager.Instance.InteractibleCharacters == null) 
                 yield break;
 
             // It doesn't have any interactactible objects.
-            if (FieldManager.Instance.InteractibleFields.Count == 0 &&
-                CharacterManager.Instance.InteractibleCharacters.Count == 0)
-            {
-                //BattleManager.Instance.DeactivateInteractible(_actionPanel);
+            if (FieldManager.Instance.InteractibleFields != null && 
+                FieldManager.Instance.InteractibleFields.Count == 0)
                 yield break;
-            }
+
+            if (CharacterManager.Instance.InteractibleCharacters != null &&
+                CharacterManager.Instance.InteractibleCharacters.Count == 0)
+                yield break;
 
             _canDiceBeingDropped = true;
         }
@@ -76,39 +87,18 @@ namespace Assets.Scripts.ActionPanelPrefab
         /// </summary>
         public void OnPointerExit(PointerEventData eventData)
         {
+            if (LevelManager.Instance.CurrentPhase != Phase.Battle)
+                return;
+
             if (_playerType != TurnManager.Instance.Turn)
                 return;
 
             if (eventData.pointerDrag != null && eventData.pointerDrag.CompareTag("Dice"))
             {
-                // Ensure that the coroutine is not null before stopping it.
-                if (BattleManager.Instance.Coroutine != null)
-                {
-                    StopCoroutine(BattleManager.Instance.Coroutine);
-                }
-                BattleManager.Instance.DeactivateInteractible(_actionPanel);
-
-                //BattleManager.Instance.SetCoroutine(DelayDeactivate());
-                //StartCoroutine(BattleManager.Instance.Coroutine);
+                BattleManager.Instance.CheckCoroutine();
+                BattleManager.Instance.DeactivateInteractible();
             }
         }
-
-        ///// <summary>
-        ///// Deactivates the interactible objects.
-        ///// </summary>
-        ///// <returns></returns>
-        //private IEnumerator DelayDeactivate()
-        //{
-        //    yield return new WaitForSeconds(_delayDeactivateTime);
-
-        //    if (_canInteractibleBeingDeactivated)
-        //    {
-        //        Debug.Log("DiceSlotAction.OnPointerExit !!!");
-        //        BattleManager.Instance.DeactivateInteractible(_actionPanel);
-        //    }
-
-        //    BattleManager.Instance.SetCoroutine(null);
-        //}
 
         /// <summary>
         /// UI Element is being dropped.
@@ -116,21 +106,27 @@ namespace Assets.Scripts.ActionPanelPrefab
         /// <param name="eventData"></param>
         public void OnDrop(PointerEventData eventData)
         {
-            Debug.Log("DiceSlotAction.OnDrop");
-            //_canInteractibleBeingDeactivated = false;
+            if (!_canDiceBeingDropped)
+            {
+                BattleManager.Instance.CheckCoroutine();
+                BattleManager.Instance.DeactivateInteractible();
+                return;
+            }
+
+            BattleManager.Instance.IsDiceBeingDropped = true;
+
+            if (LevelManager.Instance.CurrentPhase != Phase.Battle)
+                return;
 
             if (_playerType != TurnManager.Instance.Turn)
                 return;
 
             var diceObject = eventData.pointerDrag;
+            var dice = diceObject.GetComponent<Dice>();
+            dice.SetOnActionSlot(GetComponent<RectTransform>().position);
 
-            if (_canDiceBeingDropped)
-            {
-                var dice = diceObject.GetComponent<Dice>();
-                dice.SetOnActionSlot(GetComponent<RectTransform>().position);
-                
-                _canDiceBeingDropped = false;
-            }
+            _canDiceBeingDropped = false;
+            BattleManager.Instance.IsDiceBeingDropped = false;
         }
 
     }

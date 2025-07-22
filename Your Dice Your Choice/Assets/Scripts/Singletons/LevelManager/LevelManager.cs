@@ -100,7 +100,8 @@ public class LevelManager : MonoBehaviour
                 return;
 
             case Phase.WaitForInput:
-                ButtonManager.Instance.SetActive(ButtonManager.Instance.NewMatchButton, true);
+                ButtonManager.Instance.SetActive(
+                    ButtonManager.Instance.NewMatchButton, true);
                 return;
         }
     }
@@ -142,12 +143,16 @@ public class LevelManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Determines the winner based on the specified losing player and updates the <see cref="Winner"/> property.
+    /// Determines the winner based on the specified losing player and 
+    /// updates the <see cref="Winner"/> property.
     /// </summary>
-    /// <remarks>The method retrieves the winner by invoking the <see cref="PlayerBase.Instance.GetWinner"/>
-    /// method with the provided <paramref name="loser"/>. Ensure that the <paramref name="loser"/> parameter is valid
+    /// <remarks>The method retrieves the winner by invoking 
+    /// the <see cref="PlayerBase.Instance.GetWinner"/> method 
+    /// with the provided <paramref name="loser"/>. 
+    /// Ensure that the <paramref name="loser"/> parameter is valid
     /// and corresponds to a recognized player type.</remarks>
-    /// <param name="loser">The player who lost the game. This value is used to determine the winner.</param>
+    /// <param name="loser">The player who lost the game. 
+    /// This value is used to determine the winner.</param>
     public void SubmitWinnerFrom(PlayerType loser)
     {
         Winner = PlayerBase.Instance.GetWinner(loser);

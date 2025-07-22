@@ -47,19 +47,6 @@ namespace Assets.Scripts.DicePrefab
         }
 
         /// <summary>
-        /// Sets the component enabled true/false.
-        /// </summary>
-        /// <param name="component"></param>
-        /// <param name="value"></param>
-        public void SetEnabled(Component component, bool value)
-        {
-            if (component is Behaviour behaviour)
-            {
-                behaviour.enabled = value;
-            }
-        }
-
-        /// <summary>
         /// Sets the dice on the slot, deactivates the drag event and sets the canvas group default.
         /// </summary>
         public void SetOnActionSlot(Vector3 pos)
@@ -72,5 +59,18 @@ namespace Assets.Scripts.DicePrefab
             _diceDisplay.SetBlocksRaycasts(true);
         }
 
+
+        /// <summary>
+        /// Sets the component enabled true/false.
+        /// </summary>
+        /// <param name="component"></param>
+        /// <param name="value"></param>
+        public void SetEnabled(Component component, bool value)
+        {
+            if (component is Behaviour behaviour)
+            {
+                behaviour.enabled = value;
+            }
+        }
     }
 }

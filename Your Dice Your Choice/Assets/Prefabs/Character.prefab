@@ -2355,7 +2355,7 @@ MonoBehaviour:
   _healthSlider: {fileID: 6204576323055136816}
   _fillImage: {fileID: 1555208752840769769}
   _damageText: {fileID: 4686432980150634567}
-  _animSpeedTakeDamage: 0.0005
+  _animSpeedTakeDamage: 5
   _animCurve:
     serializedVersion: 2
     m_Curve:
