@@ -18,19 +18,10 @@ public class CharacterState : MonoBehaviour
     private enum BattleState 
     { 
         Battle, // battle eyes.
-        DownAct1, // @ @
-        DownAct2, // @ @ (rotate)
-        DownAct3, // X X 
+        DownAct1, // @ @ (rotate)
+        DownAct2, // X X 
     }
     private BattleState _battleState;
-
-    /// <summary>
-    /// Awake method.
-    /// </summary>
-    private void Awake()
-    {
-        SetBattleState();
-    }
 
     /// <summary>
     /// Update method.
@@ -51,9 +42,6 @@ public class CharacterState : MonoBehaviour
                 return;
 
             case BattleState.DownAct1:
-                return;
-
-            case BattleState.DownAct2:
                 RotateDownEyes(new GameObject[]
                 {
                     _downEyeAt1,
@@ -61,7 +49,7 @@ public class CharacterState : MonoBehaviour
                 });
                 return;
 
-            case BattleState.DownAct3:
+            case BattleState.DownAct2:
                 return;
 
             default:
@@ -81,9 +69,7 @@ public class CharacterState : MonoBehaviour
                 _downEyes.SetActive(false);
                 return;
 
-
             case BattleState.DownAct1:
-            case BattleState.DownAct2:
                 _battleEyes.SetActive(false);
                 _downEyes.SetActive(true);
 
@@ -94,8 +80,7 @@ public class CharacterState : MonoBehaviour
                 _downEyeAt2.SetActive(true);
                 return;
 
-
-            case BattleState.DownAct3:
+            case BattleState.DownAct2:
                 _battleEyes.SetActive(false);
                 _downEyes.SetActive(true);
 
@@ -105,7 +90,6 @@ public class CharacterState : MonoBehaviour
                 _downEyeX1.SetActive(true);
                 _downEyeX2.SetActive(true);
                 return;
-
 
             default:
                 _battleEyes.SetActive(true);

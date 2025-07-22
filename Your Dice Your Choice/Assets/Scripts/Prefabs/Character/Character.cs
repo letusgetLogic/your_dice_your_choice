@@ -1,9 +1,6 @@
 ﻿using UnityEngine;
 using Assets.Scripts.CharacterDatas;
 using Assets.Scripts.CharacterPrefab.CharacterBody;
-using UnityEngine.TextCore.Text;
-using NUnit.Framework;
-using System.Collections.Generic;
 using Assets.Scripts.FieldPrefab;
 
 namespace Assets.Scripts.CharacterPrefab
@@ -11,7 +8,13 @@ namespace Assets.Scripts.CharacterPrefab
     [ExecuteAlways]
     public class Character : MonoBehaviour
     {
-        public CharacterMouseEvent CharacterMouseEvent;
+        [SerializeField] 
+        private CharacterMouseEvent _characterMouseEvent;
+        public CharacterMouseEvent CharacterMouseEvent => _characterMouseEvent; 
+
+        [SerializeField] 
+        private CharacterBeingAttacked _characterBeingAttacked;
+        public CharacterBeingAttacked CharacterBeingAttacked  => _characterBeingAttacked; 
 
         public Player Player {  get; private set; }
         public PlayerType PlayerType { get; private set; }
@@ -49,7 +52,7 @@ namespace Assets.Scripts.CharacterPrefab
             Data = _dataInstance;
 
             // Color
-            CharacterMouseEvent.DeactivateHoverColor();
+            _characterBeingAttacked.DeactivateHoverColor();
 
             // Eyes
             GetComponent<CharacterState>().SetBattleState();
@@ -101,6 +104,8 @@ namespace Assets.Scripts.CharacterPrefab
             CurrentDP = data.DP;
 
             SetFieldIndex(fieldIndex);
+
+            gameObject.name = $"Character {Name}";
         }
 
         /// <summary>
@@ -147,6 +152,7 @@ namespace Assets.Scripts.CharacterPrefab
         {
             CurrentAP = Data.AP;
             BuffAP = 0f;
+            Debug.Log($"Character {Name} has CurrentAP {CurrentAP} and BuffAP {BuffAP}");
         }
 
         /// <summary>
@@ -169,7 +175,7 @@ namespace Assets.Scripts.CharacterPrefab
         /// </summary>
         /// <param name="component"></param>
         /// <param name="value"></param>
-        public void SetEnabled(Component component, bool value)
+        public void SetComponentEnabled(Component component, bool value)
         {
             if (component is Behaviour behaviour)
             {

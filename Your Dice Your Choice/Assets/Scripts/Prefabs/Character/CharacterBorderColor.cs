@@ -60,7 +60,6 @@ namespace Assets.Scripts.CharacterPrefab
                 if (_currentValue == 1)
                 {
                     _lightenState = LightenState.LightenDown;
-                    Debug.Log(_lightenState);
                     return;
                 }
 
@@ -79,7 +78,6 @@ namespace Assets.Scripts.CharacterPrefab
                 if (_currentValue == 0)
                 {
                     _lightenState = LightenState.LightenUp;
-                    Debug.Log(_lightenState);
                     return;
                 }
 
@@ -93,14 +91,16 @@ namespace Assets.Scripts.CharacterPrefab
         /// <param name="target"></param>
         private void Interpolate(float target)
         {
-            _currentValue = Mathf.MoveTowards(_currentValue, target, _animSpeedAct * 0.0001f / Time.deltaTime);
+            _currentValue = Mathf.MoveTowards(
+                _currentValue, target, _animSpeedAct * 0.0001f / Time.deltaTime);
 
-            float dimValue = Mathf.Lerp(_colorMinR, _colorMaxR, _animCurve.Evaluate(_currentValue));
+            float dimValue = 
+                Mathf.Lerp(_colorMinR, _colorMaxR, _animCurve.Evaluate(_currentValue));
             SetBorderColorR(dimValue);
-            Debug.Log(dimValue);
-            float scaleValue = Mathf.Lerp(_scaleMin, _scaleMax, _animCurve.Evaluate(_currentValue));
+          
+            float scaleValue = 
+                Mathf.Lerp(_scaleMin, _scaleMax, _animCurve.Evaluate(_currentValue));
             SetBorderScale(scaleValue);
-            Debug.Log(scaleValue);
         }
 
         /// <summary>
@@ -112,7 +112,8 @@ namespace Assets.Scripts.CharacterPrefab
             foreach (var item in _borders)
             {
                 var spriteRenderer = item.GetComponent<SpriteRenderer>();
-                spriteRenderer.color = new Color(rValue, spriteRenderer.color.g, spriteRenderer.color.b);
+                spriteRenderer.color = 
+                    new Color(rValue, spriteRenderer.color.g, spriteRenderer.color.b);
             }
         }
 

@@ -51,7 +51,7 @@ namespace Assets.Scripts.DicePrefab
 
                     var dice = GetComponent<Dice>();
                     var diceDragEvent = GetComponent<DiceDragEvent>();
-                    dice.SetEnabled(diceDragEvent, true);
+                    dice.SetComponentEnabled(diceDragEvent, true);
 
                     return;
                 }
@@ -78,7 +78,7 @@ namespace Assets.Scripts.DicePrefab
 
             var dice = GetComponent<Dice>();
             var diceDragEvent = GetComponent<DiceDragEvent>();
-            dice.SetEnabled(diceDragEvent, false);
+            dice.SetComponentEnabled(diceDragEvent, false);
 
             _isRunning = true;
         }

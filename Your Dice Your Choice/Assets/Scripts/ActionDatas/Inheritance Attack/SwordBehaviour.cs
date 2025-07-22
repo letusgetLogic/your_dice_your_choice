@@ -11,12 +11,12 @@ namespace Assets.Scripts.ActionDatas
         public static readonly string[] Description = new string[]
         {
             Attack.DefaultDescription,
-            "Dice 1: Attack with 100% AP",
-            "Dice 2: Attack with 200% AP",
-            "Dice 3: Attack with 300% AP",
-            "Dice 4: Attack with 400% AP",
-            "Dice 5: Attack with 500% AP",
-            "Dice 6: Attack with 600% AP",
+            "Dice 1: Hit orthogonally a opponent with 100% AP",
+            "Dice 2: Hit orthogonally a opponent with 200% AP",
+            "Dice 3: Hit orthogonally a opponent with 300% AP",
+            "Dice 4: Hit orthogonally a opponent with 400% AP",
+            "Dice 5: Hit orthogonally a opponent with 500% AP",
+            "Dice 6: Hit orthogonally a opponent with 600% AP",
         };
 
         private int _indexInList { get; set; }
@@ -27,11 +27,9 @@ namespace Assets.Scripts.ActionDatas
             AllowedDiceNumber = AllowedDiceNumber.D1_6;
         }
 
-        public override void ShowPopUpAction(int index, ActionPanel actionPanel)
+        public override void SetDataPopUp(int index)
         {
-            PanelManager.Instance.SetActive(PanelManager.Instance.PopUpAction, true);
-            PopUpAction.Instance.SetData(Description[index], 1);
-            PopUpAction.Instance.SetPosition(actionPanel.gameObject);
+            PopUpAction.Instance.SetData(Description[index]);
         }
 
         public override void SetInteractible(int diceNumber)
@@ -44,8 +42,13 @@ namespace Assets.Scripts.ActionDatas
 
         public override void ActivateSkill(int diceNumber)
         {
-            float buffedAP = character.CurrentAP + Buff(character.CurrentAP, diceNumber);
-            character.SetAP(buffedAP);
+            Debug.Log("character.CurrentAP " + character.CurrentAP);
+            float buffedAP = Buff(character.CurrentAP, diceNumber);
+           
+            character.SetAP(buffedAP); Debug.Log("character.CurrentAP " + character.CurrentAP);
+
+            character.SetBuffAP(buffedAP - character.CurrentAP); 
+            Debug.Log("character.BuffAP " + character.BuffAP);
         }
 
         private float Buff(float ap, int index)
@@ -64,7 +67,6 @@ namespace Assets.Scripts.ActionDatas
                 case 5:
                 case 6:
                     var buffedAP = ap * index;
-                    character.SetBuffAP(buffedAP - ap);
                     return buffedAP;
             }
 

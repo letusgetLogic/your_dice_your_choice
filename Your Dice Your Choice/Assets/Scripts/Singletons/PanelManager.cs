@@ -68,19 +68,19 @@ public class PanelManager : MonoBehaviour
     }
 
     [SerializeField]
-    private GameObject _popUpCharacter;
-    public GameObject PopUpCharacter
+    private GameObject _popUpCharacterObject;
+    public GameObject PopUpCharacterObject
     {
-        get { return _popUpCharacter; }
-        set { _popUpCharacter = value; }
+        get { return _popUpCharacterObject; }
+        set { _popUpCharacterObject = value; }
     }
 
     [SerializeField]
-    private GameObject _popUpAction;
-    public GameObject PopUpAction
+    private GameObject _popUpActionObject;
+    public GameObject PopUpActionObject
     {
-        get { return _popUpAction; }
-        set { _popUpAction = value; }
+        get { return _popUpActionObject; }
+        set { _popUpActionObject = value; }
     }
 
     //public GameObject RerollPanelLeft; 
@@ -127,7 +127,7 @@ public class PanelManager : MonoBehaviour
     /// <summary>
     /// Sets the panels active false.
     /// </summary>
-    private void HideAllPanel()
+    public void HideAllPanel()
     {
         foreach (GameObject panel in _characterPanelsLeft)
         {
@@ -143,10 +143,10 @@ public class PanelManager : MonoBehaviour
         SetActive(_rollPanelRight, false);
 
         // Set the inactive panel in the scene active to create the singleton instance.
-        SetActive(_popUpCharacter, true);
-        SetActive(_popUpCharacter, false);
-        SetActive(_popUpAction, true);
-        SetActive(_popUpAction, false);
+        SetActive(_popUpCharacterObject, true);
+        SetActive(_popUpCharacterObject, false);
+        SetActive(_popUpActionObject, true);
+        SetActive(_popUpActionObject, false);
     }
 
     /// <summary>

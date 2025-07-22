@@ -36,7 +36,17 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     public void StartMatch()
     {
-        ButtonManager.Instance.SetActive(ButtonManager.Instance.EndTurnButton, true);
+        ButtonManager.Instance.SetGameObjectActive(ButtonManager.Instance.EndTurnButton, true);
+    }
+
+    /// <summary>
+    /// Sets the interactable objects in lists and shows the PopUpAction. 
+    /// </summary>
+    /// <param name="diceNumber"></param>
+    /// <param name="actionPanel"></param>
+    public void SetInteractible(int diceNumber)
+    {
+        CurrentAction.SetInteractible(diceNumber);
     }
 
     /// <summary>
@@ -44,10 +54,8 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     /// <param name="diceNumber"></param>
     /// <param name="actionPanel"></param>
-    public void ShowInteractible(int diceNumber, ActionPanel actionPanel)
+    public void ShowInteractible(int diceNumber)
     {
-        CurrentAction.ShowPopUpAction(diceNumber, actionPanel);
-        CurrentAction.SetInteractible(diceNumber);
         CurrentAction.ShowInteractible();
         CurrentAction.ActivateSkill(diceNumber);
     }
@@ -81,7 +89,7 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     /// <param name="diceMovement"></param>
     public void SendDiceBackToBase(DiceMovement diceMovement)
-    {
+    {Debug.Log("SendDiceBackToBase called, IsDiceBeingDropped " + IsDiceBeingDropped);
         if (IsDiceBeingDropped)
             return;
 
@@ -96,9 +104,7 @@ public class BattleManager : MonoBehaviour
     {
         DeactivateInteractible();
 
-        var action = CurrentAction;
-        action.HandleInput(clickedObject);
-
+        CurrentAction.HandleInput(clickedObject);
         CurrentAction = null;
     }
 
@@ -109,7 +115,8 @@ public class BattleManager : MonoBehaviour
     public void EndMatch(PlayerType loser)
     {
         LevelManager.Instance.SubmitWinnerFrom(loser);
-        ButtonManager.Instance.SetActive(ButtonManager.Instance.EndTurnButton, false);
+        PanelManager.Instance.HideAllPanel();
+        ButtonManager.Instance.SetGameObjectActive(ButtonManager.Instance.EndTurnButton, false);
         LevelManager.Instance.NextPhase();
     }
 }

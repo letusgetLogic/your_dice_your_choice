@@ -66,7 +66,7 @@ public class RollPanel : MonoBehaviour
     {
         ButtonClickAnimation.Instance.ScaleSize(RollButton);
 
-        ButtonManager.Instance.SetInteractible(RollButton, false);
+        ButtonManager.Instance.SetButtonInteractible(RollButton, false);
 
         RollDice.Instance.Roll(
             VisibleDice,
@@ -94,7 +94,7 @@ public class RollPanel : MonoBehaviour
         {
             var dice = diceObject.GetComponent<Dice>();
             var diceDragEvent = diceObject.GetComponent<DiceDragEvent>();
-            dice.SetEnabled(diceDragEvent, value);
+            dice.SetComponentEnabled(diceDragEvent, value);
             
             var diceDisplay = diceObject.GetComponent<DiceDisplay>();
             

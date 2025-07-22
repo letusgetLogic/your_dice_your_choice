@@ -34,11 +34,13 @@ namespace Assets.Scripts.ActionDatas
         }
 
         /// <summary>
-        /// Sets the description and position for PopUpAction.
+        /// Sets the description of the action for popup based on dice number or not.
         /// </summary>
         /// <param name="diceNumber"></param>
-        public virtual void ShowPopUpAction(int diceNumber, ActionPanel actionPanel)
-        {}
+        public virtual void SetDataPopUp(int diceNumber)
+        {
+            PopUpAction.Instance.SetData(Data.Description);
+        }
 
         /// <summary>
         /// Sets the interactible objects.

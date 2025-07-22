@@ -2233,7 +2233,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7ede45b933cec64581e39ad2a4fdf91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharacterMouseEvent: {fileID: 756582597474049763}
+  _characterMouseEvent: {fileID: 756582597474049763}
+  _characterBeingAttacked: {fileID: 2406714893240263980}
   _data: {fileID: 0}
   SettingsFoldout: 0
 --- !u!114 &2643295388591708874
@@ -2824,6 +2825,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5792113122470517139}
   - component: {fileID: 756582597474049763}
+  - component: {fileID: 2406714893240263980}
   - component: {fileID: 7065920787256018453}
   - component: {fileID: 1465534783751511471}
   - component: {fileID: 6726623152664132908}
@@ -2869,6 +2871,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _delayOnHoverTime: 0.5
+--- !u!114 &2406714893240263980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7889348015612215440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e9324df1ba52514d813d35c3fd90725, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   _hoverColor: {fileID: 7900233103421084157}
 --- !u!212 &7065920787256018453
 SpriteRenderer:

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Assets.Scripts.CharacterDatas;
 using Assets.Scripts.CharacterPrefab;
+using Assets.Scripts.CharacterPrefab.CharacterBody;
 using UnityEngine;
 
 public class CharacterGenerator : MonoBehaviour
@@ -66,12 +67,18 @@ public class CharacterGenerator : MonoBehaviour
             // Border Color
             var characterBorderColor = 
                 characterObject.GetComponent<CharacterBorderColor>();
-            character.SetEnabled(characterBorderColor, false);
+            character.SetComponentEnabled(characterBorderColor, false);
+
+            // Being Attacked
+            character.SetComponentEnabled(character.CharacterBeingAttacked, false);
 
             // Panel
             var characterPanelObject = 
                 PanelManager.Instance.GetPanel(playerType, i, characterObject);
             character.SetPanel(characterPanelObject.GetComponent<CharacterPanel>());
+
+            // State
+            character.GetComponent<CharacterState>().SetBattleState();
 
             tempList.Add(characterObject);
         }

@@ -1,13 +1,14 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.ActionPanelPrefab;
 using Assets.Scripts.CharacterPrefab;
-using Assets.Scripts.ActionPanelPrefab;
+using System;
+using UnityEngine;
 
 namespace Assets.Scripts.ActionDatas
 {
     public abstract class Attack : ActionBase
     {
         public static readonly string DefaultDescription = 
-            "Move the dice over it to get more information";
+            "Move the dice over here to get more information";
 
         public AllowedDiceNumber AllowedDiceNumber { get; protected set; }
 
@@ -20,8 +21,7 @@ namespace Assets.Scripts.ActionDatas
             return CheckDiceCondition.IsNumberValid(AllowedDiceNumber, diceNumber);
         }
 
-        public override abstract void ShowPopUpAction(
-            int diceNumber, ActionPanel actionPanel);
+        public override abstract void SetDataPopUp(int diceNumber);
 
         public override abstract void SetInteractible(int diceNumber);
 
@@ -32,11 +32,18 @@ namespace Assets.Scripts.ActionDatas
 
         public override void HandleInput(GameObject clickedCharacterBody)
         {
+            if (clickedCharacterBody.CompareTag("Character") == false)
+            {
+                Debug.LogWarning("The clicked object is not a character body.");
+                return;
+            }
+
             GameObject enemyObject = clickedCharacterBody.transform.root.gameObject;
 
             float damage = 
                 character.CurrentAP - enemyObject.GetComponent<Character>().CurrentDP;
-
+            Debug.Log($"Character {character.Name} has CurrentAP {character.CurrentAP} and BuffAP {character.BuffAP}.");
+            Debug.Log($"Character {character.Name} makes {damage} damage. ");
             enemyObject.GetComponent<CharacterHealth>().TakeDamage(damage);
 
             this.SetDefault();

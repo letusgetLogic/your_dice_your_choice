@@ -29,6 +29,12 @@ namespace Assets.Scripts.ActionDatas
 
         public override void HandleInput(GameObject fieldObject)
         {
+            if (fieldObject.CompareTag("Field") == false)
+            {
+                Debug.LogWarning("The clicked object is not a field.");
+                return;
+            }
+
             CharacterObject.GetComponent<CharacterMovement>().MoveTo(fieldObject);
         }
 

@@ -51,7 +51,7 @@ namespace Assets.Scripts.DicePrefab
         /// </summary>
         public void SetOnActionSlot(Vector3 pos)
         {
-            SetEnabled(GetComponent<DiceDragEvent>(), false);
+            SetComponentEnabled(GetComponent<DiceDragEvent>(), false);
 
             _diceMovement.PositionsTo(pos);
 
@@ -65,7 +65,7 @@ namespace Assets.Scripts.DicePrefab
         /// </summary>
         /// <param name="component"></param>
         /// <param name="value"></param>
-        public void SetEnabled(Component component, bool value)
+        public void SetComponentEnabled(Component component, bool value)
         {
             if (component is Behaviour behaviour)
             {

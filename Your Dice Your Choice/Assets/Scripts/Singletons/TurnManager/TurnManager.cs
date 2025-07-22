@@ -100,7 +100,7 @@ public class TurnManager : MonoBehaviour
             panel.SetInteractionFor(panel.VisibleDice, false);
             panel.SendBackToBase(panel.VisibleDice);
             panel.SetDefaultNumber(panel.VisibleDice);
-            ButtonManager.Instance.SetInteractible(panel.RollButton, false);
+            ButtonManager.Instance.SetButtonInteractible(panel.RollButton, false);
         }
     }
 
@@ -144,9 +144,9 @@ public class TurnManager : MonoBehaviour
 
         var panel = nextPlayer.RollPanel;
         panel.ShowDice();
-        ButtonManager.Instance.SetInteractible(panel.RollButton, true);
+        ButtonManager.Instance.SetButtonInteractible(panel.RollButton, true);
 
-        ButtonManager.Instance.SetInteractible(
+        ButtonManager.Instance.SetButtonInteractible(
             ButtonManager.Instance.EndTurnButton, true);
     }
 

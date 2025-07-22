@@ -6,7 +6,7 @@ namespace Assets.Scripts.ActionDatas
     public class Defend : ActionBase
     {
         public static readonly string DefaultDescription = 
-            "Move the dice over it to get more information";
+            "Move the dice over here to get more information";
 
         public Defend(ActionData data, GameObject characterObject) : 
             base(data, characterObject) { }

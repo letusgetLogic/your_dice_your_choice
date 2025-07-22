@@ -32,8 +32,15 @@ namespace Assets.Scripts
         /// <param name="characterFieldIndexOrigin"></param>
         /// <param name="actionDirections"></param>
         /// <param name="directionRange"></param>
-        public void SetInteractibleEnemyCharacters(Vector2Int characterFieldIndexOrigin, Vector2Int[] actionDirections, int directionRange)
+        public void SetInteractibleEnemyCharacters(Vector2Int characterFieldIndexOrigin, 
+                                                    Vector2Int[] actionDirections, 
+                                                    int directionRange)
         {
+            if (InteractibleCharacters != null)
+            {
+                DeactivateCharacters();
+            }
+
             InteractibleCharacters = new();
 
             foreach (Vector2Int actionDirection in actionDirections)
@@ -41,14 +48,15 @@ namespace Assets.Scripts
                 var fieldIndex = characterFieldIndexOrigin;
                 fieldIndex += actionDirection * directionRange;
 
-                if (fieldIndex.x < 0 || fieldIndex.x >= LevelManager.Instance.Data.MapHeight)
-                    continue;
-                if (fieldIndex.y < 0 || fieldIndex.y >= LevelManager.Instance.Data.MapLength)
-                    continue;
-                if (EnemyCharacter(characterFieldIndexOrigin, actionDirection, directionRange) == null)
+                if (FieldManager.Instance.IsTargetOutOfRange(fieldIndex))
                     continue;
 
-                var enemyObject = EnemyCharacter(characterFieldIndexOrigin, actionDirection, directionRange);
+                if (EnemyCharacter(characterFieldIndexOrigin, actionDirection, 
+                                    directionRange) == null)
+                    continue;
+
+                var enemyObject = EnemyCharacter(characterFieldIndexOrigin, 
+                                                actionDirection, directionRange);
                 InteractibleCharacters.Add(enemyObject);
             }
         }
@@ -62,10 +70,11 @@ namespace Assets.Scripts
             {
                 var borderColor = characterObject.GetComponent<CharacterBorderColor>();
                 var character = characterObject.GetComponent<Character>();
-                character.SetEnabled(borderColor, true);
+                character.SetComponentEnabled(borderColor, true);
 
-                var mouseEvent = characterObject.GetComponent<Character>().CharacterMouseEvent;
-                mouseEvent.SetIsBeingAttacked(true);
+                var beingAttacked = 
+                    characterObject.GetComponent<Character>().CharacterBeingAttacked;
+                character.SetComponentEnabled(beingAttacked, true);
             }
         }
 
@@ -76,21 +85,20 @@ namespace Assets.Scripts
         /// <param name="actionDirection"></param>
         /// <param name="directionRange"></param>
         /// <returns></returns>
-        private GameObject EnemyCharacter(Vector2Int characterFieldIndexOrigin, Vector2Int actionDirection, int directionRange)
+        private GameObject EnemyCharacter(Vector2Int characterFieldIndexOrigin, 
+                                            Vector2Int actionDirection, 
+                                            int directionRange)
         {
-            var enemyObject = new GameObject();
-
             for (int i = 1; i <= directionRange; i++)
             {
                 var fieldIndex = characterFieldIndexOrigin;
                 fieldIndex += actionDirection * i;
 
-                if (fieldIndex.x < 0 || fieldIndex.x >= LevelManager.Instance.Data.MapHeight)
-                    continue;
-                if (fieldIndex.y < 0 || fieldIndex.y >= LevelManager.Instance.Data.MapLength)
+                if (FieldManager.Instance.IsTargetOutOfRange(fieldIndex))
                     continue;
 
-                var field = FieldManager.Instance.Fields[fieldIndex.x, fieldIndex.y].GetComponent<Field>();
+                var field = FieldManager.Instance.Fields[fieldIndex.x, fieldIndex.y].
+                    GetComponent<Field>();
 
                 if (field.EnemyObject(TurnManager.Instance.Turn) != null)
                     return field.CharacterObject;
@@ -100,21 +108,31 @@ namespace Assets.Scripts
         }
 
         /// <summary>
-        /// Deactivates the interactible characters.
+        /// Deactivates the interactable characters and sets the InteractableCharacters to null.
         /// </summary>
         public void DeactivateCharacters()
         {
-            if (InteractibleCharacters == null || InteractibleCharacters.Count == 0)
+            if (InteractibleCharacters == null)
                 return;
+
+            if (InteractibleCharacters.Count == 0)
+            {
+                 InteractibleCharacters = null;
+                return;
+            }
 
             foreach (var characterObject in InteractibleCharacters)
             {
                 var borderColor = characterObject.GetComponent<CharacterBorderColor>();
                 var character = characterObject.GetComponent<Character>();
-                character.SetEnabled(borderColor, false);
+                character.SetComponentEnabled(borderColor, false);
+
+                var beingAttacked =
+                    characterObject.GetComponent<Character>().CharacterBeingAttacked;
+                character.SetComponentEnabled(beingAttacked, false);
             }
 
-            InteractibleCharacters.Clear();
+            InteractibleCharacters = null;
         }
 
     }

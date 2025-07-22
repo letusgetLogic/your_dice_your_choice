@@ -75,7 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4be033a431a7a004a9827839d73a7ab0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _delayOnHoverTime: 0.5
+  _delayOnHoverTime: 0
 --- !u!114 &7102619009427932503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8369337378fbf0c44821350e3325af8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _delayShowingInteractible: 0.75
+  _delayShowingInteractible: 0
 --- !u!61 &3842536873040856245
 BoxCollider2D:
   m_ObjectHideFlags: 0

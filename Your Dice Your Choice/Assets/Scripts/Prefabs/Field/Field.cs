@@ -17,6 +17,7 @@ namespace Assets.Scripts.FieldPrefab
         public void SetIndex(Vector2Int index)
         {
             this.Index = index;
+            gameObject.name = $"Field {index.x} / {index.y}";
         }
 
         /// <summary>

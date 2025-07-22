@@ -100,7 +100,7 @@ public class LevelManager : MonoBehaviour
                 return;
 
             case Phase.WaitForInput:
-                ButtonManager.Instance.SetActive(
+                ButtonManager.Instance.SetGameObjectActive(
                     ButtonManager.Instance.NewMatchButton, true);
                 return;
         }

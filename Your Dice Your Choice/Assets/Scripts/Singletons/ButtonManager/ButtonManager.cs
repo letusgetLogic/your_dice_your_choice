@@ -34,14 +34,14 @@ public class ButtonManager : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        SetActive(EndTurnButton, false);
+        SetGameObjectActive(EndTurnButton, false);
         DeactivateRollButtons();
     }
 
     /// <summary>
     /// Calls when end button is clicked.
     /// </summary>
-    public void OnEndButton()
+    public void OnEndTurnButton()
     {
         ButtonClickAnimation.Instance.ScaleSize(EndTurnButton);
 
@@ -57,7 +57,7 @@ public class ButtonManager : MonoBehaviour
     {
         foreach (var button in AllRollButtons)
         {
-            SetInteractible(button, false);
+            SetButtonInteractible(button, false);
         }
     }
 
@@ -65,7 +65,7 @@ public class ButtonManager : MonoBehaviour
     /// Sets the button active true/false.
     /// </summary>
     /// <param name="button"></param>
-    public void SetActive(Button button, bool value)
+    public void SetGameObjectActive(Button button, bool value)
     {
         button.gameObject.SetActive(value);
     }
@@ -74,7 +74,7 @@ public class ButtonManager : MonoBehaviour
     /// Sets the button interactable true/false.
     /// </summary>
     /// <param name="button"></param>
-    public void SetInteractible(Button button, bool value)
+    public void SetButtonInteractible(Button button, bool value)
     {
         button.interactable = value;
     }
