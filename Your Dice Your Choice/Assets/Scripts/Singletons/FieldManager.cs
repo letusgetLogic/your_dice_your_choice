@@ -57,7 +57,8 @@ public class FieldManager : MonoBehaviour
     /// <param name="characterFieldIndexOrigin"></param>
     /// <param name="actionDirections"></param>
     /// <param name="directionRange"></param>
-    public void SetInteractibleFields(Vector2Int characterFieldIndexOrigin, Vector2Int[] actionDirections, int directionRange)
+    public void SetInteractibleFields(Vector2Int characterFieldIndexOrigin, 
+        Vector2Int[] actionDirections, int directionRange)
     {
         InteractibleFields = new();
 
@@ -73,7 +74,8 @@ public class FieldManager : MonoBehaviour
                 continue;
 
             // Check if there is an obstacle in the way
-            if (IsAnyObstacleInWay(characterFieldIndexOrigin, actionDirection, directionRange))
+            if (IsAnyObstacleInWay(
+                characterFieldIndexOrigin, actionDirection, directionRange))
                 continue;
 
             var fieldObject = Fields[fieldIndex.x, fieldIndex.y];
@@ -104,7 +106,8 @@ public class FieldManager : MonoBehaviour
     /// <param name="actionDirection"></param>
     /// <param name="directionRange"></param>
     /// <returns></returns>
-    private bool IsAnyObstacleInWay(Vector2Int characterFieldIndexOrigin, Vector2Int actionDirection, int directionRange)
+    private bool IsAnyObstacleInWay(Vector2Int characterFieldIndexOrigin, 
+        Vector2Int actionDirection, int directionRange)
     {
         for (int i = 1; i <= directionRange; i++)
         {

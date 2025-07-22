@@ -40,28 +40,12 @@ public class BattleManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Checks if the coroutine is running and stops it if necessary, setting it to null.
-    /// </summary>
-    public void CheckCoroutine()
-    {
-        // Ensure that the coroutine is not null before stopping it.
-        if (Coroutine != null)
-        {
-            StopCoroutine(Coroutine);
-            Coroutine = null;
-        }
-    }
-
-    /// <summary>
     /// Shows the interactible objects.
     /// </summary>
     /// <param name="diceNumber"></param>
     /// <param name="actionPanel"></param>
     public void ShowInteractible(int diceNumber, ActionPanel actionPanel)
     {
-        if (CurrentAction == null)
-            return;
-
         CurrentAction.ShowPopUpAction(diceNumber, actionPanel);
         CurrentAction.SetInteractible(diceNumber);
         CurrentAction.ShowInteractible();
@@ -69,17 +53,26 @@ public class BattleManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Deactivates the interactible objects. Being called from the DiceSlotAction script.
+    /// Sets the coroutine null and deactivates the interactable objects.
     /// </summary>
-    /// <param name="actionPanel"></param>
     public void DeactivateInteractible()
     {
-        if (CurrentAction == null) 
-            return;
-        
-        CurrentAction.SetDefault();
-        CurrentAction.DeactivateInteractible();
-        CurrentAction = null;
+        SetCoroutineNull();
+        FieldManager.Instance.DeactivateFields();
+        CharacterManager.Instance.DeactivateCharacters();
+    }
+
+    /// <summary>
+    /// Stops coroutine if necessary, setting it to null.
+    /// </summary>
+    private void SetCoroutineNull()
+    {
+        // Ensure that the coroutine is not null before stopping it.
+        if (Coroutine != null)
+        {
+            StopCoroutine(Coroutine);
+            Coroutine = null;
+        }
     }
 
     /// <summary>
@@ -101,7 +94,7 @@ public class BattleManager : MonoBehaviour
     /// <param name="clickedObject"></param>
     public void HandleInput(GameObject clickedObject)
     {
-        CurrentAction.DeactivateInteractible();
+        DeactivateInteractible();
 
         var action = CurrentAction;
         action.HandleInput(clickedObject);

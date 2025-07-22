@@ -6,21 +6,22 @@ namespace Assets.Scripts.ActionDatas
 {
     public abstract class Attack : ActionBase
     {
-        public static readonly string DefaultDescription = "Move the dice over it to get more information";
+        public static readonly string DefaultDescription = 
+            "Move the dice over it to get more information";
 
         public AllowedDiceNumber AllowedDiceNumber { get; protected set; }
 
-        public Attack(ActionData data, GameObject characterObject) : base(data, characterObject) 
-        {
-            
-        }
+        public Attack(ActionData data, GameObject characterObject) : 
+            base(data, characterObject) 
+        {}
 
         public override bool IsValid(int diceNumber)
         {
             return CheckDiceCondition.IsNumberValid(AllowedDiceNumber, diceNumber);
         }
 
-        public override abstract void ShowPopUpAction(int diceNumber, ActionPanel actionPanel);
+        public override abstract void ShowPopUpAction(
+            int diceNumber, ActionPanel actionPanel);
 
         public override abstract void SetInteractible(int diceNumber);
 
@@ -29,23 +30,22 @@ namespace Assets.Scripts.ActionDatas
             CharacterManager.Instance.ShowInteractibleCharacters();
         }
 
-        public override void DeactivateInteractible()
-        {
-            CharacterManager.Instance.DeactivateCharacters();
-        }
-
         public override void HandleInput(GameObject clickedCharacterBody)
         {
             GameObject enemyObject = clickedCharacterBody.transform.root.gameObject;
 
-            float damage = character.CurrentAP - enemyObject.GetComponent<Character>().CurrentDP;
+            float damage = 
+                character.CurrentAP - enemyObject.GetComponent<Character>().CurrentDP;
 
             enemyObject.GetComponent<CharacterHealth>().TakeDamage(damage);
 
             this.SetDefault();
         }
 
-        public override void SetDefault()
+        /// <summary>
+        /// Sets the default values for the action.
+        /// </summary>
+        public virtual void SetDefault()
         {
             character.SetDefault();
         }

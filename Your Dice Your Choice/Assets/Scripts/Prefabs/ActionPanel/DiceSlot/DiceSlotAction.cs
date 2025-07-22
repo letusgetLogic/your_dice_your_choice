@@ -35,11 +35,7 @@ namespace Assets.Scripts.ActionPanelPrefab
                 // If the player don't use the previous action and
                 // the interactable are still showed,
                 // deactivate the interactable of the previous action panel.
-                if (BattleManager.Instance.Coroutine != null)
-                {
-                    BattleManager.Instance.CheckCoroutine();
-                    BattleManager.Instance.DeactivateInteractible();
-                }
+                BattleManager.Instance.DeactivateInteractible();
 
                 BattleManager.Instance.Coroutine = 
                     ShowInteractible(eventData.pointerDrag);
@@ -95,7 +91,6 @@ namespace Assets.Scripts.ActionPanelPrefab
 
             if (eventData.pointerDrag != null && eventData.pointerDrag.CompareTag("Dice"))
             {
-                BattleManager.Instance.CheckCoroutine();
                 BattleManager.Instance.DeactivateInteractible();
             }
         }
@@ -108,7 +103,6 @@ namespace Assets.Scripts.ActionPanelPrefab
         {
             if (!_canDiceBeingDropped)
             {
-                BattleManager.Instance.CheckCoroutine();
                 BattleManager.Instance.DeactivateInteractible();
                 return;
             }

@@ -9,7 +9,8 @@ namespace Assets.Scripts.ActionDatas
     {
         public Vector2Int[] ActionDirections { get; private set; }
 
-        public Movement(ActionData data, GameObject characterObject) : base(data, characterObject)
+        public Movement(ActionData data, GameObject characterObject) : 
+            base(data, characterObject)
         {
             ActionDirections = GetVector2IntFromDirection.Get(data.Direction);
         }
@@ -24,11 +25,6 @@ namespace Assets.Scripts.ActionDatas
         public override void ShowInteractible()
         {
             FieldManager.Instance.ShowInteractibleFields();
-        }
-
-        public override void DeactivateInteractible()
-        {
-            FieldManager.Instance.DeactivateFields();
         }
 
         public override void HandleInput(GameObject fieldObject)

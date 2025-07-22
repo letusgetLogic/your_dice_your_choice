@@ -52,11 +52,6 @@ namespace Assets.Scripts.ActionDatas
         public abstract void ShowInteractible();
 
         /// <summary>
-        /// Deactivates the interactible objects.
-        /// </summary>
-        public abstract void DeactivateInteractible();
-
-        /// <summary>
         /// Activates the skill of the action.
         /// </summary>
         public virtual void ActivateSkill(int diceNumber)
@@ -68,10 +63,5 @@ namespace Assets.Scripts.ActionDatas
         /// <param name="fieldObject"></param>
         public abstract void HandleInput(GameObject fieldObject);
 
-        /// <summary>
-        /// Sets the default values.
-        /// </summary>
-        public virtual void SetDefault()
-        { }
     }
 }
