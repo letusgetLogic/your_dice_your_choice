@@ -1,4 +1,5 @@
 using Assets.Scripts;
+using Assets.Scripts.CharacterPrefab;
 using TMPro;
 using UnityEngine;
 
@@ -60,26 +61,23 @@ public class PopUpCharacter : MonoBehaviour
     /// <param name="currentHp"></param>
     /// <param name="ap"></param>
     /// <param name="dp"></param>
-    public void SetData(string name, Color color,
-                        float maxHp, float currentHp,
-                        float ap, float buffAp,
-                        float dp, float buffDp)
+    public void SetData(Character character)
     {
-        _name.text = name;
-        _name.color = color;
+        _name.text = character.Name;
+        _name.color = character.GetComponent<CharacterColor>().PlayerColor;
 
-        _maxHp.text = maxHp.ToString();
-        _currentHp.text = currentHp.ToString();
+        _maxHp.text = character.Data.HP.ToString();
+        _currentHp.text = character.GetComponent<CharacterHealth>().CurrentHP.ToString();
 
-        _buffAp.gameObject.SetActive(buffAp != 0);
-        _ap.text = ap.ToString();
-        _buffAp.text = $"(+{buffAp})";
+        _ap.text = character.CurrentAP.ToString();
+        _buffAp.text = $"(+{character.BuffAP.ToString()})";
+        _buffAp.gameObject.SetActive(character.BuffAP != 0);
 
-        _buffDp.gameObject.SetActive(buffDp != 0);
-        _dp.text = dp.ToString();
-        _buffDp.text = $"(+{buffDp})";
+        _dp.text = character.CurrentDP.ToString();
+        _buffDp.text = $"(+{character.BuffDP.ToString()})";
+        _buffDp.gameObject.SetActive(character.BuffDP != 0);
     }
-
+   
     /// <summary>
     /// Sets the position of the info panel.
     /// </summary>

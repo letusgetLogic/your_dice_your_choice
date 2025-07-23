@@ -54,20 +54,28 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     /// <param name="diceNumber"></param>
     /// <param name="actionPanel"></param>
-    public void ShowInteractible(int diceNumber)
+    public void ShowInteractible()
     {
         CurrentAction.ShowInteractible();
+    }
+
+    /// <summary>
+    /// Activates the skill of the current action based on the given dice number.
+    /// </summary>
+    /// <param name="diceNumber"></param>
+    public void ActivateSkill(int diceNumber)
+    {
         CurrentAction.ActivateSkill(diceNumber);
     }
 
     /// <summary>
-    /// Sets the coroutine null and deactivates the interactable objects.
+    /// Deactivates the interactable objects and Sets the coroutine null.
     /// </summary>
     public void DeactivateInteractible()
     {
-        SetCoroutineNull();
         FieldManager.Instance.DeactivateFields();
         CharacterManager.Instance.DeactivateCharacters();
+        SetCoroutineNull();
     }
 
     /// <summary>

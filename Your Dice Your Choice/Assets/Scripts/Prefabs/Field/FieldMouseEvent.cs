@@ -6,7 +6,8 @@ using UnityEngine.EventSystems;
 
 namespace Assets.Scripts.FieldPrefab
 {
-    public class FieldMouseEvent : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+    public class FieldMouseEvent : MonoBehaviour, 
+        IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] private  GameObject _foggyPanel;
         [SerializeField] private  GameObject _animationHint;
@@ -32,11 +33,14 @@ namespace Assets.Scripts.FieldPrefab
         /// </summary>
         public void OnPointerClick(PointerEventData eventData)
         {
-            _isClicking = true;
-            _animationHint.SetActive(false);
-            _animationClick.SetActive(true);
-            
-            StartCoroutine(DisableAnimClick(eventData.pointerClick));
+            if (eventData.button == PointerEventData.InputButton.Left)
+            {
+                _isClicking = true;
+                _animationHint.SetActive(false);
+                _animationClick.SetActive(true);
+
+                StartCoroutine(DisableAnimClick(eventData.pointerClick));
+            }
         }
 
         /// <summary>

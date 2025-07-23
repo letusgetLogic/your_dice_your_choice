@@ -99,8 +99,8 @@ public class PanelManager : MonoBehaviour
         Instance = this;
 
         HideAllPanel();
-        HideDiceOnPanel(RollPanelLeft);
-        HideDiceOnPanel(RollPanelRight);
+        RollPanelLeft.GetComponent<RollPanel>().HideAllDice();
+        RollPanelRight.GetComponent<RollPanel>().HideAllDice();
 
         SetFirstTurn.Instance.InitializePanels();
     }
@@ -139,24 +139,16 @@ public class PanelManager : MonoBehaviour
             SetActive(panel, false);
         }
         
-        SetActive(_rollPanelLeft, false);
-        SetActive(_rollPanelRight, false);
+        SetActive(RollPanelLeft, false);
+        RollPanelLeft.GetComponent<RollPanel>().HideAllDice();
+        SetActive(RollPanelRight, false);
+        RollPanelRight.GetComponent<RollPanel>().HideAllDice();
 
         // Set the inactive panel in the scene active to create the singleton instance.
         SetActive(_popUpCharacterObject, true);
         SetActive(_popUpCharacterObject, false);
         SetActive(_popUpActionObject, true);
         SetActive(_popUpActionObject, false);
-    }
-
-    /// <summary>
-    /// Hides Dice on Panel.
-    /// </summary>
-    /// <param name="panel"></param>
-    private void HideDiceOnPanel(GameObject panel)
-    {
-        var rollPanel = panel.GetComponent<RollPanel>();
-        rollPanel.HideAllDice();
     }
 
     /// <summary>

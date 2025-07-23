@@ -11,7 +11,7 @@ namespace Assets.Scripts.FieldPrefab
         private int _count = 0;
 
         /// <summary>
-        /// Sets the field index.
+        /// Sets the field index and the name.
         /// </summary>
         /// <param name="index"></param>
         public void SetIndex(Vector2Int index)
@@ -93,7 +93,7 @@ namespace Assets.Scripts.FieldPrefab
         /// </summary>
         /// <param name="component"></param>
         /// <param name="value"></param>
-        public void SetEnabled(Component component, bool value)
+        public void SetComponentEnabled(Component component, bool value)
         {
             if (component is Behaviour behaviour)
             {

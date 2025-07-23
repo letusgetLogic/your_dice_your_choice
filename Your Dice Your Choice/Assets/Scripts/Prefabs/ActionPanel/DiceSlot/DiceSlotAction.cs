@@ -83,7 +83,7 @@ namespace Assets.Scripts.ActionPanelPrefab
 
             _canDiceBeingDropped = true;
             Debug.Log("ShowInteractible, _canDiceBeingDropped " + _canDiceBeingDropped);
-            BattleManager.Instance.ShowInteractible(dice.CurrentNumber);
+            BattleManager.Instance.ShowInteractible();
         }
 
         /// <summary>
@@ -130,6 +130,8 @@ namespace Assets.Scripts.ActionPanelPrefab
             var diceObject = eventData.pointerDrag;
             var dice = diceObject.GetComponent<Dice>();
             dice.SetOnActionSlot(GetComponent<RectTransform>().position);
+            
+            BattleManager.Instance.ActivateSkill(dice.CurrentNumber);
 
             _canDiceBeingDropped = false;
             BattleManager.Instance.IsDiceBeingDropped = false;

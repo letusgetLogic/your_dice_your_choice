@@ -42,13 +42,10 @@ namespace Assets.Scripts.ActionDatas
 
         public override void ActivateSkill(int diceNumber)
         {
-            Debug.Log("character.CurrentAP " + character.CurrentAP);
             float buffedAP = Buff(character.CurrentAP, diceNumber);
            
-            character.SetAP(buffedAP); Debug.Log("character.CurrentAP " + character.CurrentAP);
-
             character.SetBuffAP(buffedAP - character.CurrentAP); 
-            Debug.Log("character.BuffAP " + character.BuffAP);
+            character.SetAP(buffedAP); 
         }
 
         private float Buff(float ap, int index)
@@ -59,8 +56,6 @@ namespace Assets.Scripts.ActionDatas
                     throw new System.Exception("SwordBehaviour.Buff() -> index = 0");
 
                 case 1:
-                    return 0f;
-
                 case 2:
                 case 3:
                 case 4:

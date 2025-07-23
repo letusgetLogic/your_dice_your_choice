@@ -28,16 +28,7 @@ namespace Assets.Scripts.CharacterPrefab.CharacterBody
             if (_isShowing)
             {
                 var character = transform.root.GetComponent<Character>();
-
-                PopUpCharacter.Instance.SetData(
-                    character.Name,
-                    character.GetComponent<CharacterColor>().PlayerColor,
-                    character.Data.HP,
-                    character.GetComponent<CharacterHealth>().CurrentHP,
-                    character.CurrentAP,
-                    character.BuffAP,
-                    character.CurrentDP,
-                    character.BuffDP);
+                PopUpCharacter.Instance.SetData(character);
             }
         }
 

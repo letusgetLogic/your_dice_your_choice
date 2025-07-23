@@ -44,10 +44,10 @@ public class FieldManager : MonoBehaviour
         Fields[j, i] = fieldObject;
 
         Vector2Int index = new Vector2Int(j, i);
-        fieldObject.GetComponent<Field>().SetIndex(index);
 
         var field = fieldObject.GetComponent<Field>();
-        field.SetEnabled(field.GetComponent<FieldMouseEvent>(), false);
+        field.SetIndex(index);
+        field.SetComponentEnabled(field.GetComponent<FieldMouseEvent>(), false);
 
     }
 
@@ -98,7 +98,7 @@ public class FieldManager : MonoBehaviour
         foreach (var fieldObject in InteractibleFields)
         {
             var field = fieldObject.GetComponent<Field>();
-            field.SetEnabled(field.GetComponent<FieldMouseEvent>(), true);
+            field.SetComponentEnabled(field.GetComponent<FieldMouseEvent>(), true);
             Debug.Log($"Field {fieldObject.GetComponent<Field>().Index} FieldMouseEvent enabled true\n");
         }
     }
@@ -146,7 +146,7 @@ public class FieldManager : MonoBehaviour
         foreach (var fieldObject in InteractibleFields)
         {
             var field = fieldObject.GetComponent<Field>();
-            field.SetEnabled(field.GetComponent<FieldMouseEvent>(), false);
+            field.SetComponentEnabled(field.GetComponent<FieldMouseEvent>(), false);
             Debug.Log($"Field {fieldObject.GetComponent<Field>().Index} FieldMouseEvent enabled false\n");
         }
 

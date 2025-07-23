@@ -123,8 +123,8 @@ namespace Assets.Scripts
 
             foreach (var characterObject in InteractibleCharacters)
             {
-                var borderColor = characterObject.GetComponent<CharacterBorderColor>();
                 var character = characterObject.GetComponent<Character>();
+                var borderColor = characterObject.GetComponent<CharacterBorderColor>();
                 character.SetComponentEnabled(borderColor, false);
 
                 var beingAttacked =
