@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using Assets.Scripts;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Tilemaps;

@@ -1,7 +1,4 @@
 using System.Collections.Generic;
-using Assets.Scripts.CharacterDatas;
-using Assets.Scripts.CharacterPrefab;
-using Assets.Scripts.CharacterPrefab.CharacterBody;
 using UnityEngine;
 
 public class CharacterGenerator : MonoBehaviour
@@ -12,7 +9,7 @@ public class CharacterGenerator : MonoBehaviour
     [SerializeField] private CharacterData[] _characterData;
 
     // Max. value of columns of the spawn area for character. 
-    private readonly int CharacterSpawnAreaMaxColumn = 2; 
+    private readonly int CharacterSpawnAreaMaxColumn = 2;
 
     [HideInInspector] public List<string> CharacterNames = CharacterName.Names;
 
@@ -47,14 +44,14 @@ public class CharacterGenerator : MonoBehaviour
 
         for (int i = 0; i < LevelManager.Instance.Data.CharacterAmount; i++)
         {
-            var characterObject = 
+            var characterObject =
                 Instantiate(_characterPrefab, randomPositions[i], Quaternion.identity);
             var character = characterObject.GetComponent<Character>();
-            
+
             // Data
             var characterData = _characterData[Random.Range(0, _characterData.Length)];
             character.SetData(player, playerType, characterData, randomIndexes[i]);
-            
+
             // Weapon
             var characterGetWeapon = characterObject.GetComponent<CharacterGetWeapon>();
             characterGetWeapon.SetWeaponToLeftHand(character);
@@ -65,7 +62,7 @@ public class CharacterGenerator : MonoBehaviour
             characterColor.SetColor(PlayerColor(playerType), character.Name);
 
             // Border Color
-            var characterBorderColor = 
+            var characterBorderColor =
                 characterObject.GetComponent<CharacterBorderColor>();
             character.SetComponentEnabled(characterBorderColor, false);
 
@@ -73,7 +70,7 @@ public class CharacterGenerator : MonoBehaviour
             character.SetComponentEnabled(character.CharacterBeingAttacked, false);
 
             // Panel
-            var characterPanelObject = 
+            var characterPanelObject =
                 PanelManager.Instance.GetPanel(playerType, i, characterObject);
             character.SetPanel(characterPanelObject.GetComponent<CharacterPanel>());
 
@@ -97,7 +94,7 @@ public class CharacterGenerator : MonoBehaviour
 
         // Initializes for each index a null value.
         for (int h = 0; h < fieldIndex.Length; h++)
-            fieldIndex[h] = new Vector2(-1, -1); 
+            fieldIndex[h] = new Vector2(-1, -1);
 
         int rowAmount = FieldManager.Instance.Fields.GetLength(0);
 
@@ -105,25 +102,25 @@ public class CharacterGenerator : MonoBehaviour
         {
             int row = Random.Range(0, rowAmount);
             int col = RandomizeColumn(player);
-            
+
             randomIndexes[i] = new Vector2Int(row, col);
 
             // Checks if the field index is already assigned. 
             var currentFieldIndex = new Vector2(row, col);
 
-            for (int j = 0; j <= i; j++) 
+            for (int j = 0; j <= i; j++)
             {
                 // ex. for the first loop, fieldIndex[0] = Vector2(-1,-1) => false.
-                if (currentFieldIndex == fieldIndex[j]) 
+                if (currentFieldIndex == fieldIndex[j])
                 {
                     i--; // The main for-loop repeats this loop.
                     break;
                 }
 
                 // only sets in the last loop.
-                if (j == i) 
+                if (j == i)
                 {
-                    fieldIndex[j] = currentFieldIndex; 
+                    fieldIndex[j] = currentFieldIndex;
                     // ex. fieldIndex[0] = Vector2(row, col).
                 }
             }
@@ -157,7 +154,7 @@ public class CharacterGenerator : MonoBehaviour
     {
         for (int i = 0; i < randomIndexes.Length; i++)
         {
-            var field = 
+            var field =
                 FieldManager.Instance.Fields[randomIndexes[i].x, randomIndexes[i].y];
             randomPositions[i] = field.transform.position;
         }

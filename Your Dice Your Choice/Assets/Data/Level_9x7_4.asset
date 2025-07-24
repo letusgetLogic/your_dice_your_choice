@@ -17,3 +17,4 @@ MonoBehaviour:
   MapHeight: 7
   CamOrthographicSize: 5
   CharacterAmount: 4
+  DiceAmount: 4

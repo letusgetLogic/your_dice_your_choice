@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Assets.Scripts.CharacterDatas
+public static class CharacterName
 {
-    public static class CharacterName
-    {
-        public static readonly List<string> Names = new(){
+    public static readonly List<string> Names = new(){
             "Tharok",
             "Kaelgor",
             "Draven",
@@ -62,17 +60,17 @@ namespace Assets.Scripts.CharacterDatas
             "Thorne",
         };
 
-        /// <summary>
-        /// Gets the random name in the list.
-        /// </summary>
-        /// <returns></returns>
-        public static string GetName()
-        {
-            int rndIndex = new Random().Next(0, CharacterGenerator.Instance.CharacterNames.Count);
-            string tempName = CharacterGenerator.Instance.CharacterNames[rndIndex];
-            CharacterGenerator.Instance.CharacterNames.Remove(tempName);
+    /// <summary>
+    /// Gets the random name in the list.
+    /// </summary>
+    /// <returns></returns>
+    public static string GetName()
+    {
+        int rndIndex = new Random().Next(0, CharacterGenerator.Instance.CharacterNames.Count);
+        string tempName = CharacterGenerator.Instance.CharacterNames[rndIndex];
+        CharacterGenerator.Instance.CharacterNames.Remove(tempName);
 
-            return tempName;
-        }
+        return tempName;
     }
 }
+

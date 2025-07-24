@@ -1,11 +1,9 @@
-﻿namespace Assets.Scripts.ActionDatas
+﻿public enum ActionType
 {
-    public enum ActionType
-    {
-        None,
-        Move,
-        Attack,
-        Defend,
-    }
+    None,
+    Move,
+    Attack,
+    Defend,
 }
+
 

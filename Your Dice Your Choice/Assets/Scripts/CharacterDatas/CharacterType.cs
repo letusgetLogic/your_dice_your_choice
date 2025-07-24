@@ -1,12 +1,8 @@
-﻿namespace Assets.Scripts.CharacterDatas
+﻿public enum CharacterType
 {
-    public enum CharacterType
-    {
-        Tank,
-        Archer,
-        Fighter,
-        Mage,
-        Assassin,
-    }
+    Tank,
+    Archer,
+    Fighter,
+    Mage,
+    Assassin,
 }
-

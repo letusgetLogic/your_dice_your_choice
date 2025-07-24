@@ -8,4 +8,5 @@ public class LevelData : ScriptableObject
     public int MapHeight;
     public float CamOrthographicSize;
     public int CharacterAmount;
+    public int DiceAmount;
 }

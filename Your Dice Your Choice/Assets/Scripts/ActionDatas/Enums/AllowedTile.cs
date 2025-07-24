@@ -1,12 +1,10 @@
-﻿namespace Assets.Scripts.ActionDatas
+﻿public enum AllowedTile
 {
-    public enum AllowedTile
-    {
-        None,
+    None,
 
-        Tile_X,
-        Tile_1_3,
-        Tile_1,
-    }
+    Tile_X,
+    Tile_1_3,
+    Tile_1,
 }
+
 

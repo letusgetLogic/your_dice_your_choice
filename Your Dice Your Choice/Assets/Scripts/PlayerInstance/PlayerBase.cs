@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using Assets.Scripts.CharacterPrefab;
-using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerBase : MonoBehaviour
 {
@@ -33,7 +30,7 @@ public class PlayerBase : MonoBehaviour
         switch (playerType)
         {
             case PlayerType.None:
-                throw new System.Exception("PlayerBAse.Create() -> player = None");
+                throw new System.Exception("PlayerBase.Create() -> player = None");
 
             case PlayerType.PlayerLeft:
                 PlayerLeft = new Player(name, PlayerType.PlayerLeft);

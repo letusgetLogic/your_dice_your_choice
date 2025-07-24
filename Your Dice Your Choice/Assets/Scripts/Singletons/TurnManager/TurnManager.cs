@@ -1,6 +1,4 @@
-﻿using Assets.Scripts.DicePrefab;
-using Assets.Scripts.LevelDatas;
-using System;
+﻿using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -83,25 +81,11 @@ public class TurnManager : MonoBehaviour
             lastPlayer = PlayerBase.Instance.PlayerRight;
             nextPlayer = PlayerBase.Instance.PlayerLeft;
         }
+        lastPlayer.CountRound();
+        nextPlayer.CountRound();
 
         DeactivateRollPanel(lastPlayer);
         SetTurnText(nextPlayer, nextTurn);
-    }
-
-    /// <summary>
-    /// Deactivates the roll panel for the last player.
-    /// </summary>
-    /// <param name="player"></param>
-    private void DeactivateRollPanel(Player lastPlayer)
-    {
-        if (LevelManager.Instance.CurrentPhase == Phase.Battle)
-        {
-            var panel = lastPlayer.RollPanel;
-            panel.SetInteractionFor(panel.VisibleDice, false);
-            panel.SendBackToBase(panel.VisibleDice);
-            panel.SetDefaultNumber(panel.VisibleDice);
-            ButtonManager.Instance.SetButtonInteractible(panel.RollButton, false);
-        }
     }
 
     /// <summary>
@@ -140,14 +124,36 @@ public class TurnManager : MonoBehaviour
     /// <param name="state"></param>
     private void SetTurn(Player nextPlayer, PlayerType nextTurn)
     {
-        Turn = nextTurn;
-
-        var panel = nextPlayer.RollPanel;
-        panel.ShowDice();
-        ButtonManager.Instance.SetButtonInteractible(panel.RollButton, true);
+        ActivateRollPanel(nextPlayer);
 
         ButtonManager.Instance.SetButtonInteractible(
             ButtonManager.Instance.EndTurnButton, true);
+
+        Turn = nextTurn;
     }
 
+    /// <summary>
+    /// Activates the roll panel for the next player.
+    /// </summary>
+    /// <param name="player"></param>
+    private void ActivateRollPanel(Player nextPlayer)
+    {
+        BattleManager.Instance.State = BattleManager.BattleState.PhaseRoll;
+
+        var panel = nextPlayer.RollPanel;
+        panel.SendBackToBase(panel.PlayDice);
+        panel.SetDiceDefault();
+        ButtonManager.Instance.SetButtonInteractible(panel.RollButton, true);
+    }
+
+    /// <summary>
+    /// Deactivates the roll panel for the last player.
+    /// </summary>
+    /// <param name="player"></param>
+    private void DeactivateRollPanel(Player lastPlayer)
+    {
+        var panel = lastPlayer.RollPanel;
+        panel.SetAlphaDown(panel.PlayDice);
+        ButtonManager.Instance.SetButtonInteractible(panel.RollButton, false);
+    }
 }

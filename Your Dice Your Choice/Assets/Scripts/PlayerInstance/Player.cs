@@ -1,7 +1,4 @@
-using System;
 using System.Collections.Generic;
-using Assets.Scripts;
-using Assets.Scripts.CharacterPrefab;
 using UnityEngine;
 
 public class Player
@@ -15,7 +12,7 @@ public class Player
     public Player(string name, PlayerType playerType)
     {
         Name = name;
-        PlayerType = playerType; 
+        PlayerType = playerType;
         Characters = CharacterGenerator.Instance.CreateCharactersFor(this, playerType);
         RollPanel = PanelManager.Instance.GetRollPanelFor(playerType);
         //RerollPanelObject = PanelManager.Instance.GetRerollPanelFor(player);
@@ -46,6 +43,21 @@ public class Player
 
             var characterMovement = characterObject.GetComponent<CharacterMovement>();
             characterMovement.SetBodyPivotPosition();
+        }
+    }
+
+    /// <summary>
+    /// Counts down the endurance of each character at the end of the round.
+    /// </summary>
+    public void CountRound()
+    {
+        foreach (var characterObject in Characters)
+        {
+            var character = characterObject.GetComponent<Character>();
+            var characterAttack = characterObject.GetComponent<CharacterAttack>();
+            characterAttack.CountDownRoundEndurance();
+            var characterDefense = characterObject.GetComponent<CharacterDefense>();
+            characterDefense.CountDownRoundEndurance();
         }
     }
 

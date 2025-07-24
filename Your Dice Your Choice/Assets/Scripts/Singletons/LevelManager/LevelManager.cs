@@ -1,13 +1,11 @@
-using Assets.Scripts.LevelDatas;
-using Assets.Scripts.MatchIntro;
-using Assets.Scripts.MatchOver;
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance { get; private set; }
 
-    [SerializeField] private GameObject _destroyEditorWeapon;
     [SerializeField] private GameObject _matchOver;
 
     [SerializeField] private LevelData[] _dataPrefab;
@@ -29,8 +27,6 @@ public class LevelManager : MonoBehaviour
         }
 
         Instance = this;
-
-        Destroy(_destroyEditorWeapon);
     }
 
     /// <summary>
@@ -38,8 +34,19 @@ public class LevelManager : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        Data.MatchType = MatchType.Duel;
+        SetDataIndex();
         StartPhases();
+    }
+
+    /// <summary>
+    /// Sets the data index based on the number of characters.
+    /// </summary>
+    private void SetDataIndex()
+    {
+        if (GameManager.Instance.CharacterAmount == 0)
+            return;
+        else
+            _dataIndex = GameManager.Instance.CharacterAmount - 1;
     }
 
     /// <summary>
@@ -96,7 +103,7 @@ public class LevelManager : MonoBehaviour
 
             case Phase.MatchOver:
                 _matchOver.SetActive(true);
-                MatchOverController.Instance.Congratulate(Winner);
+                MatchOverController.Instance.Congratulate(Winner.Name);
                 return;
 
             case Phase.WaitForInput:
@@ -133,8 +140,8 @@ public class LevelManager : MonoBehaviour
                 break;
 
             case MatchType.Duel:
-                PlayerBase.Instance.Create("Player 1", PlayerType.PlayerLeft);
-                PlayerBase.Instance.Create("Player 2", PlayerType.PlayerRight);
+                PlayerBase.Instance.Create(GameManager.Instance.PlayerLeftName, PlayerType.PlayerLeft);
+                PlayerBase.Instance.Create(GameManager.Instance.PlayerRightName, PlayerType.PlayerRight);
                 break;
 
             case MatchType.DuelAI:

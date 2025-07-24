@@ -1,6 +1,3 @@
-using Assets.Scripts;
-using Assets.Scripts.ActionPanelPrefab;
-using Assets.Scripts.CharacterPrefab;
 using System;
 using System.Collections.Generic;
 using TMPro;
@@ -13,7 +10,7 @@ public class PanelManager : MonoBehaviour
 
     [SerializeField] private GameObject _canvas;
 
-    [SerializeField] 
+    [SerializeField]
     private TextMeshProUGUI _nameTextLeft;
     public TextMeshProUGUI NameTextLeft
     {
@@ -21,7 +18,7 @@ public class PanelManager : MonoBehaviour
         set { _nameTextLeft = value; }
     }
 
-    [SerializeField] 
+    [SerializeField]
     private TextMeshProUGUI _nameTextRight;
     public TextMeshProUGUI NameTextRight
     {
@@ -97,12 +94,29 @@ public class PanelManager : MonoBehaviour
         }
 
         Instance = this;
+    }
 
-        HideAllPanel();
-        RollPanelLeft.GetComponent<RollPanel>().HideAllDice();
-        RollPanelRight.GetComponent<RollPanel>().HideAllDice();
+    /// <summary>
+    /// Start method.
+    /// </summary>
+    private void Start()
+    {
+        InitializeRollPanel(RollPanelLeft.GetComponent<RollPanel>());
+        InitializeRollPanel(RollPanelRight.GetComponent<RollPanel>());
+        SetPanelsInactive(false);
 
         SetFirstTurn.Instance.InitializePanels();
+    }
+
+    /// <summary>
+    /// Initializes the roll panel by setting up the dice and disabling the roll button.
+    /// </summary>
+    private void InitializeRollPanel(RollPanel rollPanel)
+    {
+        rollPanel.InitializePlayDice();
+        rollPanel.SetNonPlayDiceInactive();
+        rollPanel.SetScaleDiceZero();
+        ButtonManager.Instance.SetButtonInteractible(rollPanel.RollButton, false);
     }
 
     /// <summary>
@@ -127,7 +141,7 @@ public class PanelManager : MonoBehaviour
     /// <summary>
     /// Sets the panels active false.
     /// </summary>
-    public void HideAllPanel()
+    public void SetPanelsInactive(bool setDiceInactive)
     {
         foreach (GameObject panel in _characterPanelsLeft)
         {
@@ -138,17 +152,22 @@ public class PanelManager : MonoBehaviour
         {
             SetActive(panel, false);
         }
-        
+
+        if (setDiceInactive)
+        {
+            RollPanelLeft.GetComponent<RollPanel>().SetPlayDiceInactive();
+            RollPanelRight.GetComponent<RollPanel>().SetPlayDiceInactive();
+        }
+
         SetActive(RollPanelLeft, false);
-        RollPanelLeft.GetComponent<RollPanel>().HideAllDice();
         SetActive(RollPanelRight, false);
-        RollPanelRight.GetComponent<RollPanel>().HideAllDice();
 
         // Set the inactive panel in the scene active to create the singleton instance.
         SetActive(_popUpCharacterObject, true);
         SetActive(_popUpCharacterObject, false);
         SetActive(_popUpActionObject, true);
         SetActive(_popUpActionObject, false);
+
     }
 
     /// <summary>

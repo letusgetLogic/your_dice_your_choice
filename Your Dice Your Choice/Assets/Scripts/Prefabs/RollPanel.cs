@@ -2,60 +2,78 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Assets.Scripts.DicePrefab;
 using UnityEngine.UI;
-using Assets.Scripts;
 
 public class RollPanel : MonoBehaviour
 {
-    [SerializeField] private Button _rollButton;
-    [SerializeField] private int _diceAmount = 4;
-    [SerializeField] private GameObject[] _allDice;
-
-    public GameObject[] VisibleDice { get; private set; }
+    [SerializeField]
+    private Button _rollButton;
     public Button RollButton => _rollButton;
 
-    /// <summary>
-    /// Awake method.
-    /// </summary>
-    private void Awake()
-    {
-        SetInteractionFor(_allDice, false);
-        VisibleDice = new GameObject[_diceAmount];
-    }
+    [SerializeField] private GameObject[] _allDice;
+
+    public GameObject[] PlayDice { get; private set; }
 
     /// <summary>
-    /// Shows Dice.
+    /// Initializes the PlayDice array with the active dice from _allDice
+    /// and sets the start state to each.
     /// </summary>
-    /// <param name="amount"></param>
-    public void ShowDice()
+    public void InitializePlayDice()
     {
-        for (int i = 0; i < _diceAmount; i++)
+        PlayDice = new GameObject[LevelManager.Instance.Data.DiceAmount];
+
+        for (int i = 0; i < PlayDice.Length; i++)
         {
             var diceObject = _allDice[i];
-            diceObject.SetActive(true);
-            
-            VisibleDice[i] = diceObject;
-
             var dice = diceObject.GetComponent<Dice>();
-            dice.InitializeSide(dice.DefaultNumber);
             dice.InitializeIndexOf(gameObject, i);
 
-            var diceDisplay = diceObject.GetComponent<DiceDisplay>();
-            diceDisplay.SetDefault();
+            diceObject.GetComponent<RectTransform>().localScale = Vector3.zero;
+            var diceDragEvent = diceObject.GetComponent<DiceDragEvent>();
+            dice.SetComponentEnabled(diceDragEvent, false);
+
+            PlayDice[i] = diceObject;
         }
     }
 
     /// <summary>
-    /// Hide all Dice.
+    /// Sets the dice inactive except for the PlayDice.
     /// </summary>
     /// <param name="amount"></param>
-    public void HideAllDice()
+    public void SetNonPlayDiceInactive()
     {
-        for (int i = 0; i < _allDice.Length; i++)
+        for (int i = PlayDice.Length; i < _allDice.Length; i++)
         {
             var dice = _allDice[i];
             dice.SetActive(false);
+        }
+    }
+
+    /// <summary>
+    /// Sets the scale of all PlayDice to zero.
+    /// </summary>
+    public void SetScaleDiceZero()
+    {
+        foreach (var diceObject in PlayDice)
+        {
+            var rectTransform = diceObject.GetComponent<RectTransform>();
+            rectTransform.localScale = Vector3.zero;
+        }
+    }
+
+    /// <summary>
+    /// Sets the dice to their default state.
+    /// </summary>
+    /// <param name="amount"></param>
+    public void SetDiceDefault()
+    {
+        foreach (var diceObject in PlayDice)
+        {
+            var dice = diceObject.GetComponent<Dice>();
+            dice.InitializeSide(dice.DefaultNumber);
+
+            var diceDisplay = diceObject.GetComponent<DiceDisplay>();
+            diceDisplay.SetDefault();
         }
     }
 
@@ -64,12 +82,12 @@ public class RollPanel : MonoBehaviour
     /// </summary>
     public void Roll()
     {
-        ButtonClickAnimation.Instance.ScaleSize(RollButton);
+        ButtonClickScale.Instance.ScaleSize(RollButton);
 
         ButtonManager.Instance.SetButtonInteractible(RollButton, false);
 
         RollDice.Instance.Roll(
-            VisibleDice,
+            PlayDice,
             RollDice.Instance.RollFrequency,
             RollDice.Instance.AnimTimer,
             SetInteraction);
@@ -80,26 +98,35 @@ public class RollPanel : MonoBehaviour
     /// </summary>
     private void SetInteraction()
     {
-        SetInteractionFor(VisibleDice, true);
+        BattleManager.Instance.State = BattleManager.BattleState.PhaseAction;
+        SetDragEnabled(PlayDice, true);
     }
 
     /// <summary>
-    /// Sets the dice active true/false.
+    /// Sets the component DiceDragEvent enabled true/false.
     /// </summary>
     /// <param name="diceObjects"></param>
     /// <param name="value"></param>
-    public void SetInteractionFor(GameObject[] diceObjects, bool value)
+    public void SetDragEnabled(GameObject[] diceObjects, bool value)
     {
         foreach (GameObject diceObject in diceObjects)
         {
             var dice = diceObject.GetComponent<Dice>();
             var diceDragEvent = diceObject.GetComponent<DiceDragEvent>();
             dice.SetComponentEnabled(diceDragEvent, value);
-            
+        }
+    }
+
+    /// <summary>
+    /// Sets the alpha of the dice down.
+    /// </summary>
+    /// <param name="diceObjects"></param>
+    public void SetAlphaDown(GameObject[] diceObjects)
+    {
+        foreach (GameObject diceObject in diceObjects)
+        {
             var diceDisplay = diceObject.GetComponent<DiceDisplay>();
-            
-            if (value == false)
-                diceDisplay.SetAlphaDown();
+            diceDisplay.SetAlphaDown();
         }
     }
 
@@ -117,17 +144,13 @@ public class RollPanel : MonoBehaviour
     }
 
     /// <summary>
-    /// Sets the default number to dice.
+    /// Sets the PlayDice inactive.
     /// </summary>
-    /// <param name="diceObjects"></param>
-    /// <param name="value"></param>
-    public void SetDefaultNumber(GameObject[] diceObjects)
-    {
-        foreach (GameObject diceObject in diceObjects)
+    public void SetPlayDiceInactive()
+            {
+        foreach (GameObject diceObject in PlayDice)
         {
-            var dice = diceObject.GetComponent<Dice>();
-            dice.InitializeSide(dice.DefaultNumber);
+            diceObject.SetActive(false);
         }
     }
-
 }

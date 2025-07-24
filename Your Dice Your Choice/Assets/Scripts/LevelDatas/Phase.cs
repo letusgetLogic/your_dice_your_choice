@@ -1,12 +1,10 @@
-﻿namespace Assets.Scripts.LevelDatas
+﻿public enum Phase
 {
-    public enum Phase
-    {
-        None = 0,
-        Intro,
-        Initialization,
-        Battle,
-        MatchOver,
-        WaitForInput,
-    }
+    None = 0,
+    Intro,
+    Initialization,
+    Battle,
+    MatchOver,
+    WaitForInput,
 }
+

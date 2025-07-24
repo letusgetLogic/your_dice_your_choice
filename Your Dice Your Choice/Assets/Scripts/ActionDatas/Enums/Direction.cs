@@ -1,12 +1,10 @@
-﻿namespace Assets.Scripts.ActionDatas
+﻿public enum Direction
 {
-    public enum Direction
-    {
-        None = 0,
+    None = 0,
 
-        Any,
-        Orthogonal, // horizontal & vertical
-        Diagonal,
-    }
+    Any,
+    Orthogonal, // horizontal & vertical
+    Diagonal,
 }
+
 

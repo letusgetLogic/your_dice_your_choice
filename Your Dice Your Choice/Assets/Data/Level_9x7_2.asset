@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dfddbeeb206fc54988e16a837a7d4ea, type: 3}
   m_Name: Level_9x7_2
   m_EditorClassIdentifier: 
-  MatchType: 0
+  MatchType: 2
   MapLength: 9
   MapHeight: 7
   CamOrthographicSize: 5
   CharacterAmount: 2
+  DiceAmount: 3

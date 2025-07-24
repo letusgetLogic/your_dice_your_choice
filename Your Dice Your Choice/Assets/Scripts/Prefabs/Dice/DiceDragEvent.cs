@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using Assets.Scripts.DicePrefab;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -15,6 +14,7 @@ public class DiceDragEvent : MonoBehaviour,
     /// <param name="eventData"></param>
     public void OnBeginDrag(PointerEventData eventData)
     {
+        Debug.Log("OnBeginDrag");
         if (eventData.button == PointerEventData.InputButton.Left)
         {
             var diceDisplay = GetComponent<DiceDisplay>();
@@ -31,6 +31,7 @@ public class DiceDragEvent : MonoBehaviour,
     /// <param name="eventData"></param>
     public void OnDrag(PointerEventData eventData)
     {
+        Debug.Log("OnDrag");
         if (eventData.button == PointerEventData.InputButton.Left)
         {
             var diceDisplay = GetComponent<DiceDisplay>();

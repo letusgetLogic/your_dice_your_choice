@@ -1,4 +1,3 @@
-using Assets.Scripts.CharacterPrefab;
 using UnityEditor;
 using UnityEngine;
 

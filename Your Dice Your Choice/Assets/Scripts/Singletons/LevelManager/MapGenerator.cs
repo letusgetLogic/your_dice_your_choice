@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using Assets.Scripts.CharacterDatas;
-using Assets.Scripts.CharacterPrefab;
 using UnityEngine;
 
 public class MapGenerator : MonoBehaviour

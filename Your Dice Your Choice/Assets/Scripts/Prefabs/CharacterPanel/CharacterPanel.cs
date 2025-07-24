@@ -1,10 +1,6 @@
 using UnityEngine;
 using TMPro;
-using Assets.Scripts.CharacterPrefab;
-using Assets.Scripts.ActionDatas;
-using Assets.Scripts;
 using UnityEngine.UI;
-using Assets.Scripts.ActionPanelPrefab;
 using System;
 using System.Collections;
 

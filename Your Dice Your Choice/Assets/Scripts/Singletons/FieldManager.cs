@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Assets.Scripts.ActionDatas;
-using Assets.Scripts.FieldPrefab;
 using UnityEngine;
 
 public class FieldManager : MonoBehaviour

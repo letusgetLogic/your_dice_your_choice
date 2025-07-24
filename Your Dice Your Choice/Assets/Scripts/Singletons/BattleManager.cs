@@ -1,12 +1,6 @@
-﻿using Assets.Scripts;
-using Assets.Scripts.ActionDatas;
-using Assets.Scripts.ActionPanelPrefab;
-using Assets.Scripts.CharacterPrefab;
-using Assets.Scripts.DicePrefab;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,6 +11,13 @@ public class BattleManager : MonoBehaviour
     public ActionBase CurrentAction { get; set; }
     public IEnumerator Coroutine { get; set; }
     public bool IsDiceBeingDropped { get; set; } = false;
+    public enum BattleState
+    {
+        None,
+        PhaseRoll,
+        PhaseAction,
+    }
+    public BattleState State { get; set; } = BattleState.None;
 
     /// <summary>
     /// Awake method.
@@ -123,7 +124,7 @@ public class BattleManager : MonoBehaviour
     public void EndMatch(PlayerType loser)
     {
         LevelManager.Instance.SubmitWinnerFrom(loser);
-        PanelManager.Instance.HideAllPanel();
+        PanelManager.Instance.SetPanelsInactive(true);
         ButtonManager.Instance.SetGameObjectActive(ButtonManager.Instance.EndTurnButton, false);
         LevelManager.Instance.NextPhase();
     }

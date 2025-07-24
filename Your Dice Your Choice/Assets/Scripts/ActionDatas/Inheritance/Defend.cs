@@ -1,31 +1,28 @@
 ﻿using UnityEngine;
-using Assets.Scripts.CharacterPrefab;
-
-namespace Assets.Scripts.ActionDatas
+public abstract class Defend : ActionBase
 {
-    public class Defend : ActionBase
+    public static readonly string DefaultDescription =
+        "Move the dice over here to get more information";
+
+    public AllowedDiceNumber AllowedDiceNumber { get; protected set; }
+
+    public Defend(ActionData data, GameObject characterObject) :
+        base(data, characterObject)
+    { }
+
+    public override bool IsValid(int diceNumber)
     {
-        public static readonly string DefaultDescription = 
-            "Move the dice over here to get more information";
-
-        public Defend(ActionData data, GameObject characterObject) : 
-            base(data, characterObject) { }
-
-        public override void SetInteractible(int diceNumber)
-        {
-
-        }
-
-        public override void ShowInteractible()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override void HandleInput(GameObject fieldObject)
-        {
-            Debug.Log("Defend!");
-        }
-
+        return CheckDiceCondition.IsNumberValid(AllowedDiceNumber, diceNumber);
     }
-}
 
+    public override abstract void SetDataPopUp(int diceNumber);
+
+    public override void SetInteractible(int diceNumber)
+    {}
+
+    public override void ShowInteractible()
+    {}
+
+    public override void HandleInput(GameObject fieldObject)
+    {}
+}

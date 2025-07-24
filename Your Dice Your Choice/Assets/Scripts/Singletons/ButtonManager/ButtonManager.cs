@@ -1,20 +1,25 @@
-﻿using Assets.Scripts;
-using System;
+﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ButtonManager : MonoBehaviour
 {
     public static ButtonManager Instance { get; private set; }
 
-    public Button EndTurnButton;
-    public Button NewMatchButton;
-    public Button[] AllRollButtons;
-    public Button RollButtonLeft;
-    public Button RerollButtonLeft;
-    public Button RollButtonRight;
-    public Button RerollButtonRight;
+    [SerializeField] 
+    private Button _endTurnButton;
+    public Button EndTurnButton => _endTurnButton;
+
+    [SerializeField]
+    private Button _newMatchButton;
+    public Button NewMatchButton => _newMatchButton;
+
+    [SerializeField]
+    private Button _menuButton;
+    public Button MenuButton => _menuButton;
+
 
     /// <summary>
     /// Awake method.
@@ -35,15 +40,15 @@ public class ButtonManager : MonoBehaviour
     private void Start()
     {
         SetGameObjectActive(EndTurnButton, false);
-        DeactivateRollButtons();
+        SetGameObjectActive(NewMatchButton, false);
     }
 
     /// <summary>
-    /// Calls when end button is clicked.
+    /// OnEndTurnButton method is called when the end turn button is clicked.
     /// </summary>
     public void OnEndTurnButton()
     {
-        ButtonClickAnimation.Instance.ScaleSize(EndTurnButton);
+        ButtonClickScale.Instance.ScaleSize(EndTurnButton);
 
         FieldManager.Instance.DeactivateFields();
         CharacterManager.Instance.DeactivateCharacters();
@@ -51,14 +56,21 @@ public class ButtonManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Deactivates the roll buttons.
+    /// OnNewMatchButton method is called when the new match button is clicked.
     /// </summary>
-    private void DeactivateRollButtons()
+    public void OnNewMatchButton()
     {
-        foreach (var button in AllRollButtons)
-        {
-            SetButtonInteractible(button, false);
-        }
+        ButtonClickScale.Instance.ScaleSize(NewMatchButton);
+        GameManager.Instance.LoadScene("BattleArenaScene");
+    }
+
+    /// <summary>
+    /// OnMenuButton method is called when the menu button is clicked.
+    /// </summary>
+    public void OnMenuButton()
+    {
+        ButtonClickScale.Instance.ScaleSize(MenuButton);
+        GameManager.Instance.LoadScene("MainMenuScene");
     }
 
     /// <summary>
