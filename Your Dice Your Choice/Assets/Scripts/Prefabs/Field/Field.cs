@@ -25,6 +25,9 @@ public class Field : MonoBehaviour
     {
         if (collision.CompareTag("Character"))
         {
+            if (CharacterObject != null)
+                return;
+
             CharacterObject = collision.transform.root.gameObject;
             _count++;
         }
@@ -41,7 +44,7 @@ public class Field : MonoBehaviour
     /// <param name="collision"></param>
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Character"))
+        if (collision.gameObject == CharacterObject)
         {
             CharacterObject = null;
             _count--;
@@ -77,7 +80,7 @@ public class Field : MonoBehaviour
 
         var character = CharacterObject.GetComponent<Character>();
 
-        if (character.PlayerType != currentPlayer)
+        if (character.Player.PlayerType != currentPlayer)
         {
             return CharacterObject;
         }

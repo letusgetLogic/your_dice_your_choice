@@ -1,19 +1,19 @@
 ﻿using UnityEngine;
 public abstract class ActionBase
 {
-    public ActionData Data { get; private set; }
-    public GameObject CharacterObject { get; private set; }
-    protected Character character => CharacterObject.GetComponent<Character>();
+    protected ActionPanel actionPanel { get; private set; }
+    protected GameObject characterObject { get; private set; }
+    protected Character character => characterObject.GetComponent<Character>();
 
     /// <summary>
     /// Sets data when the constructor has been created.
     /// </summary>
     /// <param name="data"></param>
     /// <param name="characterObject"></param>
-    public ActionBase(ActionData data, GameObject characterObject)
+    public ActionBase(ActionPanel actionPanel, GameObject characterObject)
     {
-        Data = data;
-        CharacterObject = characterObject;
+        this.actionPanel = actionPanel;
+        this.characterObject = characterObject;
     }
 
     /// <summary>
@@ -23,7 +23,7 @@ public abstract class ActionBase
     /// <exception cref="NotImplementedException"></exception>
     public virtual bool IsValid(int diceNumber)
     {
-        return CheckDiceCondition.IsNumberValid(Data.AllowedDiceNumber, diceNumber);
+        return CheckDiceCondition.IsNumberValid(actionPanel.ActionData.AllowedDiceNumber, diceNumber);
     }
 
     /// <summary>
@@ -32,7 +32,7 @@ public abstract class ActionBase
     /// <param name="diceNumber"></param>
     public virtual void SetDataPopUp(int diceNumber)
     {
-        PopUpAction.Instance.SetData(Data.Description);
+        PopUpAction.Instance.SetData(actionPanel.ActionData.Description);
     }
 
     /// <summary>
@@ -53,10 +53,21 @@ public abstract class ActionBase
     { }
 
     /// <summary>
-    /// Handles the input of player.
+    /// Processes the input of player.
     /// </summary>
     /// <param name="fieldObject"></param>
-    public abstract void HandleInput(GameObject fieldObject);
+    public abstract void ProcessInput(GameObject fieldObject);
 
+    /// <summary>
+    /// Updates the hit endurance for defend action.
+    /// </summary>
+    public virtual void UpdateHitEnduranceForDefend()
+    { }
+
+    /// <summary>
+    /// Counts down the round endurance.
+    /// </summary>
+    public virtual void CountDownRoundEndurance(PlayerType lastTurn)
+    { }
 }
 

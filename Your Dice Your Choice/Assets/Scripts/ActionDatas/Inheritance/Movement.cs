@@ -5,10 +5,10 @@ public class Movement : ActionBase
 {
     public Vector2Int[] ActionDirections { get; private set; }
 
-    public Movement(ActionData data, GameObject characterObject) :
-        base(data, characterObject)
+    public Movement(ActionPanel actionPanel, GameObject characterObject) :
+        base(actionPanel, characterObject)
     {
-        ActionDirections = GetVector2IntFromDirection.Get(data.Direction);
+        ActionDirections = GetVector2IntFromDirection.Get(base.actionPanel.ActionData.Direction);
     }
 
     public override void SetInteractible(int diceNumber)
@@ -16,14 +16,14 @@ public class Movement : ActionBase
         FieldManager.Instance.SetInteractibleFields(
             character.FieldIndex,
             ActionDirections,
-            GetIntFromAllowedTile.Get(Data.AllowedTile, diceNumber));
+            GetIntFromAllowedTile.Get(actionPanel.ActionData.AllowedTile, diceNumber));
     }
     public override void ShowInteractible()
     {
         FieldManager.Instance.ShowInteractibleFields();
     }
 
-    public override void HandleInput(GameObject fieldObject)
+    public override void ProcessInput(GameObject fieldObject)
     {
         if (fieldObject.CompareTag("Field") == false)
         {
@@ -31,7 +31,7 @@ public class Movement : ActionBase
             return;
         }
 
-        CharacterObject.GetComponent<CharacterMovement>().MoveTo(fieldObject);
+        characterObject.GetComponent<CharacterMovement>().MoveTo(fieldObject);
     }
 
 }

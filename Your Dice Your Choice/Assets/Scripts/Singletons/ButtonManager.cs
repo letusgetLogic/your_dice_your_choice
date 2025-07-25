@@ -48,8 +48,6 @@ public class ButtonManager : MonoBehaviour
     /// </summary>
     public void OnEndTurnButton()
     {
-        ButtonClickScale.Instance.ScaleSize(EndTurnButton);
-
         FieldManager.Instance.DeactivateFields();
         CharacterManager.Instance.DeactivateCharacters();
         TurnManager.Instance.SwitchTurn();
@@ -60,7 +58,6 @@ public class ButtonManager : MonoBehaviour
     /// </summary>
     public void OnNewMatchButton()
     {
-        ButtonClickScale.Instance.ScaleSize(NewMatchButton);
         GameManager.Instance.LoadScene("BattleArenaScene");
     }
 
@@ -69,7 +66,6 @@ public class ButtonManager : MonoBehaviour
     /// </summary>
     public void OnMenuButton()
     {
-        ButtonClickScale.Instance.ScaleSize(MenuButton);
         GameManager.Instance.LoadScene("MainMenuScene");
     }
 

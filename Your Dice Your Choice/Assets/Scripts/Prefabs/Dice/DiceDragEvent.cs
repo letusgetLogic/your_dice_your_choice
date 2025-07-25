@@ -63,7 +63,7 @@ public class DiceDragEvent : MonoBehaviour,
     {
         yield return new WaitForSeconds(_delayEndDrag);
 
-        BattleManager.Instance.SendDiceBackToBase(
+        BattleController.Instance.SendDiceBackToBase(
             GetComponent<DiceMovement>());
     }
 }

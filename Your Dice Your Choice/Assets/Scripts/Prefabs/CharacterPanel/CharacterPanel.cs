@@ -22,7 +22,7 @@ public class CharacterPanel : MonoBehaviour
     public GameObject CharacterObject { get; private set; }
     public Character Character { get; private set; }
     public PlayerType PlayerType { get; private set; }
-    public GameObject[] ActiveActionPanels { get; private set; }
+    public ActionPanel[] ActiveActionPanels { get; private set; }
 
     /// <summary>
     /// References Object and Script Character.
@@ -41,7 +41,7 @@ public class CharacterPanel : MonoBehaviour
     /// </summary>
     public void SetAction()
     {
-        ActiveActionPanels = new GameObject[Character.Data.ActionData.Length];
+        ActiveActionPanels = new ActionPanel[Character.Data.ActionData.Length];
 
         for (int i = 0; i < _actionPanelPrefabs.Length; i++)
         {
@@ -52,10 +52,10 @@ public class CharacterPanel : MonoBehaviour
                 break;
             }
 
-            ActiveActionPanels[i] = _actionPanelPrefabs[i];
+            ActiveActionPanels[i] = _actionPanelPrefabs[i].GetComponent<ActionPanel>();
 
             var actionData = Character.Data.ActionData[i];
-            ActiveActionPanels[i].GetComponent<ActionPanel>().SetData(actionData, CharacterObject, this, i);
+            ActiveActionPanels[i].SetData(actionData, CharacterObject, this, i);
         }
     }
 

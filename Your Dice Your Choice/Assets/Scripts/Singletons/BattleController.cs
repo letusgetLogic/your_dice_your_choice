@@ -4,13 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BattleManager : MonoBehaviour
+public class BattleController : MonoBehaviour
 {
-    public static BattleManager Instance { get; private set; }
+    public static BattleController Instance { get; private set; }
 
-    public ActionBase CurrentAction { get; set; }
-    public IEnumerator Coroutine { get; set; }
-    public bool IsDiceBeingDropped { get; set; } = false;
     public enum BattleState
     {
         None,
@@ -18,6 +15,10 @@ public class BattleManager : MonoBehaviour
         PhaseAction,
     }
     public BattleState State { get; set; } = BattleState.None;
+    public ActionBase CurrentAction { get; set; }
+    public ActionPanel CurrentPanelOfDefend { get; set; }
+    public IEnumerator Coroutine { get; set; }
+    public bool IsDiceBeingDropped { get; set; } = false;
 
     /// <summary>
     /// Awake method.
@@ -113,8 +114,41 @@ public class BattleManager : MonoBehaviour
     {
         DeactivateInteractible();
 
-        CurrentAction.HandleInput(clickedObject);
+        CurrentAction.ProcessInput(clickedObject);
         CurrentAction = null;
+    }
+
+    /// <summary>
+    /// Calculates the damage dealt by the attacker and applies it to the defender's health.
+    /// </summary>
+    /// <param name="attacker"></param>
+    /// <param name="defender"></param>
+    public void CalculateDamage(
+        CharacterAttack deals, CharacterDefense defends, CharacterHealth defenderHealth,
+        Attack attack, CharacterPanel defenderCharacterPanel)
+    {
+        float damage = deals.CurrentAP - defends.CurrentDP > 0 ?
+                    deals.CurrentAP - defends.CurrentDP : 0;
+
+        defenderHealth.TakeDamage(damage);
+
+        UpdateHitEndurance(attack, defenderCharacterPanel);
+    }
+
+    private void UpdateHitEndurance(Attack attack, CharacterPanel defenderCharacterPanel)
+    {
+        attack.CountDownHitEndurance();
+        
+        UpdateHitEnduranceForDefender(defenderCharacterPanel);
+    }
+
+
+    private void UpdateHitEnduranceForDefender(CharacterPanel characterPanel)
+    {
+        foreach (ActionPanel actionPanel in characterPanel.ActiveActionPanels)
+        {
+           actionPanel.Action.UpdateHitEnduranceForDefend();
+        }
     }
 
     /// <summary>

@@ -82,8 +82,6 @@ public class RollPanel : MonoBehaviour
     /// </summary>
     public void Roll()
     {
-        ButtonClickScale.Instance.ScaleSize(RollButton);
-
         ButtonManager.Instance.SetButtonInteractible(RollButton, false);
 
         RollDice.Instance.Roll(
@@ -98,7 +96,7 @@ public class RollPanel : MonoBehaviour
     /// </summary>
     private void SetInteraction()
     {
-        BattleManager.Instance.State = BattleManager.BattleState.PhaseAction;
+        BattleController.Instance.State = BattleController.BattleState.PhaseAction;
         SetDragEnabled(PlayDice, true);
     }
 

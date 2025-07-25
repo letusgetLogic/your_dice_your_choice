@@ -5,8 +5,7 @@ public class CharacterAttack : MonoBehaviour
 {
     public float CurrentAP { get; private set; }
     public float BuffAP { get; private set; }
-    public int HitEndurance { get; private set; }
-    public int RoundEndurance { get; private set; }
+
     private float _originalAP => GetComponent<Character>().Data.AP;
 
     /// <summary>
@@ -28,48 +27,24 @@ public class CharacterAttack : MonoBehaviour
     }
 
     /// <summary>
-    /// Sets the value of attack points.
+    /// Sets the value of attack points buff.
     /// </summary>
     /// <param name="value"></param>
-    public void SetBuffAP(float value, int hit, int round)
+    /// <param name="hit"></param>
+    /// <param name="round"></param>
+    public void SetBuffAP(float value)
     {
         BuffAP = value;
-        HitEndurance = hit;
-        RoundEndurance = round;
     }
 
     /// <summary>
-    /// Counts down the HitEndurance and resets if it reaches zero.
+    /// Sets the value default.
     /// </summary>
-    public void CountDownHitEndurance()
+    public void SetDefault()
     {
-        if (HitEndurance > 0)
-        {
-            HitEndurance--;
-        }
-        if (HitEndurance == 0)
-        {
-            BuffAP = 0f;
-            CurrentAP = _originalAP;
-            RoundEndurance = 0;
-        }
+        CurrentAP = _originalAP;
+        BuffAP = 0f;
     }
 
-    /// <summary>
-    /// Counts down the RoundEndurance and resets if it reaches zero.
-    /// </summary>
-    public void CountDownRoundEndurance()
-    {
-        if (RoundEndurance > 0)
-        {
-            RoundEndurance--;
-        }
-        if (RoundEndurance == 0)
-        {
-            BuffAP = 0f;
-            CurrentAP = _originalAP;
-            HitEndurance = 0;
-        }
-    }
 }
 

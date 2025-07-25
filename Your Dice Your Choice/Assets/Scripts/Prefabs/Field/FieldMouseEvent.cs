@@ -49,7 +49,7 @@ public class FieldMouseEvent : MonoBehaviour,
         yield return new WaitForSeconds(_animClickTime);
 
         _isClicking = false;
-        BattleManager.Instance.HandleInput(fieldObject);
+        BattleController.Instance.HandleInput(fieldObject);
     }
 
     /// <summary>

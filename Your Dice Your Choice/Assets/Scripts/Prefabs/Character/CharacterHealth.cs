@@ -57,7 +57,7 @@ public class CharacterHealth : MonoBehaviour
     public void TakeDamage(float damage)
     {
         CalculateHealth(-damage);
-        _damageText.text = (-damage).ToString();
+        _damageText.text = (-damage).ToString("0");
         _damageText.enabled = true;
     }
 

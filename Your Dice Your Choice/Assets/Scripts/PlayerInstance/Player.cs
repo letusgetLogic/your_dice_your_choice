@@ -47,17 +47,18 @@ public class Player
     }
 
     /// <summary>
-    /// Counts down the endurance of each character at the end of the round.
+    /// Counts down the round endurance of each action of each character at the end of the round.
     /// </summary>
-    public void CountRound()
+    public void CountDownRoundEndurance(PlayerType lastTurn)
     {
         foreach (var characterObject in Characters)
         {
-            var character = characterObject.GetComponent<Character>();
-            var characterAttack = characterObject.GetComponent<CharacterAttack>();
-            characterAttack.CountDownRoundEndurance();
-            var characterDefense = characterObject.GetComponent<CharacterDefense>();
-            characterDefense.CountDownRoundEndurance();
+            ActionPanel[] actionPanels = characterObject.GetComponent<Character>().Panel.ActiveActionPanels;
+
+            foreach (var actionPanel in actionPanels)
+            {
+                actionPanel.Action.CountDownRoundEndurance(lastTurn);
+            }
         }
     }
 
@@ -73,7 +74,7 @@ public class Player
         // If there are no characters left, end the match.
         if (Characters.Count == 0)
         {
-            BattleManager.Instance.EndMatch(PlayerType);
+            BattleController.Instance.EndMatch(PlayerType);
         }
     }
 }

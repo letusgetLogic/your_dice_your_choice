@@ -15,8 +15,8 @@ public class SwordBehaviour : Attack
             "Dice 6: Hit orthogonally a opponent with 600% AP",
     };
 
-    public SwordBehaviour(ActionData data, GameObject characterObject) :
-        base(data, characterObject)
+    public SwordBehaviour(ActionPanel actionPanel, GameObject characterObject) :
+        base(actionPanel, characterObject)
     {
         AllowedDiceNumber = AllowedDiceNumber.D1_6;
     }
@@ -39,8 +39,12 @@ public class SwordBehaviour : Attack
         var characterAttack = character.GetComponent<CharacterAttack>();
 
         float buffedAP = Buff(characterAttack.CurrentAP, diceNumber);
-        characterAttack.SetBuffAP(buffedAP - characterAttack.CurrentAP, 1, 1); 
+        characterAttack.SetBuffAP(buffedAP - characterAttack.CurrentAP); 
         characterAttack.SetAP(buffedAP);
+
+        HitEndurance = 1;
+        RoundEndurance = 1;
+        actionPanel.UpdateEndurance(HitEndurance, RoundEndurance);
     }
 
     private float Buff(float ap, int index)

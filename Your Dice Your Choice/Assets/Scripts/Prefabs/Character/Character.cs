@@ -12,12 +12,8 @@ public class Character : MonoBehaviour
     public CharacterBeingAttacked CharacterBeingAttacked => _characterBeingAttacked;
 
     public Player Player { get; private set; }
-    public PlayerType PlayerType { get; private set; }
     public CharacterData Data { get; private set; }
     public string Name { get; private set; }
-    public float CurrentDP { get; private set; }
-    public float BuffDP { get; private set; }
-    public int BuffDPDuration { get; private set; }
     public CharacterPanel Panel { get; private set; }
     public Vector2Int FieldIndex { get; private set; }
 
@@ -86,10 +82,9 @@ public class Character : MonoBehaviour
     /// Initialize Data.
     /// </summary>
     /// <param name="data"></param>
-    public void SetData(Player player, PlayerType playerType, CharacterData data, Vector2Int fieldIndex)
+    public void SetData(Player player, CharacterData data, Vector2Int fieldIndex)
     {
         Player = player;
-        PlayerType = playerType;
         Data = data;
         Name = CharacterName.GetName();
 
@@ -119,24 +114,6 @@ public class Character : MonoBehaviour
     {
         FieldIndex = fieldIndex;
         Debug.Log($"Character {Name} is on the field {FieldIndex}.");
-    }
-
-    /// <summary>
-    /// Sets the value of attack points.
-    /// </summary>
-    /// <param name="value"></param>
-    public void SetDP(float value)
-    {
-        CurrentDP = value;
-    }
-
-    /// <summary>
-    /// Sets the value of attack points.
-    /// </summary>
-    /// <param name="value"></param>
-    public void SetBuffDP(float value)
-    {
-        BuffDP = value;
     }
 
     /// <summary>

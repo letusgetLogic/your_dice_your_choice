@@ -50,7 +50,7 @@ public class CharacterGenerator : MonoBehaviour
 
             // Data
             var characterData = _characterData[Random.Range(0, _characterData.Length)];
-            character.SetData(player, playerType, characterData, randomIndexes[i]);
+            character.SetData(player, characterData, randomIndexes[i]);
 
             // Weapon
             var characterGetWeapon = characterObject.GetComponent<CharacterGetWeapon>();

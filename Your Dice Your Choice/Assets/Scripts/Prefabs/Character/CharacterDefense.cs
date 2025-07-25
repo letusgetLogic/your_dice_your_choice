@@ -1,11 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class CharacterDefense : MonoBehaviour
-    {
+{
     public float CurrentDP { get; private set; }
     public float BuffDP { get; private set; }
-    public int HitEndurance { get; private set; }
-    public int RoundEndurance { get; private set; }
     private float _originalDP => GetComponent<Character>().Data.DP;
 
     /// <summary>
@@ -30,45 +29,20 @@ public class CharacterDefense : MonoBehaviour
     /// Sets the value of defense points.
     /// </summary>
     /// <param name="value"></param>
-    public void SetBuffDP(float value, int hit, int round)
+    public void SetBuffDP(float value)
     {
         BuffDP = value;
-        HitEndurance = hit;
-        RoundEndurance = round;
     }
 
-    /// <summary>
-    /// Counts down the HitEndurance and resets if it reaches zero.
-    /// </summary>
-    public void CountDownHitEndurance()
-    {
-        if (HitEndurance > 0)
-        {
-            HitEndurance--;
-        }
-        if (HitEndurance == 0)
-        {
-            BuffDP = 0f;
-            CurrentDP = _originalDP;
-            RoundEndurance = 0;
-        }
-    }
 
     /// <summary>
-    /// Counts down the RoundEndurance and resets if it reaches zero.
+    /// Sets the value default.
     /// </summary>
-    public void CountDownRoundEndurance()
+    public void SetDefault()
     {
-        if (RoundEndurance > 0)
-        {
-            RoundEndurance--;
-        }
-        if (RoundEndurance == 0)
-        {
-            BuffDP = 0f;
-            CurrentDP = _originalDP;
-            HitEndurance = 0;
-        }
+        CurrentDP = _originalDP;
+        BuffDP = 0f;
     }
+
 }
 

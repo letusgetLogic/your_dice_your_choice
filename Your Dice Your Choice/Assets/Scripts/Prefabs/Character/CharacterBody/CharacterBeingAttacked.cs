@@ -62,7 +62,7 @@ public class CharacterBeingAttacked : MonoBehaviour,
         {
             _hoverColor.SetActive(false);
 
-            BattleManager.Instance.HandleInput(eventData.pointerClick);
+            BattleController.Instance.HandleInput(eventData.pointerClick);
         }
 
     }

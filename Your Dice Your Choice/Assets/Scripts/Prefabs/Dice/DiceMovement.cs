@@ -44,7 +44,7 @@ public class DiceMovement : MonoBehaviour
                 _currentValue = 0f;
                 _isRunning = false;
 
-                if (BattleManager.Instance.State == BattleManager.BattleState.PhaseRoll)
+                if (BattleController.Instance.State == BattleController.BattleState.PhaseRoll)
                     return;
 
                 var dice = GetComponent<Dice>();

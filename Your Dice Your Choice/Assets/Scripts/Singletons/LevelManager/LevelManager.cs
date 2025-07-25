@@ -98,7 +98,7 @@ public class LevelManager : MonoBehaviour
                 return;
 
             case Phase.Battle:
-                BattleManager.Instance.StartMatch();
+                BattleController.Instance.StartMatch();
                 return;
 
             case Phase.MatchOver:

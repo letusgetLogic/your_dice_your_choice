@@ -66,17 +66,17 @@ public class PopUpCharacter : MonoBehaviour
         _name.text = character.Name;
         _name.color = character.GetComponent<CharacterColor>().PlayerColor;
 
-        _maxHp.text = character.Data.HP.ToString();
-        _currentHp.text = character.GetComponent<CharacterHealth>().CurrentHP.ToString();
+        _maxHp.text = character.Data.HP.ToString("0");
+        _currentHp.text = character.GetComponent<CharacterHealth>().CurrentHP.ToString("0");
 
         var characterAttack = character.GetComponent<CharacterAttack>();
-        _ap.text = characterAttack.CurrentAP.ToString();
-        _buffAp.text = $"(+{characterAttack.BuffAP.ToString()})";
+        _ap.text = characterAttack.CurrentAP.ToString("0");
+        _buffAp.text = $"(+{characterAttack.BuffAP.ToString("0")})";
         _buffAp.gameObject.SetActive(characterAttack.BuffAP != 0);
 
         var characterDefense = character.GetComponent<CharacterDefense>();
-        _dp.text = characterDefense.CurrentDP.ToString();
-        _buffDp.text = $"(+{characterDefense.BuffDP.ToString()})";
+        _dp.text = characterDefense.CurrentDP.ToString("0");
+        _buffDp.text = $"(+{characterDefense.BuffDP.ToString("0")})";
         _buffDp.gameObject.SetActive(characterDefense.BuffDP != 0);
     }
 
