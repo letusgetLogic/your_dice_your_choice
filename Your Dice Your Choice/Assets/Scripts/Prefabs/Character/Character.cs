@@ -92,7 +92,9 @@ public class Character : MonoBehaviour
         GetComponent<CharacterAttack>().SetData();
         GetComponent<CharacterDefense>().SetData();
 
-        SetFieldIndex(fieldIndex);
+        var field = FieldManager.Instance.Fields[
+            fieldIndex.x, fieldIndex.y].GetComponent<Field>();
+        SetFieldIndex(field, fieldIndex);
 
         gameObject.name = $"Character {Name}";
     }
@@ -110,9 +112,10 @@ public class Character : MonoBehaviour
     /// Initializes FieldIndex.
     /// </summary>
     /// <param name="fieldIndex"></param>
-    public void SetFieldIndex(Vector2Int fieldIndex)
+    public void SetFieldIndex(Field field, Vector2Int fieldIndex)
     {
         FieldIndex = fieldIndex;
+        field.SetObject(gameObject);
         Debug.Log($"Character {Name} is on the field {FieldIndex}.");
     }
 
@@ -124,9 +127,6 @@ public class Character : MonoBehaviour
         gameObject.tag = "Obstacle";
         GetComponent<CharacterState>().SetDownState();
         Panel.SetActionInactive();
-
-        var field = FieldManager.Instance.Fields[FieldIndex.x, FieldIndex.y].GetComponent<Field>();
-        field.SetCharacterObjectNull();
 
         Player.RemoveCharacter(gameObject);
     }

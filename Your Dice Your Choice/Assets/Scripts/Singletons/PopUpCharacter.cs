@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -48,7 +49,7 @@ public class PopUpCharacter : MonoBehaviour
         _ap.text = "";
         _buffAp.text = "";
 
-        _buffAp.gameObject.SetActive(false);
+        _buffDp.gameObject.SetActive(false);
         _dp.text = "";
         _buffDp.text = "";
     }
@@ -63,21 +64,56 @@ public class PopUpCharacter : MonoBehaviour
     /// <param name="dp"></param>
     public void SetData(Character character)
     {
+        _ap.color = Color.white;
+
         _name.text = character.Name;
         _name.color = character.GetComponent<CharacterColor>().PlayerColor;
 
         _maxHp.text = character.Data.HP.ToString("0");
         _currentHp.text = character.GetComponent<CharacterHealth>().CurrentHP.ToString("0");
 
-        var characterAttack = character.GetComponent<CharacterAttack>();
-        _ap.text = characterAttack.CurrentAP.ToString("0");
-        _buffAp.text = $"(+{characterAttack.BuffAP.ToString("0")})";
-        _buffAp.gameObject.SetActive(characterAttack.BuffAP != 0);
+        UpdateAP(character);
+        UpdateDP(character);
+    }
 
+    /// <summary>
+    /// Updates attack points.
+    /// </summary>
+    /// <param name="character"></param>
+    private void UpdateAP(Character character)
+    {
+        var characterAttack = character.GetComponent<CharacterAttack>();
+
+        if (characterAttack.BuffAP > 0)
+        {
+            _ap.color = Color.green;
+            _buffAp.gameObject.SetActive(true);
+            _buffAp.text = $"(+{characterAttack.BuffAP.ToString("0")})";
+        }
+        else
+            _buffAp.gameObject.SetActive(false);
+
+        _ap.text = characterAttack.CurrentAP.ToString("0");
+    }
+
+    /// <summary>
+    /// Updates defense points.
+    /// </summary>
+    /// <param name="character"></param>
+    private void UpdateDP(Character character)
+    {
         var characterDefense = character.GetComponent<CharacterDefense>();
+
+        if (characterDefense.BuffDP > 0)
+        {
+            _dp.color = Color.green;
+            _buffDp.gameObject.SetActive(true);
+            _buffDp.text = $"(+{characterDefense.BuffDP.ToString("0")})";
+        }
+        else
+            _buffDp.gameObject.SetActive(false);
+
         _dp.text = characterDefense.CurrentDP.ToString("0");
-        _buffDp.text = $"(+{characterDefense.BuffDP.ToString("0")})";
-        _buffDp.gameObject.SetActive(characterDefense.BuffDP != 0);
     }
 
     /// <summary>

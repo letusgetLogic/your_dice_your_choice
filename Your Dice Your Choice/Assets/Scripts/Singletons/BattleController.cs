@@ -124,13 +124,13 @@ public class BattleController : MonoBehaviour
     /// <param name="attacker"></param>
     /// <param name="defender"></param>
     public void CalculateDamage(
-        CharacterAttack deals, CharacterDefense defends, CharacterHealth defenderHealth,
+        CharacterAttack deals, bool isCrit, CharacterDefense defends, CharacterHealth defenderHealth,
         Attack attack, CharacterPanel defenderCharacterPanel)
     {
         float damage = deals.CurrentAP - defends.CurrentDP > 0 ?
                     deals.CurrentAP - defends.CurrentDP : 0;
 
-        defenderHealth.TakeDamage(damage);
+        defenderHealth.TakeDamage(damage, isCrit);
 
         UpdateHitEndurance(attack, defenderCharacterPanel);
     }

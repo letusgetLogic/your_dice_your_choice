@@ -6,7 +6,7 @@ public class SetRectLocalScaleClick : MonoBehaviour,
 {
     [SerializeField] private float _scaleFactor;
 
-    private bool _isHeld = false;
+    //private bool _isHeld = false;
     private Vector3 _originalScale;
 
     /// <summary>
@@ -23,7 +23,7 @@ public class SetRectLocalScaleClick : MonoBehaviour,
     /// <param name="eventData"></param>
     public void OnPointerDown(PointerEventData eventData)
     {
-        _isHeld = true;
+        //_isHeld = true;
         GetComponent<RectTransform>().localScale = _originalScale * _scaleFactor;
     }
 
@@ -33,7 +33,7 @@ public class SetRectLocalScaleClick : MonoBehaviour,
     /// <param name="eventData"></param>
     public void OnPointerUp(PointerEventData eventData)
     {
-        _isHeld = false;
+        //_isHeld = false;
         GetComponent<RectTransform>().localScale = _originalScale;
     }
 
@@ -43,7 +43,7 @@ public class SetRectLocalScaleClick : MonoBehaviour,
     /// <param name="eventData"></param>
     public void OnPointerExit(PointerEventData eventData)
     {
-        _isHeld = false;
+        //_isHeld = false;
         GetComponent<RectTransform>().localScale = _originalScale;
     }
 

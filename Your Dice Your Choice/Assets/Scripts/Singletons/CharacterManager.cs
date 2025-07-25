@@ -96,7 +96,7 @@ public class CharacterManager : MonoBehaviour
                 GetComponent<Field>();
 
             if (field.EnemyObject(TurnManager.Instance.Turn) != null)
-                return field.CharacterObject;
+                return field.Obstacle;
         }
 
         return null;

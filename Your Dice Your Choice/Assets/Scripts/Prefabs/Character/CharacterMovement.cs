@@ -45,12 +45,21 @@ public class CharacterMovement : MonoBehaviour
     /// <param name="position"></param>
     public void MoveTo(GameObject fieldObject)
     {
+        var character = GetComponent<Character>();
+
+        var currentField =
+            FieldManager.Instance.Fields[
+                character.FieldIndex.x, 
+                character.FieldIndex.y]
+                .GetComponent<Field>();
+
+        currentField.SetObjectNull();
+
+        var field = fieldObject.GetComponent<Field>();
+        character.SetFieldIndex(field, field.Index);
+
         _targetPosition = fieldObject.transform.position;
         _isMoving = true;
-
-        var character = GetComponent<Character>();
-        var field = fieldObject.GetComponent<Field>();
-        character.SetFieldIndex(field.Index);
     }
 
 }

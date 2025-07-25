@@ -1,11 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Field : MonoBehaviour
 {
+    public GameObject Character;
     public Vector2Int Index { get; private set; }
-    public GameObject CharacterObject { get; private set; }
+    public GameObject Obstacle { get; private set; }
 
-    private int _count = 0;
+    //private int _count = 0;
 
     /// <summary>
     /// Sets the field index and the name.
@@ -17,44 +19,68 @@ public class Field : MonoBehaviour
         gameObject.name = $"Field {index.x} / {index.y}";
     }
 
-    /// <summary>
-    /// OnTriggerEnter2D.
-    /// </summary>
-    /// <param name="collision"></param>
-    private void OnTriggerEnter2D(Collider2D collision)
+    ///// <summary>
+    ///// OnTriggerEnter2D.
+    ///// </summary>
+    ///// <param name="collision"></param>
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.CompareTag("Character"))
+    //    {
+    //        if (CharacterObject != null)
+    //            return;
+
+    //        CharacterObject = collision.transform.root.gameObject;
+    //        Character = CharacterObject;
+    //        _count++;
+    //        ObstacleCount = _count;
+    //    }
+
+    //    else if (collision.CompareTag("Obstacle"))
+    //    {
+    //        _count++;
+    //        ObstacleCount = _count;
+    //    }
+    //}
+
+    public void SetObject(GameObject obstacle)
     {
-        if (collision.CompareTag("Character"))
-        {
-            if (CharacterObject != null)
-                return;
+        if (Obstacle != null)
+            throw new System.Exception($"Field {Index.x} / {Index.y} has {obstacle.name}");
 
-            CharacterObject = collision.transform.root.gameObject;
-            _count++;
-        }
-
-        else if (collision.CompareTag("Obstacle"))
-        {
-            _count++;
-        }
+        Obstacle = obstacle;
+        Character = Obstacle;
     }
 
-    /// <summary>
-    /// OnTriggerExit2D.
-    /// </summary>
-    /// <param name="collision"></param>
-    private void OnTriggerExit2D(Collider2D collision)
+    public void SetObjectNull()
     {
-        if (collision.gameObject == CharacterObject)
-        {
-            CharacterObject = null;
-            _count--;
-        }
+        if (Obstacle == null)
+            return;
 
-        else if (collision.CompareTag("Obstacle"))
-        {
-            _count--;
-        }
+        Obstacle = null;
     }
+
+    ///// <summary>
+    ///// OnTriggerExit2D.
+    ///// </summary>
+    ///// <param name="collision"></param>
+    //private void OnTriggerExit2D(Collider2D collision)
+    //{
+    //    if (collision.CompareTag("Character") &&
+    //        collision.gameObject.GetComponent<Character>().FieldIndex == In)
+    //    {
+    //        CharacterObject = null;
+    //        Character = null;
+    //        _count--;
+    //        ObstacleCount = _count;
+    //    }
+
+    //    else if (collision.CompareTag("Obstacle"))
+    //    {
+    //        _count--;
+    //        ObstacleCount = _count;
+    //    }
+    //}
 
     /// <summary>
     /// Checks OnTrigger counter.
@@ -62,7 +88,7 @@ public class Field : MonoBehaviour
     /// <returns></returns>
     public bool IsAnyObstacleOnField()
     {
-        if (_count == 0)
+        if (Obstacle == null)
             return false;
 
         return true;
@@ -75,14 +101,17 @@ public class Field : MonoBehaviour
     /// <returns></returns>
     public GameObject EnemyObject(PlayerType currentPlayer)
     {
-        if (CharacterObject == null)
+        if (Obstacle == null)
             return null;
 
-        var character = CharacterObject.GetComponent<Character>();
+        if (!Obstacle.CompareTag("Character"))
+            return null;
+
+        var character = Obstacle.GetComponent<Character>();
 
         if (character.Player.PlayerType != currentPlayer)
         {
-            return CharacterObject;
+            return Obstacle;
         }
 
         return null;
@@ -99,14 +128,6 @@ public class Field : MonoBehaviour
         {
             behaviour.enabled = value;
         }
-    }
-
-    /// <summary>
-    /// Set the character obejct null.
-    /// </summary>
-    public void SetCharacterObjectNull()
-    {
-        CharacterObject = null;
     }
 }
 

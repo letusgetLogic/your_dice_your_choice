@@ -6,9 +6,9 @@ public class ShieldBehaviour : Defend
 {
     public static readonly string[] Description = new string[]
     {
-            Defend.DefaultDescription,
-            "Dice 1: Increase DP by 10% for 2 rounds. It expires when attacked and doesn't stack.",
-            "Dice 2: Increase DP by 20% for 2 rounds. It expires when attacked and doesn't stack.",
+            DefaultDescription,
+            "Dice 1: Reduces AP by 10% for 2 rounds. It expires when attacked and doesn't stack.",
+            "Dice 2: Increase DP by 200% for 2 rounds. It expires when attacked and doesn't stack.",
             "Dice 3: Increase DP by 30% for 1 round. It expires when attacked and doesn't stack.",
             "Dice 4: Increase DP by 40% for 1 round. It expires when attacked and doesn't stack.",
             "Dice 5: Increase DP by 50% for 1 round. It expires when attacked and doesn't stack.",

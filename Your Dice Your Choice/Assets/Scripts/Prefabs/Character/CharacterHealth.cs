@@ -9,6 +9,9 @@ public class CharacterHealth : MonoBehaviour
     [SerializeField] private Image           _fillImage;
     [SerializeField] private TextMeshProUGUI _damageText;
 
+    [SerializeField] private GameObject _critDamage;
+    [SerializeField] private TextMeshProUGUI _critDamageText;
+
     [SerializeField] private float           _animSpeedTakeDamage = 5f;
     [SerializeField] private AnimationCurve  _animCurve;
 
@@ -37,6 +40,7 @@ public class CharacterHealth : MonoBehaviour
         CurrentHP = _maxHealth;
         SetHealthSlider(CurrentHP / _maxHealth);
         _damageText.enabled = false;
+        _critDamage.SetActive(false);
     }
 
     /// <summary>
@@ -54,10 +58,18 @@ public class CharacterHealth : MonoBehaviour
     /// Takes the damage.
     /// </summary>
     /// <param name="damage"></param>
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, bool crit)
     {
         CalculateHealth(-damage);
-        _damageText.text = (-damage).ToString("0");
+
+        if (crit)
+        {
+            _critDamage.SetActive(true);
+            _critDamageText.text = (damage).ToString("0");
+            return;
+        }
+
+        _damageText.text = (damage).ToString("0");
         _damageText.enabled = true;
     }
 
@@ -88,6 +100,7 @@ public class CharacterHealth : MonoBehaviour
         {
             _current = 0f;
             _damageText.enabled = false;
+            _critDamage.SetActive(false);
 
             CurrentHP = _newHealth;
 

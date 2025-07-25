@@ -2,20 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwordBehaviour : Attack
+public class KnifeBehaviour : Attack
 {
     public static readonly string[] Description = new string[]
     {
-            DefaultDescription,
-            "Dice 1: Hit orthogonally with 1 tile range.",
-            "Dice 2: Hit diagonally with 1 tile range.",
-            "Dice 3: Hit orthogonally a opponent with 300% AP",
-            "Dice 4: Hit orthogonally a opponent with 400% AP",
-            "Dice 5: Hit orthogonally a opponent with 500% AP",
-            "Dice 6: Hit orthogonally a opponent with 600% AP",
+            Attack.DefaultDescription,
+            "Dice 1: Hit orthogonally a opponent with 10% chance of crit damage.",
+            "Dice 2: Hit orthogonally a opponent with 20% chance of crit damage.",
+            "Dice 3: Hit orthogonally a opponent with 30% chance of crit damage.",
+            "Dice 4: Hit orthogonally a opponent with 40% chance of crit damage.",
+            "Dice 5: Hit orthogonally a opponent with 50% chance of crit damage.",
+            "Dice 6: Hit orthogonally a opponent with 60% chance of crit damage.",
     };
 
-    public SwordBehaviour(ActionPanel actionPanel, GameObject characterObject) :
+    public KnifeBehaviour(ActionPanel actionPanel, GameObject characterObject) :
         base(actionPanel, characterObject)
     {
         AllowedDiceNumber = AllowedDiceNumber.D1_6;
@@ -32,8 +32,6 @@ public class SwordBehaviour : Attack
            character.FieldIndex,
            GetVector2IntFromDirection.Get(GetDirection(diceNumber)),
            Range(diceNumber));
-
-        CurrentDiceNumber = diceNumber;
     }
 
     public override void ActivateSkill(int diceNumber)
@@ -41,20 +39,12 @@ public class SwordBehaviour : Attack
         var characterAttack = character.GetComponent<CharacterAttack>();
 
         float buffedAP = Buff(characterAttack.CurrentAP, diceNumber);
-        characterAttack.SetBuffAP(buffedAP - characterAttack.CurrentAP); 
+        characterAttack.SetBuffAP(buffedAP - characterAttack.CurrentAP);
         characterAttack.SetAP(buffedAP);
 
         HitEndurance = 0;
         RoundEndurance = 0;
         actionPanel.UpdateEndurance(HitEndurance, RoundEndurance);
-    }
-
-    public override bool IsCritDamage()
-    {
-        if (CurrentDiceNumber > 3 && CurrentDiceNumber <= 6)
-            return true;
-
-        return false;
     }
 
     private float Buff(float ap, int index)
@@ -91,9 +81,8 @@ public class SwordBehaviour : Attack
                 throw new System.Exception(
                     "SwordBehaviour.GetDirection() -> index = 0");
 
-            case 2:
-                return Direction.Diagonal;
             case 1:
+            case 2:
             case 3:
             case 4:
             case 5:
@@ -140,5 +129,6 @@ public class SwordBehaviour : Attack
     //    {"The Giant Sword", "Hit orthogonally 3 Tiles or diagonally 2 Tiles with 200% Damage, with Dice 6" },
     //};
 }
+
 
 

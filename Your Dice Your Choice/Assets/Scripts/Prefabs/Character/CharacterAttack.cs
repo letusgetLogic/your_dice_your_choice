@@ -5,6 +5,8 @@ public class CharacterAttack : MonoBehaviour
 {
     public float CurrentAP { get; private set; }
     public float BuffAP { get; private set; }
+    public string BuffAPText { get; private set; }
+    public Color BuffAPColor { get; private set; }
 
     private float _originalAP => GetComponent<Character>().Data.AP;
 

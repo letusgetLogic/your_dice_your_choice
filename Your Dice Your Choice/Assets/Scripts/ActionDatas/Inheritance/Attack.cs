@@ -9,7 +9,7 @@ public abstract class Attack : ActionBase
     public AllowedDiceNumber AllowedDiceNumber { get; protected set; }
     public int HitEndurance { get; protected set; }
     public int RoundEndurance { get; protected set; }
-
+    
     public Attack(ActionPanel actionPanel, GameObject characterObject) :
         base(actionPanel, characterObject)
     { }
@@ -41,12 +41,21 @@ public abstract class Attack : ActionBase
         var defense = defenderObject.GetComponent<CharacterDefense>();
         var defenderHealth = defenderObject.GetComponent<CharacterHealth>();
 
-        // attack action aniamtion still needs to be implemented here...
+        // attack action animation still needs to be implemented here...
 
         var characterPanel = defenderObject.GetComponent<Character>().Panel;
 
-        BattleController.Instance.CalculateDamage(attack, defense, defenderHealth, 
+        BattleController.Instance.CalculateDamage(attack, IsCritDamage(), defense, defenderHealth, 
             this, characterPanel);
+    }
+
+    /// <summary>
+    /// The other attack mechanic implements this if needed.
+    /// </summary>
+    /// <returns></returns>
+    public virtual bool IsCritDamage()
+    {
+        return false;
     }
 
     /// <summary>
