@@ -6,15 +6,16 @@ public class MatchOverView : MonoBehaviour
 {
     public static MatchOverView Instance { get; private set; }
 
-    [SerializeField] private TextMeshProUGUI _matchStateShaderText;
+    [SerializeField] 
+    private TextMeshProUGUI _matchStateShaderText;
+    public RectTransform MatchStateShaderRect => _matchStateShaderRect;
+
     [SerializeField] private TextMeshProUGUI _matchStateText;
     [SerializeField] private TextMeshProUGUI _winnerStateShaderText;
     [SerializeField] private TextMeshProUGUI _winnerStateText;
 
     [SerializeField] private RectTransform _matchStateShaderRect;
     [SerializeField] private RectTransform _endPosition;
-
-    public RectTransform MatchStateShaderRect => _matchStateShaderRect;
 
     public Vector2 StartPosition => _matchStateShaderRect.anchoredPosition;
     public Vector2 EndPosition => _endPosition.anchoredPosition;
@@ -72,8 +73,8 @@ public class MatchOverView : MonoBehaviour
     {
         foreach (var item in _textArray)
         {
-            item.gameObject.SetActive(value);
             item.alpha = 0f;
+            item.gameObject.SetActive(value);
             Debug.Log($"{item.name} is set to active: {value}");  // Debug log to indicate active state change
             Debug.Log($"{item.name} alpha set to: {item.alpha}");  // Debug log to indicate alpha value
         }
@@ -93,13 +94,5 @@ public class MatchOverView : MonoBehaviour
                 item.alpha = 1f;
             }
         }
-    }
-
-    /// <summary>
-    /// Sets the default values.
-    /// </summary>
-    public void SetDefault()
-    {
-        SetTextArrayActive(false);
     }
 }

@@ -75,8 +75,8 @@ public class BattleController : MonoBehaviour
     /// </summary>
     public void DeactivateInteractible()
     {
-        FieldManager.Instance.DeactivateFields();
-        CharacterManager.Instance.DeactivateCharacters();
+        FieldManager.Instance.DeactivateInteractibleFields();
+        CharacterManager.Instance.DeactivateInteractibleCharacters();
         SetCoroutineNull();
     }
 
@@ -119,31 +119,10 @@ public class BattleController : MonoBehaviour
     }
 
     /// <summary>
-    /// Calculates the damage dealt by the attacker and applies it to the defender's health.
+    /// Updates the hit endurance for the defender character panel.
     /// </summary>
-    /// <param name="attacker"></param>
-    /// <param name="defender"></param>
-    public void CalculateDamage(
-        CharacterAttack deals, bool isCrit, CharacterDefense defends, CharacterHealth defenderHealth,
-        Attack attack, CharacterPanel defenderCharacterPanel)
-    {
-        float damage = deals.CurrentAP - defends.CurrentDP > 0 ?
-                    deals.CurrentAP - defends.CurrentDP : 0;
-
-        defenderHealth.TakeDamage(damage, isCrit);
-
-        UpdateHitEndurance(attack, defenderCharacterPanel);
-    }
-
-    private void UpdateHitEndurance(Attack attack, CharacterPanel defenderCharacterPanel)
-    {
-        attack.CountDownHitEndurance();
-        
-        UpdateHitEnduranceForDefender(defenderCharacterPanel);
-    }
-
-
-    private void UpdateHitEnduranceForDefender(CharacterPanel characterPanel)
+    /// <param name="characterPanel"></param>
+    public void UpdateHitEnduranceForDefender(CharacterPanel characterPanel)
     {
         foreach (ActionPanel actionPanel in characterPanel.ActiveActionPanels)
         {

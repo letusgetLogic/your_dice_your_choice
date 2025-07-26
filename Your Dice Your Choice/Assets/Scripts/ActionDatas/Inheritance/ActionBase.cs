@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 public abstract class ActionBase
 {
-    protected int CurrentDiceNumber { get; set; }
     protected ActionPanel actionPanel { get; private set; }
     protected GameObject characterObject { get; private set; }
     protected Character character => characterObject.GetComponent<Character>();

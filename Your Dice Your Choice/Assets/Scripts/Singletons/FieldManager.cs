@@ -50,39 +50,27 @@ public class FieldManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Adds the interactible fields in the list InteractibleFields.
+    /// Deactivates the old interactable fields if needed and creates a new list.
     /// </summary>
     /// <param name="characterFieldIndexOrigin"></param>
     /// <param name="actionDirections"></param>
     /// <param name="directionRange"></param>
-    public void SetInteractibleFields(Vector2Int characterFieldIndexOrigin,
-        Vector2Int[] actionDirections, int directionRange)
+    public void SetInteractibleFields()
     {
         if (InteractibleFields != null)
         {
-            DeactivateFields();
+            DeactivateInteractibleFields();
         }
-
         InteractibleFields = new();
+    }
 
-        foreach (Vector2Int actionDirection in actionDirections)
-        {
-            var fieldIndex = characterFieldIndexOrigin;
-            fieldIndex += actionDirection * directionRange;
-
-            // Check if the field index is within bounds
-            if (IsTargetOutOfRange(fieldIndex))
-                continue;
-
-            // Check if there is an obstacle in the way
-            if (IsAnyObstacleInWay(
-                characterFieldIndexOrigin, actionDirection, directionRange))
-                continue;
-
-            var fieldObject = Fields[fieldIndex.x, fieldIndex.y];
-
-            InteractibleFields.Add(fieldObject);
-        }
+    /// <summary>
+    /// Adds a field object to the collection of interactable fields.
+    /// </summary>
+    /// <param name="fieldObject">The field object to add. This parameter cannot be <see langword="null"/>.</param>
+    public void AddInteractibleField(GameObject fieldObject)
+    {
+        InteractibleFields.Add(fieldObject);
     }
 
     /// <summary>
@@ -97,46 +85,21 @@ public class FieldManager : MonoBehaviour
         {
             var field = fieldObject.GetComponent<Field>();
             field.SetComponentEnabled(field.GetComponent<FieldMouseEvent>(), true);
-            Debug.Log($"Field {fieldObject.GetComponent<Field>().Index} FieldMouseEvent enabled true\n");
         }
-    }
-
-    /// <summary>
-    /// Checks every field between character and target field.
-    /// </summary>
-    /// <param name="characterFieldIndexOrigin"></param>
-    /// <param name="actionDirection"></param>
-    /// <param name="directionRange"></param>
-    /// <returns></returns>
-    private bool IsAnyObstacleInWay(Vector2Int characterFieldIndexOrigin,
-        Vector2Int actionDirection, int directionRange)
-    {
-        for (int i = 1; i <= directionRange; i++)
-        {
-            var fieldIndex = characterFieldIndexOrigin;
-            fieldIndex += actionDirection * i;
-
-            var field = Fields[fieldIndex.x, fieldIndex.y].GetComponent<Field>();
-
-            if (field.IsAnyObstacleOnField() == true)
-                return true;
-        }
-
-        return false;
     }
 
     /// <summary>
     /// Deactivates the interactable fields and sets the InteractableFields to null.
     /// </summary>
     /// <param name="clickedField"></param>
-    public void DeactivateFields()
+    public void DeactivateInteractibleFields()
     {
         if (InteractibleFields == null)
             return;
 
         if (InteractibleFields.Count == 0)
         {
-            InteractibleFields = null; Debug.Log("InteractibleFields set to null");
+            InteractibleFields = null; 
             return;
         }
 
@@ -145,11 +108,9 @@ public class FieldManager : MonoBehaviour
         {
             var field = fieldObject.GetComponent<Field>();
             field.SetComponentEnabled(field.GetComponent<FieldMouseEvent>(), false);
-            Debug.Log($"Field {fieldObject.GetComponent<Field>().Index} FieldMouseEvent enabled false\n");
         }
 
         InteractibleFields = null;
-        Debug.Log("InteractibleFields set to null");
     }
 
     /// <summary>
@@ -157,7 +118,7 @@ public class FieldManager : MonoBehaviour
     /// </summary>
     /// <param name="fieldIndex"></param>
     /// <returns></returns>
-    public bool IsTargetOutOfRange(Vector2Int fieldIndex)
+    public bool IsTargetOutOfMap(Vector2Int fieldIndex)
     {
         if (fieldIndex.x < 0 || fieldIndex.x >= LevelManager.Instance.Data.MapHeight ||
             fieldIndex.y < 0 || fieldIndex.y >= LevelManager.Instance.Data.MapLength)
@@ -165,4 +126,5 @@ public class FieldManager : MonoBehaviour
 
         return false;
     }
+
 }

@@ -89,8 +89,8 @@ public class Character : MonoBehaviour
         Name = CharacterName.GetName();
 
         GetComponent<CharacterHealth>().SetData();
-        GetComponent<CharacterAttack>().SetData();
-        GetComponent<CharacterDefense>().SetData();
+        GetComponent<CharacterAttack>().CurrentAP = Data.AP;
+        GetComponent<CharacterDefense>().CurrentDP = Data.DP;
 
         var field = FieldManager.Instance.Fields[
             fieldIndex.x, fieldIndex.y].GetComponent<Field>();

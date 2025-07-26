@@ -68,4 +68,13 @@ public class ActionPanel : MonoBehaviour
         _roundEndurance.gameObject.SetActive(isActive);
         _roundEndurance.text = roundEndurance.ToString();
     }
+
+    /// <summary>
+    /// OnDisable method.
+    /// </summary>
+    private void OnDisable()
+    {
+        _hitEndurance.gameObject.SetActive(false);
+        _roundEndurance.gameObject.SetActive(false);
+    }
 }

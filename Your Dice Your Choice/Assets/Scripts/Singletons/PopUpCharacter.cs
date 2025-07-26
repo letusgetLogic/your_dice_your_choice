@@ -65,6 +65,7 @@ public class PopUpCharacter : MonoBehaviour
     public void SetData(Character character)
     {
         _ap.color = Color.white;
+        _dp.color = Color.white;
 
         _name.text = character.Name;
         _name.color = character.GetComponent<CharacterColor>().PlayerColor;
@@ -84,11 +85,11 @@ public class PopUpCharacter : MonoBehaviour
     {
         var characterAttack = character.GetComponent<CharacterAttack>();
 
-        if (characterAttack.BuffAP > 0)
+        if (characterAttack.CurrentBuffAP > 0)
         {
             _ap.color = Color.green;
             _buffAp.gameObject.SetActive(true);
-            _buffAp.text = $"(+{characterAttack.BuffAP.ToString("0")})";
+            _buffAp.text = characterAttack.CurrentBuffAPText;
         }
         else
             _buffAp.gameObject.SetActive(false);
@@ -104,14 +105,22 @@ public class PopUpCharacter : MonoBehaviour
     {
         var characterDefense = character.GetComponent<CharacterDefense>();
 
-        if (characterDefense.BuffDP > 0)
+        if (characterDefense.CurrentBuffType == CharacterDefense.BuffType.DP)
         {
             _dp.color = Color.green;
             _buffDp.gameObject.SetActive(true);
-            _buffDp.text = $"(+{characterDefense.BuffDP.ToString("0")})";
+            _buffDp.text = characterDefense.CurrentBuffDPText;
+        }
+        else if (characterDefense.CurrentBuffType == CharacterDefense.BuffType.DamageReduction)
+        {
+            _dp.color = Color.white;
+            _buffDp.gameObject.SetActive(true);
+            _buffDp.text = characterDefense.CurrentBuffDPText;
         }
         else
+        {
             _buffDp.gameObject.SetActive(false);
+        }
 
         _dp.text = characterDefense.CurrentDP.ToString("0");
     }

@@ -144,7 +144,7 @@ public class SetFirstTurn : MonoBehaviour
     /// <summary>
     /// Scales up the alpha values. 
     /// </summary>
-    public void ScaleUp(float ratio)
+    public void ScaleUpPanelsAndTurnDice(float ratio)
     {
         ScaleUpEach(
             _turnDiceLeft, 
@@ -174,11 +174,6 @@ public class SetFirstTurn : MonoBehaviour
                 PanelManager.Instance.SetScale(panel, Vector3.one);
             }
 
-            foreach (var playDice in rollPanel.PlayDice)
-            {
-                playDice.GetComponent<RectTransform>().localScale = Vector3.one;
-            }
-
             return;
         }
 
@@ -188,11 +183,41 @@ public class SetFirstTurn : MonoBehaviour
         {
             PanelManager.Instance.SetScale(panel, new Vector3(ratio, ratio, ratio));
         }
+    }
+
+    /// <summary>
+    /// Scales up the alpha values. 
+    /// </summary>
+    public void ScaleUpPlayDice(float ratio)
+    {
+        ScaleUpEach(PanelManager.Instance.RollPanelLeft.GetComponent<RollPanel>(), 
+            ratio);
+
+        ScaleUpEach(PanelManager.Instance.RollPanelRight.GetComponent<RollPanel>(), 
+            ratio);
+    }
+
+    /// <summary>
+    /// Scales up each turn dice, panels and each play dice.
+    /// </summary>
+    /// <param name="turnDice"></param>
+    /// <param name="rollPanel"></param>
+    /// <param name="ratio"></param>
+    private void ScaleUpEach(RollPanel rollPanel, float ratio)
+    {
+        if (ratio >= 1)
+        {
+            foreach (var playDice in rollPanel.PlayDice)
+            {
+                playDice.GetComponent<RectTransform>().localScale = Vector3.one;
+            }
+
+            return;
+        }
 
         foreach (var playDice in rollPanel.PlayDice)
         {
             playDice.GetComponent<RectTransform>().localScale = Vector3.one * ratio;
         }
     }
-
 }

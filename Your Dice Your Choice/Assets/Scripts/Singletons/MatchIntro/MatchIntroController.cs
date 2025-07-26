@@ -44,6 +44,10 @@ public class MatchIntroController : MonoBehaviour
             case MatchIntroModel.PlayState.Act3:
                 PlayAct3();
                 return;
+
+            case MatchIntroModel.PlayState.Act4:
+                PlayAct4();
+                return;
         }
     }
 
@@ -59,6 +63,39 @@ public class MatchIntroController : MonoBehaviour
         MatchIntroModel.Instance.SetPlayState(MatchIntroModel.PlayState.Act1);
 
         StartCoroutine(SetAct2());
+    }
+
+    /// <summary>
+    /// Sets Act 2.
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator SetAct2()
+    {
+        yield return new WaitForSeconds(MatchIntroModel.Instance.Act1Time);
+
+        MatchIntroModel.Instance.SetPlayState(MatchIntroModel.PlayState.Act2);
+
+        StartCoroutine(SetAct3());
+    }
+
+    /// <summary>
+    /// Sets Act 3.
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator SetAct3()
+    {
+        yield return new WaitForSeconds(MatchIntroModel.Instance.Act2Time);
+
+        MatchIntroModel.Instance.SetPlayState(MatchIntroModel.PlayState.Act3);
+    }
+
+    /// <summary>
+    /// Sets Act 3.
+    /// </summary>
+    /// <returns></returns>
+    private void SetAct4()
+    {
+        MatchIntroModel.Instance.SetPlayState(MatchIntroModel.PlayState.Act4);
     }
 
     /// <summary>
@@ -131,38 +168,36 @@ public class MatchIntroController : MonoBehaviour
 
         float ratio = Mathf.Lerp(0, 1, value);
 
-        SetFirstTurn.Instance.ScaleUp(ratio);
+        SetFirstTurn.Instance.ScaleUpPanelsAndTurnDice(ratio);
 
         if (ratio >= 1)
         {
             MatchIntroView.Instance.SetForegroundActive(false);
             MatchIntroModel.Instance.SetDefault();
             SetFirstTurn.Instance.RollTurnDice();
+            SetAct4();
         }
     }
 
     /// <summary>
-    /// Sets Act 2.
+    /// Plays the act 4.
     /// </summary>
-    /// <returns></returns>
-    private IEnumerator SetAct2()
+    /// <exception cref="NotImplementedException"></exception>
+    private void PlayAct4()
     {
-        yield return new WaitForSeconds(MatchIntroModel.Instance.Act1Time);
+        MatchIntroModel.Instance.RunCurrentValue(
+            MatchIntroModel.Instance.AnimSpeedAct4);
+        float value = MatchIntroModel.Instance.GetInterpolation(
+            MatchIntroModel.Instance.AnimCurve4);
 
-        MatchIntroModel.Instance.SetPlayState(MatchIntroModel.PlayState.Act2);
+        float ratio = Mathf.Lerp(0, 1, value);
 
-        StartCoroutine(SetAct3());
-    }
+        SetFirstTurn.Instance.ScaleUpPlayDice(ratio);
 
-    /// <summary>
-    /// Sets Act 3.
-    /// </summary>
-    /// <returns></returns>
-    private IEnumerator SetAct3()
-    {
-        yield return new WaitForSeconds(MatchIntroModel.Instance.Act2Time);
-
-        MatchIntroModel.Instance.SetPlayState(MatchIntroModel.PlayState.Act3);
+        if (ratio >= 1)
+        {
+            MatchIntroModel.Instance.SetPlayState(MatchIntroModel.PlayState.None);
+        }
     }
 
     /// <summary>

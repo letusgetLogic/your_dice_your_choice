@@ -43,19 +43,22 @@ public abstract class Attack : ActionBase
 
         // attack action animation still needs to be implemented here...
 
-        var characterPanel = defenderObject.GetComponent<Character>().Panel;
+        DamageCalculator.CalculateDamage(attack, defense, defenderHealth, this);
 
-        BattleController.Instance.CalculateDamage(attack, IsCritDamage(), defense, defenderHealth, 
-            this, characterPanel);
+        CountDownHitEndurance();
+
+        var defenderCharacterPanel = defenderObject.GetComponent<Character>().Panel;
+        BattleController.Instance.UpdateHitEnduranceForDefender(defenderCharacterPanel);
     }
 
     /// <summary>
-    /// The other attack mechanic implements this if needed.
+    /// Returns the varied attack points.
     /// </summary>
+    /// <param name="ap"></param>
     /// <returns></returns>
-    public virtual bool IsCritDamage()
+    public virtual float VariedAP(float ap)
     {
-        return false;
+        return 0f;
     }
 
     /// <summary>

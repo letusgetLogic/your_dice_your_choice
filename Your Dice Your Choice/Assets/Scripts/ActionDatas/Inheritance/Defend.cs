@@ -7,6 +7,8 @@ public abstract class Defend : ActionBase
     public AllowedDiceNumber AllowedDiceNumber { get; protected set; }
     public int HitEndurance { get; protected set; }
     public int RoundEndurance { get; protected set; }
+    public bool IsHitCrucial { get; protected set; }
+    public int ActiveSkillIndex { get; set; } = 0;
 
     public Defend(ActionPanel actionPanel, GameObject characterObject) :
         base(actionPanel, characterObject)
@@ -30,7 +32,8 @@ public abstract class Defend : ActionBase
 
     public override void UpdateHitEnduranceForDefend()
     {
-        CountDownHitEndurance();
+        if (IsHitCrucial)
+            CountDownHitEndurance();
     }
 
     // <summary>
@@ -46,6 +49,8 @@ public abstract class Defend : ActionBase
         {
             characterObject.GetComponent<CharacterDefense>().SetDefault();
             RoundEndurance = 0;
+            ActiveSkillIndex = 0;
+
         }
         actionPanel.UpdateEndurance(HitEndurance, RoundEndurance);
     }
@@ -55,6 +60,9 @@ public abstract class Defend : ActionBase
     /// </summary>
     public override void CountDownRoundEndurance(PlayerType lastTurn)
     {
+        if (IsHitCrucial)
+            return;
+
         var playerType = character.Player.PlayerType;
 
         if (playerType != lastTurn)
@@ -67,8 +75,10 @@ public abstract class Defend : ActionBase
             {
                 characterObject.GetComponent<CharacterDefense>().SetDefault();
                 HitEndurance = 0;
+                ActiveSkillIndex = 0;
             }
             actionPanel.UpdateEndurance(HitEndurance, RoundEndurance);
         }
     }
+
 }

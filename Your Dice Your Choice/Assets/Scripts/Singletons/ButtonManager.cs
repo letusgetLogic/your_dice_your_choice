@@ -48,8 +48,8 @@ public class ButtonManager : MonoBehaviour
     /// </summary>
     public void OnEndTurnButton()
     {
-        FieldManager.Instance.DeactivateFields();
-        CharacterManager.Instance.DeactivateCharacters();
+        FieldManager.Instance.DeactivateInteractibleFields();
+        CharacterManager.Instance.DeactivateInteractibleCharacters();
         TurnManager.Instance.SwitchTurn();
     }
 

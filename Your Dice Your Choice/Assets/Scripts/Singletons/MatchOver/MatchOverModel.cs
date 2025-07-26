@@ -4,17 +4,26 @@ public class MatchOverModel : MonoBehaviour
 {
     public static MatchOverModel Instance { get; private set; }
 
-    [SerializeField] private float _animSpeedAct1 = 1f;
-    [SerializeField] private float _animSpeedAct2 = 1f;
-    [SerializeField] private float _animFadeInSpeed = 2.5f;
-    [SerializeField] private AnimationCurve _animCurve1;
-    [SerializeField] private AnimationCurve _animCurve2;
-
+    [SerializeField] 
+    private float _animSpeedAct1 = 1f;
     public float AnimSpeedAct1 => _animSpeedAct1;
+
+    [SerializeField] 
+    private float _animSpeedAct2 = 1f;
     public float AnimSpeedAct2 => _animSpeedAct2;
+
+    [SerializeField] 
+    private float _animFadeInSpeed = 2.5f;
     public float AnimFadeInSpeed => _animFadeInSpeed;
+
+    [SerializeField] 
+    private AnimationCurve _animCurve1;
     public AnimationCurve AnimCurve1 => _animCurve1;
+
+    [SerializeField] 
+    private AnimationCurve _animCurve2;
     public AnimationCurve AnimCurve2 => _animCurve2;
+
     public enum PlayState { None, Act1, Act2 }
     public PlayState CurrentState { get; private set; }
     public float CurrentValue { get; private set; }

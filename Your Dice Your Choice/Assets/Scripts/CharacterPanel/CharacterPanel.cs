@@ -72,6 +72,7 @@ public class CharacterPanel : MonoBehaviour
 
             actionPanel.SetEnabled(diceSlotAction, false);
             actionPanel.SetEnabled(actionPanelMouseEvent, false);
+            actionPanel.SetEnabled(actionPanel, false);
 
            _inactive.SetActive(true);
         }

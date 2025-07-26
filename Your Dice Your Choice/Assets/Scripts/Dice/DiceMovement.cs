@@ -83,7 +83,7 @@ public class DiceMovement : MonoBehaviour
 
     /// <summary>
     /// </summary>
-    public void PositionsTo(Vector2 pos)
+    public void PositionsTo(Vector3 pos)
     {
         _rectTransform.position = pos;
     }

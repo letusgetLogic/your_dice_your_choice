@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using UnityEngine;
 
 public class MatchOverController : MonoBehaviour
 {
@@ -43,12 +45,18 @@ public class MatchOverController : MonoBehaviour
     public void Congratulate(string playerName)
     {
         MatchOverModel.Instance.SetPlayState(MatchOverModel.PlayState.None);
-
-        MatchOverView.Instance.SetDefault();
-
         MatchOverView.Instance.SetText(playerName);
-
         MatchOverView.Instance.SetTextArrayActive(true);
+        StartCoroutine(SetAct());
+    }
+
+    /// <summary>
+    /// Delays the act setting wo waiting the start method in TextColorSeting.cs.
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator SetAct()
+    {
+        yield return new WaitForSeconds(0.1f);
 
         MatchOverModel.Instance.SetPlayState(MatchOverModel.PlayState.Act1);
     }
