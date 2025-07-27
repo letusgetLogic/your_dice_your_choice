@@ -75,7 +75,7 @@ public class CharacterGenerator : MonoBehaviour
 
         // Color
         var characterColor = characterObject.GetComponent<CharacterColor>();
-        characterColor.SetColor(PlayerColor(playerType), character.Name);
+        characterColor.SetColorAndName(PlayerColor(playerType), character.Name);
 
         // Border Color
         var characterBorderColor =

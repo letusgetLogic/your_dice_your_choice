@@ -747,8 +747,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '* AP can vary during the attack within the range between 5% below and
-    50% above.'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1745,4 +1744,5 @@ MonoBehaviour:
   _buffAp: {fileID: 1879648535028514729}
   _dp: {fileID: 7949430049932095530}
   _buffDp: {fileID: 1300558059613848844}
+  _info: {fileID: 264854640994603997}
   _distance: {x: 120, y: 0}

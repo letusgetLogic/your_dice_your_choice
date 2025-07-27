@@ -31,8 +31,8 @@ public class DevelopTool : MonoBehaviour
     {
         OnWindow();
         
-        LevelManager.Instance.SetPhase(Phase.Initialization);
-        LevelManager.Instance.SetPhase(Phase.Battle);
+        //LevelManager.Instance.SetPhase(Phase.Initialization);
+        //LevelManager.Instance.SetPhase(Phase.Battle);
         LevelManager.Instance.SubmitWinnerFrom(PlayerType.PlayerLeft);
         LevelManager.Instance.SetPhase(Phase.MatchOver);
     }

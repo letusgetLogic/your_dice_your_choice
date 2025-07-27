@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    public bool IsModusDevelopment;
+    public bool ModusDevelopment;
 
     public string PlayerLeftName { get; set; } = "Player 1";
     public string PlayerRightName { get; set; } = "Player 2";
@@ -39,6 +39,15 @@ public class GameManager : MonoBehaviour
         PlayerLeftName = playerLeftName;
         PlayerRightName = playerRightName;
         CharacterAmount = characterAmount;
+    }
+
+    /// <summary>
+    /// Sets the default player names.
+    /// </summary>
+    public void SetDefault()
+    {
+        PlayerLeftName = "Player 1";
+        PlayerRightName = "Player 2";
     }
 
     /// <summary>

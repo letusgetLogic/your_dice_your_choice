@@ -1,5 +1,4 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
@@ -35,7 +34,7 @@ public class LevelManager : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        _developTool.SetActive(GameManager.Instance.IsModusDevelopment);
+        _developTool.SetActive(GameManager.Instance.ModusDevelopment);
        
         SetDataIndex();
         StartPhases();
@@ -61,7 +60,7 @@ public class LevelManager : MonoBehaviour
     {
         if (Data != null)
         {
-            SetPhase(Phase.Intro);
+            SetPhase(Phase.Initialization);
         }
         else
         {
@@ -91,15 +90,23 @@ public class LevelManager : MonoBehaviour
                 throw new System.Exception("CurrentPhase = Phase.None");
 
             case Phase.Intro:
-                MatchIntroController.Instance.Play();
+                //MatchIntroController.Instance.Play();
                 return;
 
             case Phase.Initialization:
+                PanelManager.Instance.SetPanels();
                 PhaseInitialization();
+                SetPhase(Phase.SetFirstTurn);
+                return;
+
+            case Phase.SetFirstTurn:
+                SetFirstTurn.Instance.InitializePanels();
+                SetFirstTurn.Instance.SetTurnDiceAndPanel();
+                SetFirstTurn.Instance.RollTurnDice();
                 return;
 
             case Phase.Battle:
-                MatchIntroController.Instance.gameObject.SetActive(false);
+                //MatchIntroController.Instance.gameObject.SetActive(false);
                 BattleController.Instance.StartMatch();
                 return;
 

@@ -16,31 +16,21 @@ public class ShieldBehaviour : Defend
             "Dice 1: Increase DP by 100% for 1 round. It doesn't stack.",
             "Dice 2: Increase DP by 100% for 2 hits. It doesn't stack.",
             "Dice 3: Reduces damage by 30% for 3 rounds. It doesn't stack.",
-            "Dice 4: Reduces damage by 20% for 2 hits. It doesn't stack.",
-            "Dice 5: Reduces damage by 50% for 1 round. It doesn't stack.",
+            "Dice 4: Reduces damage by 40% for 2 hits. It doesn't stack.",
+            "Dice 5: Reduces damage by 55% for 1 round. It doesn't stack.",
             "Dice 6: Increase DP by 260% for 1 round. It doesn't stack.",
     };
-    private static readonly string[] buffText = new string[]
-    {
-            "",
-            "(+100% DP)",
-            "(+100% DP)",
-            "(-30% dmg)",
-            "(-20% dmg)",
-            "(-50% dmg)",
-            "(+260% DP)"
-    };
-
+  
     private readonly ShieldSkill[] shieldSkills = new ShieldSkill[]
     {
-        // dpPercentage, damageReduction, hitEndurance, roundEndurance
-        new(0, 0, 0, 0), // Default
-        new(100, 0, 0, 1), // Dice 1
-        new(100, 0, 2, 0), // Dice 2
-        new(0, 30, 0, 3), // Dice 3
-        new(0, 20, 2, 0), // Dice 4
-        new(0, 50, 0, 1), // Dice 5
-        new(260, 0, 0, 1) // Dice 6
+        // dpP., dmg, hit, round, buffText
+        new(0,    0,   0,    0, ""),          // Default
+        new(100,  0,   0,    1, "(+100% DP)"),// Dice 1
+        new(100,  0,   2,    0, "(+100% DP)"),// Dice 2
+        new(0,   30,   0,    3, "(-30% dmg)"),// Dice 3
+        new(0,   40,   2,    0, "(-40% dmg)"),// Dice 4
+        new(0,   55,   0,    1, "(-55% dmg)"),// Dice 5
+        new(260,  0,   0,    1, "(+260% DP)") // Dice 6
     };
 
     public override void SetDataPopUp(int index)
@@ -71,7 +61,7 @@ public class ShieldBehaviour : Defend
             characterDefend.CurrentDamageReduction = skill.DamageReduction;
             characterDefend.CurrentBuffType = CharacterDefense.BuffType.DamageReduction;
         }
-        characterDefend.CurrentBuffDPText = buffText[diceNumber];
+        characterDefend.CurrentBuffDPText = skill.BuffText;
 
         HitEndurance = skill.HitEndurance;
         RoundEndurance = skill.RoundEndurance;

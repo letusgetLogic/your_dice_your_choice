@@ -18,6 +18,8 @@ public class PopUpCharacter : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _dp;
     [SerializeField] private TextMeshProUGUI _buffDp;
 
+    [SerializeField] private TextMeshProUGUI _info;
+
     [SerializeField] private Vector2 _distance;
 
     /// <summary>
@@ -95,6 +97,7 @@ public class PopUpCharacter : MonoBehaviour
             _buffAp.gameObject.SetActive(false);
 
         _ap.text = characterAttack.CurrentAP.ToString("0");
+        _info.text = characterAttack.InfoText;
     }
 
     /// <summary>
