@@ -55,7 +55,8 @@ public class CharacterPanel : MonoBehaviour
             ActiveActionPanels[i] = _actionPanelPrefabs[i].GetComponent<ActionPanel>();
 
             var actionData = Character.Data.ActionData[i];
-            ActiveActionPanels[i].SetData(actionData, CharacterObject, this, i);
+            ActiveActionPanels[i].SetData(actionData, CharacterObject);
+
         }
     }
 

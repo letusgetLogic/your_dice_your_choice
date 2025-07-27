@@ -247,7 +247,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
+  m_VertexColorAlwaysGammaSpace: 1
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -33269,6 +33269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd8bd9cf877e3ac43abbd68040b2f4b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsModusDevelopment: 0
 --- !u!4 &1448795325
 Transform:
   m_ObjectHideFlags: 0
@@ -34299,12 +34300,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f5a134a62363604d8710480a5a99090, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerLeftName: {fileID: 2768628596113866172}
-  _playerRightName: {fileID: 1678072900}
-  _characterAmount: {fileID: 1801444381}
   _inputFieldLeft: {fileID: 4221886396598428080}
   _inputFieldRight: {fileID: 1074523701}
   _charName: 9
+  _characterAmount: {fileID: 1801444381}
   _characterAmountDropDown: {fileID: 1370210535}
   _playButton: {fileID: 1617118522}
   _quitButton: {fileID: 1086203154}

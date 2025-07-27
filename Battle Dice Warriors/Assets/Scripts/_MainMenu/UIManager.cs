@@ -8,14 +8,11 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
 
-    [SerializeField] private TextMeshProUGUI _playerLeftName;
-    [SerializeField] private TextMeshProUGUI _playerRightName;
-    [SerializeField] private TextMeshProUGUI _characterAmount;
-
     [SerializeField] private TMP_InputField _inputFieldLeft;
     [SerializeField] private TMP_InputField _inputFieldRight;
     [SerializeField] private int _charName;
 
+    [SerializeField] private TextMeshProUGUI _characterAmount;
     [SerializeField] private TMP_Dropdown _characterAmountDropDown;
 
     [SerializeField] private Button _playButton;

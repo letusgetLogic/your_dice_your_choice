@@ -11,8 +11,10 @@ public class SwordBehaviour : Attack
         AllowedDiceNumber = AllowedDiceNumber.D1_6;
     }
 
+    private static readonly float belowVariedPercentage = 5f;
+    private static readonly float aboveVariedPercentage = 50f;
     public static readonly string VariedValueDescription = 
-        "* AP can vary during the attack within the range between 5% below and 50% above";
+        $"* AP can vary during the attack within the range between {belowVariedPercentage}% below and {aboveVariedPercentage}% above";
 
     public static readonly string[] Description = new string[]
     {
@@ -118,7 +120,8 @@ public class SwordBehaviour : Attack
 
     public override float VariedAP(float ap)
     {
-        float variedPercentage = UnityEngine.Random.Range(-0.05f, 0.5f);
+        float variedPercentage = UnityEngine.Random.Range(-belowVariedPercentage * 0.01f, aboveVariedPercentage * 0.01f);
+        Debug.Log($"Varied AP: {ap} * {variedPercentage}");
         return ap * variedPercentage;
     }
 

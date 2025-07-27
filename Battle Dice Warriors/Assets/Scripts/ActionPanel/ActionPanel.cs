@@ -12,8 +12,6 @@ public class ActionPanel : MonoBehaviour
     public ActionData ActionData { get; private set; }
     public ActionBase Action { get; private set; }
     public GameObject CharacterObject { get; private set; }
-    public CharacterPanel CharacterPanel { get; private set; }
-    public Component ActionAtribute { get; private set; }
     public DiceSlotAction DiceSlotAction => _diceSlotAction;
 
     /// <summary>
@@ -29,13 +27,11 @@ public class ActionPanel : MonoBehaviour
     /// Initializes data.
     /// </summary>
     /// <param name="actionData"></param>
-    public void SetData(ActionData actionData, GameObject characterObject,
-                        CharacterPanel characterPanel, int index)
+    public void SetData(ActionData actionData, GameObject characterObject)
     {
         ActionData = actionData;
         Action = GetActionBase.Create(this, characterObject);
         CharacterObject = characterObject;
-        CharacterPanel = characterPanel;
         _actionName.text = actionData.ActionType.ToString();
     }
 
@@ -76,5 +72,10 @@ public class ActionPanel : MonoBehaviour
     {
         _hitEndurance.gameObject.SetActive(false);
         _roundEndurance.gameObject.SetActive(false);
+
+        if (CharacterObject == null)
+            return;
+        CharacterObject.GetComponent<CharacterAttack>().SetDefault();
+        CharacterObject.GetComponent<CharacterDefense>().SetDefault();
     }
 }
