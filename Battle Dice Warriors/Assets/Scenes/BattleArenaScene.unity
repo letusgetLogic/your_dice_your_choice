@@ -189,7 +189,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 175f218960678a446abdc873f61fb322, type: 2}
   - {fileID: 11400000, guid: 02f0e1ffa1bbb5340ab40ab5311a35f8, type: 2}
   - {fileID: 11400000, guid: a6e97e2ec5e445c44941de668b1d1b7b, type: 2}
-  _dataIndex: 0
+  _dataIndex: 3
 --- !u!114 &11377614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30615,7 +30615,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
+  m_VertexColorAlwaysGammaSpace: 1
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 664311233
@@ -31537,13 +31537,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08a6ca95f93898142a32314177eaabcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _act1Time: 2
-  _act2Time: 0.5
+  _delayAct1: 0
+  _delayAct2: 2
+  _delayAct3: 2
+  _delayAct4: 4
   _animSpeedAct1: 0.4
   _animSpeedAct2: 0.5
-  _animSpeedAct3: 0.5
-  _animSpeedAct4: 0.5
-  _animFadeInTime: 2.5
+  _animSpeedAct3: 0.7
+  _animSpeedAct4: 0.6
+  _fadeInSpeed: 2.5
   _animCurve1:
     serializedVersion: 2
     m_Curve:
