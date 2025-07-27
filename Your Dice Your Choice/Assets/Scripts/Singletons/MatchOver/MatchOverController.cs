@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using UnityEngine;
 
 public class MatchOverController : MonoBehaviour
 {
@@ -43,14 +45,31 @@ public class MatchOverController : MonoBehaviour
     public void Congratulate(string playerName)
     {
         MatchOverModel.Instance.SetPlayState(MatchOverModel.PlayState.None);
-
-        MatchOverView.Instance.SetDefault();
-
         MatchOverView.Instance.SetText(playerName);
-
         MatchOverView.Instance.SetTextArrayActive(true);
+        StartCoroutine(SetAct());
+    }
+
+    /// <summary>
+    /// Delays the act setting wo waiting the start method in TextColorSeting.cs.
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator SetAct()
+    {
+        yield return new WaitForSeconds(0.1f);
 
         MatchOverModel.Instance.SetPlayState(MatchOverModel.PlayState.Act1);
+    }
+
+    /// <summary>
+    /// Delays the act 2 setting after the first act is done.
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator SetAct2()
+    {
+        yield return new WaitForSeconds(MatchOverModel.Instance.AnimDuration);
+
+        MatchOverModel.Instance.SetPlayState(MatchOverModel.PlayState.Act2);
     }
 
     /// <summary>
@@ -74,7 +93,7 @@ public class MatchOverController : MonoBehaviour
         if (value >= 1)
         {
             MatchOverModel.Instance.SetDefault();
-            MatchOverModel.Instance.SetPlayState(MatchOverModel.PlayState.Act2);
+            StartCoroutine(SetAct2());
         }
     }
 
@@ -94,7 +113,7 @@ public class MatchOverController : MonoBehaviour
         if (value >= 1)
         {
             MatchOverModel.Instance.SetDefault();
-            LevelManager.Instance.NextPhase();
+            LevelManager.Instance.SetPhase(Phase.WaitForInput);
         }
     }
 

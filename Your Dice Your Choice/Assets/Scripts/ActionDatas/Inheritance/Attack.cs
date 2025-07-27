@@ -7,9 +7,11 @@ public abstract class Attack : ActionBase
         "Move the dice over here to get more information";
 
     public AllowedDiceNumber AllowedDiceNumber { get; protected set; }
-
-    public Attack(ActionData data, GameObject characterObject) :
-        base(data, characterObject)
+    public int HitEndurance { get; protected set; }
+    public int RoundEndurance { get; protected set; }
+    
+    public Attack(ActionPanel actionPanel, GameObject characterObject) :
+        base(actionPanel, characterObject)
     { }
 
     public override bool IsValid(int diceNumber)
@@ -26,35 +28,75 @@ public abstract class Attack : ActionBase
         CharacterManager.Instance.ShowInteractibleCharacters();
     }
 
-    public override void HandleInput(GameObject clickedCharacterBody)
+    public override void ProcessInput(GameObject clickedCharacterBody)
     {
         if (clickedCharacterBody.CompareTag("Character") == false)
         {
             Debug.LogWarning("The clicked object is not a character body.");
             return;
         }
+        GameObject defenderObject = clickedCharacterBody.transform.root.gameObject;
 
-        var characterAttack = character.GetComponent<CharacterAttack>();
-        GameObject enemyObject = clickedCharacterBody.transform.root.gameObject;
-        var enemyCharacter = enemyObject.GetComponent<Character>();
+        var attack = character.GetComponent<CharacterAttack>();
+        var defense = defenderObject.GetComponent<CharacterDefense>();
+        var defenderHealth = defenderObject.GetComponent<CharacterHealth>();
 
-        float damage = characterAttack.CurrentAP - enemyCharacter.CurrentDP > 0 ?
-                    characterAttack.CurrentAP - enemyCharacter.CurrentDP : 
-                     0;
-       Debug.Log($"Damage dealt: {damage}");
-        enemyObject.GetComponent<CharacterHealth>().TakeDamage(damage);
+        // attack action animation still needs to be implemented here...
 
-        this.SetDefault(enemyCharacter);
+        DamageCalculator.CalculateDamage(attack, defense, defenderHealth, this);
+
+        CountDownHitEndurance();
+
+        var defenderCharacterPanel = defenderObject.GetComponent<Character>().Panel;
+        BattleController.Instance.UpdateHitEnduranceForDefender(defenderCharacterPanel);
     }
 
     /// <summary>
-    /// Sets the default values for the action.
+    /// Returns the varied attack points.
     /// </summary>
-    public virtual void SetDefault(Character enemyCharacter)
+    /// <param name="ap"></param>
+    /// <returns></returns>
+    public virtual float VariedAP(float ap)
     {
-        var characterAttack = character.GetComponent<CharacterAttack>();
-        characterAttack.CountDownHitEndurance();
-        var enemyDefense = enemyCharacter.GetComponent<CharacterDefense>();
-        enemyDefense.CountDownHitEndurance();
+        return 0f;
+    }
+
+    /// <summary>
+    /// Counts down the HitEndurance and resets if it reaches zero.
+    /// </summary>
+    public void CountDownHitEndurance()
+    {
+        if (HitEndurance > 0)
+        {
+            HitEndurance--;
+        }
+        if (HitEndurance == 0)
+        {
+            characterObject.GetComponent<CharacterAttack>().SetDefault();
+            RoundEndurance = 0;
+        }
+        actionPanel.UpdateEndurance(HitEndurance, RoundEndurance);
+    }
+
+    /// <summary>
+    /// Counts down the RoundEndurance and resets if it reaches zero.
+    /// </summary>
+    public override void CountDownRoundEndurance(PlayerType lastTurn)
+    {
+        var playerType = character.Player.PlayerType;
+
+        if (playerType == lastTurn)
+        {
+            if (RoundEndurance > 0)
+            {
+                RoundEndurance--;
+            }
+            if (RoundEndurance == 0)
+            {
+                characterObject.GetComponent<CharacterAttack>().SetDefault();
+                HitEndurance = 0;
+            }
+            actionPanel.UpdateEndurance(HitEndurance, RoundEndurance);
+        }
     }
 }

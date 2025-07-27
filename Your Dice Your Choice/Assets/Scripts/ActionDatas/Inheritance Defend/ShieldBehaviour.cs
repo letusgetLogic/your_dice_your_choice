@@ -4,65 +4,94 @@ using UnityEngine;
 
 public class ShieldBehaviour : Defend
 {
-    public static readonly string[] Description = new string[]
-    {
-            Defend.DefaultDescription,
-            "Dice 1: Increase DP by 10% for 1 round.\nIt expires when attacked.",
-            "Dice 2: Increase DP by 20% for 1 round.\nIt expires when attacked.",
-            "Dice 3: Increase DP by 30% for 1 round.\nIt expires when attacked.",
-            "Dice 4: Increase DP by 40% for 1 round.\nIt expires when attacked.",
-            "Dice 5: Increase DP by 50% for 1 round.\nIt expires when attacked.",
-            "Dice 6: Increase DP by 60% for 1 round.\nIt expires when attacked.",
-    };
-
-    public ShieldBehaviour(ActionData data, GameObject characterObject) :
-       base(data, characterObject)
+    public ShieldBehaviour(ActionPanel actionPanel, GameObject characterObject) :
+       base(actionPanel, characterObject)
     {
         AllowedDiceNumber = AllowedDiceNumber.D1_6;
     }
 
+    private static readonly string[] description = new string[]
+    {
+            DefaultDescription,
+            "Dice 1: Increase DP by 100% for 1 round. It doesn't stack.",
+            "Dice 2: Increase DP by 100% for 2 hits. It doesn't stack.",
+            "Dice 3: Reduces damage by 30% for 3 rounds. It doesn't stack.",
+            "Dice 4: Reduces damage by 20% for 2 hits. It doesn't stack.",
+            "Dice 5: Reduces damage by 50% for 1 round. It doesn't stack.",
+            "Dice 6: Increase DP by 260% for 1 round. It doesn't stack.",
+    };
+    private static readonly string[] buffText = new string[]
+    {
+            "",
+            "(+100% DP)",
+            "(+100% DP)",
+            "(-30% dmg)",
+            "(-20% dmg)",
+            "(-50% dmg)",
+            "(+260% DP)"
+    };
+
+    private readonly ShieldSkill[] shieldSkills = new ShieldSkill[]
+    {
+        // dpPercentage, damageReduction, hitEndurance, roundEndurance
+        new(0, 0, 0, 0), // Default
+        new(100, 0, 0, 1), // Dice 1
+        new(100, 0, 2, 0), // Dice 2
+        new(0, 30, 0, 3), // Dice 3
+        new(0, 20, 2, 0), // Dice 4
+        new(0, 50, 0, 1), // Dice 5
+        new(260, 0, 0, 1) // Dice 6
+    };
+
     public override void SetDataPopUp(int index)
     {
-        PopUpAction.Instance.SetData(Description[index]);
+        if (index == 0 && ActiveSkillIndex != 0)
+        {
+            PopUpAction.Instance.SetData(description[ActiveSkillIndex]);
+            return;
+        }
+        PopUpAction.Instance.SetData(description[index]);
     }
 
     public override void ActivateSkill(int diceNumber)
     {
-        var characterDefend = character.GetComponent<CharacterDefense>();    
+        ActiveSkillIndex = diceNumber;
+        var skill = shieldSkills[diceNumber];
+        var characterDefend = character.GetComponent<CharacterDefense>();
 
-        float buffedDP = Buff(characterDefend.CurrentDP, diceNumber);
-
-        characterDefend.SetBuffDP(buffedDP - characterDefend.CurrentDP, 1, 2);
-        characterDefend.SetDP(buffedDP);
-    }
-
-    private float Buff(float dp, int index)
-    {
-        switch (index)
+        if (skill.Percentage > 0)
         {
-            case 0:
-                throw new System.Exception("ShieldBehaviour.Buff() -> index = 0");
-
-            case 1:
-            case 2:
-            case 3:
-            case 4:
-            case 5:
-            case 6:
-                var buffedAP = (float)Math.Round(dp * (1 + index * 0.1f), 2);
-                return buffedAP;
+            float buffDP = characterDefend.CurrentDP * skill.Percentage * 0.01f;
+            characterDefend.CurrentBuffDP = buffDP;
+            characterDefend.CurrentDP = characterDefend.CurrentDP + buffDP;
+            characterDefend.CurrentBuffType = CharacterDefense.BuffType.DP;
         }
+        else if (skill.DamageReduction > 0)
+        {
+            characterDefend.CurrentDamageReduction = skill.DamageReduction;
+            characterDefend.CurrentBuffType = CharacterDefense.BuffType.DamageReduction;
+        }
+        characterDefend.CurrentBuffDPText = buffText[diceNumber];
 
-        throw new System.Exception("ShieldBehaviour.Buff() -> int index invalid");
+        HitEndurance = skill.HitEndurance;
+        RoundEndurance = skill.RoundEndurance;
+
+        if (HitEndurance > 0)
+            IsHitCrucial = true;
+        else
+            IsHitCrucial = false;
+
+        actionPanel.UpdateEndurance(skill.HitEndurance, skill.RoundEndurance);
+    
     }
 
-    //private Dictionary<string, string> _defendDescription = new Dictionary<string, string>
-    //    {
-    //        {"Quick_Shielding", "Cover 50% Damage" },
-    //        {"Ally_Shielding", "Cover 40% Damage for the nearby selected Ally" },
-    //        {"The_Big_Shield", "Enlarge the Shield by 3 Tiles, which cover 30% Damage and prevent Enemies from getting through" },
-    //        {"Shield_Throwing", "Damage the nearby Enemy and getting Shield, which cover 40% Damage" },
-    //        {"Team_Shielding", "All nearby Allies and You getting Shields, which cover 25% Damage" },
-    //        {"The_Burden", "Force all Enemies to attack him and cover 80% Damage" }
-    //    };
-}
+        //private Dictionary<string, string> _defendDescription = new Dictionary<string, string>
+        //    {
+        //        {"Quick_Shielding", "Cover 50% Damage" },
+        //        {"Ally_Shielding", "Cover 40% Damage for the nearby selected Ally" },
+        //        {"The_Big_Shield", "Enlarge the Shield by 3 Tiles, which cover 30% Damage and prevent Enemies from getting through" },
+        //        {"Shield_Throwing", "Damage the nearby Enemy and getting Shield, which cover 40% Damage" },
+        //        {"Team_Shielding", "All nearby Allies and You getting Shields, which cover 25% Damage" },
+        //        {"The_Burden", "Force all Enemies to attack him and cover 80% Damage" }
+        //    };
+    }

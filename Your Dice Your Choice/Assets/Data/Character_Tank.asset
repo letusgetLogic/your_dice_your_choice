@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 0
   HP: 1200
-  AP: 156
-  DP: 84
+  AP: 312
+  DP: 184
   WeaponRight: {fileID: 4454906068307276358, guid: 8a2fe4dff3f74c84d97fe590b3dcf2db, type: 3}
   WeaponLeft: {fileID: 2106958939825099808, guid: b3db58b855c74cf479f616ae0971db9c, type: 3}
   ActionData:

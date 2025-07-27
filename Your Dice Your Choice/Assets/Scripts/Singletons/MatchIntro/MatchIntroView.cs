@@ -8,6 +8,9 @@ public class MatchIntroView : MonoBehaviour
 {
     public static MatchIntroView Instance { get; private set; }
 
+    [SerializeField] private TextMeshProUGUI _playerNameLeft;
+    [SerializeField] private TextMeshProUGUI _playerNameRight;
+
     [SerializeField] private TextMeshProUGUI _leftIntroShaderText;
     [SerializeField] private TextMeshProUGUI _leftIntroText;
     [SerializeField] private TextMeshProUGUI _versusIntroShaderText;
@@ -33,9 +36,6 @@ public class MatchIntroView : MonoBehaviour
     public Vector2 StartPositionRightAct2 => _startPositionRightAct2.anchoredPosition;
     public Vector2 EndPositionLeftAct2 => _endPositionLeftAct2.anchoredPosition;
     public Vector2 EndPositionRightAct2 => _endPositionRightAct2.anchoredPosition;
-
-    private readonly string PlayerNameLeft = "Player 1";
-    private readonly string PlayerNameRight = "Player 2";
 
     private TextMeshProUGUI[] _textArray => new[]
     {
@@ -67,10 +67,13 @@ public class MatchIntroView : MonoBehaviour
     /// <param name="value"></param>
     public void SetText()
     {
-        _leftIntroShaderText.text = PlayerNameLeft;
-        _leftIntroText.text = PlayerNameLeft;
-        _rightIntroShaderText.text = PlayerNameRight;
-        _rightIntroText.text = PlayerNameRight;
+        _playerNameLeft.text = GameManager.Instance.PlayerLeftName;
+        _playerNameRight.text = GameManager.Instance.PlayerRightName;
+
+        _leftIntroShaderText.text = GameManager.Instance.PlayerLeftName;
+        _leftIntroText.text = GameManager.Instance.PlayerLeftName;
+        _rightIntroShaderText.text = GameManager.Instance.PlayerRightName;
+        _rightIntroText.text = GameManager.Instance.PlayerRightName;
     }
 
     /// <summary>

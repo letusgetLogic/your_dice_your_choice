@@ -6,15 +6,16 @@ public class MatchOverView : MonoBehaviour
 {
     public static MatchOverView Instance { get; private set; }
 
-    [SerializeField] private TextMeshProUGUI _matchStateShaderText;
+    [SerializeField] 
+    private TextMeshProUGUI _matchStateShaderText;
+    public RectTransform MatchStateShaderRect => _matchStateShaderRect;
+
     [SerializeField] private TextMeshProUGUI _matchStateText;
     [SerializeField] private TextMeshProUGUI _winnerStateShaderText;
     [SerializeField] private TextMeshProUGUI _winnerStateText;
 
     [SerializeField] private RectTransform _matchStateShaderRect;
     [SerializeField] private RectTransform _endPosition;
-
-    public RectTransform MatchStateShaderRect => _matchStateShaderRect;
 
     public Vector2 StartPosition => _matchStateShaderRect.anchoredPosition;
     public Vector2 EndPosition => _endPosition.anchoredPosition;
@@ -86,20 +87,12 @@ public class MatchOverView : MonoBehaviour
     {
         foreach (var item in textMeshProUGUIs)
         {
-            if (item.alpha < 1f)
+            if (item.alpha < 0.9f)
                 item.alpha += animSpeed * Time.deltaTime;
             else
             {
                 item.alpha = 1f;
             }
         }
-    }
-
-    /// <summary>
-    /// Sets the default values.
-    /// </summary>
-    public void SetDefault()
-    {
-        SetTextArrayActive(false);
     }
 }

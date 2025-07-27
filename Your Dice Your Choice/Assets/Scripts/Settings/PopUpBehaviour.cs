@@ -25,7 +25,7 @@ public class PopUpBehaviour
         Vector3 distance = new();
 
         distance.x = distanceV2.x * Direction(targetLocalPos).x;
-        distance.y = distanceV2.y * Direction(targetLocalPos).y;
+        distance.y = distanceV2.y /** Direction(targetLocalPos).y*/;
 
         return distance;
     }
@@ -45,11 +45,11 @@ public class PopUpBehaviour
             case > 0f: dir.x = -1; break;
         }
 
-        switch (pos.y)
-        {
-            case <= 0f: dir.y = 1; break;
-            case > 0f: dir.y = -1; break;
-        }
+        //switch (pos.y)
+        //{
+        //    case <= 0f: dir.y = 1; break;
+        //    case > 0f: dir.y = -1; break;
+        //}
 
         return dir;
     }

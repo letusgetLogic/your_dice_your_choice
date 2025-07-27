@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor.U2D.Aseprite;
 using UnityEngine;
 
 public class CharacterGenerator : MonoBehaviour
@@ -46,41 +47,52 @@ public class CharacterGenerator : MonoBehaviour
         {
             var characterObject =
                 Instantiate(_characterPrefab, randomPositions[i], Quaternion.identity);
-            var character = characterObject.GetComponent<Character>();
 
-            // Data
-            var characterData = _characterData[Random.Range(0, _characterData.Length)];
-            character.SetData(player, playerType, characterData, randomIndexes[i]);
-
-            // Weapon
-            var characterGetWeapon = characterObject.GetComponent<CharacterGetWeapon>();
-            characterGetWeapon.SetWeaponToLeftHand(character);
-            characterGetWeapon.SetWeaponToRightHand(character);
-
-            // Color
-            var characterColor = characterObject.GetComponent<CharacterColor>();
-            characterColor.SetColor(PlayerColor(playerType), character.Name);
-
-            // Border Color
-            var characterBorderColor =
-                characterObject.GetComponent<CharacterBorderColor>();
-            character.SetComponentEnabled(characterBorderColor, false);
-
-            // Being Attacked
-            character.SetComponentEnabled(character.CharacterBeingAttacked, false);
-
-            // Panel
-            var characterPanelObject =
-                PanelManager.Instance.GetPanel(playerType, i, characterObject);
-            character.SetPanel(characterPanelObject.GetComponent<CharacterPanel>());
-
-            // State
-            character.GetComponent<CharacterState>().SetBattleState();
-
+            SetReference(characterObject, player, playerType, randomIndexes[i], i);
+            
             tempList.Add(characterObject);
         }
 
         return tempList;
+    }
+
+    /// <summary>
+    /// Sets the references for the character.
+    /// </summary>
+    /// <param name="characterObject"></param>
+    private void SetReference(GameObject characterObject, Player player, 
+                                PlayerType playerType, Vector2Int randomIndex, int index)
+    {
+        var character = characterObject.GetComponent<Character>();
+
+        // Data
+        var characterData = _characterData[Random.Range(0, _characterData.Length)];
+        character.SetData(player, characterData, randomIndex);
+
+        // Weapon
+        var characterGetWeapon = characterObject.GetComponent<CharacterGetWeapon>();
+        characterGetWeapon.SetWeaponToLeftHand(character);
+        characterGetWeapon.SetWeaponToRightHand(character);
+
+        // Color
+        var characterColor = characterObject.GetComponent<CharacterColor>();
+        characterColor.SetColor(PlayerColor(playerType), character.Name);
+
+        // Border Color
+        var characterBorderColor =
+            characterObject.GetComponent<CharacterBorderColor>();
+        character.SetComponentEnabled(characterBorderColor, false);
+
+        // Being Attacked
+        character.SetComponentEnabled(character.CharacterBeingAttacked, false);
+
+        // Panel
+        var characterPanelObject =
+            PanelManager.Instance.GetPanel(playerType, index, characterObject);
+        character.SetPanel(characterPanelObject.GetComponent<CharacterPanel>());
+
+        // State
+        character.GetComponent<CharacterState>().SetBattleState();
     }
 
     /// <summary>

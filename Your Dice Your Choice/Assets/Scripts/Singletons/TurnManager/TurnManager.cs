@@ -81,8 +81,8 @@ public class TurnManager : MonoBehaviour
             lastPlayer = PlayerBase.Instance.PlayerRight;
             nextPlayer = PlayerBase.Instance.PlayerLeft;
         }
-        lastPlayer.CountRound();
-        nextPlayer.CountRound();
+        lastPlayer.CountDownRoundEndurance(lastTurn);
+        nextPlayer.CountDownRoundEndurance(lastTurn);
 
         DeactivateRollPanel(lastPlayer);
         SetTurnText(nextPlayer, nextTurn);
@@ -138,7 +138,7 @@ public class TurnManager : MonoBehaviour
     /// <param name="player"></param>
     private void ActivateRollPanel(Player nextPlayer)
     {
-        BattleManager.Instance.State = BattleManager.BattleState.PhaseRoll;
+        BattleController.Instance.State = BattleController.BattleState.PhaseRoll;
 
         var panel = nextPlayer.RollPanel;
         panel.SendBackToBase(panel.PlayDice);

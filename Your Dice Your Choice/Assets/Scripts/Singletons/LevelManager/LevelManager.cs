@@ -6,6 +6,7 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance { get; private set; }
 
+    [SerializeField] private GameObject _developTool;
     [SerializeField] private GameObject _matchOver;
 
     [SerializeField] private LevelData[] _dataPrefab;
@@ -34,6 +35,8 @@ public class LevelManager : MonoBehaviour
     /// </summary>
     private void Start()
     {
+        _developTool.SetActive(GameManager.Instance.IsModusDevelopment);
+       
         SetDataIndex();
         StartPhases();
     }
@@ -58,9 +61,7 @@ public class LevelManager : MonoBehaviour
     {
         if (Data != null)
         {
-            CurrentPhase = Phase.Intro;
-
-            OnPhase();
+            SetPhase(Phase.Intro);
         }
         else
         {
@@ -69,12 +70,12 @@ public class LevelManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Switchs to the next phase.
+    /// Sets the current phase to the specified phase.
     /// </summary>
-    public void NextPhase()
+    /// <param name="phase"></param>
+    public void SetPhase(Phase phase)
     {
-        int nextEnumIndex = (int)CurrentPhase + 1;
-        CurrentPhase = (Phase)nextEnumIndex;
+        CurrentPhase = phase;
         OnPhase();
     }
 
@@ -98,12 +99,16 @@ public class LevelManager : MonoBehaviour
                 return;
 
             case Phase.Battle:
-                BattleManager.Instance.StartMatch();
+                MatchIntroController.Instance.gameObject.SetActive(false);
+                BattleController.Instance.StartMatch();
                 return;
 
             case Phase.MatchOver:
+                PanelManager.Instance.SetPanelsInactive(true);
+                ButtonManager.Instance.SetGameObjectActive(ButtonManager.Instance.EndTurnButton, false);
+
                 _matchOver.SetActive(true);
-                MatchOverController.Instance.Congratulate(Winner.Name);
+                _matchOver.GetComponent<MatchOverController>().Congratulate(Winner.Name);
                 return;
 
             case Phase.WaitForInput:
@@ -164,4 +169,5 @@ public class LevelManager : MonoBehaviour
     {
         Winner = PlayerBase.Instance.GetWinner(loser);
     }
+
 }

@@ -11,21 +11,21 @@ public static class GetActionBase
     /// <param name="characterObject"></param>
     /// <returns></returns>
     /// <exception cref="Exception"></exception>
-    public static ActionBase Create(ActionData data, GameObject characterObject)
+    public static ActionBase Create(ActionPanel actionPanel, GameObject characterObject)
     {
-        switch (data.ActionType)
+        switch (actionPanel.ActionData.ActionType)
         {
             case ActionType.None:
                 return null;
 
             case ActionType.Move:
-                return new Movement(data, characterObject);
+                return new Movement(actionPanel, characterObject);
 
             case ActionType.Attack:
-                return CreateAttackChild(data, characterObject);
+                return CreateAttackChild(actionPanel, characterObject);
 
             case ActionType.Defend:
-                return CreateDefendChild(data, characterObject);
+                return CreateDefendChild(actionPanel, characterObject);
         }
 
         throw new System.Exception("Didn't match any case in GetActionBase.Create()");
@@ -38,16 +38,16 @@ public static class GetActionBase
     /// <param name="characterObject"></param>
     /// <returns></returns>
     /// <exception cref="System.Exception"></exception>
-    private static Attack CreateAttackChild(ActionData data, GameObject characterObject)
+    private static Attack CreateAttackChild(ActionPanel actionPanel, GameObject characterObject)
     {
-        switch (data.WeaponType)
+        switch (actionPanel.ActionData.WeaponType)
         {
             case WeaponType.None:
                 throw new System.Exception("GetActionBase.CreateAttackChild() " +
                     "-> data.WeaponType = None");
 
             case WeaponType.Sword:
-                return new SwordBehaviour(data, characterObject);
+                return new SwordBehaviour(actionPanel, characterObject);
         }
 
         throw new System.Exception("Didn't match any case in GetActionBase.CreateAttackChild()");
@@ -60,16 +60,16 @@ public static class GetActionBase
     /// <param name="characterObject"></param>
     /// <returns></returns>
     /// <exception cref="System.Exception"></exception>
-    private static Defend CreateDefendChild(ActionData data, GameObject characterObject)
+    private static Defend CreateDefendChild(ActionPanel actionPanel, GameObject characterObject)
     {
-        switch (data.WeaponType)
+        switch (actionPanel.ActionData.WeaponType)
         {
             case WeaponType.None:
                 throw new System.Exception("\"GetActionBase.CreateDefendChild() " +
                     "-> data.WeaponType = None");
 
             case WeaponType.Shield:
-                return new ShieldBehaviour(data, characterObject);
+                return new ShieldBehaviour(actionPanel, characterObject);
         }
 
         throw new System.Exception("Didn't match any case in GetActionBase.CreateDefendChild()");

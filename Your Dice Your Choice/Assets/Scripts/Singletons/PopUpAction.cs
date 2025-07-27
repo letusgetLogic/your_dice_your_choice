@@ -27,7 +27,7 @@ public class PopUpAction : MonoBehaviour
     /// </summary>
     private void OnEnable()
     {
-        transform.SetParent(_canvasRectTransform, true);
+        transform.SetParent(_canvasRectTransform, false);
         _description.text = "";
     }
 

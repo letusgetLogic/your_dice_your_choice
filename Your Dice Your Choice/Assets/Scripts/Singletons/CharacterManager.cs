@@ -22,38 +22,27 @@ public class CharacterManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Sets the interactible enmey characters.
+    /// Deactivates the old interactable characters if needed and creates a new list.
     /// </summary>
     /// <param name="characterFieldIndexOrigin"></param>
     /// <param name="actionDirections"></param>
-    /// <param name="directionRange"></param>
-    public void SetInteractibleEnemyCharacters(Vector2Int characterFieldIndexOrigin,
-                                                Vector2Int[] actionDirections,
-                                                int directionRange)
+    /// <param name="range"></param>
+    public void SetInteractibleEnemyCharacters()
     {
         if (InteractibleCharacters != null)
         {
-            DeactivateCharacters();
+            DeactivateInteractibleCharacters();
         }
-
         InteractibleCharacters = new();
+    }
 
-        foreach (Vector2Int actionDirection in actionDirections)
-        {
-            var fieldIndex = characterFieldIndexOrigin;
-            fieldIndex += actionDirection * directionRange;
-
-            if (FieldManager.Instance.IsTargetOutOfRange(fieldIndex))
-                continue;
-
-            if (EnemyCharacter(characterFieldIndexOrigin, actionDirection,
-                                directionRange) == null)
-                continue;
-
-            var enemyObject = EnemyCharacter(characterFieldIndexOrigin,
-                                            actionDirection, directionRange);
-            InteractibleCharacters.Add(enemyObject);
-        }
+    /// <summary>
+    /// Adds a character to the list of interactable characters.
+    /// </summary>
+    /// <param name="characterObject"></param>
+    public void AddCharacter(GameObject characterObject)
+    {
+        InteractibleCharacters.Add(characterObject);
     }
 
     /// <summary>
@@ -74,38 +63,9 @@ public class CharacterManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Checks enemy between character and target field.
-    /// </summary>
-    /// <param name="characterFieldIndexOrigin"></param>
-    /// <param name="actionDirection"></param>
-    /// <param name="directionRange"></param>
-    /// <returns></returns>
-    private GameObject EnemyCharacter(Vector2Int characterFieldIndexOrigin,
-                                        Vector2Int actionDirection,
-                                        int directionRange)
-    {
-        for (int i = 1; i <= directionRange; i++)
-        {
-            var fieldIndex = characterFieldIndexOrigin;
-            fieldIndex += actionDirection * i;
-
-            if (FieldManager.Instance.IsTargetOutOfRange(fieldIndex))
-                continue;
-
-            var field = FieldManager.Instance.Fields[fieldIndex.x, fieldIndex.y].
-                GetComponent<Field>();
-
-            if (field.EnemyObject(TurnManager.Instance.Turn) != null)
-                return field.CharacterObject;
-        }
-
-        return null;
-    }
-
-    /// <summary>
     /// Deactivates the interactable characters and sets the InteractableCharacters to null.
     /// </summary>
-    public void DeactivateCharacters()
+    public void DeactivateInteractibleCharacters()
     {
         if (InteractibleCharacters == null)
             return;
