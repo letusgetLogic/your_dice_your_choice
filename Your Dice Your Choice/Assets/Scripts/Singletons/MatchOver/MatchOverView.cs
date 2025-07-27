@@ -73,8 +73,8 @@ public class MatchOverView : MonoBehaviour
     {
         foreach (var item in _textArray)
         {
-            item.alpha = 0f;
             item.gameObject.SetActive(value);
+            item.alpha = 0f;
             Debug.Log($"{item.name} is set to active: {value}");  // Debug log to indicate active state change
             Debug.Log($"{item.name} alpha set to: {item.alpha}");  // Debug log to indicate alpha value
         }
@@ -87,7 +87,7 @@ public class MatchOverView : MonoBehaviour
     {
         foreach (var item in textMeshProUGUIs)
         {
-            if (item.alpha < 1f)
+            if (item.alpha < 0.9f)
                 item.alpha += animSpeed * Time.deltaTime;
             else
             {

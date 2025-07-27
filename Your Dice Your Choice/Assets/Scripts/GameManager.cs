@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
+    public bool IsModusDevelopment;
+
     public string PlayerLeftName { get; set; } = "Player 1";
     public string PlayerRightName { get; set; } = "Player 2";
     public int CharacterAmount { get; set; } = 0;

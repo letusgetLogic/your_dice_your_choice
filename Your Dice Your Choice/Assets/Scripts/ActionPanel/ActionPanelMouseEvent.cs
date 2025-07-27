@@ -9,15 +9,8 @@ public class ActionPanelMouseEvent : MonoBehaviour,
     public float DelayOnHoverTime => _delayOnHoverTime;
 
     private IEnumerator _coroutine;
-    private bool _isPopUpActionActive = false;
-    public bool IsPopUpActionActive
-    {
-        get => _isPopUpActionActive;
-        set
-        {
-            _isPopUpActionActive = value;
-        }
-    }
+    private PlayerType _playerType => GetComponent<ActionPanel>().
+        CharacterObject.GetComponent<Character>().Player.PlayerType;
 
     /// <summary>
     /// OnPointerEnter. 
@@ -25,6 +18,9 @@ public class ActionPanelMouseEvent : MonoBehaviour,
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (LevelManager.Instance.CurrentPhase != Phase.Battle)
+            return;
+
+        if (TurnManager.Instance.Turn != _playerType)
             return;
 
         var diceNumber = 0;
@@ -43,6 +39,12 @@ public class ActionPanelMouseEvent : MonoBehaviour,
     /// </summary>
     public void OnPointerExit(PointerEventData eventData)
     {
+        if (LevelManager.Instance.CurrentPhase != Phase.Battle)
+            return;
+
+        if (TurnManager.Instance.Turn != _playerType)
+            return;
+
         // Ensure that the coroutine is not null before stopping it.
         if (_coroutine != null)
         {
@@ -65,8 +67,6 @@ public class ActionPanelMouseEvent : MonoBehaviour,
 
         GetComponent<ActionPanel>().Action.SetDataPopUp(diceNumber);
         PopUpAction.Instance.SetPosition(gameObject);
-
-        _isPopUpActionActive = true;
     }
 
     /// <summary>
@@ -75,8 +75,6 @@ public class ActionPanelMouseEvent : MonoBehaviour,
     public void HidePopUp()
     {
         PanelManager.Instance.SetActive(PanelManager.Instance.PopUpActionObject, false);
-
-        _isPopUpActionActive = false;
     }
 
 }

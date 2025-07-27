@@ -149,7 +149,7 @@ public class MatchIntroController : MonoBehaviour
         {
             SetFirstTurn.Instance.SetTurnDiceAndPanel();
             MatchIntroModel.Instance.SetDefault();
-            LevelManager.Instance.NextPhase();
+            LevelManager.Instance.SetPhase(Phase.Initialization);
         }
     }
 
@@ -215,8 +215,7 @@ public class MatchIntroController : MonoBehaviour
     /// </summary>
     public void EndPhase()
     {
-        LevelManager.Instance.NextPhase();
-        gameObject.SetActive(false);
+        LevelManager.Instance.SetPhase(Phase.Battle);
     }
 
 }

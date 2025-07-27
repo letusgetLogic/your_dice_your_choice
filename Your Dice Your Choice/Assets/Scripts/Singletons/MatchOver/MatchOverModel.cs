@@ -17,6 +17,10 @@ public class MatchOverModel : MonoBehaviour
     public float AnimFadeInSpeed => _animFadeInSpeed;
 
     [SerializeField] 
+    private float _animDuration = 1f;
+    public float AnimDuration => _animDuration;
+
+    [SerializeField] 
     private AnimationCurve _animCurve1;
     public AnimationCurve AnimCurve1 => _animCurve1;
 

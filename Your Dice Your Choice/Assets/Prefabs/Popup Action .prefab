@@ -136,7 +136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canvasRectTransform: {fileID: 0}
   _description: {fileID: 9058748463685962821}
-  _distance: {x: 120, y: 0}
+  _distance: {x: 110, y: -35}
 --- !u!1 &6435771042248349451
 GameObject:
   m_ObjectHideFlags: 0

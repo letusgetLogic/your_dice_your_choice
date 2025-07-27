@@ -62,6 +62,17 @@ public class MatchOverController : MonoBehaviour
     }
 
     /// <summary>
+    /// Delays the act 2 setting after the first act is done.
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator SetAct2()
+    {
+        yield return new WaitForSeconds(MatchOverModel.Instance.AnimDuration);
+
+        MatchOverModel.Instance.SetPlayState(MatchOverModel.PlayState.Act2);
+    }
+
+    /// <summary>
     /// Plays the act 1.
     /// </summary>
     private void PlayAct1()
@@ -82,7 +93,7 @@ public class MatchOverController : MonoBehaviour
         if (value >= 1)
         {
             MatchOverModel.Instance.SetDefault();
-            MatchOverModel.Instance.SetPlayState(MatchOverModel.PlayState.Act2);
+            StartCoroutine(SetAct2());
         }
     }
 
@@ -102,7 +113,7 @@ public class MatchOverController : MonoBehaviour
         if (value >= 1)
         {
             MatchOverModel.Instance.SetDefault();
-            LevelManager.Instance.NextPhase();
+            LevelManager.Instance.SetPhase(Phase.WaitForInput);
         }
     }
 

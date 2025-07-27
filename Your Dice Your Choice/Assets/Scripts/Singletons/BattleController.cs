@@ -137,9 +137,8 @@ public class BattleController : MonoBehaviour
     public void EndMatch(PlayerType loser)
     {
         LevelManager.Instance.SubmitWinnerFrom(loser);
-        PanelManager.Instance.SetPanelsInactive(true);
-        ButtonManager.Instance.SetGameObjectActive(ButtonManager.Instance.EndTurnButton, false);
-        LevelManager.Instance.NextPhase();
+       
+        LevelManager.Instance.SetPhase(Phase.MatchOver);
     }
 }
 
