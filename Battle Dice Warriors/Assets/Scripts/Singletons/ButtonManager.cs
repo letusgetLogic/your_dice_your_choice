@@ -66,6 +66,7 @@ public class ButtonManager : MonoBehaviour
     /// </summary>
     public void OnMenuButton()
     {
+        GameManager.Instance.SetDefault();
         GameManager.Instance.LoadScene("MainMenuScene");
     }
 

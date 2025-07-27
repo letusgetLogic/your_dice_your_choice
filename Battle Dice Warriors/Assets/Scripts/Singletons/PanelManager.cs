@@ -97,15 +97,17 @@ public class PanelManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Start method.
+    /// Sets the panel for the game.
     /// </summary>
-    private void Start()
+    public void SetPanels()
     {
+        _nameTextLeft.text = GameManager.Instance.PlayerLeftName;
+        _nameTextRight.text = GameManager.Instance.PlayerRightName;
         InitializeRollPanel(RollPanelLeft.GetComponent<RollPanel>());
         InitializeRollPanel(RollPanelRight.GetComponent<RollPanel>());
         SetPanelsInactive(false);
 
-        SetFirstTurn.Instance.InitializePanels();
+        
     }
 
     /// <summary>
@@ -115,7 +117,7 @@ public class PanelManager : MonoBehaviour
     {
         rollPanel.InitializePlayDice();
         rollPanel.SetNonPlayDiceInactive();
-        rollPanel.SetScaleDiceZero();
+        //rollPanel.SetScaleDiceZero();
         ButtonManager.Instance.SetButtonInteractible(rollPanel.RollButton, false);
     }
 

@@ -1,7 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.Playables;
-using UnityEngine.Tilemaps;
 
 public class MatchIntroController : MonoBehaviour
 {

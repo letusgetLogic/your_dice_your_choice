@@ -189,7 +189,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 175f218960678a446abdc873f61fb322, type: 2}
   - {fileID: 11400000, guid: 02f0e1ffa1bbb5340ab40ab5311a35f8, type: 2}
   - {fileID: 11400000, guid: a6e97e2ec5e445c44941de668b1d1b7b, type: 2}
-  _dataIndex: 3
+  _dataIndex: 0
 --- !u!114 &11377614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31471,7 +31471,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &982114002
 RectTransform:
   m_ObjectHideFlags: 0
@@ -31537,15 +31537,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08a6ca95f93898142a32314177eaabcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _delayAct1: 0
-  _delayAct2: 2
-  _delayAct3: 2
-  _delayAct4: 4
+  _act1Time: 2
+  _act2Time: 2
   _animSpeedAct1: 0.4
   _animSpeedAct2: 0.5
   _animSpeedAct3: 0.7
   _animSpeedAct4: 0.6
-  _fadeInSpeed: 2.5
+  _animFadeInTime: 3
   _animCurve1:
     serializedVersion: 2
     m_Curve:
@@ -62769,7 +62767,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd8bd9cf877e3ac43abbd68040b2f4b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsModusDevelopment: 0
+  ModusDevelopment: 0
 --- !u!4 &1929827783
 Transform:
   m_ObjectHideFlags: 0
@@ -64166,7 +64164,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1181180783034776694
 GameObject:
   m_ObjectHideFlags: 0
@@ -64188,7 +64186,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1204472299309778074
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66575,6 +66573,10 @@ PrefabInstance:
     - target: {fileID: 1211377032878791155, guid: d4acf396f00774f408b54ae5c9d7baf0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3378897226663478286, guid: d4acf396f00774f408b54ae5c9d7baf0, type: 3}
+      propertyPath: _distance.y
+      value: -40
       objectReference: {fileID: 0}
     - target: {fileID: 3378897226663478286, guid: d4acf396f00774f408b54ae5c9d7baf0, type: 3}
       propertyPath: _canvasRectTransform

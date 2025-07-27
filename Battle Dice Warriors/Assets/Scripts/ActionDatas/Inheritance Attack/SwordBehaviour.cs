@@ -11,37 +11,37 @@ public class SwordBehaviour : Attack
         AllowedDiceNumber = AllowedDiceNumber.D1_6;
     }
 
-    private static readonly float belowVariedPercentage = 5f;
-    private static readonly float aboveVariedPercentage = 50f;
-    public static readonly string VariedValueDescription = 
+    private static readonly float belowVariedPercentage = 15f;
+    private static readonly float aboveVariedPercentage = 25;
+    private static readonly string variedValueDescription = 
         $"* AP can vary during the attack within the range between {belowVariedPercentage}% below and {aboveVariedPercentage}% above";
 
     public static readonly string[] Description = new string[]
     {
             DefaultDescription,
-            "Dice 1: Hit orthogonally a opponent with 100% AP",
-            "Dice 2: Hit orthogonally a opponent with 120% AP",
-            "Dice 3: Hit orthogonally a opponent with 150% AP",
-            "Dice 4: Hit orthogonally a opponent with 200% AP",
-            "Dice 5: Hit orthogonally a opponent with 270% AP",
-            "Dice 6: Hit orthogonally a opponent with 360% AP",
+            "Dice 1: Hit orthogonally a opponent",
+            "Dice 2: Hit orthogonally a opponent with 20% AP Buff",
+            "Dice 3: Hit orthogonally a opponent with 50% AP Buff",
+            "Dice 4: Hit orthogonally a opponent with 100% AP Buff",
+            "Dice 5: Hit orthogonally a opponent with 170% AP Buff",
+            "Dice 6: Hit orthogonally a opponent with 260% AP Buff",
     };
 
     private static readonly SwordSkill[] swordSkills = new SwordSkill[]
     {
-        // Direction, Range, AP Percentage, HitEndurance, RoundEndurance
-        new(Direction.None, 0, 0, 0, 0, ""),
-        new(Direction.Orthogonal, 1, 100, 0, 0, ""),
-        new(Direction.Orthogonal, 1, 120, 0, 0, "(120% AP)"),
-        new(Direction.Orthogonal, 1, 150, 0, 0, "(150% AP)"),
-        new(Direction.Orthogonal, 1, 200, 0, 0, "(200% AP)"),
-        new(Direction.Orthogonal, 1, 270, 0, 0, "(270% AP)"),
-        new(Direction.Orthogonal, 1, 360, 0, 0, "(360% AP)"),
+        // Direction,           Range, %, Hit, Round, BuffAPText
+        new(Direction.None,       0,   0,   0, 0, ""),
+        new(Direction.Orthogonal, 1,   0,   1, 0, ""),
+        new(Direction.Orthogonal, 1,   20,  1, 0, "(+20% AP)"),
+        new(Direction.Orthogonal, 1,   50,  1, 0, "(+50% AP)"),
+        new(Direction.Orthogonal, 1,   100, 1, 0, "(+100% AP)"),
+        new(Direction.Orthogonal, 1,   170, 1, 0, "(+170% AP)"),
+        new(Direction.Orthogonal, 1,   260, 1, 0, "(+260% AP)"),
     };
     
     public override void SetDataPopUp(int index)
     {
-            PopUpAction.Instance.SetData(Description[index]);
+        PopUpAction.Instance.SetData(Description[index]);
     }
 
     public override void SetInteractible(int diceNumber)
@@ -112,10 +112,9 @@ public class SwordBehaviour : Attack
         characterAttack.CurrentBuffAP = buffAP; 
         characterAttack.CurrentAP = characterAttack.CurrentAP + buffAP;
         characterAttack.CurrentBuffAPText = skill.BuffAPText;
+        characterAttack.InfoText = variedValueDescription;
 
-        HitEndurance = 0;
-        RoundEndurance = 0;
-        actionPanel.UpdateEndurance(HitEndurance, RoundEndurance);
+        actionPanel.UpdateEndurance(skill.HitEndurance, skill.RoundEndurance);
     }
 
     public override float VariedAP(float ap)
@@ -126,17 +125,6 @@ public class SwordBehaviour : Attack
     }
 
 
-    //public static readonly string[] Description2 = new string[]
-    //{
-    //        DefaultDescription,
-    //        "Dice 1: Hit orthogonally with 1 tile range.",
-    //        "Dice 2: Hit diagonally with 1 tile range.",
-    //        "Dice 3: Hit orthogonally 1 target, deals 50% damage to 2 others next to target, include allies",
-    //        "Dice 4: Hit in 4 orthogonal directions with 1 tile range and 75% damage, include allies",
-    //        "Dice 5: Hit in any direction with 1 tile range",
-    //        "Dice 6: Hit in any direction a opponent with 200% AP",
-    //};
-
     //private static Dictionary<string, string> _attackDescription = new Dictionary<string, string>
     //{
     //    {"Solid Thrust", "Hit orthogonally 1 Tile, with Dice 1" },
@@ -144,7 +132,7 @@ public class SwordBehaviour : Attack
     //    {"Silver Swing", "Hit orthogonally 3 Tiles with 75% Damage, with Dice 3" },
     //    {"The 4 Stiches", "Hit all orthogonal Tiles or all diagonal Tiles with 100% Damage, with Dice 4" },
     //    {"Stunning Strike", "Hit and stun in any direction 1 Tile, with Dice 5" },
-    //    {"The Giant Sword", "Hit orthogonally 3 Tiles or diagonally 2 Tiles with 200% Damage, with Dice 6" },
+    //    {"The Giant Sword", "Hit in any direction 2 Tiles with 200% Damage, with Dice 6" },
     //};
 }
 

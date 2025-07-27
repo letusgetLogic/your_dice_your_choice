@@ -46,15 +46,15 @@ public class SetFirstTurn : MonoBehaviour
     /// </summary>
     public void SetTurnDiceAndPanel()
     {
-        _turnDiceLeft.GetComponent<RectTransform>().localScale = new Vector3(0, 0, 0);
-        _turnDiceRight.GetComponent<RectTransform>().localScale = new Vector3(0, 0, 0);
+        //_turnDiceLeft.GetComponent<RectTransform>().localScale = new Vector3(0, 0, 0);
+        //_turnDiceRight.GetComponent<RectTransform>().localScale = new Vector3(0, 0, 0);
         _turnDiceLeft.SetActive(true);
         _turnDiceRight.SetActive(true);
 
-        foreach (var panel in _panels)
-        {
-            PanelManager.Instance.SetScale(panel, new Vector3(0, 0, 0));
-        }
+        //foreach (var panel in _panels)
+        //{
+        //    PanelManager.Instance.SetScale(panel, new Vector3(0, 0, 0));
+        //}
 
         foreach (var panel in _panels)
         {
@@ -120,7 +120,7 @@ public class SetFirstTurn : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
 
-        MatchIntroController.Instance.SetIntroInactive();
+        //MatchIntroController.Instance.SetIntroInactive();
 
         TurnManager.Instance.SetFirstTurn(firstTurn);
 
@@ -138,7 +138,7 @@ public class SetFirstTurn : MonoBehaviour
         _turnDiceLeft.SetActive(false);
         _turnDiceRight.SetActive(false);
 
-        MatchIntroController.Instance.EndPhase();
+        LevelManager.Instance.SetPhase(Phase.Battle);
     }
 
     /// <summary>

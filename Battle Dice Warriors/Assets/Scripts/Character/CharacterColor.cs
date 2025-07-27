@@ -13,7 +13,7 @@ public class CharacterColor : MonoBehaviour
     /// Sets the color and the name to the character of the target player.
     /// </summary>
     /// <param name="color"></param>
-    public void SetColor(Color color, string characterName)
+    public void SetColorAndName(Color color, string characterName)
     {
         foreach (var item in _colorSpriteRenderers)
         {
