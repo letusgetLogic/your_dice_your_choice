@@ -30,11 +30,13 @@ public class DevelopTool : MonoBehaviour
     public void OnMatchOver()
     {
         OnWindow();
-        
+
         //LevelManager.Instance.SetPhase(Phase.Initialization);
         //LevelManager.Instance.SetPhase(Phase.Battle);
-        LevelManager.Instance.SubmitWinnerFrom(PlayerType.PlayerLeft);
-        LevelManager.Instance.SetPhase(Phase.MatchOver);
+        SetFirstTurn.Instance.HideTurnDice();
+        BattleController.Instance.EndMatch(PlayerType.PlayerLeft);
+        //LevelManager.Instance.SubmitWinnerFrom(PlayerType.PlayerLeft);
+        //LevelManager.Instance.SetPhase(Phase.MatchOver);
     }
 }
 

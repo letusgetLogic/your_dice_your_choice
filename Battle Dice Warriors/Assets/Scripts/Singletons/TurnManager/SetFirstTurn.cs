@@ -67,6 +67,11 @@ public class SetFirstTurn : MonoBehaviour
     /// </summary>
     public void RollTurnDice()
     {
+        if (LevelManager.Instance.CurrentPhase != Phase.SetFirstTurn)
+        {
+            return;
+        }
+
         var turnDice = new GameObject[]
         {
                 _turnDiceLeft,
@@ -120,6 +125,11 @@ public class SetFirstTurn : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
 
+        if (LevelManager.Instance.CurrentPhase == Phase.MatchOver)
+        {
+            yield break;
+        }
+
         //MatchIntroController.Instance.SetIntroInactive();
 
         TurnManager.Instance.SetFirstTurn(firstTurn);
@@ -134,6 +144,11 @@ public class SetFirstTurn : MonoBehaviour
     private IEnumerator EndMatchIntro()
     {
         yield return new WaitForSeconds(1f);
+
+        if (LevelManager.Instance.CurrentPhase == Phase.MatchOver)
+        {
+            yield break;
+        }
 
         _turnDiceLeft.SetActive(false);
         _turnDiceRight.SetActive(false);
@@ -219,5 +234,11 @@ public class SetFirstTurn : MonoBehaviour
         {
             playDice.GetComponent<RectTransform>().localScale = Vector3.one * ratio;
         }
+    }
+
+    public void HideTurnDice()
+    {
+               _turnDiceLeft.SetActive(false);
+        _turnDiceRight.SetActive(false);
     }
 }
