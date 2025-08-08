@@ -39,6 +39,11 @@ public class TurnManager : MonoBehaviour
     /// <param name="lastState"></param>
     public void SetFirstTurn(PlayerType firstTurn)
     {
+        if (LevelManager.Instance.CurrentPhase != Phase.SetFirstTurn)
+        {
+            return;
+        }
+
         var otherTurn = firstTurn == PlayerType.PlayerLeft
                       ? PlayerType.PlayerRight
                       : PlayerType.PlayerLeft;
@@ -68,6 +73,11 @@ public class TurnManager : MonoBehaviour
     /// <param name="lastState"></param>
     private void SetOthers(PlayerType lastTurn, PlayerType nextTurn)
     {
+        if (LevelManager.Instance.CurrentPhase == Phase.MatchOver)
+        {
+            return;
+        }
+
         Player lastPlayer = null;
         Player nextPlayer = null;
 
@@ -124,8 +134,12 @@ public class TurnManager : MonoBehaviour
     /// <param name="state"></param>
     private void SetTurn(Player nextPlayer, PlayerType nextTurn)
     {
+        if (LevelManager.Instance.CurrentPhase == Phase.MatchOver)
+        {
+            return;
+        }
         ActivateRollPanel(nextPlayer);
-
+        
         ButtonManager.Instance.SetButtonInteractible(
             ButtonManager.Instance.EndTurnButton, true);
 
