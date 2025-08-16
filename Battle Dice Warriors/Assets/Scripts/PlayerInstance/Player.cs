@@ -55,8 +55,17 @@ public class Player
         {
             ActionPanel[] actionPanels = characterObject.GetComponent<Character>().Panel.ActiveActionPanels;
 
+            if (actionPanels == null || actionPanels.Length == 0)
+            {
+                continue;
+            }
+
             foreach (var actionPanel in actionPanels)
             {
+                if (actionPanel.Action == null)
+                {
+                    continue;
+                }
                 actionPanel.Action.CountDownRoundEndurance(lastTurn);
             }
         }
