@@ -62,7 +62,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f23020efcba0834e96127460d02cf8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defaultNumber: 6
 --- !u!114 &3950348896155111165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,6 +85,7 @@ MonoBehaviour:
   _canvas: {fileID: 0}
   _alphaValue: 0.6
   _scaleSize: 1.2
+  _animTimer: 0.5
 --- !u!114 &5819641078766941038
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -44,7 +44,7 @@ public class MatchOverController : MonoBehaviour
     /// </summary>
     public void Congratulate(string playerName)
     {
-        MatchOverModel.Instance.SetPlayState(MatchOverModel.PlayState.None);
+        MatchOverModel.Instance.CurrentState = MatchOverModel.PlayState.None;
         MatchOverView.Instance.SetText(playerName);
         MatchOverView.Instance.SetTextArrayActive(true);
         StartCoroutine(SetAct());
@@ -58,7 +58,8 @@ public class MatchOverController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
 
-        MatchOverModel.Instance.SetPlayState(MatchOverModel.PlayState.Act1);
+        MatchOverModel.Instance.CurrentValue = 0f;
+        MatchOverModel.Instance.CurrentState = MatchOverModel.PlayState.Act1;
     }
 
     /// <summary>
@@ -69,7 +70,8 @@ public class MatchOverController : MonoBehaviour
     {
         yield return new WaitForSeconds(MatchOverModel.Instance.AnimDuration);
 
-        MatchOverModel.Instance.SetPlayState(MatchOverModel.PlayState.Act2);
+        MatchOverModel.Instance.CurrentValue = 0f;
+        MatchOverModel.Instance.CurrentState = MatchOverModel.PlayState.Act2;
     }
 
     /// <summary>
@@ -92,7 +94,7 @@ public class MatchOverController : MonoBehaviour
 
         if (value >= 1)
         {
-            MatchOverModel.Instance.SetDefault();
+            MatchOverModel.Instance.CurrentState = MatchOverModel.PlayState.None;
             StartCoroutine(SetAct2());
         }
     }
@@ -112,7 +114,7 @@ public class MatchOverController : MonoBehaviour
 
         if (value >= 1)
         {
-            MatchOverModel.Instance.SetDefault();
+            MatchOverModel.Instance.CurrentState = MatchOverModel.PlayState.None;
             LevelManager.Instance.SetPhase(Phase.WaitForInput);
         }
     }

@@ -6,7 +6,7 @@ public class RollDice : MonoBehaviour
     public static RollDice Instance { get; private set; }
 
     [SerializeField] private int _rollFrequency = 10;
-    [SerializeField] private float _animTimer = 0.25f;
+    [SerializeField] private float _animTimer = 0.1f;
 
     public int RollFrequency => _rollFrequency;
     public float AnimTimer => _animTimer;
@@ -34,7 +34,7 @@ public class RollDice : MonoBehaviour
     }
 
     /// <summary>
-    /// Shows all dice per roll.
+    /// Animates dice roll.
     /// </summary>
     /// <returns></returns>
     public IEnumerator AnimateDiceRoll(GameObject[] diceList, int rollFrequency,
