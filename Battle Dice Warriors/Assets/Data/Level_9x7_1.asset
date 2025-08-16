@@ -15,6 +15,6 @@ MonoBehaviour:
   MatchType: 2
   MapLength: 9
   MapHeight: 7
-  CamOrthographicSize: 5
+  CamOrthographicSize: 6
   CharacterAmount: 1
   DiceAmount: 3

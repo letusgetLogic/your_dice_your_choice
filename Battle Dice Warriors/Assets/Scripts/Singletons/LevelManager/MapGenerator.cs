@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,11 +6,10 @@ public class MapGenerator : MonoBehaviour
 {
     public static MapGenerator Instance { get; private set; }
 
+    [SerializeField] private GameObject _linePrefabHorizontal;
+    [SerializeField] private GameObject _linePrefabVertical;
     [SerializeField] private GameObject _fieldPrefab;
-    [SerializeField] private GameObject _groundTop;
-    [SerializeField] private GameObject _groundBottom;
-    [SerializeField] private GameObject _groundLeft;
-    [SerializeField] private GameObject _groundRight;
+
 
     /// <summary>
     /// Awake method.
@@ -34,28 +34,10 @@ public class MapGenerator : MonoBehaviour
         // For example 9 fields have 8 distance between their pivot points.
         float halfLength = (levelData.MapLength - 1) * 0.5f;
         float halfHeight = (levelData.MapHeight - 1) * 0.5f;
-        float startPointHorizontal = -halfLength;
-        float startPointVertical = halfHeight;
+        float startPointHorizontal = -halfLength - 1;
+        float startPointVertical = halfHeight + 1;
 
-        SpawnCoverGrounds(startPointHorizontal, startPointVertical);
         SpawnFields(levelData, startPointHorizontal, startPointVertical);
-    }
-
-    /// <summary>
-    /// Spawns cover grounds.
-    /// </summary>
-    /// <param name="startPointHorizontal"></param>
-    /// <param name="startPointVertical"></param>
-    private void SpawnCoverGrounds(float startPointHorizontal, float startPointVertical)
-    {
-        Instantiate(
-            _groundTop, new Vector3(0, startPointVertical + 1, 0), Quaternion.identity);
-        Instantiate(
-            _groundBottom, new Vector3(0, -startPointVertical - 1, 0), Quaternion.identity);
-        Instantiate(
-            _groundLeft, new Vector3(startPointHorizontal - 1, 0, 0), Quaternion.identity);
-        Instantiate(
-            _groundRight, new Vector3(-startPointHorizontal + 1, 0, 0), Quaternion.identity);
     }
 
     /// <summary>
@@ -67,15 +49,33 @@ public class MapGenerator : MonoBehaviour
     private void SpawnFields(LevelData levelData, 
         float startPointHorizontal, float startPointVertical)
     {
-        Vector3 spawnPos = new Vector3(startPointHorizontal, startPointVertical, 0);
+        Vector3 spawnPos = new(startPointHorizontal, startPointVertical, 0);
 
-        for (int j = 0; j < levelData.MapHeight; j++)
+        for (int j = -1; j < levelData.MapHeight; j++)
         {
-            for (int i = 0; i < levelData.MapLength; i++)
+            for (int i = -1; i < levelData.MapLength; i++)
             {
-                var field = Instantiate(_fieldPrefab, spawnPos, Quaternion.identity);
-
-                FieldManager.Instance.SetField(field, j, i);
+                if (j == -1) // draw horizontal lines for the border of battle ground
+                {
+                    if (i == -1)
+                    {
+                        // pos(-1,-1) draw nothing
+                    }
+                    else
+                        Instantiate(_linePrefabHorizontal, spawnPos, Quaternion.identity);
+                }
+                else
+                {
+                    if (i == -1) // draw vertical lines for the border of battle ground
+                    {
+                        Instantiate(_linePrefabVertical, spawnPos, Quaternion.identity);
+                    }
+                    else
+                    {
+                        var field = Instantiate(_fieldPrefab, spawnPos, Quaternion.identity);
+                        FieldManager.Instance.SetField(field, j, i);
+                    }
+                }
 
                 spawnPos.x += 1;
             }
