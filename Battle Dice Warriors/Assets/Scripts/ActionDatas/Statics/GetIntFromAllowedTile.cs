@@ -19,9 +19,6 @@ public static class GetIntFromAllowedTile
             case AllowedTile.Tile_X:
                 return diceNumber;
 
-            case AllowedTile.Tile_1_3:
-                return diceNumber;
-
             case AllowedTile.Tile_1:
                 return 1;
         }
