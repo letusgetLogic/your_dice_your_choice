@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Field : MonoBehaviour
 {
-    public GameObject Character;
+    [HideInInspector] public GameObject Character;
     public Vector2Int Index { get; private set; }
     public GameObject Obstacle { get; private set; }
 

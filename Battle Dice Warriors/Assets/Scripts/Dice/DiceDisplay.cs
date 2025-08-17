@@ -1,5 +1,7 @@
-using System.Collections.Generic;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -10,8 +12,11 @@ public class DiceDisplay : MonoBehaviour
     [SerializeField] private Canvas _canvas;
     [SerializeField] private float _alphaValue = 0.6f;
     [SerializeField] private float _scaleSize = 1.1f;
+    [SerializeField] private float _animTimer = 0.25f;
 
+    public bool IsDiceIdleRolling { get; set; } = false;
     public Sprite[] DiceSide => _diceSide;
+
     private Vector3 _originScale;
 
     /// <summary>
@@ -20,6 +25,32 @@ public class DiceDisplay : MonoBehaviour
     private void Awake()
     {
         _originScale = GetComponent<RectTransform>().localScale;
+    }
+
+    /// <summary>
+    /// Sets the dice to idle rolling state.
+    /// </summary>
+    public void SetIdleRolling()
+    {
+        IsDiceIdleRolling = true;
+        StartCoroutine(AnimateDiceRoll());
+    }
+
+    /// <summary>
+    /// Animates dice roll.
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator AnimateDiceRoll()
+    {
+        while (IsDiceIdleRolling)
+        {
+            var dice = GetComponent<Dice>();
+                int sideIndex = UnityEngine.Random.Range(1, DiceSide.Length);
+                dice.InitializeSide(sideIndex);
+            
+
+            yield return new WaitForSeconds(_animTimer);
+        }
     }
 
     /// <summary>

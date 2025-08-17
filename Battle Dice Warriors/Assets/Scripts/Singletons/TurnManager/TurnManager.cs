@@ -167,6 +167,7 @@ public class TurnManager : MonoBehaviour
     private void DeactivateRollPanel(Player lastPlayer)
     {
         var panel = lastPlayer.RollPanel;
+        panel.SetDragEnabled(panel.PlayDice, false);
         panel.SetAlphaDown(panel.PlayDice);
         ButtonManager.Instance.SetButtonInteractible(panel.RollButton, false);
     }

@@ -29,8 +29,8 @@ public class MatchOverModel : MonoBehaviour
     public AnimationCurve AnimCurve2 => _animCurve2;
 
     public enum PlayState { None, Act1, Act2 }
-    public PlayState CurrentState { get; private set; }
-    public float CurrentValue { get; private set; }
+    public PlayState CurrentState { get; set; }
+    public float CurrentValue { get; set; }
 
     /// <summary>
     /// Awake method.
@@ -43,15 +43,6 @@ public class MatchOverModel : MonoBehaviour
         }
 
         Instance = this;
-    }
-
-    /// <summary>
-    /// Sets the play state.
-    /// </summary>
-    /// <param name="state"></param>
-    public void SetPlayState(PlayState state)
-    {
-        CurrentState = state;
     }
 
     /// <summary>
@@ -85,14 +76,5 @@ public class MatchOverModel : MonoBehaviour
                         float value)
     {
         rect.anchoredPosition = Vector2.Lerp(startPosition, endPosition, value);
-    }
-
-    /// <summary>
-    /// Sets the default values.
-    /// </summary>
-    public void SetDefault()
-    {
-        CurrentValue = 0f;
-        CurrentState = PlayState.None;
     }
 }

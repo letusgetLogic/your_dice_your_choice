@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -69,11 +66,9 @@ public class RollPanel : MonoBehaviour
     {
         foreach (var diceObject in PlayDice)
         {
-            var dice = diceObject.GetComponent<Dice>();
-            dice.InitializeSide(dice.DefaultNumber);
-
             var diceDisplay = diceObject.GetComponent<DiceDisplay>();
             diceDisplay.SetDefault();
+            diceDisplay.SetIdleRolling();
         }
     }
 
@@ -83,6 +78,12 @@ public class RollPanel : MonoBehaviour
     public void Roll()
     {
         ButtonManager.Instance.SetButtonInteractible(RollButton, false);
+
+        foreach (var diceObject in PlayDice)
+        {
+            var diceDisplay = diceObject.GetComponent<DiceDisplay>();
+            diceDisplay.IsDiceIdleRolling = false;
+        }
 
         RollDice.Instance.Roll(
             PlayDice,

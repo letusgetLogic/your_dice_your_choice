@@ -10,6 +10,7 @@ public static class MovementType
 
         Move_Tile_X_D1_3_Any,
         Move_Tile_X_D1_3_Orthogonal,
+        Move_Tile_X_D1_4_Orthogonal,
         Move_Tile_X_D1_3_Diagonal,
 
         Move_Tile_1_D4_6_Any,
@@ -25,6 +26,7 @@ public static class MovementType
 
             { MovementKey.Move_Tile_X_D1_3_Any, $"Move in any direction X Tiles,\\n with Dice 1-3" },
             { MovementKey.Move_Tile_X_D1_3_Orthogonal, $"Move orthogonally X Tiles,\\n with Dice 1-3" },
+            { MovementKey.Move_Tile_X_D1_4_Orthogonal, $"Move orthogonally X Tiles,\\n with Dice 1-4" },
             { MovementKey.Move_Tile_X_D1_3_Diagonal, $"Move diagonally X Tiles,\\n with Dice 1-3" },
 
             { MovementKey.Move_Tile_1_D4_6_Any, $"Move in any direction 1 Tile,\\n with Dice 4-6" },

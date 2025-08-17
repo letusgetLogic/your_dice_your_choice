@@ -5,8 +5,8 @@ public class Dice : MonoBehaviour
 {
     public static int MaxNumber => 6;
 
-    [SerializeField] private int _defaultNumber = 6;
-    public int DefaultNumber => _defaultNumber;
+    //[SerializeField] private int _defaultNumber = 6;
+    //public int DefaultNumber => _defaultNumber;
     public int CurrentNumber { get; private set; }
     public GameObject RollPanel { get; private set; }
     public int IndexOnPanel { get; private set; }

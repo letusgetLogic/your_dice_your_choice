@@ -25,6 +25,10 @@
                 if (number <= 3)
                     return true;
                 else return false;
+            case AllowedDiceNumber.D1_4:
+                if (number <= 4)
+                    return true;
+                else return false;
             case AllowedDiceNumber.D4_6:
                 if (number >= 4)
                     return true;

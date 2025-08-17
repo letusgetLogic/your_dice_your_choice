@@ -3,7 +3,6 @@
     None,
 
     Tile_X,
-    Tile_1_3,
     Tile_1,
 }
 

@@ -8,6 +8,7 @@ public class SetFirstTurn : MonoBehaviour
 
     [SerializeField] private GameObject _turnDiceLeft;
     [SerializeField] private GameObject _turnDiceRight;
+    [SerializeField] private float _animTimer = 0.2f;
 
     private GameObject[] _panels;
     private Vector3 _originScale;
@@ -81,7 +82,7 @@ public class SetFirstTurn : MonoBehaviour
         RollDice.Instance.Roll(
             turnDice,
             RollDice.Instance.RollFrequency,
-            RollDice.Instance.AnimTimer,
+            _animTimer,
             CheckDiceNumber);
     }
 
