@@ -30639,7 +30639,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "\t\t\t\t- Game designed by Nam \n\t\t\t\tinspired by Dicey Birdball\n\n\t\t   
-    - Programming and art working by Nam\n\n\t \t  - Tileset of castle enviroment
+    - Programming, art and animation by Nam\n\n\t \t  - Tileset of castle enviroment
     \n\t\t\t\t\t\t     made by \n\t\t\t\t      \t\tmodified by Nam\n\t\t  License:
     \n"
   m_isRightToLeft: 0
@@ -36538,8 +36538,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14
-  m_fontSizeBase: 14
+  m_fontSize: 18
+  m_fontSizeBase: 18
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

@@ -13,12 +13,12 @@ public class ShieldBehaviour : Defend
     private static readonly string[] description = new string[]
     {
             DefaultDescription,
-            "Dice 1: Increase DP by 100% for 1 round. It doesn't stack.",
-            "Dice 2: Increase DP by 100% for 2 hits. It doesn't stack.",
-            "Dice 3: Reduces damage by 30% for 3 rounds. It doesn't stack.",
-            "Dice 4: Reduces damage by 40% for 2 hits. It doesn't stack.",
-            "Dice 5: Reduces damage by 55% for 1 round. It doesn't stack.",
-            "Dice 6: Increase DP by 260% for 1 round. It doesn't stack.",
+            "Roll 1: Increase DP by 100% for 1 round. It doesn't stack.",
+            "Roll 2: Increase DP by 100% for 2 hits. It doesn't stack.",
+            "Roll 3: Reduces damage by 30% for 3 rounds. It doesn't stack.",
+            "Roll 4: Reduces damage by 40% for 2 hits. It doesn't stack.",
+            "Roll 5: Reduces damage by 55% for 1 round. It doesn't stack.",
+            "Roll 6: Increase DP by 260% for 1 round. It doesn't stack.",
     };
   
     private readonly ShieldSkill[] shieldSkills = new ShieldSkill[]
