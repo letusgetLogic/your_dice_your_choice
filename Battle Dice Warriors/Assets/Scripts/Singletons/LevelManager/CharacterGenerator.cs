@@ -7,6 +7,7 @@ public class CharacterGenerator : MonoBehaviour
 
     [SerializeField] private GameObject _characterPrefab;
     [SerializeField] private CharacterData[] _characterData;
+    [SerializeField] private int _characterDataDefinedLength = 1;
 
     // Max. value of columns of the spawn area for character. 
     private readonly int CharacterSpawnAreaMaxColumn = 2;
@@ -65,7 +66,7 @@ public class CharacterGenerator : MonoBehaviour
         var character = characterObject.GetComponent<Character>();
 
         // Data
-        var characterData = _characterData[Random.Range(0, _characterData.Length)];
+        var characterData = _characterData[Random.Range(0, _characterDataDefinedLength)];
         character.SetData(player, characterData, randomIndex);
 
         // Weapon

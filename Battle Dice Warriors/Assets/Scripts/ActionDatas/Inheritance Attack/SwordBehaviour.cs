@@ -19,12 +19,12 @@ public class SwordBehaviour : Attack
     public static readonly string[] Description = new string[]
     {
             DefaultDescription,
-            "Dice 1: Hit orthogonally a opponent",
-            "Dice 2: Hit orthogonally a opponent with 20% AP Buff",
-            "Dice 3: Hit orthogonally a opponent with 50% AP Buff",
-            "Dice 4: Hit orthogonally a opponent with 100% AP Buff",
-            "Dice 5: Hit orthogonally a opponent with 170% AP Buff",
-            "Dice 6: Hit orthogonally a opponent with 260% AP Buff",
+            "Roll 1: Hit orthogonally an opponent",
+            "Roll 2: Hit orthogonally an opponent with 20% AP Buff",
+            "Roll 3: Hit orthogonally an opponent with 50% AP Buff",
+            "Roll 4: Hit orthogonally an opponent with 100% AP Buff",
+            "Roll 5: Hit orthogonally an opponent with 170% AP Buff",
+            "Roll 6: Hit orthogonally an opponent with 260% AP Buff",
     };
 
     private static readonly SwordSkill[] swordSkills = new SwordSkill[]
@@ -127,12 +127,12 @@ public class SwordBehaviour : Attack
 
     //private static Dictionary<string, string> _attackDescription = new Dictionary<string, string>
     //{
-    //    {"Solid Thrust", "Hit orthogonally 1 Tile, with Dice 1" },
-    //    {"Long Thrust", "Hit diagonally 1 Tile, with Dice 2" },
-    //    {"Silver Swing", "Hit orthogonally 3 Tiles with 75% Damage, with Dice 3" },
-    //    {"The 4 Stiches", "Hit all orthogonal Tiles or all diagonal Tiles with 100% Damage, with Dice 4" },
-    //    {"Stunning Strike", "Hit and stun in any direction 1 Tile, with Dice 5" },
-    //    {"The Giant Sword", "Hit in any direction 2 Tiles with 200% Damage, with Dice 6" },
+    //    {"Roll 1", "Solid Thrust - Hit an opponent within 1 orthogonal tile range" },
+    //    {"Roll 2", "Long Thrust - Hit an opponent within 1 diagonal tile range" },
+    //    {"Roll 3", "Silver Swing - Hit all opponents on 3 nearby tiles, which is orthogonal to character, with 75% AP" },
+    //    {"Roll 4", "The 4 Stitches - Hit all opponents on all orthogonal or diagonal Tiles with 75% AP" },
+    //    {"Roll 5", "Stunning Strike - Hit and stun an opponent within 1 tile range" },
+    //    {"Roll 6", "The Giant Sword - Hit all opponents within 2 tile range in a direction with 150% AP" },
     //};
 }
 

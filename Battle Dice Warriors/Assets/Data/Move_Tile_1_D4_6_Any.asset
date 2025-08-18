@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Move_Tile_1_D4_6_Any
   m_EditorClassIdentifier: 
   ActionType: 1
-  MovementKey: 6
-  AllowedTile: 3
-  AllowedDiceNumber: 9
+  MovementKey: 7
+  AllowedTile: 2
+  AllowedDiceNumber: 10
   Direction: 1
   WeaponType: 0
   Description: Move in any direction 1 Tile,\n with Dice 4-6

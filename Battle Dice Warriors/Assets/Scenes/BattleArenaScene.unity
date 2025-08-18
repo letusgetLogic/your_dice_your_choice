@@ -268,7 +268,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 02f0e1ffa1bbb5340ab40ab5311a35f8, type: 2}
   - {fileID: 11400000, guid: a6e97e2ec5e445c44941de668b1d1b7b, type: 2}
   - {fileID: 11400000, guid: 2cb6bfb7d091a4a42a967473885ff98f, type: 2}
-  _dataIndex: 0
+  _dataIndex: 3
 --- !u!114 &11377614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,6 +284,10 @@ MonoBehaviour:
   _characterPrefab: {fileID: 5643954692354094509, guid: 305f1e38bdd73a646858d5933e3f7202, type: 3}
   _characterData:
   - {fileID: 11400000, guid: 56206443434f1ca47a9064deacb04ed3, type: 2}
+  - {fileID: 11400000, guid: b4104001d3ef93643a60f060ab7cadfa, type: 2}
+  - {fileID: 11400000, guid: 86cf1a308e570954ea573c8a6af223d2, type: 2}
+  - {fileID: 11400000, guid: ab30ec2e0827e0b47a97c3d60582eb2a, type: 2}
+  _characterDataDefinedLength: 4
   CharacterNames:
   - 'Tharok '
   - Kaelgor

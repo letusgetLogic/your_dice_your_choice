@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Move_Tile_1_D4_6_Diagonal
   m_EditorClassIdentifier: 
   ActionType: 1
-  MovementKey: 8
-  AllowedTile: 3
-  AllowedDiceNumber: 9
+  MovementKey: 9
+  AllowedTile: 2
+  AllowedDiceNumber: 10
   Direction: 3
   WeaponType: 0
   Description: Move diagonally 1 Tile,\n with Dice 4-6
