@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ShieldBehaviour : Defend
 {
-    public ShieldBehaviour(ActionPanel actionPanel, GameObject characterObject) :
-       base(actionPanel, characterObject)
-    {
-        AllowedDiceNumber = AllowedDiceNumber.D1_6;
-    }
 
     private static readonly string[] description = new string[]
     {
@@ -21,7 +14,7 @@ public class ShieldBehaviour : Defend
             "Roll 6: Increase DP by 260% for 1 round. It doesn't stack.",
     };
   
-    private readonly ShieldSkill[] shieldSkills = new ShieldSkill[]
+    private static readonly ShieldSkill[] shieldSkills = new ShieldSkill[]
     {
         // dpP., dmg, hit, round, buffText
         new(0,    0,   0,    0, ""),          // Default
@@ -32,6 +25,12 @@ public class ShieldBehaviour : Defend
         new(0,   55,   0,    1, "(-55% dmg)"),// Dice 5
         new(260,  0,   0,    1, "(+260% DP)") // Dice 6
     };
+
+    public ShieldBehaviour(ActionPanel actionPanel, GameObject characterObject) :
+       base(actionPanel, characterObject)
+    {
+        AllowedDiceNumber = AllowedDiceNumber.D1_6;
+    }
 
     public override void SetDataPopUp(int index)
     {

@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
@@ -90,11 +89,10 @@ public class LevelManager : MonoBehaviour
                 throw new System.Exception("CurrentPhase = Phase.None");
 
             case Phase.Intro:
-                //MatchIntroController.Instance.Play();
+                //MatchIntroController.Instance.Play(); * Intro Animation not running correctly in build. 
                 return;
 
             case Phase.Initialization:
-                PanelManager.Instance.SetPanels();
                 PhaseInitialization();
                 SetPhase(Phase.SetFirstTurn);
                 return;
@@ -130,8 +128,8 @@ public class LevelManager : MonoBehaviour
     /// </summary>
     private void PhaseInitialization()
     {
+        PanelManager.Instance.SetPanels();
         FieldManager.Instance.InitializeFields();
-
         MapGenerator.Instance.GenerateMapFrom(Data);
 
         CreatePlayer();

@@ -5,14 +5,8 @@ using UnityEngine;
 
 public class SwordBehaviour : Attack
 {
-    public SwordBehaviour(ActionPanel actionPanel, GameObject characterObject) :
-        base(actionPanel, characterObject)
-    {
-        AllowedDiceNumber = AllowedDiceNumber.D1_6;
-    }
-
     private static readonly float belowVariedPercentage = 15f;
-    private static readonly float aboveVariedPercentage = 25;
+    private static readonly float aboveVariedPercentage = 25f;
     private static readonly string variedValueDescription = 
         $"* AP can vary during the attack within the range between {belowVariedPercentage}% below and {aboveVariedPercentage}% above";
 
@@ -38,6 +32,12 @@ public class SwordBehaviour : Attack
         new(Direction.Orthogonal, 1,   170, 1, 0, "(+170% AP)"),
         new(Direction.Orthogonal, 1,   260, 1, 0, "(+260% AP)"),
     };
+
+    public SwordBehaviour(ActionPanel actionPanel, GameObject characterObject) :
+        base(actionPanel, characterObject)
+    {
+        AllowedDiceNumber = AllowedDiceNumber.D1_6;
+    }
     
     public override void SetDataPopUp(int index)
     {

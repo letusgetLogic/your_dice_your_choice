@@ -53,7 +53,7 @@ public class CharacterMovement : MonoBehaviour
                 character.FieldIndex.y]
                 .GetComponent<Field>();
 
-        currentField.SetObjectNull();
+        currentField.SetOstacleNull();
 
         var field = fieldObject.GetComponent<Field>();
         character.SetFieldIndex(field, field.Index);

@@ -115,7 +115,7 @@ public class Character : MonoBehaviour
     public void SetFieldIndex(Field field, Vector2Int fieldIndex)
     {
         FieldIndex = fieldIndex;
-        field.SetObject(gameObject);
+        field.SetOstacle(gameObject);
         Debug.Log($"Character {Name} is on the field {FieldIndex}.");
     }
 

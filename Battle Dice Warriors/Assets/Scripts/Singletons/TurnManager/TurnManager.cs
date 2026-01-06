@@ -138,12 +138,12 @@ public class TurnManager : MonoBehaviour
         {
             return;
         }
-        ActivateRollPanel(nextPlayer);
         
-        ButtonManager.Instance.SetButtonInteractible(
-            ButtonManager.Instance.EndTurnButton, true);
+        var endTurnButton = ButtonManager.Instance.EndTurnButton;
+        ButtonManager.Instance.SetButtonInteractible(endTurnButton, true);
 
         Turn = nextTurn;
+        ActivateRollPanel(nextPlayer);
     }
 
     /// <summary>
@@ -152,12 +152,12 @@ public class TurnManager : MonoBehaviour
     /// <param name="player"></param>
     private void ActivateRollPanel(Player nextPlayer)
     {
-        BattleController.Instance.State = BattleController.BattleState.PhaseRoll;
-
         var panel = nextPlayer.RollPanel;
         panel.SendBackToBase(panel.PlayDice);
         panel.SetDiceDefault();
         ButtonManager.Instance.SetButtonInteractible(panel.RollButton, true);
+
+        BattleController.Instance.State = BattleController.BattleState.PhaseRoll;
     }
 
     /// <summary>

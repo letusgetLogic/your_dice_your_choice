@@ -94,19 +94,6 @@ public class BattleController : MonoBehaviour
     }
 
     /// <summary>
-    /// DiceDragEvent.OnEndDrag() method calls this method to send the dice back to 
-    /// its base position, when dice is not being dropped.
-    /// </summary>
-    /// <param name="diceMovement"></param>
-    public void SendDiceBackToBase(DiceMovement diceMovement)
-    {Debug.Log("SendDiceBackToBase called, IsDiceBeingDropped " + IsDiceBeingDropped);
-        if (IsDiceBeingDropped)
-            return;
-
-        diceMovement.SendBackToBase();
-    }
-
-    /// <summary>
     /// Handles the input of player on the clicked field or enemy character.
     /// </summary>
     /// <param name="clickedObject"></param>

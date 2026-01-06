@@ -52,7 +52,7 @@ public class UIManager : MonoBehaviour
                 ValueChangeCheck(_inputFieldRight); 
             });
 
-        _playButton.onClick.AddListener(OnBattleButton);
+        _playButton.onClick.AddListener(OnPlayButton);
         _quitButton.onClick.AddListener(OnQuitButtonClick);
         _randomizeButton.onClick.AddListener(OnRandomizeButtonClick);
     }
@@ -80,9 +80,9 @@ public class UIManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Battle button click handler.
+    /// Play button click handler.
     /// </summary>
-    private void OnBattleButton()
+    private void OnPlayButton()
     {
         if (string.IsNullOrEmpty(_inputFieldLeft.text))
         {

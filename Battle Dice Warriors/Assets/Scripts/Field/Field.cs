@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class Field : MonoBehaviour
 {
-    [HideInInspector] public GameObject Character;
     public Vector2Int Index { get; private set; }
     public GameObject Obstacle { get; private set; }
 
@@ -17,16 +16,24 @@ public class Field : MonoBehaviour
         this.Index = index;
         gameObject.name = $"Field {index.x} / {index.y}";
     }
-    public void SetObject(GameObject obstacle)
+
+    /// <summary> 
+    /// Sets the reference to obstacle. 
+    /// </summary>
+    /// <param name="obstacle"></param>
+    /// <exception cref="System.Exception"></exception>
+    public void SetOstacle(GameObject obstacle)
     {
         if (Obstacle != null)
-            throw new System.Exception($"Field {Index.x} / {Index.y} has {obstacle.name}");
+            Debug.Log($"! Exception: Field {Index.x} / {Index.y} has {obstacle.name}");
 
         Obstacle = obstacle;
-        Character = Obstacle;
     }
 
-    public void SetObjectNull()
+    /// <summary>
+    /// Sets the obstacle to null.
+    /// </summary>
+    public void SetOstacleNull()
     {
         if (Obstacle == null)
             return;

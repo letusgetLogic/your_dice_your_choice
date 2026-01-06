@@ -47,18 +47,6 @@ public class RollPanel : MonoBehaviour
     }
 
     /// <summary>
-    /// Sets the scale of all PlayDice to zero.
-    /// </summary>
-    public void SetScaleDiceZero()
-    {
-        foreach (var diceObject in PlayDice)
-        {
-            var rectTransform = diceObject.GetComponent<RectTransform>();
-            rectTransform.localScale = Vector3.zero;
-        }
-    }
-
-    /// <summary>
     /// Sets the dice to their default state.
     /// </summary>
     /// <param name="amount"></param>
@@ -73,7 +61,7 @@ public class RollPanel : MonoBehaviour
     }
 
     /// <summary>
-    /// Button call.
+    /// Roll Button triggers.
     /// </summary>
     public void Roll()
     {
@@ -93,7 +81,7 @@ public class RollPanel : MonoBehaviour
     }
 
     /// <summary>
-    /// Sets interaction.
+    /// Sets interaction for the dice.
     /// </summary>
     private void SetInteraction()
     {

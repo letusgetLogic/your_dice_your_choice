@@ -28,6 +28,44 @@ public class DiceDisplay : MonoBehaviour
     }
 
     /// <summary>
+    /// Sets the dice side image based on the index.
+    /// </summary>
+    /// <param name="sprite"></param>
+    public void SetImage(int index)
+    {
+        GetComponent<Image>().sprite = _diceSide[index];
+    }
+
+    /// <summary>
+    /// Sets the alpha at the defined value.
+    /// </summary>
+    public void SetAlphaDown()
+    {
+        var canvasGroup = GetComponent<CanvasGroup>();
+        canvasGroup.alpha = _alphaValue;
+    }
+
+    /// <summary>
+    /// Sets the default values.
+    /// </summary>
+    public void SetDefault()
+    {
+        var canvasGroup = GetComponent<CanvasGroup>();
+        canvasGroup.alpha = 1f;
+        var rectTransform = gameObject.GetComponent<RectTransform>();
+        rectTransform.localScale = _originScale;
+    }
+    
+    /// <summary>
+    /// Sets blocksRaycasts true/false.
+    /// </summary>
+    public void SetBlocksRaycasts(bool value)
+    {
+        var canvasGroup = GetComponent<CanvasGroup>();
+        canvasGroup.blocksRaycasts = value;
+    }
+
+    /// <summary>
     /// Sets the dice to idle rolling state.
     /// </summary>
     public void SetIdleRolling()
@@ -51,44 +89,6 @@ public class DiceDisplay : MonoBehaviour
 
             yield return new WaitForSeconds(_animTimer);
         }
-    }
-
-    /// <summary>
-    /// Sets the dice side image based on the index.
-    /// </summary>
-    /// <param name="sprite"></param>
-    public void SetImage(int index)
-    {
-        GetComponent<Image>().sprite = _diceSide[index];
-    }
-
-    /// <summary>
-    /// Sets the default values.
-    /// </summary>
-    public void SetDefault()
-    {
-        var canvasGroup = GetComponent<CanvasGroup>();
-        canvasGroup.alpha = 1f;
-        var rectTransform = gameObject.GetComponent<RectTransform>();
-        rectTransform.localScale = _originScale;
-    }
-
-    /// <summary>
-    /// Sets the alpha at the defined value.
-    /// </summary>
-    public void SetAlphaDown()
-    {
-        var canvasGroup = GetComponent<CanvasGroup>();
-        canvasGroup.alpha = _alphaValue;
-    }
-    
-    /// <summary>
-    /// Sets blocksRaycasts true/false.
-    /// </summary>
-    public void SetBlocksRaycasts(bool value)
-    {
-        var canvasGroup = GetComponent<CanvasGroup>();
-        canvasGroup.blocksRaycasts = value;
     }
 
     /// <summary>
