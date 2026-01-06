@@ -110,7 +110,7 @@ public class LevelManager : MonoBehaviour
 
             case Phase.MatchOver:
                 PanelManager.Instance.SetPanelsInactive(true);
-                ButtonManager.Instance.SetGameObjectActive(ButtonManager.Instance.EndTurnButton, false);
+                ButtonManager.Instance.SetGameObjectActive(ButtonManager.Instance.EndTurnButtonObject, false);
 
                 _matchOver.SetActive(true);
                 _matchOver.GetComponent<MatchOverController>().Congratulate(Winner.Name);
@@ -118,7 +118,7 @@ public class LevelManager : MonoBehaviour
 
             case Phase.WaitForInput:
                 ButtonManager.Instance.SetGameObjectActive(
-                    ButtonManager.Instance.NewMatchButton, true);
+                    ButtonManager.Instance.NewMatchButtonObject, true);
                 return;
         }
     }

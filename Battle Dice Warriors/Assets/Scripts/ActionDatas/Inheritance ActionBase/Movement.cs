@@ -1,9 +1,4 @@
-﻿using System;
-using System.Runtime.Serialization;
-using Unity.VisualScripting;
-using UnityEngine;
-using UnityEngine.TextCore.Text;
-using static UnityEngine.GraphicsBuffer;
+﻿using UnityEngine;
 
 public class Movement : ActionBase
 {
@@ -11,19 +6,28 @@ public class Movement : ActionBase
         base(actionPanel, characterObject)
     {}
 
-    public override void SetInteractible(int diceNumber)
+    public override bool SetInteractible(int diceNumber)
     {
-        FieldManager.Instance.SetInteractibleFields();
-
         Vector2Int[] actionDirections = 
             GetVector2IntFromDirection.Get(base.actionPanel.ActionData.Direction);
 
         int range = GetIntFromAllowedTile.Get(actionPanel.ActionData.AllowedTile, diceNumber);
 
+        bool isMovePossible = false;
+        bool isSettingOnce = false;
+
         foreach (Vector2Int actionDirection in actionDirections)
         {
             if (IsAnyObstacleInWay(actionDirection, range))
                 continue;
+
+            if (!isSettingOnce)
+            {
+                FieldManager.Instance.SetInteractibleFields();
+                isSettingOnce = true;
+            }
+
+            isMovePossible = true;
 
             Vector2Int fieldIndex = character.FieldIndex;
             fieldIndex += actionDirection * range;
@@ -33,6 +37,8 @@ public class Movement : ActionBase
 
             FieldManager.Instance.AddInteractibleField(fieldObject);
         }
+
+        return isMovePossible;
     }
 
     /// <summary>

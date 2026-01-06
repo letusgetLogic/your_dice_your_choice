@@ -11,6 +11,7 @@ public class Dice : MonoBehaviour
     private DiceDisplay _diceDisplay;
     private DiceMovement _diceMovement;
 
+    public bool IsDropped { get; set; } = false;
 
     /// <summary>
     /// Awake method.
@@ -46,6 +47,7 @@ public class Dice : MonoBehaviour
     /// </summary>
     public void SetOnActionSlot(Vector3 pos)
     {
+        IsDropped = true;
         SetComponentEnabled(GetComponent<DiceDragEvent>(), false);
 
         _diceMovement.PositionsTo(pos);
@@ -54,6 +56,11 @@ public class Dice : MonoBehaviour
         _diceDisplay.SetBlocksRaycasts(true);
     }
 
+    public bool IsOnPosition(Vector3 pos)
+    {
+        var currentPos = GetComponent<RectTransform>().position;
+        return currentPos == pos;
+    }
 
     /// <summary>
     /// Sets the component enabled true/false.

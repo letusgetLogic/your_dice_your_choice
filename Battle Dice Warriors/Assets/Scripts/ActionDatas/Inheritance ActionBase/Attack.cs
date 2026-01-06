@@ -21,7 +21,7 @@ public abstract class Attack : ActionBase
 
     public override abstract void SetDataPopUp(int diceNumber);
 
-    public override abstract void SetInteractible(int diceNumber);
+    public override abstract bool SetInteractible(int diceNumber);
 
     public override void ShowInteractible()
     {

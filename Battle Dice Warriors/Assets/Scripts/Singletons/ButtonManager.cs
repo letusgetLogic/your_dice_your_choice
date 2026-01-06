@@ -1,20 +1,29 @@
-﻿using System;
-using System.Collections;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class ButtonManager : MonoBehaviour
 {
     public static ButtonManager Instance { get; private set; }
 
+    [SerializeField]  
+    private GameObject _endTurnButtonObject;
+    public GameObject EndTurnButtonObject => _endTurnButtonObject;
+
     [SerializeField] 
     private Button _endTurnButton;
     public Button EndTurnButton => _endTurnButton;
 
     [SerializeField]
+    private GameObject _newMatchButtonObject;
+    public GameObject NewMatchButtonObject => _newMatchButtonObject;
+
+    [SerializeField]
     private Button _newMatchButton;
     public Button NewMatchButton => _newMatchButton;
+
+    [SerializeField]
+    private GameObject _menuButtonObject;
+    public GameObject MenuButtonObject => _menuButtonObject;
 
     [SerializeField]
     private Button _menuButton;
@@ -39,8 +48,8 @@ public class ButtonManager : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        SetGameObjectActive(EndTurnButton, false);
-        SetGameObjectActive(NewMatchButton, false);
+        SetGameObjectActive(_endTurnButtonObject, false);
+        SetGameObjectActive(_newMatchButtonObject, false);
     }
 
     /// <summary>
@@ -73,10 +82,10 @@ public class ButtonManager : MonoBehaviour
     /// <summary>
     /// Sets the button active true/false.
     /// </summary>
-    /// <param name="button"></param>
-    public void SetGameObjectActive(Button button, bool value)
+    /// <param name="go"></param>
+    public void SetGameObjectActive(GameObject go, bool value)
     {
-        button.gameObject.SetActive(value);
+        go.gameObject.SetActive(value);
     }
 
     /// <summary>

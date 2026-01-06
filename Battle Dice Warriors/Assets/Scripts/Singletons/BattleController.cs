@@ -15,10 +15,14 @@ public class BattleController : MonoBehaviour
         PhaseAction,
     }
     public BattleState State { get; set; } = BattleState.None;
-    public ActionBase CurrentAction { get; set; }
     public ActionPanel CurrentPanelOfDefend { get; set; }
-    public IEnumerator Coroutine { get; set; }
-    public bool IsDiceBeingDropped { get; set; } = false;
+    //public IEnumerator Coroutine { get; set; }
+
+    public DiceSlotAction CurrentActiveSlot { get; set; }
+
+    public bool IsLockingAction { get; set; } = false;
+
+
 
     /// <summary>
     /// Awake method.
@@ -38,7 +42,7 @@ public class BattleController : MonoBehaviour
     /// </summary>
     public void StartMatch()
     {
-        ButtonManager.Instance.SetGameObjectActive(ButtonManager.Instance.EndTurnButton, true);
+        ButtonManager.Instance.SetGameObjectActive(ButtonManager.Instance.EndTurnButtonObject, true);
     }
 
     /// <summary>
@@ -46,9 +50,10 @@ public class BattleController : MonoBehaviour
     /// </summary>
     /// <param name="diceNumber"></param>
     /// <param name="actionPanel"></param>
-    public void SetInteractible(int diceNumber)
+    public bool SetInteractible(DiceSlotAction diceSlotAction, int diceNumber)
     {
-        CurrentAction.SetInteractible(diceNumber);
+        CurrentActiveSlot = diceSlotAction;
+        return CurrentActiveSlot.Action.SetInteractible(diceNumber);
     }
 
     /// <summary>
@@ -58,7 +63,8 @@ public class BattleController : MonoBehaviour
     /// <param name="actionPanel"></param>
     public void ShowInteractible()
     {
-        CurrentAction.ShowInteractible();
+        CurrentActiveSlot.Action.ShowInteractible();
+        IsLockingAction = true;
     }
 
     /// <summary>
@@ -67,7 +73,7 @@ public class BattleController : MonoBehaviour
     /// <param name="diceNumber"></param>
     public void ActivateSkill(int diceNumber)
     {
-        CurrentAction.ActivateSkill(diceNumber);
+        CurrentActiveSlot.Action.ActivateSkill(diceNumber);
     }
 
     /// <summary>
@@ -77,21 +83,21 @@ public class BattleController : MonoBehaviour
     {
         FieldManager.Instance.DeactivateInteractibleFields();
         CharacterManager.Instance.DeactivateInteractibleCharacters();
-        SetCoroutineNull();
+        //SetCoroutineNull();
     }
 
-    /// <summary>
-    /// Stops coroutine if necessary, setting it to null.
-    /// </summary>
-    private void SetCoroutineNull()
-    {
-        // Ensure that the coroutine is not null before stopping it.
-        if (Coroutine != null)
-        {
-            StopCoroutine(Coroutine);
-            Coroutine = null;
-        }
-    }
+    ///// <summary>
+    ///// Stops coroutine if necessary, setting it to null.
+    ///// </summary>
+    //private void SetCoroutineNull()
+    //{
+    //    // Ensure that the coroutine is not null before stopping it.
+    //    if (Coroutine != null)
+    //    {
+    //        StopCoroutine(Coroutine);
+    //        Coroutine = null;
+    //    }
+    //}
 
     /// <summary>
     /// Handles the input of player on the clicked field or enemy character.
@@ -101,8 +107,9 @@ public class BattleController : MonoBehaviour
     {
         DeactivateInteractible();
 
-        CurrentAction.ProcessInput(clickedObject);
-        CurrentAction = null;
+        CurrentActiveSlot.Action.ProcessInput(clickedObject);
+        CurrentActiveSlot = null;
+        IsLockingAction = false;
     }
 
     /// <summary>

@@ -30,7 +30,7 @@ public abstract class ActionBase
     /// Sets the interactible objects.
     /// </summary>
     /// <param name="diceNumber"></param>
-    public abstract void SetInteractible(int diceNumber);
+    public abstract bool SetInteractible(int diceNumber);
 
     /// <summary>
     /// Shows the interactible objects.

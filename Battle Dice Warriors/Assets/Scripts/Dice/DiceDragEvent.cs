@@ -8,6 +8,17 @@ public class DiceDragEvent : MonoBehaviour,
 {
     [SerializeField] private float _delayEndDrag = 0.1f;
 
+    private Dice _dice;
+    private DiceDisplay _display;
+    private DiceMovement _move;
+
+    private void Start()
+    {
+        _dice = GetComponent<Dice>();
+        _display = GetComponent<DiceDisplay>();
+        _move = GetComponent<DiceMovement>();
+}
+
     /// <summary>
     /// Triggers event at the beginning of drag.
     /// </summary>
@@ -15,12 +26,17 @@ public class DiceDragEvent : MonoBehaviour,
     public void OnBeginDrag(PointerEventData eventData)
     {
         Debug.Log("OnBeginDrag");
+
+        if (BattleController.Instance.IsLockingAction)
+        {
+            BattleUI.Inst.ShowWarning("An action is active!");
+        }
+
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            var diceDisplay = GetComponent<DiceDisplay>();
-            diceDisplay.SetAlphaDown();
-            diceDisplay.SetBlocksRaycasts(false);
-            diceDisplay.SetScale();
+            _display.SetAlphaDown();
+            _display.SetBlocksRaycasts(false);
+            _display.SetScale();
         }
        
     }
@@ -32,10 +48,10 @@ public class DiceDragEvent : MonoBehaviour,
     public void OnDrag(PointerEventData eventData)
     {
         Debug.Log("OnDrag");
+
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            var diceDisplay = GetComponent<DiceDisplay>();
-            diceDisplay.UpdatePosition(eventData);
+            _display.UpdatePosition(eventData);
         }
        
     }
@@ -47,9 +63,9 @@ public class DiceDragEvent : MonoBehaviour,
     public void OnEndDrag(PointerEventData eventData)
     {
         Debug.Log("OnEndDrag");
-        var diceDisplay = GetComponent<DiceDisplay>();
-        diceDisplay.SetDefault();
-        diceDisplay.SetBlocksRaycasts(true);
+
+        _display.SetDefault();
+        _display.SetBlocksRaycasts(true);
 
         StartCoroutine(WaitForEndDrag());
         
@@ -63,11 +79,12 @@ public class DiceDragEvent : MonoBehaviour,
     {
         yield return new WaitForSeconds(_delayEndDrag);
 
-        if (BattleController.Instance.IsDiceBeingDropped)
+        if (_dice.IsDropped)
+        {
             yield break;
+        }
 
-        var diceMovement = GetComponent<DiceMovement>();
-        diceMovement.SendBackToBase();
+        _move.SendBackToBase();
     }
 }
 

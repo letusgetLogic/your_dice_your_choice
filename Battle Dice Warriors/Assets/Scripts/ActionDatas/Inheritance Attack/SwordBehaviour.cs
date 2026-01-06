@@ -44,13 +44,14 @@ public class SwordBehaviour : Attack
         PopUpAction.Instance.SetData(Description[index]);
     }
 
-    public override void SetInteractible(int diceNumber)
+    public override bool SetInteractible(int diceNumber)
     {
-        CharacterManager.Instance.SetInteractibleEnemyCharacters();
-
         var skill = swordSkills[diceNumber];
         var actionDirections = GetVector2IntFromDirection.Get(
             skill.Direction);
+
+        bool findTarget = false;
+        bool isSettingOnce = false;
 
         foreach (Vector2Int actionDirection in actionDirections)
         {
@@ -62,8 +63,16 @@ public class SwordBehaviour : Attack
             if (enemyObject == null)
                 continue;
 
+            if (!isSettingOnce)
+            {
+                CharacterManager.Instance.SetInteractibleEnemyCharacters();
+                isSettingOnce = true;
+            }
+
+            findTarget = true;
             CharacterManager.Instance.AddCharacter(enemyObject);
         }
+        return findTarget;
     }
 
     /// <summary>

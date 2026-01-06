@@ -21,8 +21,10 @@ public abstract class Defend : ActionBase
 
     public override abstract void SetDataPopUp(int diceNumber);
 
-    public override void SetInteractible(int diceNumber)
-    {}
+    public override bool SetInteractible(int diceNumber)
+    {
+        return true;
+    }
 
     public override void ShowInteractible()
     {}

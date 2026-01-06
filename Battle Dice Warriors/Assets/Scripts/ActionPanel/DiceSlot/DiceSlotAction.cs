@@ -4,100 +4,109 @@ using UnityEngine.EventSystems;
 using System.Collections;
 
 public class DiceSlotAction : MonoBehaviour,
-        IPointerEnterHandler, IPointerExitHandler, IDropHandler
+       /* IPointerEnterHandler,*/ /*IPointerExitHandler,*/ IDropHandler
 {
     [SerializeField][Range(0f, 1f)] private float _delayShowingInteractible = .5f;
 
     private ActionPanel _actionPanel => transform.parent.GetComponent<ActionPanel>();
+    public ActionBase Action => _actionPanel.Action;
     private PlayerType _playerType =>
         _actionPanel.CharacterObject.GetComponent<Character>().Player.PlayerType;
 
     private bool _canDiceBeingDropped { get; set; } = false;
 
-    /// <summary>
-    /// Mouse enters UI Element. 
-    /// </summary>
-    public void OnPointerEnter(PointerEventData eventData)
+    private RectTransform _diceTf;
+
+    public bool HasDice()
     {
-        Debug.Log("OnPointerEnter");
-        // Only runs when
-
-        // - the current phase is Battle,
-        if (LevelManager.Instance.CurrentPhase != Phase.Battle)
-            return;
-
-        // - the current turn is the player type of this action panel,
-        if (TurnManager.Instance.Turn != _playerType)
-            return;
-
-        // - the pointer is dragging a dice object,
-        if (eventData.pointerDrag != null && eventData.pointerDrag.CompareTag("Dice"))
+        if (_diceTf != null)
         {
-            // - the previous interactable objects are not interactible,
-            BattleController.Instance.DeactivateInteractible();
-
-            BattleController.Instance.Coroutine =
-                ShowInteractible(eventData.pointerDrag);
-
-            StartCoroutine(BattleController.Instance.Coroutine);
+            return _diceTf.anchoredPosition == GetComponent<RectTransform>().anchoredPosition;
         }
+
+        return false;
     }
 
-    /// <summary>
-    /// Shows the interactible objects.
-    /// </summary>
-    /// <returns></returns>
-    private IEnumerator ShowInteractible(GameObject diceBeingDragged)
-    {
-        yield return new WaitForSeconds(_delayShowingInteractible);
+    ///// <summary>
+    ///// Mouse enters UI Element. 
+    ///// </summary>
+    //public void OnPointerEnter(PointerEventData eventData)
+    //{
+    //    Debug.Log("OnPointerEnter");
+    //    // Only runs when
 
-        BattleController.Instance.Coroutine = null;
+    //    // - the current phase is Battle,
+    //    if (LevelManager.Instance.CurrentPhase != Phase.Battle)
+    //        return;
 
-        var dice = diceBeingDragged.GetComponent<Dice>();
+    //    // - the current turn is the player type of this action panel,
+    //    if (TurnManager.Instance.Turn != _playerType)
+    //        return;
 
-        if (_actionPanel.Action.IsValid(dice.CurrentNumber) == false)
-            yield break;
+    //    // - the pointer is dragging a dice object,
+    //    if (eventData.pointerDrag != null && eventData.pointerDrag.CompareTag("Dice"))
+    //    {
+    //        // - the previous interactable objects are not interactible,
+    //        BattleController.Instance.DeactivateInteractible();
 
-        // Only runs when the dice is valid to the action.
+    //        BattleController.Instance.Coroutine =
+    //            ShowInteractible(eventData.pointerDrag);
 
-        BattleController.Instance.CurrentAction = _actionPanel.Action;
-        BattleController.Instance.SetInteractible(dice.CurrentNumber);
+    //        StartCoroutine(BattleController.Instance.Coroutine);
+    //    }
+    //}
 
-        if (FieldManager.Instance.InteractibleFields != null &&
-            FieldManager.Instance.InteractibleFields.Count == 0)
-        {
-            yield break;
-        }
-        if (CharacterManager.Instance.InteractibleCharacters != null &&
-            CharacterManager.Instance.InteractibleCharacters.Count == 0)
-        {
-            yield break;
-        }
+    ///// <summary>
+    ///// Shows the interactible objects.
+    ///// </summary>
+    ///// <returns></returns>
+    //private IEnumerator ShowInteractible(GameObject diceBeingDragged)
+    //{
+    //    yield return new WaitForSeconds(_delayShowingInteractible);
 
-        _canDiceBeingDropped = true;
-        Debug.Log("ShowInteractible, _canDiceBeingDropped " + _canDiceBeingDropped);
-        BattleController.Instance.ShowInteractible();
-    }
+    //    BattleController.Instance.Coroutine = null;
 
-    /// <summary>
-    /// Mouse exits UI Element. 
-    /// </summary>
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        if (LevelManager.Instance.CurrentPhase != Phase.Battle)
-            return;
+    //    var dice = diceBeingDragged.GetComponent<Dice>();
 
-        if (TurnManager.Instance.Turn != _playerType)
-            return;
+    //    if (_actionPanel.Action.IsValid(dice.CurrentNumber) == false)
+    //        yield break;
 
-        _actionPanel.GetComponent<ActionPanelMouseEvent>().HidePopUp();
+    //    // Only runs when the dice is valid to the action.
 
-        if (eventData.pointerDrag != null && eventData.pointerDrag.CompareTag("Dice"))
-        {
-            Debug.Log("OnPointerExit");
-            BattleController.Instance.DeactivateInteractible();
-        }
-    }
+    //    BattleController.Instance.SetInteractible(this, dice.CurrentNumber);
+
+    //    if (FieldManager.Instance.InteractibleFields != null &&
+    //        FieldManager.Instance.InteractibleFields.Count == 0)
+    //    {
+    //        yield break;
+    //    }
+    //    if (CharacterManager.Instance.InteractibleCharacters != null &&
+    //        CharacterManager.Instance.InteractibleCharacters.Count == 0)
+    //    {
+    //        yield break;
+    //    }
+
+    //    _canDiceBeingDropped = true;
+    //    Debug.Log("ShowInteractible, _canDiceBeingDropped " + _canDiceBeingDropped);
+    //    BattleController.Instance.ShowInteractible();
+    //}
+
+    ///// <summary>
+    ///// Mouse exits UI Element. 
+    ///// </summary>
+    //public void OnPointerExit(PointerEventData eventData)
+    //{
+    //    _actionPanel.GetComponent<ActionPanelMouseEvent>().HidePopUp();
+
+    //    if (BattleController.Instance.IsLockingAction)
+    //        return;
+
+    //    if (eventData.pointerDrag != null && eventData.pointerDrag.CompareTag("Dice"))
+    //    {
+    //        Debug.Log("OnPointerExit");
+    //        BattleController.Instance.DeactivateInteractible();
+    //    }
+    //}
 
     /// <summary>
     /// UI Element is being dropped.
@@ -105,29 +114,42 @@ public class DiceSlotAction : MonoBehaviour,
     /// <param name="eventData"></param>
     public void OnDrop(PointerEventData eventData)
     {
-        Debug.Log("OnDrop, _canDiceBeingDropped " + _canDiceBeingDropped);
-        if (!_canDiceBeingDropped)
-        {
-            BattleController.Instance.DeactivateInteractible();
-            return;
-        }
+        Debug.Log("OnDrop");
 
-        BattleController.Instance.IsDiceBeingDropped = true;
-        Debug.Log("OnDrop, IsDiceBeingDropped " + BattleController.Instance.IsDiceBeingDropped);
-        if (LevelManager.Instance.CurrentPhase != Phase.Battle)
+        if (LevelManager.Instance.CurrentPhase != Phase.Battle ||
+            TurnManager.Instance.Turn != _playerType)
             return;
 
-        if (TurnManager.Instance.Turn != _playerType)
+        if (eventData.pointerDrag == null ||
+            eventData.pointerDrag.CompareTag("Dice") == false)
             return;
 
         var diceObject = eventData.pointerDrag;
         var dice = diceObject.GetComponent<Dice>();
+
+        if (_actionPanel.Action.IsValid(dice.CurrentNumber) == false)
+            return;
+
+        bool isInteractable = BattleController.Instance.SetInteractible(this, dice.CurrentNumber);
+        if (isInteractable == false)
+            return;
+        Debug.Log("OnDrop, isInteractable " + isInteractable);
+        //if (IsThereActiveObject() == false)
+        //    return;
+
+        BattleController.Instance.ShowInteractible();
+
         dice.SetOnActionSlot(GetComponent<RectTransform>().position);
 
         BattleController.Instance.ActivateSkill(dice.CurrentNumber);
-
-        _canDiceBeingDropped = false;
-        BattleController.Instance.IsDiceBeingDropped = false;
     }
 
+    //private bool IsThereActiveObject()
+    //{
+    //    return FieldManager.Instance.InteractibleFields != null &&
+    //        FieldManager.Instance.InteractibleFields.Count > 0 ||
+    //        CharacterManager.Instance.InteractibleCharacters != null &&
+    //        CharacterManager.Instance.InteractibleCharacters.Count > 0;
+    //}
 }
+
