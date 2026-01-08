@@ -9,48 +9,45 @@ public class PopUpBehaviour
     /// <param name="targetWorldPos"></param>
     /// <param name="distanceV2"></param>
     /// <returns></returns>
-    public static Vector3 NewWorldToLocalPosition(RectTransform canvasRect, Vector3 targetWorldPos, Vector2 distanceV2)
+    public static (Vector2, int) RectLocalPositionFromTargetDirToCenterCanvasWithDistance(RectTransform canvasRect, Vector3 targetWorldPos, Vector2 distanceV2)
     {
         var targetLocalPos = canvasRect.InverseTransformPoint(targetWorldPos);
-        return targetLocalPos + Distance(targetLocalPos, distanceV2);
+        Vector3  distance = Distance(targetLocalPos, distanceV2);
+        return (targetLocalPos + distance, (int)distance.normalized.x);
     }
 
     /// <summary>
-    /// Return the distance.
+    /// Return the distance to target, which shows to the center of window.
     /// </summary>
-    /// <param name="targetLocalPos"></param>
+    /// <param name="targetLocalPos"> target</param>
+    /// <param name="distanceV2"> distance to be setted</param>
     /// <returns></returns>
-    private static Vector3 Distance(Vector3 targetLocalPos, Vector2 distanceV2)
+    private static Vector2 Distance(Vector2 targetLocalPos, Vector2 distanceV2)
     {
-        Vector3 distance = new();
+        int dir = HoriDirectionDefaultLeft(targetLocalPos.x);
+        Vector2 distance = new();
 
-        distance.x = distanceV2.x * Direction(targetLocalPos).x;
-        distance.y = distanceV2.y /** Direction(targetLocalPos).y*/;
+        distance.x = distanceV2.x * dir;
+        distance.y = distanceV2.y /**  VertiDirection(targetLocalPos).y*/;
 
         return distance;
     }
 
     /// <summary>
-    /// Return the direction of the distance.
+    /// Return the horizontal direction to target.
+    /// Left (1 -> default) and Right (-1)
     /// </summary>
-    /// <param name="pos"></param>
+    /// <param name="x"></param>
     /// <returns></returns>
-    private static Vector3 Direction(Vector3 pos)
+    private static int HoriDirectionDefaultLeft(float x)
     {
-        Vector3 dir = new();
-
-        switch (pos.x)
+        switch (x)
         {
-            case <= 0f: dir.x = 1; break;
-            case > 0f: dir.x = -1; break;
+            case <= 0f: return 1;
+            case > 0f: return -1; 
         }
 
-        //switch (pos.y)
-        //{
-        //    case <= 0f: dir.y = 1; break;
-        //    case > 0f: dir.y = -1; break;
-        //}
-
-        return dir;
+        return 0;
     }
+
 }

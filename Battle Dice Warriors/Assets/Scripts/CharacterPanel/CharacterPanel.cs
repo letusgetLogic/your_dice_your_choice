@@ -68,14 +68,14 @@ public class CharacterPanel : MonoBehaviour
         foreach (var actionPanelObject in ActiveActionPanels)
         {
             var actionPanel = actionPanelObject.GetComponent<ActionPanel>();
-            var diceSlotAction = actionPanel.DiceSlotAction;
+            var diceSlotAction = actionPanel.GetComponent<DiceSlotAction>();
             var actionPanelMouseEvent = actionPanel.GetComponent<ActionPanelMouseEvent>();
 
             actionPanel.SetEnabled(diceSlotAction, false);
             actionPanel.SetEnabled(actionPanelMouseEvent, false);
             actionPanel.SetEnabled(actionPanel, false);
 
-           _inactive.SetActive(true);
+            _inactive.SetActive(true);
         }
     }
 

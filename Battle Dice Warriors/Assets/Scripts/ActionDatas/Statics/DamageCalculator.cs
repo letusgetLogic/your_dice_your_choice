@@ -10,10 +10,19 @@
         Attack attack)
     {
         float variedAP = attack.VariedAP(deals.CurrentAP);
+        GameManager.Instance.Log(
+            $"{deals.gameObject.name} attacks {defends.gameObject.name} with varied AP {variedAP} from base AP {deals.CurrentAP}."
+        );
         float damage = deals.CurrentAP + variedAP - defends.CurrentDP;
+        GameManager.Instance.Log(
+            $"Calculated damage before damage reduction: {damage}."
+        );
         if (defends.CurrentBuffType == CharacterDefense.BuffType.DamageReduction)
         {
             damage *= 1 - defends.CurrentDamageReduction * 0.01f;
+            GameManager.Instance.Log(
+                $"Applied damage reduction of {defends.CurrentDamageReduction}%, resulting in final damage: {damage}."
+            );
         }
         if (damage < 0)
             damage = 0;

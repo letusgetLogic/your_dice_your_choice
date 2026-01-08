@@ -4,12 +4,13 @@ using UnityEngine.EventSystems;
 public class CharacterBeingAttacked : MonoBehaviour,
         IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
-    [SerializeField] private GameObject _hoverColor;
+    [SerializeField] private GameObject[] _hoverColor;
 
     // Generator Tool
     public void DeactivateHoverColor()
     {
-        _hoverColor.SetActive(false);
+        foreach (var hover in _hoverColor)
+            hover.SetActive(false);
     }
 
     /// <summary>
@@ -17,7 +18,8 @@ public class CharacterBeingAttacked : MonoBehaviour,
     /// </summary>
     private void OnEnable()
     {
-        _hoverColor.SetActive(false);
+        foreach (var hover in _hoverColor)
+            hover.SetActive(false);
     }
 
     /// <summary>
@@ -30,7 +32,8 @@ public class CharacterBeingAttacked : MonoBehaviour,
             return;
         }
 
-        _hoverColor.SetActive(true);
+        foreach (var hover in _hoverColor)
+            hover.SetActive(true);
     }
 
     /// <summary>
@@ -43,7 +46,8 @@ public class CharacterBeingAttacked : MonoBehaviour,
             return;
         }
 
-        _hoverColor.SetActive(false);
+        foreach (var hover in _hoverColor)
+            hover.SetActive(false);
     }
 
     /// <summary>
@@ -60,7 +64,8 @@ public class CharacterBeingAttacked : MonoBehaviour,
 
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            _hoverColor.SetActive(false);
+            foreach (var hover in _hoverColor)
+                hover.SetActive(false);
 
             BattleController.Instance.HandleInput(eventData.pointerClick);
         }

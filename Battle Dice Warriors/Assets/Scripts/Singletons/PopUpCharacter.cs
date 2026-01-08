@@ -19,8 +19,11 @@ public class PopUpCharacter : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _buffDp;
 
     [SerializeField] private TextMeshProUGUI _info;
+    [SerializeField] private RectTransform _pointer;
 
     [SerializeField] private Vector2 _distance;
+
+    private Vector2 _originalPointerPos;
 
     /// <summary>
     /// Awake method.
@@ -33,6 +36,8 @@ public class PopUpCharacter : MonoBehaviour
         }
 
         Instance = this;
+
+        _originalPointerPos = _pointer.localPosition;
     }
 
     /// <summary>
@@ -40,6 +45,7 @@ public class PopUpCharacter : MonoBehaviour
     /// </summary>
     private void OnEnable()
     {
+       
         transform.SetParent(_canvasRectTransform, true);
 
         _name.text = "";
@@ -133,11 +139,15 @@ public class PopUpCharacter : MonoBehaviour
     /// </summary>
     public void SetPosition(GameObject characterObject)
     {
-        gameObject.GetComponent<RectTransform>().localPosition =
-            PopUpBehaviour.NewWorldToLocalPosition(
-                _canvasRectTransform,
-                characterObject.transform.position,
-                _distance);
-    }
+        Vector3 targetPos = characterObject.transform.position;
 
+        (Vector2 pos, int dir) localPos =
+            PopUpBehaviour.RectLocalPositionFromTargetDirToCenterCanvasWithDistance(
+                _canvasRectTransform,
+                targetPos,
+                _distance);
+        gameObject.GetComponent<RectTransform>().localPosition = localPos.pos;
+
+        _pointer.localPosition = new(_originalPointerPos.x * localPos.dir, 0, 0);
+    }
 }

@@ -38,11 +38,9 @@ public class Player
     {
         if (PlayerType == PlayerType.PlayerRight)
         {
-            var characterRotatation = characterObject.GetComponent<CharacterRotation>();
-            characterRotatation.RotateBody(180);
-
             var characterMovement = characterObject.GetComponent<CharacterMovement>();
             characterMovement.SetBodyPivotPosition();
+            characterMovement.RotateBody(180);
         }
     }
 

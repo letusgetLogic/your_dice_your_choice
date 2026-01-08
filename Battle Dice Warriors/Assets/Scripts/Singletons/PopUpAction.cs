@@ -49,11 +49,13 @@ public class PopUpAction : MonoBehaviour
     /// </summary>
     public void SetPosition(GameObject targetObject)
     {
-        gameObject.GetComponent<RectTransform>().localPosition =
-            PopUpBehaviour.NewWorldToLocalPosition(
-                _canvasRectTransform,
-                targetObject.transform.position,
-                _distance);
+        (Vector2, int) posInfo =
+             PopUpBehaviour.RectLocalPositionFromTargetDirToCenterCanvasWithDistance(
+                 _canvasRectTransform,
+                 targetObject.transform.position,
+                 _distance);
+
+        gameObject.GetComponent<RectTransform>().localPosition = posInfo.Item1;
 
     }
 }

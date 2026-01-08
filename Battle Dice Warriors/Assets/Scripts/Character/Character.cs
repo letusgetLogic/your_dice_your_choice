@@ -17,7 +17,7 @@ public class Character : MonoBehaviour
     public CharacterPanel Panel { get; private set; }
     public Vector2Int FieldIndex { get; private set; }
 
-    // Generator Tool
+    #region Generator Tool
     public CharacterData CharacterData { get => _dataInstance; }
 
     [SerializeField]
@@ -51,7 +51,7 @@ public class Character : MonoBehaviour
         GetComponent<CharacterHealth>().SetData();
 
         // Weapon
-        var characterGetWeapon = GetComponent<CharacterGetWeapon>();
+        var characterGetWeapon = GetComponent<CharacterWeapon>();
 
         if (characterGetWeapon.WeaponObjectLeft != null)
         {
@@ -74,7 +74,7 @@ public class Character : MonoBehaviour
         weaponObject.transform.SetParent(destroyEditorWeapon.transform);
     }
 
-    // 
+    #endregion
 
 
 

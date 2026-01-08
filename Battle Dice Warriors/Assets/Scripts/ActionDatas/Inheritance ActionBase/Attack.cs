@@ -21,7 +21,7 @@ public abstract class Attack : ActionBase
 
     public override abstract void SetDataPopUp(int diceNumber);
 
-    public override abstract bool SetInteractible(int diceNumber);
+    public override abstract bool SetInteractible(int diceNumber); // child class will implement
 
     public override void ShowInteractible()
     {
@@ -74,6 +74,7 @@ public abstract class Attack : ActionBase
         {
             characterObject.GetComponent<CharacterAttack>().SetDefault();
             RoundEndurance = 0;
+            activeSkillIndex = 0;
         }
         actionPanel.UpdateEndurance(HitEndurance, RoundEndurance);
     }
@@ -95,6 +96,7 @@ public abstract class Attack : ActionBase
             {
                 characterObject.GetComponent<CharacterAttack>().SetDefault();
                 HitEndurance = 0;
+                activeSkillIndex = 0;
             }
             actionPanel.UpdateEndurance(HitEndurance, RoundEndurance);
         }

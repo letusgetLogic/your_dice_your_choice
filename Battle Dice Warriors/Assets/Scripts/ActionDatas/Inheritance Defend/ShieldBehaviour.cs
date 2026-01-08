@@ -10,7 +10,7 @@ public class ShieldBehaviour : Defend
             "Roll 2: Increase DP by 100% for 2 hits. It doesn't stack.",
             "Roll 3: Reduces damage by 30% for 3 rounds. It doesn't stack.",
             "Roll 4: Reduces damage by 40% for 2 hits. It doesn't stack.",
-            "Roll 5: Reduces damage by 55% for 1 round. It doesn't stack.",
+            "Roll 5: Reduces damage by 50% for 1 round. It doesn't stack.",
             "Roll 6: Increase DP by 260% for 1 round. It doesn't stack.",
     };
   
@@ -22,7 +22,7 @@ public class ShieldBehaviour : Defend
         new(100,  0,   2,    0, "(+100% DP)"),// Dice 2
         new(0,   30,   0,    3, "(-30% dmg)"),// Dice 3
         new(0,   40,   2,    0, "(-40% dmg)"),// Dice 4
-        new(0,   55,   0,    1, "(-55% dmg)"),// Dice 5
+        new(0,   50,   0,    1, "(-50% dmg)"),// Dice 5
         new(260,  0,   0,    1, "(+260% DP)") // Dice 6
     };
 
@@ -34,9 +34,9 @@ public class ShieldBehaviour : Defend
 
     public override void SetDataPopUp(int index)
     {
-        if (index == 0 && ActiveSkillIndex != 0)
+        if (index == 0 && activeSkillIndex != 0)
         {
-            PopUpAction.Instance.SetData(description[ActiveSkillIndex]);
+            PopUpAction.Instance.SetData(description[activeSkillIndex]);
             return;
         }
         PopUpAction.Instance.SetData(description[index]);
@@ -44,9 +44,11 @@ public class ShieldBehaviour : Defend
 
     public override void ActivateSkill(int diceNumber)
     {
-        ActiveSkillIndex = diceNumber;
+        activeSkillIndex = diceNumber;
         var skill = shieldSkills[diceNumber];
         var characterDefend = character.GetComponent<CharacterDefense>();
+        var characterWeapon = character.GetComponent<CharacterWeapon>();
+        characterWeapon.IsProtecting = true;
 
         if (skill.Percentage > 0)
         {

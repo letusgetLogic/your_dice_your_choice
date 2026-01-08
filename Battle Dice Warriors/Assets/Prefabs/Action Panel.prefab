@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 9133780491778248315}
   - component: {fileID: 3144011488393902226}
   - component: {fileID: 7102619009427932503}
+  - component: {fileID: 4737531074717800968}
   m_Layer: 5
   m_Name: Action Panel
   m_TagString: Untagged
@@ -66,7 +67,7 @@ MonoBehaviour:
   _actionName: {fileID: 7240826885235866854}
   _hitEndurance: {fileID: 960876475218415847}
   _roundEndurance: {fileID: 3250777439477072667}
-  _diceSlotAction: {fileID: 4360947806263819555}
+  _diceSlotAction: {fileID: 7154172334302712278}
 --- !u!114 &3144011488393902226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,6 +111,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4737531074717800968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 421359889958457307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8369337378fbf0c44821350e3325af8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _delayShowingInteractible: 0
 --- !u!1 &2500213633062353452
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,7 +159,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 15, y: -17.5}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 10, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &21414178061601387
 CanvasRenderer:
@@ -281,7 +295,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 15, y: -17.5}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 10, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2919496505939333978
 CanvasRenderer:
@@ -436,7 +450,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5944877232779813216}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8369337378fbf0c44821350e3325af8e, type: 3}
   m_Name: 

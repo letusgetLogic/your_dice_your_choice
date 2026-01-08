@@ -5,6 +5,9 @@ public abstract class ActionBase
     protected GameObject characterObject { get; private set; }
     protected Character character => characterObject.GetComponent<Character>();
 
+    protected int activeSkillIndex { get; set; } = 0;
+
+
     /// <summary>
     /// Sets data when the constructor has been created.
     /// </summary>

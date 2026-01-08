@@ -54,6 +54,9 @@ public class RollPanel : MonoBehaviour
     {
         foreach (var diceObject in PlayDice)
         {
+            var dice = diceObject.GetComponent<Dice>();
+            dice.SetDefault();
+
             var diceDisplay = diceObject.GetComponent<DiceDisplay>();
             diceDisplay.SetDefault();
             diceDisplay.SetIdleRolling();
@@ -66,6 +69,7 @@ public class RollPanel : MonoBehaviour
     public void Roll()
     {
         ButtonManager.Instance.SetButtonInteractible(RollButton, false);
+        ButtonManager.Instance.SetGameObjectActive(ButtonManager.Instance.EndTurnButtonObject, true);
 
         foreach (var diceObject in PlayDice)
         {

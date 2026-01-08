@@ -58,5 +58,10 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(sceneName);
     }
+
+    public void Log(string text)
+    {
+               Debug.Log(text);
+    }
 }
 

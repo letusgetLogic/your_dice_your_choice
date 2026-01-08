@@ -8,7 +8,6 @@ public abstract class Defend : ActionBase
     public int HitEndurance { get; protected set; }
     public int RoundEndurance { get; protected set; }
     public bool IsHitCrucial { get; protected set; }
-    public int ActiveSkillIndex { get; set; } = 0;
 
     public Defend(ActionPanel actionPanel, GameObject characterObject) :
         base(actionPanel, characterObject)
@@ -49,10 +48,10 @@ public abstract class Defend : ActionBase
         }
         if (HitEndurance == 0)
         {
-            characterObject.GetComponent<CharacterDefense>().SetDefault();
+            character.GetComponent<CharacterDefense>().SetDefault();
             RoundEndurance = 0;
-            ActiveSkillIndex = 0;
-
+            activeSkillIndex = 0;
+            character.GetComponent<CharacterWeapon>().IsRelaxing = true;
         }
         actionPanel.UpdateEndurance(HitEndurance, RoundEndurance);
     }
@@ -77,7 +76,8 @@ public abstract class Defend : ActionBase
             {
                 characterObject.GetComponent<CharacterDefense>().SetDefault();
                 HitEndurance = 0;
-                ActiveSkillIndex = 0;
+                activeSkillIndex = 0;
+                character.GetComponent<CharacterWeapon>().IsRelaxing = true;
             }
             actionPanel.UpdateEndurance(HitEndurance, RoundEndurance);
         }

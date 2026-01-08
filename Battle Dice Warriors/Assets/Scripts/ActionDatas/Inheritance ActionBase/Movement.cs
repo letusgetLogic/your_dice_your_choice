@@ -5,6 +5,50 @@ public class Movement : ActionBase
     public Movement(ActionPanel actionPanel, GameObject characterObject) :
         base(actionPanel, characterObject)
     {}
+    public override void SetDataPopUp(int index)
+    {
+        // Dragging nothing and dice is on slot
+        if (index == 0 && activeSkillIndex != 0)
+        {
+            PopUpAction.Instance.SetData(Description(activeSkillIndex));
+            return;
+        }
+
+        // Dragging a dice
+        if (index > 0 && CheckDiceCondition.IsNumberValid(actionPanel.ActionData.AllowedDiceNumber, index))
+        {
+            PopUpAction.Instance.SetData(Description(index));
+            return;
+        }
+
+        // Dragging nothing or a invalid dice
+        PopUpAction.Instance.SetData(actionPanel.ActionData.Description);
+    }
+
+    private string Description(int index)
+    {
+        string s = "Move ";
+        
+        switch(actionPanel.ActionData.Direction)
+        {
+            case Direction.None:
+                break;
+            case Direction.Orthogonal:
+                s += "orthogonally ";
+                break;
+            case Direction.Diagonal:
+                s += "diagonally ";
+                break;
+            case Direction.Any:
+                s += "in any direction ";
+                break;
+        }
+
+        int i = GetIntFromAllowedTile.Get(actionPanel.ActionData.AllowedTile, index);
+        s += i + (i == 1 ? " Tile" : " Tiles");
+
+        return s;
+    }
 
     public override bool SetInteractible(int diceNumber)
     {
@@ -24,6 +68,7 @@ public class Movement : ActionBase
             if (!isSettingOnce)
             {
                 FieldManager.Instance.SetInteractibleFields();
+                activeSkillIndex = diceNumber;
                 isSettingOnce = true;
             }
 
@@ -84,6 +129,7 @@ public class Movement : ActionBase
         }
 
         characterObject.GetComponent<CharacterMovement>().MoveTo(fieldObject);
+        activeSkillIndex = 0;
     }
 
 }

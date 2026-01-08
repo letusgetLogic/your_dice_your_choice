@@ -6,9 +6,10 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private float _speed = .01f;
 
     [SerializeField] private Transform _bodyPivotTransform;
+    [SerializeField] private Transform _bodyTransform;
 
     private Vector3 _targetPosition;
-    private bool _isMoving = false;
+    private bool _isMovingTowards = false;
 
 
     /// <summary>
@@ -16,11 +17,11 @@ public class CharacterMovement : MonoBehaviour
     /// </summary>
     private void FixedUpdate()
     {
-        if (_isMoving)
+        if (_isMovingTowards)
         {
             if (transform.position == _targetPosition)
             {
-                _isMoving = false;
+                _isMovingTowards = false;
                 return;
             }
 
@@ -49,7 +50,7 @@ public class CharacterMovement : MonoBehaviour
 
         var currentField =
             FieldManager.Instance.Fields[
-                character.FieldIndex.x, 
+                character.FieldIndex.x,
                 character.FieldIndex.y]
                 .GetComponent<Field>();
 
@@ -59,7 +60,18 @@ public class CharacterMovement : MonoBehaviour
         character.SetFieldIndex(field, field.Index);
 
         _targetPosition = fieldObject.transform.position;
-        _isMoving = true;
+        _isMovingTowards = true;
     }
+
+    /// <summary>
+    /// Rotate the body transform.
+    /// </summary>
+    public void RotateBody(int number)
+    {
+        var rotation = _bodyTransform.rotation;
+        rotation.z += number;
+        _bodyTransform.rotation = rotation;
+    }
+
 
 }

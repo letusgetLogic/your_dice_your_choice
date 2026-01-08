@@ -42,7 +42,6 @@ public class BattleController : MonoBehaviour
     /// </summary>
     public void StartMatch()
     {
-        ButtonManager.Instance.SetGameObjectActive(ButtonManager.Instance.EndTurnButtonObject, true);
     }
 
     /// <summary>

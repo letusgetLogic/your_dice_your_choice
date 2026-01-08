@@ -52,6 +52,8 @@ public class CharacterHealth : MonoBehaviour
         _healthSlider.value = normalizedValue;
         float currentHealth = normalizedValue * _maxHealth;
         CurrentHP = currentHealth;
+        GameManager.Instance.Log(tag +
+            $" health updated: {CurrentHP}/{_maxHealth} ({normalizedValue * 100:0.00}%)");
     }
 
     /// <summary>
@@ -90,7 +92,7 @@ public class CharacterHealth : MonoBehaviour
         if (!_isHealthChanging)
             return;
 
-        _current = Mathf.MoveTowards(_current, 1, _animSpeedTakeDamage * 0.0001f / Time.deltaTime);
+        _current = Mathf.MoveTowards(_current, 1, _animSpeedTakeDamage * 0.0001f / Time.fixedDeltaTime);
         float interpolation = _animCurve.Evaluate(_current);
 
         SetHealthSlider(Mathf.Lerp(_oldValue, _newValue, interpolation));
@@ -118,7 +120,7 @@ public class CharacterHealth : MonoBehaviour
     private void CalculateHealth(float value)
     {
         float currentHealth = CurrentHP;
-
+       
         _oldValue = currentHealth / _maxHealth;
 
         _newHealth = currentHealth + value;

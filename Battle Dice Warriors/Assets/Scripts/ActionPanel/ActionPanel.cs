@@ -7,12 +7,12 @@ public class ActionPanel : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _actionName;
     [SerializeField] private TextMeshProUGUI _hitEndurance;
     [SerializeField] private TextMeshProUGUI _roundEndurance;
-    [SerializeField] private DiceSlotAction _diceSlotAction;
+    [SerializeField] private RectTransform _diceSlotAction;
+    public RectTransform DiceSlotAction => _diceSlotAction;
 
     public ActionData ActionData { get; private set; }
     public ActionBase Action { get; private set; }
     public GameObject CharacterObject { get; private set; }
-    public DiceSlotAction DiceSlotAction => _diceSlotAction;
 
     /// <summary>
     /// Awake method.

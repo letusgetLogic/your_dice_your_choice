@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class ButtonManager : MonoBehaviour
@@ -60,6 +61,7 @@ public class ButtonManager : MonoBehaviour
         FieldManager.Instance.DeactivateInteractibleFields();
         CharacterManager.Instance.DeactivateInteractibleCharacters();
         TurnManager.Instance.SwitchTurn();
+        SetGameObjectActive(_endTurnButtonObject, false);
     }
 
     /// <summary>

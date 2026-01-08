@@ -22,6 +22,11 @@ public class Dice : MonoBehaviour
         _diceMovement = GetComponent<DiceMovement>();
     }
 
+    public void SetDefault()
+    {
+        IsDropped = false;
+    }
+
     /// <summary>   
     /// Initializes the dice side.
     /// </summary>

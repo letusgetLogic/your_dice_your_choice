@@ -27,11 +27,6 @@ public class DiceDragEvent : MonoBehaviour,
     {
         Debug.Log("OnBeginDrag");
 
-        if (BattleController.Instance.IsLockingAction)
-        {
-            BattleUI.Inst.ShowWarning("An action is active!");
-        }
-
         if (eventData.button == PointerEventData.InputButton.Left)
         {
             _display.SetAlphaDown();
@@ -47,7 +42,7 @@ public class DiceDragEvent : MonoBehaviour,
     /// <param name="eventData"></param>
     public void OnDrag(PointerEventData eventData)
     {
-        Debug.Log("OnDrag");
+        //Debug.Log("OnDrag");
 
         if (eventData.button == PointerEventData.InputButton.Left)
         {

@@ -20,9 +20,6 @@ public class ActionPanelMouseEvent : MonoBehaviour,
         if (LevelManager.Instance.CurrentPhase != Phase.Battle)
             return;
 
-        if (TurnManager.Instance.Turn != _playerType)
-            return;
-
         var diceNumber = 0;
 
         if (eventData.pointerDrag != null && eventData.pointerDrag.CompareTag("Dice"))
@@ -40,9 +37,6 @@ public class ActionPanelMouseEvent : MonoBehaviour,
     public void OnPointerExit(PointerEventData eventData)
     {
         if (LevelManager.Instance.CurrentPhase != Phase.Battle)
-            return;
-
-        if (TurnManager.Instance.Turn != _playerType)
             return;
 
         // Ensure that the coroutine is not null before stopping it.

@@ -70,7 +70,7 @@ public class CharacterGenerator : MonoBehaviour
         character.SetData(player, characterData, randomIndex);
 
         // Weapon
-        var characterGetWeapon = characterObject.GetComponent<CharacterGetWeapon>();
+        var characterGetWeapon = characterObject.GetComponent<CharacterWeapon>();
         characterGetWeapon.SetWeaponToLeftHand(character);
         characterGetWeapon.SetWeaponToRightHand(character);
 

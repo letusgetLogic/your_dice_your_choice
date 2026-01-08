@@ -1,24 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SwordBehaviour : Attack
 {
     private static readonly float belowVariedPercentage = 15f;
     private static readonly float aboveVariedPercentage = 25f;
     private static readonly string variedValueDescription = 
-        $"* AP can vary during the attack within the range between {belowVariedPercentage}% below and {aboveVariedPercentage}% above";
+        $"* AP varies from -{belowVariedPercentage}% to +{aboveVariedPercentage}%";
 
-    public static readonly string[] Description = new string[]
+    private static readonly string[] description = new string[]
     {
             DefaultDescription,
             "Roll 1: Hit orthogonally an opponent",
             "Roll 2: Hit orthogonally an opponent with 20% AP Buff",
             "Roll 3: Hit orthogonally an opponent with 50% AP Buff",
             "Roll 4: Hit orthogonally an opponent with 100% AP Buff",
-            "Roll 5: Hit orthogonally an opponent with 170% AP Buff",
-            "Roll 6: Hit orthogonally an opponent with 260% AP Buff",
+            "Roll 5: Hit orthogonally an opponent with 150% AP Buff",
+            "Roll 6: Hit orthogonally an opponent with 200% AP Buff",
     };
 
     private static readonly SwordSkill[] swordSkills = new SwordSkill[]
@@ -29,8 +26,8 @@ public class SwordBehaviour : Attack
         new(Direction.Orthogonal, 1,   20,  1, 0, "(+20% AP)"),
         new(Direction.Orthogonal, 1,   50,  1, 0, "(+50% AP)"),
         new(Direction.Orthogonal, 1,   100, 1, 0, "(+100% AP)"),
-        new(Direction.Orthogonal, 1,   170, 1, 0, "(+170% AP)"),
-        new(Direction.Orthogonal, 1,   260, 1, 0, "(+260% AP)"),
+        new(Direction.Orthogonal, 1,   150, 1, 0, "(+150% AP)"),
+        new(Direction.Orthogonal, 1,   200, 1, 0, "(+200% AP)"),
     };
 
     public SwordBehaviour(ActionPanel actionPanel, GameObject characterObject) :
@@ -41,7 +38,12 @@ public class SwordBehaviour : Attack
     
     public override void SetDataPopUp(int index)
     {
-        PopUpAction.Instance.SetData(Description[index]);
+        if (index == 0 && activeSkillIndex != 0)
+        {
+            PopUpAction.Instance.SetData(description[activeSkillIndex]);
+            return;
+        }
+        PopUpAction.Instance.SetData(description[index]);
     }
 
     public override bool SetInteractible(int diceNumber)
@@ -114,6 +116,7 @@ public class SwordBehaviour : Attack
 
     public override void ActivateSkill(int diceNumber)
     {
+        activeSkillIndex = diceNumber;
         var skill = swordSkills[diceNumber];
         var characterAttack = character.GetComponent<CharacterAttack>();
 
